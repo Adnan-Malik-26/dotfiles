@@ -1,0 +1,127 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+export LANG=en_IN.UTF-8
+export LC_CTYPE=en_IN.UTF-8
+export HISTCONTROL=ignoreboth
+
+
+#ALIASES
+#Neovim Alias
+alias 'vi'='nvim'
+alias 'vim'='nvim'
+alias 'nv'='nvim'
+#Quitting Terminal
+alias ':q'="exit"
+alias ':qw'='exit'
+alias ':wq'='exit'
+
+#Bashrc 
+alias 's'='source ~/.bashrc'
+alias 'b'='nvim ~/.bashrc'
+
+#Alternatives
+alias df='duf'
+alias 'cat'='bat'
+alias 'ping'='gping'
+#Opening Configs
+alias 'i3c'='nvim ~/.config/i3/config '
+alias 'plc'='nvim ~/.config/polybar/config.ini'
+alias 'nfc'='nvim ~/.config/neofetch/config.conf'
+alias 'alc'='nvim ~/.config/alacritty/alacritty.yml'
+
+#Neofetch Alias
+alias 'n'='neofetch'
+
+#List Aliases
+alias 'ls'='lsd --group-dirs first'
+alias 'la'='lsd -a --group-dirs first'
+alias 'll'='lsd -al --group-dirs first'
+alias 'l'='lsd --group-dirs first -a'
+#Adding Flags
+alias df='df -h'
+alias free='free -m'
+
+#Adding Verbose
+alias 'cp'='cp -v'
+alias 'rm'='rm -v'
+alias 'mv'='mv -v'
+alias 'cl'='clear'
+#IP address 
+alias 'giveip'="ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'"
+#Meat of the file
+alias meat='grep "^\s*[^#;]"'
+
+#start Tor Browser
+alias 'tor'='exec /home/adnan/Documents/tor-browser/start-tor-browser.desktop'
+#Ping short
+alias 'pn'='ping -c 5 8.8.8.8'
+#Shopt
+shopt -s autocd
+shopt -s cdspell
+#AUTOSTART
+neofetch
+
+###PATH
+PATH=$PATH:$HOME/.local/bin/
+PATH=$PATH:/usr/bin
+. "$HOME/.cargo/env"
+export PATH=$PATH:/home/adnan/.spicetify
+export PATH=$PATH:/home/adnan/geny/genymotions
+###FUNCTIONS
+
+#Extracting Files
+ex () {
+   if [ -f $1 ] ; then
+       case $1 in
+           *.tar.bz2)   tar xvjf $1    ;;
+           *.tar.gz)    tar xvzf $1    ;;
+           *.bz2)       bunzip2 $1     ;;
+           *.rar)       unrar x $1     ;;
+           *.gz)        gunzip $1      ;;
+           *.tar)       tar xvf $1     ;;
+           *.tbz2)      tar xvjf $1    ;;
+           *.tgz)       tar xvzf $1    ;;
+           *.zip)       unzip $1       ;;
+           *.Z)         uncompress $1  ;;
+           *.7z)        7z x $1        ;;
+           *.tar.xz)    tar -xf $1     ;; 
+           *)           echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "'$1' is not a valid file!"
+   fi
+ }
+
+#cd function
+function up {
+    local counter=${1:-1}
+    local dirup="../"
+    local out=""
+    while (( counter > 0 )); do
+        let counter--
+        out="${out}$dirup"
+    done
+    cd $out
+}
+
+#mkcd
+mkcd() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: mkcd <directory_name>"
+    else
+        mkdir -p "$1" && cd "$1"
+        echo "Created Directory $1"
+    fi
+}
+
+###eval
+eval "$(starship init bash)"
+
