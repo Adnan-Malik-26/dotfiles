@@ -1,0 +1,17 @@
+#!/bin/bash
+NUM="${2:-5}"
+
+toggle() { pulsemixer --toggle-mute ; }
+mute() { pulsemixer --mute ; }
+up() { pulsemixer --change-volume +$NUM ;}
+down(){ pulsemixer --change-volume -$NUM ;}
+
+case "$1" in
+	toggle) toggle ;;
+	mute) mute ;;
+	up) up ;;
+	down) down ;;
+esac >/dev/null
+
+
+

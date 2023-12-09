@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Get the wallpaper path from the Pywal cache
+WALLPAPER_PATH=$(cat "$HOME/.cache/wal/wal")
+
+# Upload the image to Transfer.sh and get the link
+UPLOAD_RESULT=$(curl --upload-file "$WALLPAPER_PATH" https://transfer.sh/"$(basename "$WALLPAPER_PATH")")
+
+# Check if the upload was successful
+if [ -n "$UPLOAD_RESULT" ]; then
+  echo "Wallpaper uploaded successfully. Here's the link:"
+  echo "$UPLOAD_RESULT"
+else
+  echo "Failed to upload the wallpaper."
+fi
+

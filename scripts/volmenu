@@ -1,0 +1,11 @@
+#!/bin/bash
+
+chosen=$(printf " Volume Up\n Volume Down\n Mute\n UnMute" | rofi -dmenu -i -p "Volume: ")
+
+case "$chosen" in
+	" Volume Up") pulsemixer --change-volume +10 ;;
+	" Volume Down") pulsemixer --change-volume -10 ;;
+	" Mute") pulsemixer --mute ;;
+	" UnMute") pulsemixer --unmute ;;
+	*) exit 1;;
+esac
