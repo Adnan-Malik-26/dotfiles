@@ -58,5 +58,5 @@ temurin
 openrgb
 wlogout
 obs-studio
-
+liferea
 
