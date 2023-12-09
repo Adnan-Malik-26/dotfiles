@@ -1,0 +1,92 @@
+
+window:
+  opacity: 0.6
+  padding:
+    x: 5
+    y: 5
+  
+live_config_reload: true
+scrolling:
+  history: 10000
+  multiplier: 10
+selection:
+  semantic_escape_chars: '|:"'' {}()[]<>'
+  save_to_clipboard: true
+
+font:
+  normal:
+    family: "FiraCode Nerd Font Mono"
+    style: Regular
+
+  size: 12 
+draw_bold_text_with_bright_colors: true
+
+cursor:
+  style: Block
+  unfocused_hollow: true
+
+key_bindings:
+  - { key: N, mods: Super, action: SpawnNewInstance }
+  - { key: Q, mods: Super, action: Quit }
+  - { key: W, mods: Super, action: Quit }
+  - { key: F, mods: Super|Control, action: ToggleFullscreen }
+colors:
+  # Default colors
+  primary:
+    background: '#222332'
+    foreground: '#FCFFFF'
+
+  # Cursor colors
+  cursor:
+    text: '#222332'
+    cursor: '#FFFFFF'
+
+  # Normal colors
+  normal:
+    black: '#0d0d0d'
+    red: '#FF301B'
+    green: '#A0E521'
+    yellow: '#FFC620'
+    blue: '#1BA6FA'
+    magenta: '#8763B8'
+    cyan: '#21DEEF'
+    white: '#EBEBEB'
+
+  # Bright colors
+  bright:
+    black: '#6D7070'
+    red: '#FF4352'
+    green: '#B8E466'
+    yellow: '#FFD750'
+    blue: '#1BA6FA'
+    magenta: '#A578EA'
+    cyan: '#73FBF1'
+    white: '#FEFEF8'
+theme: Argonaut
+# BEGIN ACE
+colors:
+  primary:
+    background: '#12121b'
+    foreground: '#cadddb'
+  cursor:
+    text:       '#12121b'
+    cursor:     '#cadddb'
+  normal:
+    black:      '#12121b'
+    red:        '#BC6EE5'
+    green:      '#65C0A3'
+    yellow:     '#F7BC95'
+    blue:       '#E6A1AC'
+    magenta:    '#D2A3EB'
+    cyan:       '#DDB5F2'
+    white:      '#cadddb'
+  bright:
+    black:      '#8d9a99'
+    red:        '#BC6EE5'
+    green:      '#65C0A3'
+    yellow:     '#F7BC95'
+    blue:       '#E6A1AC'
+    magenta:    '#D2A3EB'
+    cyan:       '#DDB5F2'
+    white:      '#cadddb'
+# END ACE
