@@ -1,0 +1,170 @@
+#------------------Setting Mod Key--------------------------#
+	set $mod Mod1
+
+#-----------------Setting the font--------------------------#
+	font pango:FiraCode Nerd Font 8
+
+
+#-----------------Default Startup Apps----------------------#
+	exec 		--no-startup-id 		dex --autostart --environment i3
+	exec 		--no-startup-id 		xss-lock --transfer-sleep-lock -- i3lock --nofork
+	exec 		--no-startup-id 		nm-applet
+	set 		$refresh_i3status 		killall -SIGUSR1 i3status
+	bindsym 	XF86AudioRaiseVolume 	exec 	--no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+	bindsym 	XF86AudioLowerVolume 	exec 	--no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+	bindsym 	XF86AudioMute 		exec 	--no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+	bindsym 	XF86AudioMicMute 	exec 	--no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+
+#------------Floating Modifier-----------------_#
+  floating_modifier $mod
+
+
+#-------------------Kill the focused Window-----------#
+	bindsym 	$mod+q 			kill
+
+
+#-------------------Change Focus---------------------#
+	bindsym 	$mod+j   		    	focus left
+	bindsym 	$mod+k  	    		focus down
+	bindsym 	$mod+l      			focus up
+	bindsym 	$mod+semicolon 		focus right
+
+
+#--------------------Move Window--------------------#
+	bindsym 	$mod+Shift+j  		move left
+	bindsym 	$mod+Shift+k 		move down
+	bindsym 	$mod+Shift+l 		move up
+	bindsym 	$mod+Shift+semicolon 	move right
+
+#-------------------FullScreen-----------------------#
+	bindsym 	$mod+f 			fullscreen toggle
+
+#------------------Change Layout---------------------#
+# bindsym 	$mod+s 			exec 		i3l spiral 0.5 && notify-send "Layout: Spiral"
+	bindsym 	$mod+v 			layout splitv 
+	bindsym 	$mod+h 			layout splith
+
+#-----------------Toggle Floating---------------------#
+	bindsym 	$mod+shift+space 	floating toggle
+
+
+#----------Setting Workspace numbering-------------#
+	set $ws1 "1"
+	set $ws2 "2"
+	set $ws3 "3"
+	set $ws4 "4"
+	set $ws5 "5"
+	set $ws6 "6"
+	set $ws7 "7"
+	set $ws8 "8"
+	set $ws9 "9"
+	set $ws10 "10"
+
+
+#-----------------Switch To Workspace------------------#
+	bindsym 	$mod+1 	workspace number $ws1
+	bindsym 	$mod+2 	workspace number $ws2
+	bindsym 	$mod+3 	workspace number $ws3
+	bindsym 	$mod+4 	workspace number $ws4
+	bindsym 	$mod+5 	workspace number $ws5
+	bindsym 	$mod+6 	workspace number $ws6
+	bindsym 	$mod+7 	workspace number $ws7
+	bindsym 	$mod+8 	workspace number $ws8
+	bindsym 	$mod+9 	workspace number $ws9
+	bindsym 	$mod+0 	workspace number $ws10
+
+
+#-------------------Move To Workspace-------------------#
+	bindsym 	$mod+Shift+1 	move container to workspace number $ws1
+	bindsym 	$mod+Shift+2 	move container to workspace number $ws2
+	bindsym 	$mod+Shift+3 	move container to workspace number $ws3
+	bindsym 	$mod+Shift+4 	move container to workspace number $ws4
+	bindsym 	$mod+Shift+5 	move container to workspace number $ws5
+	bindsym 	$mod+Shift+6 	move container to workspace number $ws6
+	bindsym 	$mod+Shift+7 	move container to workspace number $ws7
+	bindsym 	$mod+Shift+8 	move container to workspace number $ws8
+	bindsym 	$mod+Shift+9 	move container to workspace number $ws9
+	bindsym 	$mod+Shift+0 	move container to workspace number $ws10
+
+#-----------------Setting Layouts--------------------#
+
+set $i3l spiral to workspace $ws1
+#----------------I3-KEYBINDS-------------#
+
+	#Reload I3
+		bindsym 	$mod+Shift+c 		reload
+	#Restart I3
+		bindsym 	$mod+Shift+r 		restart
+	#Exit I3
+		bindsym 	$mod+Shift+e 	exec 	"i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+
+#--------------------RESIZE MODE-------------------_#
+	bindsym 	$mod+r mode 	"resize"
+
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+  bindsym   $mod+p  mode    "power"
+
+mode "power"{
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
+      bindsym $mod+p mode "default"
+
+}
+#-----------------COLORS-------------------#
+
+	set_from_resource 	$fg 	i3wm.color7 	#f0f0f0
+	set_from_resource 	$bg 	i3wm.color20 	#432652
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
+
+
+
+#----------------Run at Startup--------------------#
+  exec_always picom  --config $HOME/.config/picom.conf
+  exec_always dunst -conf ~/.cache/wal/dunstrc
+  exec $HOME/.config/polybar/launch.sh
+  exec i3-layouts
+  exec wal -i virus.png
+#-------------Custom Keybindings-----------------#
+	bindsym 	$mod+b 			    exec 		thorium-browser
+	bindsym 	$mod+Return 		exec 		alacritty 
+  bindsym   $mod+e          exec    evince
+  bindsym   $mod+Shift+p    exec    liferea
+#-------------------Rofi Keybinds----------------------#
+	bindsym 	$mod+space 		  exec 	--no-startup-id 	rofi -show drun
+  bindsym 	$mod+Shift+b 		exec 	--no-startup-id 	blueman-manager
+	# bindsym 	$mod+Shift+p 		exec 	--no-startup-id 	powermenu
+	# bindsym 	$mod+Shift+w 		exec 	--no-startup-id 	wifimenu 
+	bindsym 	$mod+Shift+d 		exec 	--no-startup-id		rofi -show run
+	bindsym 	$mod+Shift+v 		exec 	--no-startup-id		volmenu
+
+default_floating_border pixel 5
+default_border pixel 2 
+hide_edge_borders smart
+#Gaps
+gaps inner 5
+gaps outer 5
+smart_gaps on
