@@ -56,4 +56,4 @@ ventoy
 bibata
 temurin
 openrgb
-
+wlogout
