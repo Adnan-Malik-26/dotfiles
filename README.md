@@ -21,7 +21,7 @@ Dotfiles are plain text configuration files that are used to customize and confi
 To get started, clone this repository to your home directory:
 
 ```bash
-git clone https://github.com/your-username/dotfiles.git ~/.dotfiles
+git clone https://github.com/Adnan-Malik-26/dotfiles.git ~/.dotfiles
 ```
 
 Navigate to the `~/.dotfiles` directory and run the installation script:
