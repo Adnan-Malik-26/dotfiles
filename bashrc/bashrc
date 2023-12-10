@@ -54,6 +54,7 @@ alias 'cp'='cp -v'
 alias 'rm'='rm -v'
 alias 'mv'='mv -v'
 alias 'cl'='clear'
+alias 'cls'='clear'
 #IP address 
 alias 'giveip'="ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'"
 #Meat of the file
@@ -72,7 +73,6 @@ neofetch
 ###PATH
 PATH=$PATH:$HOME/.local/bin/
 PATH=$PATH:/usr/bin
-. "$HOME/.cargo/env"
 export PATH=$PATH:/home/adnan/.spicetify
 export PATH=$PATH:/home/adnan/geny/genymotions
 ###FUNCTIONS
