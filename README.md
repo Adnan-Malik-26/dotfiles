@@ -37,9 +37,10 @@ This script will create symbolic links to the configuration files in your home d
 
 - **Shell:** Configuration files for Bash and/or Zsh.
 - **Editor:** Configuration files for Vim or Neovim.
-- **Git:** Git configuration settings and aliases.
-- **Tmux:** Configuration for the terminal multiplexer.
-- **Miscellaneous:** Various other configurations for tools and applications.
+- **Hyprland:** Configuration for the terminal multiplexer.
+- **Waybar:** Various other configurations for tools and applications.
+- **Starship:** Various other configurations for tools and applications.
+- **Neofetch:** Various other configurations for tools and applications.
 
 ## Installation
 
