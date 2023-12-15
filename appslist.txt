@@ -59,9 +59,5 @@ openrgb
 wlogout
 obs-studio
 liferea
+github-cli
 
-
-
-
-
-edits
