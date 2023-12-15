@@ -1,0 +1,13 @@
+#!/bin/bash
+
+wal -i ~/gits/aesthetic-wallpapers/images/
+
+wallpaper_path=$(cat "$HOME/.cache/wal/wal")
+
+swww img $wallpaper_path
+
+cd $HOME/.local/bin/
+./chalac
+
+cd $HOME/.config/waybar/
+./launch.sh

@@ -1,9 +1,0 @@
-#!/bin/bash
-
-
-#changing Pywal
-wal -i $1
-
-#Changing alacritty color
-exec chalac
-

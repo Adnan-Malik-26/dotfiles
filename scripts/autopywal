@@ -1,4 +1,0 @@
-#!/bin/bash
-WALLPAPER=$(cat "$HOME/.cache/wal/wal")
-
-wal -q -i $WALLPAPER

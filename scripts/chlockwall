@@ -1,5 +1,0 @@
-#!/bin/bash
-
-WALLPAPER=$(cat /home/adnanmalik/.cache/wal/wal)
-
-gdm-wall --image $WALLPAPER
