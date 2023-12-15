@@ -1,6 +1,6 @@
 <h1 align="center">Eddy</h1>
 
-[lavender](https://github.com/Adnan-Malik-26/dotfiles/blob/main/assets/Github.png)
+[rice](https://imgur.com/a/tLFEF0A)
 
 - OS: [Arch Linux](https://archlinux.org/)
 - WM: [Hyprland](https://hyprland.org/)
