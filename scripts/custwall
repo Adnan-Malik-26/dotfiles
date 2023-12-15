@@ -1,0 +1,13 @@
+#!/bin/bash
+
+wal -i $1
+
+wallpaper_path=$(cat "$HOME/.cache/wal/wal")
+
+swww img $wallpaper_path
+
+cd $HOME/.local/bin/
+./chalac
+
+cd $HOME/.config/waybar/
+./launch.sh

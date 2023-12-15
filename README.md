@@ -1,68 +1,30 @@
-# Dotfiles Repository
+<h1 align="center">Eddy</h1>
 
-Welcome to my dotfiles repository! This is a collection of configuration files and scripts that I use to customize my Linux environment. Feel free to explore and use anything you find interesting. If you have any suggestions or improvements, I'd love to hear them.
+![lavender](https://github.com/m4xshen/dotfiles/assets/74842863/e13dbe5d-d6df-4a16-85fc-eddc921312ab)
 
-## Table of Contents
+- OS: [Arch Linux](https://archlinux.org/)
+- WM: [Hyprland](https://hyprland.org/)
+- Bar: [Waybar](https://github.com/Alexays/Waybar)
+- Launcher/Powermenu: [Rofi](https://github.com/davatorium/rofi)
+- Terminal: [Kitty](https://sw.kovidgoyal.net/kitty/)
+- Shell: [Zsh](https://www.zsh.org/)
+- Editor: [Neovim](https://neovim.io/)
+- Font: [Fira Code](https://github.com/tonsky/FiraCode)
+- Fetch: [neofetch](https://github.com/dylanaraps/neofetch)
+- PDF Viewer: [zathura](https://github.com/pwmt/zathura)
+- Notification Daemon: [dunst](https://github.com/dunst-project/dunst)
+- Colorscheme: [catppuccin mocha](https://github.com/catppuccin/catppuccin) with custom background (#11111B)
 
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Included Configurations](#included-configurations)
-- [Installation](#installation)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
+## Requirement
 
-## Introduction
-
-Dotfiles are plain text configuration files that are used to customize and configure your system. This repository contains my personal dotfiles for Linux, including configurations for various applications, shell settings, and scripts to automate tasks.
-
-## Getting Started
-
-To get started, clone this repository to your home directory:
-
-```bash
-git clone https://github.com/Adnan-Malik-26/dotfiles.git ~/.dotfiles
-```
-
-Navigate to the `~/.dotfiles` directory and run the installation script:
-
-```bash
-cd ~/.dotfiles
-./install.sh
-```
-
-This script will create symbolic links to the configuration files in your home directory, ensuring that your system is configured according to the settings in this repository.
-
-## Included Configurations
-
-- **Shell:** Configuration files for Bash and/or Zsh.
-- **Editor:** Configuration files for Vim or Neovim.
-- **Hyprland:** Configuration for the terminal multiplexer.
-- **Waybar:** Various other configurations for tools and applications.
-- **Starship:** Various other configurations for tools and applications.
-- **Neofetch:** Various other configurations for tools and applications.
+Install [stow](https://github.com/aspiers/stow)
 
 ## Installation
 
-The installation script (`install.sh`) creates symbolic links for each configuration file to your home directory. Before running the script, make sure to back up your existing configurations if you have any.
+1. Uncomment the config in `install.sh` you want to install
+2. Run `./install.sh`
 
-```bash
-cd ~/.dotfiles
-./install.sh
-```
+## Uninstall
 
-If you encounter any issues or conflicts during installation, you can selectively link files or manually copy the configurations as needed.
-
-## Customization
-
-Feel free to customize any of the configurations to suit your preferences. You can also add your own configurations or scripts to the repository. Create a new branch for your changes, and submit a pull request if you'd like to share your improvements.
-
-## Contributing
-
-Contributions are welcome! If you have any suggestions, bug reports, or improvements, please open an issue or submit a pull request. Be sure to follow the existing coding style and conventions.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as you see fit.
-
-Happy hacking! 
+1. Uncomment the config in `uninstall.sh` you want to uninstall
+2. Run `./uninstall.sh`
