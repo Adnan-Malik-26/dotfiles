@@ -1,6 +1,6 @@
 <h1 align="center">Eddy</h1>
 
-[rice](https://i.ibb.co/pZbRB7w/Github.png)
+![rice](https://i.ibb.co/pZbRB7w/Github.png)
 
 - OS: [Arch Linux](https://archlinux.org/)
 - WM: [Hyprland](https://hyprland.org/)
