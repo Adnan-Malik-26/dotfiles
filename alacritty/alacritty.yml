@@ -1,6 +1,6 @@
 
 window:
-  opacity: 0.6
+  opacity: 0.75 
   padding:
     x: 5
     y: 5
@@ -18,7 +18,7 @@ font:
     family: "FiraCode Nerd Font Mono"
     style: Regular
 
-  size: 12 
+  size: 15 
 draw_bold_text_with_bright_colors: true
 
 cursor:
@@ -66,27 +66,27 @@ theme: Argonaut
 # BEGIN ACE
 colors:
   primary:
-    background: '#12121b'
-    foreground: '#cadddb'
+    background: '#0B141E'
+    foreground: '#deb7b9'
   cursor:
-    text:       '#12121b'
-    cursor:     '#cadddb'
+    text:       '#0B141E'
+    cursor:     '#deb7b9'
   normal:
-    black:      '#12121b'
-    red:        '#BC6EE5'
-    green:      '#65C0A3'
-    yellow:     '#F7BC95'
-    blue:       '#E6A1AC'
-    magenta:    '#D2A3EB'
-    cyan:       '#DDB5F2'
-    white:      '#cadddb'
+    black:      '#0B141E'
+    red:        '#84575D'
+    green:      '#8E5C62'
+    yellow:     '#9A6369'
+    blue:       '#B37176'
+    magenta:    '#C37A7E'
+    cyan:       '#CA7E82'
+    white:      '#deb7b9'
   bright:
-    black:      '#8d9a99'
-    red:        '#BC6EE5'
-    green:      '#65C0A3'
-    yellow:     '#F7BC95'
-    blue:       '#E6A1AC'
-    magenta:    '#D2A3EB'
-    cyan:       '#DDB5F2'
-    white:      '#cadddb'
+    black:      '#9b8081'
+    red:        '#84575D'
+    green:      '#8E5C62'
+    yellow:     '#9A6369'
+    blue:       '#B37176'
+    magenta:    '#C37A7E'
+    cyan:       '#CA7E82'
+    white:      '#deb7b9'
 # END ACE
