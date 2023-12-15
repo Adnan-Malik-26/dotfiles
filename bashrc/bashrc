@@ -18,6 +18,8 @@ export HISTCONTROL=ignoreboth
 alias 'vi'='nvim'
 alias 'vim'='nvim'
 alias 'nv'='nvim'
+alias 'v'='nvim'
+
 #Quitting Terminal
 alias ':q'="exit"
 alias ':qw'='exit'
