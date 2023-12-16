@@ -36,7 +36,7 @@ alias ':wq'='exit'
 
 #Bashrc 
 alias 's'='source ~/.bashrc'
-alias 'b'='nvim ~/.bashrc'
+alias 'b'='nvim ~/.dotfiles/bashrc/bashrc'
 
 #Alternatives
 alias df='duf'
@@ -92,6 +92,7 @@ alias clone='git clone'
 alias commit='git commit -m'
 alias fetch='git fetch'
 alias push='git push'
+alias psuh='git push'
 alias stat='git status'
 alias tag='git tag'
 alias newtag='git tag -a'
