@@ -8,6 +8,6 @@ swww img $wallpaper_path
 
 cd $HOME/.local/bin/
 ./chalac
-
+./chchrome
 cd $HOME/.config/waybar/
 ./launch.sh
