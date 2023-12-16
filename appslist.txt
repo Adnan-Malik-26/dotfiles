@@ -60,4 +60,5 @@ wlogout
 obs-studio
 liferea
 github-cli
+noto-fonts-emoji
 
