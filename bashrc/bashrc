@@ -1,8 +1,17 @@
 #
-# ~/.bashrc
+ # ____    _    ____  _   _ ____   ____   ______   __
+# | __ )  / \  / ___|| | | |  _ \ / ___| | __ ) \ / /
+# |  _ \ / _ \ \___ \| |_| | |_) | |     |  _ \\ V /
+# | |_) / ___ \ ___) |  _  |  _ <| |___  | |_) || |
+# |____/_/   \_\____/|_| |_|_| \_\\____| |____/ |_|
 #
-# This is a bashrc
-# If not running interactively, don't do anything
+    # _    ____  _   _    _    _   _
+   # / \  |  _ \| \ | |  / \  | \ | |
+  # / _ \ | | | |  \| | / _ \ |  \| |
+ # / ___ \| |_| | |\  |/ ___ \| |\  |
+# /_/   \_\____/|_| \_/_/   \_\_| \_|
+
+
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
@@ -33,6 +42,7 @@ alias 'b'='nvim ~/.bashrc'
 alias df='duf'
 alias 'cat'='bat'
 alias 'ping'='gping'
+
 #Opening Configs
 alias 'i3c'='nvim ~/.config/i3/config '
 alias 'plc'='nvim ~/.config/polybar/config.ini'
@@ -47,6 +57,7 @@ alias 'ls'='lsd --group-dirs first'
 alias 'la'='lsd -a --group-dirs first'
 alias 'll'='lsd -al --group-dirs first'
 alias 'l'='lsd --group-dirs first -a'
+
 #Adding Flags
 alias df='df -h'
 alias free='free -m'
@@ -57,18 +68,39 @@ alias 'rm'='rm -v'
 alias 'mv'='mv -v'
 alias 'cl'='clear'
 alias 'cls'='clear'
+
 #IP address 
 alias 'giveip'="ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'"
+
 #Meat of the file
 alias meat='grep "^\s*[^#;]"'
 
 #start Tor Browser
 alias 'tor'='exec /home/adnan/Documents/tor-browser/start-tor-browser.desktop'
+
 #Ping short
 alias 'pn'='ping -c 5 8.8.8.8'
+
 #Shopt
 shopt -s autocd
 shopt -s cdspell
+
+#Git
+alias add='git add .'
+alias branch='git branch'
+alias checkout='git checkout'
+alias clone='git clone'
+alias commit='git commit -m'
+alias fetch='git fetch'
+alias pull='git pull origin'
+alias push='git push origin'
+alias stat='git status'  # 'status' is protected name so using 'stat' instead
+alias tag='git tag'
+alias newtag='git tag -a'
+
+
+
+
 #AUTOSTART
 neofetch
 
