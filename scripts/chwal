@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wal -i ~/gits/aesthetic-wallpapers/images/
+wal -q -i ~/gits/aesthetic-wallpapers/images/
 
 wallpaper_path=$(cat "$HOME/.cache/wal/wal")
 
