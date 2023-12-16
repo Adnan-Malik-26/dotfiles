@@ -50,5 +50,6 @@ ln -s $CURRENT_DIRECTORY/scripts/waybar-progress ~/.local/bin/waybar-progress
 
 ln -s $CURRENT_DIRECTORY/pywaltemplates ~/.config/wal/templates/ 
 
+ln -s $CURRENT_DIRECTORY/scripts ~/.local/bin/colorscript
 
 ln -s $CURRENT_DIRECTORY/scripts/custwall /home/adnan/.local/bin/custwall
