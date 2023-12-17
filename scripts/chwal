@@ -11,3 +11,5 @@ cd $HOME/.local/bin/
 ./chchrome
 cd $HOME/.config/waybar/
 ./launch.sh
+
+cp $wallpaper_path ~/.cache/wal/default.jpg
