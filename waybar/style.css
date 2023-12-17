@@ -106,10 +106,24 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
  #custom-brave, 
- #custom-browser, 
+ #custom-browser{ 
+    background-color: @color4;
+    font-size: 16px;
+    color: @background;
+    border-radius: 15px;
+    padding: 2px 10px 0px 10px;
+    margin: 10px 15px 10px 0px;
+  }
  #custom-keybindings, 
  #custom-outlook, 
- #custom-filemanager, 
+ #custom-filemanager{
+    background-color: @color4;
+    font-size: 16px;
+    color: @background;
+    border-radius: 15px;
+    padding: 2px 10px 0px 10px;
+    margin: 10px 15px 10px 0px;
+ } 
  #custom-teams, 
  #custom-chatgpt, 
  #custom-calculator, 

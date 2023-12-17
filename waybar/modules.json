@@ -79,7 +79,7 @@
     // Settings
     "custom/settings": {
         "format": "",
-        "on-click": "alacritty --class dotfiles-floating -e ~/dotfiles/hypr/settings/settings.sh",
+        "on-click": "alacritty --class dotfiles-floating -e ~/git/dotfiles/hypr/settings/settings.sh",
         "tooltip": false
     },
 
@@ -93,7 +93,7 @@
     // Filemanager Launcher
     "custom/filemanager": {
         "format": "",
-        "on-click": "~/dotfiles/.settings/filemanager.sh",
+        "on-click": "~/.dotfiles/scripts/filemanager.sh",
         "tooltip": false
     },
 
@@ -113,8 +113,8 @@
 
     // Browser Launcher
     "custom/browser": {
-        "format": "",
-        "on-click": "~/dotfiles/.settings/browser.sh",
+        "format": "",
+        "on-click": "~/.dotfiles/scripts/browser.sh",
         "tooltip": false
     },    
 

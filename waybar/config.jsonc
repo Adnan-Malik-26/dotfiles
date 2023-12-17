@@ -31,13 +31,14 @@
 
     // Modules Left
     "modules-left": [
-        "hyprland/window",
-        "wlr/taskbar"
+        "hyprland/window"
     ],
 
     // Modules Center
     "modules-center": [
-        "hyprland/workspaces"
+        "custom/filemanager",
+        "hyprland/workspaces",
+        "custom/browser"
     ],
 
     // Modules Right    
