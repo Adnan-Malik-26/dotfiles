@@ -61,4 +61,6 @@ obs-studio
 liferea
 github-cli
 noto-fonts-emoji
+swayidle
+swaylock-effects-git
 
