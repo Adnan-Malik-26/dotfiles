@@ -31,7 +31,8 @@
 
     // Modules Left
     "modules-left": [
-        "hyprland/window"
+        "hyprland/window",
+        "wlr/taskbar"
     ],
 
     // Modules Center
@@ -41,7 +42,6 @@
 
     // Modules Right    
     "modules-right": [
-        "custom/updates",
         "pulseaudio",
         "battery", 
         "clock",
