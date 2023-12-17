@@ -17,7 +17,6 @@ datestr=%a, %e of %B
 
 # Add current screenshot as wallpaper
 # screenshots
-
 # Add an image as a background 
 # In my setup the current wallpaper (requires wallpaper scripts in /scripts)
 image=~/.cache/current_wallpaper.jpg
