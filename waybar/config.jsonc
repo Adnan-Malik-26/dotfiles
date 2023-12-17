@@ -31,7 +31,9 @@
 
     // Modules Left
     "modules-left": [
-        "hyprland/window"
+        "custom/appmenu",
+        "hyprland/window",
+        "group/hardware"
     ],
 
     // Modules Center

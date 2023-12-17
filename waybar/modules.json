@@ -47,8 +47,8 @@
     // Hyprland Window
     "hyprland/window": {
         "rewrite": {
-            "(.*) - Brave": "$1",
-            "(.*) - Chromium": "$1",
+            "(.*) - Thorium": "$1",
+            "(.*) - Alacritty": "$1",
             "(.*) - Brave Search": "$1",
             "(.*) - Outlook": "$1",
             "(.*) Microsoft Teams": "$1"
@@ -180,7 +180,7 @@
 
     // System
     "custom/system": {
-        "format": "",
+        "format": "",
         "tooltip": false
     },
 
