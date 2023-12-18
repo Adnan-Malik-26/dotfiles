@@ -54,4 +54,5 @@ ln -s $CURRENT_DIRECTORY/scripts ~/.local/bin/colorscript
 
 ln -s $CURRENT_DIRECTORY/scripts/custwall /home/adnan/.local/bin/custwall
 
-ln -s $CURRENT_DIRECTORY/swaylock ~/.config/swaylock
+ln -s $CURRENT_DIRECTORY/swaylock ~/.config/swaylock  
+
