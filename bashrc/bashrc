@@ -99,7 +99,7 @@ alias newtag='git tag -a'
 
 #AUTOSTART
 neofetch
-
+ls
 ###PATH
 PATH=$PATH:$HOME/.local/bin/
 PATH=$PATH:/usr/bin
