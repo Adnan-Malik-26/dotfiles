@@ -63,4 +63,6 @@ github-cli
 noto-fonts-emoji
 swayidle
 swaylock-effects-git
-
+notion
+xorg-fonts-100dpi
+xorg-fonts-75dpi
