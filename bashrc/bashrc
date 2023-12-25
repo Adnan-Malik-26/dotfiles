@@ -76,7 +76,6 @@ alias 'giveip'="ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'"
 alias meat='grep "^\s*[^#;]"'
 
 #start Tor Browser
-alias 'tor'='exec /home/adnan/Documents/tor-browser/start-tor-browser.desktop'
 
 #Ping short
 alias 'pn'='ping -c 5 8.8.8.8'
