@@ -11,5 +11,7 @@ cd $HOME/.local/bin/
 ./chchrome
 cd $HOME/.config/waybar/
 ./launch.sh
-
+cd $HOME/.dotfiles/scripts/ 
+./wal-telegram
+./wal-zathura
 cp $wallpaper_path ~/.cache/wal/default.jpg
