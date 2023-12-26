@@ -1,0 +1,1 @@
+/bin/sh -c "/usr/share/wal-telegram/wal-telegram $*"
