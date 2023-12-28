@@ -21,12 +21,12 @@ symbol = " "
 
 [directory]
 style = "blue"
-read_only = " "
+read_only = " 🔒"
 truncation_length = 4
 truncate_to_repo = false
 
 [character]
-success_symbol = "[❯](purple)"
+success_symbol = "[[♥](green) ❯](maroon)"
 error_symbol = "[❯](red)"
 vicmd_symbol = "[❮](green)"
 
@@ -55,9 +55,6 @@ disabled = false
 [cmd_duration]
 format = "[$duration]($style)"
 style = "yellow"
-
-[memory_usage]
-symbol = " "
 
 [rust]
 symbol = " "
