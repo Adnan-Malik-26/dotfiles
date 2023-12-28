@@ -17,13 +17,13 @@ die() {
   exit 1
 }
 
-DEFAULT_MACOS_CONFIG="$HOME"/.config/alacritty/alacritty.yml
+DEFAULT_MACOS_CONFIG="$HOME"/.config/alacritty/alacritty.toml
 
 # Wal generates a shell script that defines color0..color15
 SRC="$HOME"/.cache/wal/colors.sh
 
 [ -e "$SRC" ] || die "Wal colors not found, exiting script. Have you executed Wal before?"
-# printf "Colors found, source ready.\n"
+printf "Colors found, source ready.\n"
 
 READLINK=$( command -v greadlink || command -v readlink )
 
@@ -62,7 +62,7 @@ if grep -q '^# BEGIN ACE' "$CFG"; then
   # And if end comment exists
   if grep -q '^# END ACE' "$CFG"; then
     # Delete contents of the block
-  #  printf "Existing generated colors found, replacing new colors...\n"
+    printf "Existing generated colors found, replacing new colors...\n"
     sed '/^# BEGIN ACE/,/^# END ACE/ {
       /^# BEGIN ACE/! { /^# END ACE/!d; }
     }' "$CFG" > "$tempfile" \
@@ -75,41 +75,43 @@ if grep -q '^# BEGIN ACE' "$CFG"; then
 else
   # Don't do anything and notify user if there's an end comment in the file
   ! grep -q '^# END ACE' "$CFG" || die "Found '# END ACE' comment, but no '# BEGIN ACE' comment found. Please ensure it is present."
-  #printf "There's no existing 'generated' colors, adding comments...\n";
-  #printf '# BEGIN ACE\n# END ACE' >> "$CFG";
+  printf "There's no existing 'generated' colors, adding comments...\n";
+  printf '# BEGIN ACE\n# END ACE' >> "$CFG";
 fi
 
 # Write new color definitions
 # We know $colorX is unset, we set it by sourcing above
 # shellcheck disable=SC2154
 { sed "/^# BEGIN ACE/ r /dev/stdin" "$CFG" > "$tempfile" <<EOF
-colors:
-  primary:
-    background: '$color0'
-    foreground: '$color7'
-  cursor:
-    text:       '$color0'
-    cursor:     '$color7'
-  normal:
-    black:      '$color0'
-    red:        '$color1'
-    green:      '$color2'
-    yellow:     '$color3'
-    blue:       '$color4'
-    magenta:    '$color5'
-    cyan:       '$color6'
-    white:      '$color7'
-  bright:
-    black:      '$color8'
-    red:        '$color9'
-    green:      '$color10'
-    yellow:     '$color11'
-    blue:       '$color12'
-    magenta:    '$color13'
-    cyan:       '$color14'
-    white:      '$color15'
+[colors.primary]
+background = "$color0"
+foreground = "$color7"
+
+[colors.cursor]
+text = "$color0"
+cursor = "$color7"
+
+[colors.normal]
+black = "$color0"
+red = "$color1"
+green = "$color2"
+yellow = "$color3"
+blue = "$color4"
+magenta = "$color5"
+cyan = "$color6"
+white = "$color7"
+
+[colors.bright]
+black = "$color8"
+red = "$color9"
+green = "$color10"
+yellow = "$color11"
+blue = "$color12"
+magenta = "$color13"
+cyan = "$color14"
+white = "$color15"
 EOF
 } && cat "$tempfile" > "$CFG" \
   && rm "$tempfile"
 trap - INT TERM EXIT
-# printf "'%s' exported to '%s'\n" "$SRC" "$CFG"
+printf "'%s' exported to '%s'\n" "$SRC" "$CFG"

@@ -1,20 +1,7 @@
-format = """
-$username\
-$hostname\
-$directory\
-$git_branch\
-$git_state\
-$git_status\
-$git_metrics\
-$fill\
-$nodejs\
-$cmd_duration $jobs $time\
-$line_break\
-$character"""
-command_timeout = 10000
 
-[nodejs]
-format = "[$symbol($version )]($style)"
+format = """\
+[╭╴](238)$env_var\
+$all[╰─](238)$character"""
 
 [fill]
 symbol = " "
@@ -60,7 +47,7 @@ style = "yellow"
 symbol = " "
 
 [time]
-disabled = false
+disabled = true 
 style = "bold white"
 format = "[$time]($style)"
 
