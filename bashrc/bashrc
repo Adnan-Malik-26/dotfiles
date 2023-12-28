@@ -80,10 +80,6 @@ alias meat='grep "^\s*[^#;]"'
 #Ping short
 alias 'pn'='ping -c 5 8.8.8.8'
 
-#Shopt
-shopt -s autocd
-shopt -s cdspell
-
 #Git
 alias add='git add .'
 alias branch='git branch'
@@ -95,6 +91,10 @@ alias psuh='git push'
 alias stat='git status'
 alias tag='git tag'
 alias newtag='git tag -a'
+
+#Shopt
+shopt -s autocd
+shopt -s cdspell
 
 #AUTOSTART
 neofetch
