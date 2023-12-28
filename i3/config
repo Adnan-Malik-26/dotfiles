@@ -3,7 +3,9 @@
 
 #-----------------Setting the font--------------------------#
 	font pango:FiraCode Nerd Font 8
-
+#thisifdklafjkldsjfklsdjfklsdjlfkj
+#alskdfjlkjl
+#ajdsfldsjalfkjslk;
 
 #-----------------Default Startup Apps----------------------#
 	exec 		--no-startup-id 		dex --autostart --environment i3
