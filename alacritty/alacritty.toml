@@ -1,0 +1,57 @@
+
+live_config_reload = true
+colors.draw_bold_text_with_bright_colors = true
+
+[window]
+opacity = 0.75
+
+  [window.padding]
+  x = 5
+  y = 5
+
+[scrolling]
+history = 10_000
+multiplier = 10
+
+[selection]
+semantic_escape_chars = "|:\"' {}()[]<>"
+save_to_clipboard = true
+
+[font]
+size = 15
+
+  [font.normal]
+  family = "FiraCode Nerd Font Mono"
+  style = "Regular"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[colors.primary]
+background = "#000000"
+foreground = "#e1bfc0"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#e1bfc0"
+
+[colors.normal]
+black = "#000000"
+red = "#9B6463"
+green = "#AD7171"
+yellow = "#C17F7F"
+blue = "#61898A"
+magenta = "#9E9E9E"
+cyan = "#ABA5A5"
+white = "#e1bfc0"
+
+[colors.bright]
+black = "#9d8586"
+red = "#9B6463"
+green = "#AD7171"
+yellow = "#C17F7F"
+blue = "#61898A"
+magenta = "#9E9E9E"
+cyan = "#ABA5A5"
+white = "#e1bfc0"
