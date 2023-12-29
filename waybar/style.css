@@ -121,7 +121,7 @@ window#waybar.empty #window {
     font-size:16px;
     font-weight:normal;
 }
- #custom-idle {
+ #custom-audio_idle_inhibitor {
     background-color: @color4;
     font-size: 16px;
     color: @background;
@@ -242,7 +242,7 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
 #pulseaudio {
-    background-color: @color4;
+    background-color: @color8;
     font-size: 16px;
     color: @background;
     border-radius: 15px;
