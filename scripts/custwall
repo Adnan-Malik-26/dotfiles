@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wal -i $1
+wal -i $1 -g
 
 wallpaper_path=$(cat "$HOME/.cache/wal/wal")
 
