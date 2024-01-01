@@ -15,3 +15,5 @@ cd $HOME/.dotfiles/scripts/
 ./wal-zathura
 ./wal-discord
 cp $wallpaper_path ~/.cache/wal/default.jpg
+
+notify-send $(basename $wallpaper_path)
