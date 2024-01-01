@@ -6,12 +6,12 @@ wallpaper_path=$(cat "$HOME/.cache/wal/wal")
 
 swww img $wallpaper_path
 
-cd $HOME/.local/bin/
-./chalac
-./chchrome
 cd $HOME/.config/waybar/
 ./launch.sh
 cd $HOME/.dotfiles/scripts/ 
 ./wal-telegram
+./chalac
+./chchrome
 ./wal-zathura
+./wal-discord
 cp $wallpaper_path ~/.cache/wal/default.jpg
