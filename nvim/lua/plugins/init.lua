@@ -262,6 +262,14 @@ local default_plugins = {
       require("which-key").setup(opts)
     end,
   },
+{
+	"oncomouse/lushwal.nvim",
+	cmd = { "LushwalCompile" },
+	dependencies = {
+		{ "rktjmp/lush.nvim" },
+		{ "rktjmp/shipwright.nvim" },
+	},
+}
 }
 
 local config = require("core.utils").load_config()

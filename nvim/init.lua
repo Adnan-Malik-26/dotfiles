@@ -7,7 +7,6 @@ if custom_init_path then
 end
 
 require("core.utils").load_mappings()
-
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 -- bootstrap lazy.nvim!
