@@ -14,6 +14,7 @@ cd $HOME/.dotfiles/scripts/
 ./chchrome
 ./wal-zathura
 ./wal-discord
+./wallpaper_history
 cp $wallpaper_path ~/.cache/wal/default.jpg
 
 notify-send $(basename $wallpaper_path)
