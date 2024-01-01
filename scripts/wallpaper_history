@@ -1,0 +1,5 @@
+#!/bin/bash
+
+wallpaper_name=$(basename $(cat ~/.cache/wal/wal))
+
+echo $wallpaper_name>>$HOME/.cache/wal/history
