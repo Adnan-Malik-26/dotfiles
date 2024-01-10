@@ -1,0 +1,12 @@
+[SddmGreeterTheme]
+Name=Redrock
+Description=macOS inspired SDDM theme.
+License=CC-BY-SA
+Type=sddm-theme
+Version=1.0
+Screenshot=screenshot.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Theme-Id=redrock
+Theme-API=2.0
