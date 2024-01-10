@@ -1,72 +1,53 @@
-# ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗         ███████╗ ██████╗██████╗ ██╗██████╗ ████████╗
-# ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║         ██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝
-# ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║         ███████╗██║     ██████╔╝██║██████╔╝   ██║   
-# ██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║         ╚════██║██║     ██╔══██╗██║██╔═══╝    ██║   
-# ██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗    ███████║╚██████╗██║  ██║██║██║        ██║   
-# ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝   
-
-
 #!/bin/bash
 
-# Set the current directory
-CURRENT_DIRECTORY=$(pwd)
+ln -s ~/.dotfiles/alacritty/ ~/.config/alacritty/ 
+ln -s ~/.dotfiles/neofetch/ ~/.config/neofetch/ 
+ln -s ~/.dotfiles/bashrc/bashrc ~/.bashrc 
+ln -s ~/.dotfiles/gtk/gtk-3.0/ ~/.config/gtk-3.0/ 
+ln -s ~/.dotfiles/gtk/gtk-4.0/ ~/.config/gtk-4.0/ 
+ln -s ~/.dotfiles/hypr/ ~/.config/hypr/ 
+ln -s ~/.dotfiles/i3 ~/.config/i3 
+ln -s ~/.dotfiles/nvim ~/.config/nvim/ 
+ln -s ~/.dotfiles/qBittorrent/ ~/.dotfiles/qBittorrent/ 
+ln -s ~/.dotfiles/rofi/ ~/.config/rofi/ 
+ln -s ~/.dotfiles/starship/starship.toml ~/.config/starship.toml 
+ln -s ~/.dotfiles/swaylock/ ~/.config/swaylock/
+ln -s ~/.dotfiles/waybar/ ~/.config/waybar/ 
+ln -s ~/.dotfiles/wlogout/ ~/.config/wlogout/ 
 
-# Function to create symbolic links with error handling
-create_symlink() {
-    source_file=$1
-    target_file=$2
 
-    if [ -e "$target_file" ]; then
-        echo "Symbolic link for $target_file already exists. Skipping..."
-    else
-        ln -s "$source_file" "$target_file"
-        echo "Created symbolic link for $target_file"
-    fi
-}
+chmod +x ~/.dotfiles/scripts/chwal 
+chmod +x ~/.dotfiles/scripts/autolock.sh
+chmod +x ~/.dotfiles/scripts/browser.sh
+chmod +x ~/.dotfiles/scripts/chalac
+chmod +x ~/.dotfiles/scripts/chchrome
+chmod +x ~/.dotfiles/scripts/colorscript.sh
+chmod +x ~/.dotfiles/scripts/custwall
+chmod +x ~/.dotfiles/scripts/filemanager.sh
+chmod +x ~/.dotfiles/scripts/getwall
+chmod +x ~/.dotfiles/scripts/gtk.sh
+chmod +x ~/.dotfiles/scripts/rofiwifimenu
+chmod +x ~/.dotfiles/scripts/wal-discord
+chmod +x ~/.dotfiles/scripts/wal-zathura
+chmod +x ~/.dotfiles/scripts/wal-telegram
+chmod +x ~/.dotfiles/scripts/wallpaper_history
+chmod +x ~/.dotfiles/scripts/waybar-progress
 
-# Ensure that target directories exist
-mkdir -p ~/.config/alacritty
-mkdir -p ~/.config/gtk-3.0
-mkdir -p ~/.config/gtk-4.0
-mkdir -p ~/.config/hypr
-mkdir -p ~/.config/i3
-mkdir -p ~/.config/liferea
-mkdir -p ~/.config/neofetch
-mkdir -p ~/.config/nvim
-mkdir -p ~/.config/polybar
-mkdir -p ~/.config/qBittorrent
-mkdir -p ~/.config/rofi
-mkdir -p ~/.config/waybar
-mkdir -p ~/.config/wlogout
-mkdir -p ~/.config/wal/templates
-mkdir -p ~/.local/bin
-
-# Create symbolic links
-create_symlink "$CURRENT_DIRECTORY/alacritty/alacritty.yml" "~/.config/alacritty/alacritty.yml"
-create_symlink "$CURRENT_DIRECTORY/bashrc/bashrc" "~/.bashrc"
-create_symlink "$CURRENT_DIRECTORY/gtk/gtk-3.0" "~/.config/gtk-3.0/"
-create_symlink "$CURRENT_DIRECTORY/gtk/gtk-4.0" "~/.config/gtk-4.0/"
-create_symlink "$CURRENT_DIRECTORY/hypr" "~/.config/hypr/"
-create_symlink "$CURRENT_DIRECTORY/i3" "~/.config/i3/"
-create_symlink "$CURRENT_DIRECTORY/liferea" "~/.config/liferea/"
-create_symlink "$CURRENT_DIRECTORY/neofetch" "~/.config/neofetch"
-create_symlink "$CURRENT_DIRECTORY/nvim" "~/.config/nvim/"
-create_symlink "$CURRENT_DIRECTORY/polybar" "~/.config/polybar/"
-create_symlink "$CURRENT_DIRECTORY/qBittorrent" "~/.config/qBittorrent/"
-create_symlink "$CURRENT_DIRECTORY/rofi" "~/.config/rofi/"
-create_symlink "$CURRENT_DIRECTORY/starship/starship.toml" "~/.config/starship.toml"
-create_symlink "$CURRENT_DIRECTORY/waybar" "~/.config/waybar/"
-create_symlink "$CURRENT_DIRECTORY/wlogout" "~/.config/wlogout/"
-create_symlink "$CURRENT_DIRECTORY/scripts/chalac" "~/.local/bin/chalac"
-create_symlink "$CURRENT_DIRECTORY/scripts/chchrome" "~/.local/bin/chchrome"
-create_symlink "$CURRENT_DIRECTORY/scripts/chwal" "~/.local/bin/chwal"
-create_symlink "$CURRENT_DIRECTORY/scripts/getwall" "~/.local/bin/getwall"
-create_symlink "$CURRENT_DIRECTORY/scripts/gtk.sh" "~/.local/bin/gtk.sh"
-create_symlink "$CURRENT_DIRECTORY/scripts/rofiwifimenu" "~/.local/bin/rofiwifimenu"
-create_symlink "$CURRENT_DIRECTORY/scripts/waybar-progress" "~/.local/bin/waybar-progress"
-create_symlink "$CURRENT_DIRECTORY/pywaltemplates" "~/.config/wal/templates/"
-create_symlink "$CURRENT_DIRECTORY/scripts" "~/.local/bin/colorscript"
-create_symlink "$CURRENT_DIRECTORY/scripts/custwall" "~/.local/bin/custwall"
-create_symlink "$CURRENT_DIRECTORY/swaylock" "~/.config/swaylock"
+ln -s ~/.dotfiles/scripts/chwal 
+ln -s ~/.dotfiles/scripts/autolock.sh
+ln -s ~/.dotfiles/scripts/browser.sh
+ln -s ~/.dotfiles/scripts/chalac
+ln -s ~/.dotfiles/scripts/chchrome
+ln -s ~/.dotfiles/scripts/colorscript.sh
+ln -s ~/.dotfiles/scripts/custwall
+ln -s ~/.dotfiles/scripts/filemanager.sh
+ln -s ~/.dotfiles/scripts/getwall
+ln -s ~/.dotfiles/scripts/gtk.sh
+ln -s ~/.dotfiles/scripts/rofiwifimenu
+ln -s ~/.dotfiles/scripts/wal-discord
+ln -s ~/.dotfiles/scripts/wal-zathura
+ln -s ~/.dotfiles/scripts/wal-telegram
+ln -s ~/.dotfiles/scripts/wallpaper_history
+ln -s ~/.dotfiles/scripts/waybar-progress
 
 echo "Installation complete."
