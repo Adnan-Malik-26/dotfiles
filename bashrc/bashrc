@@ -130,7 +130,7 @@ ex () {
  }
 
 #cd function
-function up {
+function cm {
     local counter=${1:-1}
     local dirup="../"
     local out=""
