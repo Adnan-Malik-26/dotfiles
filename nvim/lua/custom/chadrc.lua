@@ -2,7 +2,7 @@
 local M = {}
 
 M.ui = {
-  theme = 'ashes',
+  theme = 'chadracula',
   transparency = true,
 
 
