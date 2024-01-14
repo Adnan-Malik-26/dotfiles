@@ -2,6 +2,7 @@
 format = """\
 [╭╴](238)$env_var\
 $all[╰─](238)$character"""
+command_timeout = 1000
 
 [fill]
 symbol = " "
