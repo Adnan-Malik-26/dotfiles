@@ -33,13 +33,13 @@ window#waybar {
     margin: 4px 3px;
     border-radius: 15px;
     border: 0px;
-    color: @color6;
+    color: @color9;
     transition: all 0.3s ease-in-out;
 }
 
 #workspaces button.active {
-    color: @color4;
-    background: @color9;
+    color: @color10;
+    background: @color8;
     border-radius: 15px;
     min-width: 40px;
     transition: all 0.3s ease-in-out;
