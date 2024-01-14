@@ -67,6 +67,7 @@ alias 'cp'='cp -v'
 alias 'rm'='rm -v'
 alias 'mv'='mv -v'
 alias 'cl'='cd ~ && clear&&neofetch&&ls'
+alias 'cv'='clear&&neofetch&&ls'
 alias 'cls'='clear'
 
 #IP address 
