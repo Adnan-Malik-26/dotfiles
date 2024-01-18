@@ -51,6 +51,6 @@ ln -s ~/.dotfiles/scripts/wallpaper_history
 ln -s ~/.dotfiles/scripts/waybar-progress
 
 #sddm theme
-sudo cp ~/.dotfiles/sddm/theme/redrock/ /usr/share/sddm/themes/redrock/ 
+sudo cp ~/.dotfiles/sddm/theme/redrock/ /usr/share/sddm/themes/redrock
 
 echo "Installation complete."
