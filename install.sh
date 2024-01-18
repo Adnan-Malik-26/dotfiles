@@ -14,7 +14,7 @@ ln -s ~/.dotfiles/starship/starship.toml ~/.config/starship.toml
 ln -s ~/.dotfiles/swaylock/ ~/.config/swaylock/
 ln -s ~/.dotfiles/waybar/ ~/.config/waybar/ 
 ln -s ~/.dotfiles/wlogout/ ~/.config/wlogout/ 
-
+ln -s ~/.dotfiles/gitconfig ~/.gitconfig
 
 chmod +x ~/.dotfiles/scripts/chwal 
 chmod +x ~/.dotfiles/scripts/autolock.sh
@@ -49,5 +49,8 @@ ln -s ~/.dotfiles/scripts/wal-zathura
 ln -s ~/.dotfiles/scripts/wal-telegram
 ln -s ~/.dotfiles/scripts/wallpaper_history
 ln -s ~/.dotfiles/scripts/waybar-progress
+
+#sddm theme
+sudo cp ~/.dotfiles/sddm/theme/redrock/ /usr/share/sddm/themes/redrock/ 
 
 echo "Installation complete."
