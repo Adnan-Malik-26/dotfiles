@@ -211,7 +211,7 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
  #disk,#memory,#cpu,#language {
-    background-color: @color3;
+    background-color: @color11;
     font-size: 16px;
     color: @background;
     border-radius: 15px;

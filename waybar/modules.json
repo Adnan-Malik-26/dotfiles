@@ -187,13 +187,13 @@
 
     // CPU
     "cpu": {
-        "format": "/ C {usage}% ",
+        "format": "C {usage}% ",
         "on-click": "alacritty -e htop"
     },
 
     // Memory
     "memory": {
-        "format": "/ M {}% ",
+        "format": "M {}% ",
         "on-click": "alacritty -e htop"
     },
 
@@ -205,9 +205,6 @@
         "on-click": "alacritty -e htop"
     }, 
 
-    "hyprland/language": {
-        "format": "/ K {short}"
-    },
 
     // Group Hardware
     "group/hardware": {
@@ -222,7 +219,6 @@
             "disk",
             "cpu",
             "memory",
-            "hyprland/language"
         ]
     },
     
