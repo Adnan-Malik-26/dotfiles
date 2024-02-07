@@ -18,7 +18,7 @@ semantic_escape_chars = "|:\"' {}()[]<>"
 save_to_clipboard = true
 
 [font]
-size = 15
+size = 11
 
   [font.normal]
   family = "FiraCode Nerd Font Mono"

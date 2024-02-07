@@ -18,7 +18,7 @@ font:
     family: "FiraCode Nerd Font Mono"
     style: Regular
 
-  size: 15 
+  size: 11 
 draw_bold_text_with_bright_colors: true
 
 cursor:

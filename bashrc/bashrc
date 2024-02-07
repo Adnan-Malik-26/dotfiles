@@ -53,10 +53,10 @@ alias 'alc'='nvim ~/.config/alacritty/alacritty.yml'
 alias 'n'='neofetch'
 
 #List Aliases
-alias 'ls'='lsd --group-dirs first'
-alias 'la'='lsd -a --group-dirs first'
-alias 'll'='lsd -al --group-dirs first'
-alias 'l'='lsd --group-dirs first -a'
+alias 'ls'='lsd --group-dirs first '
+alias 'la'='lsd -a --group-dirs first '
+alias 'll'='lsd -al --group-dirs first '
+alias 'l'='lsd --group-dirs first -a '
 
 #Adding Flags
 alias df='df -h'
