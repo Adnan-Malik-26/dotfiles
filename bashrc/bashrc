@@ -105,6 +105,7 @@ PATH=$PATH:$HOME/.local/bin/
 PATH=$PATH:/usr/bin
 export PATH=$PATH:/home/adnan/.spicetify
 export PATH=$PATH:/home/adnan/geny/genymotions
+PATH=$PATH:/home/adnan/.cargo/bin
 ###FUNCTIONS
 
 #Extracting Files
