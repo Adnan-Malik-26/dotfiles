@@ -1,30 +1,6 @@
-2025/01/26-15:57:46.615 b307 Reusing MANIFEST /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
-2025/01/26-15:57:46.615 b307 Recovering log #40
-2025/01/26-15:57:46.630 b307 Reusing old log /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000040.log 
-2025/01/26-15:57:46.922 b382 Level-0 table #45: started
-2025/01/26-15:57:46.958 b382 Level-0 table #45: 804262 bytes OK
-2025/01/26-15:57:46.997 b382 Delete type=0 #40
-2025/01/26-15:57:47.131 b307 Compacting 1@1 + 1@2 files
-2025/01/26-15:57:47.181 b307 Generated table #46@1: 2260 keys, 401744 bytes
-2025/01/26-15:57:47.181 b307 Compacted 1@1 + 1@2 files => 401744 bytes
-2025/01/26-15:57:47.218 b307 compacted to: files[ 0 0 1 0 0 0 0 ]
-2025/01/26-15:57:47.219 b307 Delete type=2 #45
-2025/01/26-15:57:47.219 b307 Delete type=2 #42
-2025/01/26-16:09:23.021 b308 Level-0 table #48: started
-2025/01/26-16:09:23.145 b308 Level-0 table #48: 932984 bytes OK
-2025/01/26-16:09:23.196 b308 Delete type=0 #44
-2025/01/26-16:09:53.094 b308 Compacting 1@1 + 1@2 files
-2025/01/26-16:09:53.460 b308 Generated table #49@1: 2124 keys, 395548 bytes
-2025/01/26-16:09:53.460 b308 Compacted 1@1 + 1@2 files => 395548 bytes
-2025/01/26-16:09:53.498 b308 compacted to: files[ 0 0 1 0 0 0 0 ]
-2025/01/26-16:09:53.498 b308 Delete type=2 #46
-2025/01/26-16:09:53.498 b308 Delete type=2 #48
-2025/01/26-16:16:58.138 b308 Level-0 table #51: started
-2025/01/26-16:16:58.791 b308 Level-0 table #51: 856852 bytes OK
-2025/01/26-16:16:58.829 b308 Delete type=0 #47
-2025/01/26-16:17:46.950 b308 Compacting 1@1 + 1@2 files
-2025/01/26-16:17:47.004 b308 Generated table #52@1: 2365 keys, 501490 bytes
-2025/01/26-16:17:47.004 b308 Compacted 1@1 + 1@2 files => 501490 bytes
-2025/01/26-16:17:47.059 b308 compacted to: files[ 0 0 1 0 0 0 0 ]
-2025/01/26-16:17:47.059 b308 Delete type=2 #51
-2025/01/26-16:17:47.060 b308 Delete type=2 #49
+2025/01/28-17:06:16.422 1c7d5 Reusing MANIFEST /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
+2025/01/28-17:06:16.422 1c7d5 Recovering log #50
+2025/01/28-17:06:16.438 1c7d5 Reusing old log /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000050.log 
+2025/01/28-17:13:03.531 1c7d6 Level-0 table #55: started
+2025/01/28-17:13:04.304 1c7d6 Level-0 table #55: 1209301 bytes OK
+2025/01/28-17:13:04.343 1c7d6 Delete type=0 #50
