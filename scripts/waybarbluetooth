@@ -1,0 +1,3 @@
+#!/bin/bash
+
+kitty --class floating_kitty bluetuith

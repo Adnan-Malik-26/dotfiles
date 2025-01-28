@@ -1,0 +1,13 @@
+#!bin/bash
+
+THEME='Catppuccin-Mocha'
+ICONS='oomox-Catppuccin-Mocha'
+#CURSOR='catppuccin-mocha-dark-cursors'
+
+SCHEMA=gsettings set org.gnome.desktop.interface
+
+apply_theme() {
+  $SCHEMA gtk-theme "$THEME"
+  $SCHEMA icon-theme "$ICONS"
+  #  $SCHEMA cursor-theme "$CURSOR"
+}
