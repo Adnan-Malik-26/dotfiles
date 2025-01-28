@@ -1,0 +1,126 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 13,
+    "modules-left": ["custom/arch","clock", "hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["custom/pacman","pulseaudio", "battery", "backlight"],
+
+    "battery": {
+        "format": "{icon}  {capacity}%",
+        "format-charging": "󰂄  {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    },
+    "custom/vpn": {
+        "format": "VPN ",
+        "exec": "echo '{\"class\": \"connected\"}'",
+        "exec-if": "test -d /proc/sys/net/ipv4/conf/tun0",
+        "return-type": "json",
+        "interval": 5
+    },
+    "hyprland/window": {
+        "format": "󰁔 {}",
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "󰈹 $1",
+        },
+        "separate-outputs": true
+    },
+    "custom/pacman": {
+    "format": "{}  ",
+    "interval": 3600,                     // every hour
+    "exec": "checkupdates | wc -l",       // # of updates
+    "exec-if": "exit 0",                  // always run; consider advanced run conditions
+    "on-click": "termite -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
+    "signal": 8
+    },
+    "custom/pipewire": {
+    "tooltip": false,
+    "max-length": 6,
+    "exec": "$HOME/.config/waybar/scripts/pipewire.sh",
+    "on-click": "pavucontrol",
+    "on-click-right": "qpwgraph"
+    },
+    "custom/arch": {
+      "format": "  ",
+      "tooltip": false,
+      "on-click": "sh ~/.config/rofi/launchers/type-5/launcher.sh"
+    },
+
+    "clock": {
+        "format": "󰥔   {:%I:%M %p}",
+        "format-alt": "󰥔   {:%a, %d. %b  %I:%M %p}",
+    },
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "󰂱  {volume}%",
+        "format-muted": "󰖁",
+        "scroll-step": 1,
+        "on-click": "waybarbluetooth",
+        "ignored-sinks": ["Easy Effects Sink"],
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["󰖀", "󰕾"]
+        },
+    },
+
+    "network": {
+        "interface": "wlo1",
+        "format": "{ifname}",
+        "format-wifi": "{icon}   {essid}",
+        "format-ethernet": "󰈀   {ipaddr}/{cidr}",
+        "format-disconnected": "󰤭   disconnected",
+        "max-length": 50,
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+    },
+    
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十",
+        },
+        "sort-by-number": true,
+        "persistent-workspaces": {
+             "*": 5,
+       }
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}   {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"]
+    }
+},
+    "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+
+  "custom/wallpaper": {
+      "format": "⚙️ Waybar Config",
+      "on-click": "python3 ~/.config/waybar/scripts/waybar_wallpaper_button.py"
+  }

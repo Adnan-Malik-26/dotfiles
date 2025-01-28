@@ -1,0 +1,101 @@
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[font]
+size = 15
+
+[font.normal]
+family = "FiraCode Nerd Font Mono"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "W"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F"
+mods = "Super|Control"
+
+[scrolling]
+history = 10000
+multiplier = 10
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = "|:\"' {}()[]<>"
+
+[window]
+opacity = 0.75
+dynamic_title = true
+
+[window.padding]
+x = 5
+y = 5
+
+
+# BEGIN WAL
+[colors.primary]
+background = '#11111b'  # Base
+foreground = '#cdd6f4'  # Text
+
+[colors.cursor]
+text   = '#1e1e2e'  # Background color for cursor text
+cursor = '#cdd6f4'  # Foreground color for cursor
+
+[colors.vi_mode_cursor]
+text    = '#1e1e2e'  # Same as above
+cursor  = '#cdd6f4'
+
+[colors.search.matches]
+foreground = '#1e1e2e'  # Background color for search matches
+background = '#cdd6f4'  # Foreground color for search matches
+
+[colors.search.focused_match]
+foreground = 'CellBackground'
+background = 'CellForeground'
+
+[colors.line_indicator]
+foreground = 'None'
+background = 'None'
+
+[colors.footer_bar]
+foreground = '#bac2de'  # Overlay0
+background = '#cba6f7'  # Lavender
+
+[colors.selection]
+text       = 'CellBackground'
+background = 'CellForeground'
+
+[colors.normal]
+black   = '#1e1e2e'  # Base
+red     = '#f38ba8'  # Red
+green   = '#a6e3a1'  # Green
+yellow  = '#f9e2af'  # Yellow
+blue    = '#89b4fa'  # Blue
+magenta = '#cba6f7'  # Lavender
+cyan    = '#94e2d5'  # Teal
+white   = '#cdd6f4'  # Text
+
+[colors.bright]
+black   = '#585b70'  # Surface2
+red     = '#f38ba8'  # Red
+green   = '#a6e3a1'  # Green
+yellow  = '#f9e2af'  # Yellow
+blue    = '#89b4fa'  # Blue
+magenta = '#cba6f7'  # Lavender
+cyan    = '#94e2d5'  # Teal
+white   = '#cdd6f4'  # Text
+# END WAL

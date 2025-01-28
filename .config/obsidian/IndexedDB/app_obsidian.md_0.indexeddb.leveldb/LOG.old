@@ -1,0 +1,21 @@
+2025/01/26-13:41:54.347 d0c Reusing MANIFEST /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
+2025/01/26-13:41:54.351 d0c Recovering log #33
+2025/01/26-13:41:55.963 d0c Reusing old log /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000033.log 
+2025/01/26-13:53:38.923 d0c Level-0 table #38: started
+2025/01/26-13:53:39.051 d0c Level-0 table #38: 1159063 bytes OK
+2025/01/26-13:53:39.089 d0c Delete type=0 #33
+2025/01/26-13:55:26.049 e3b Compacting 1@1 + 1@2 files
+2025/01/26-13:55:26.172 e3b Generated table #39@1: 2102 keys, 376628 bytes
+2025/01/26-13:55:26.172 e3b Compacted 1@1 + 1@2 files => 376628 bytes
+2025/01/26-13:55:26.209 e3b compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/26-13:55:26.210 e3b Delete type=2 #38
+2025/01/26-13:55:26.210 e3b Delete type=2 #35
+2025/01/26-14:02:21.643 d0c Level-0 table #41: started
+2025/01/26-14:02:21.766 d0c Level-0 table #41: 807297 bytes OK
+2025/01/26-14:02:21.805 d0c Delete type=0 #37
+2025/01/26-14:02:49.548 d0c Compacting 1@1 + 1@2 files
+2025/01/26-14:02:50.351 d0c Generated table #42@1: 2072 keys, 373415 bytes
+2025/01/26-14:02:50.351 d0c Compacted 1@1 + 1@2 files => 373415 bytes
+2025/01/26-14:02:50.389 d0c compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/01/26-14:02:50.389 d0c Delete type=2 #41
+2025/01/26-14:02:50.389 d0c Delete type=2 #39

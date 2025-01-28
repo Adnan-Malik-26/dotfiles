@@ -1,0 +1,183 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun,run,filebrowser,window";
+    show-icons:                 true;
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
+	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	window-format:              "{w}   {c}   {t}";
+}
+
+/*****----- Global Properties -----*****/
+* {
+    font:                        "FiraCode Nerd Font Mono 12";
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       800px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border-radius:               20px;
+    cursor:                      "default";
+    background-color:            #1E1E2E;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     25px;
+    padding:                     50px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message","listview", "mode-switcher" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px 200px;
+    padding:                     5px;
+    border:                      1px;
+    border-radius:               100%;
+    border-color:                #585B70;
+    background-color:            transparent;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    padding:                     8px 11px;
+    border-radius:               100%;
+    background-color:            #F5E0DC;
+    text-color:                  #1E1E2E;
+    str:                         "";
+}
+entry {
+    enabled:                     true;
+    padding:                     8px 12px;
+    border:                      0px;
+    background-color:            transparent;
+    text-color:                  #D9E0EE;
+    cursor:                      text;
+    placeholder:                 "Search...";
+    placeholder-color:           inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     2;
+    lines:                       10;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     10px;
+    background-color:            transparent;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     5px;
+    border:                      0px;
+    border-radius:               100%;
+    border-color:                #6E6C7E;
+    background-color:            transparent;
+    text-color:                  #9399B2;
+    cursor:                      pointer;
+}
+element normal.active {
+    background-image:            linear-gradient(to right, #45475A, #313244);
+    text-color:                  #A6E3A1;
+}
+element selected.normal {
+    background-image:            linear-gradient(to right, #45475A, #313244);
+    text-color:                  #FAB387;
+}
+element selected.active {
+    background-image:            linear-gradient(to right, #45475A, #313244);
+    text-color:                  #F38BA8;
+}
+element-icon {
+    background-color:            transparent;
+    size:                        24px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    enabled:                     true;
+    expand:                      false;
+    spacing:                     0px;
+    margin:                      0px 200px;
+    padding:                     12px;
+    border-radius:               100%;
+    background-color:            #313244;
+}
+button {
+    background-color:            inherit;
+    text-color:                  #D9E0EE;
+    cursor:                      pointer;
+}
+button selected {
+    background-color:            inherit;
+    text-color:                  #FAB387;
+}
+
+/*****----- Message -----*****/
+error-message {
+    padding:                     20px;
+    background-color:            #1E1E2E;
+    text-color:                  #D9E0EE;
+}
+message {
+    padding:                     0px;
+    background-color:            inherit;
+    text-color:                  #FAB387;
+}
+textbox {
+    padding:                     0px;
+    border-radius:               0px;
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}

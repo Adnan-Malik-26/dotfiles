@@ -1,0 +1,84 @@
+@import url("colors.css");
+
+* {
+    font-family: 'FiraCode Nerd Font Mono', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50px;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: @fg;
+}
+
+#workspaces {
+    background-color: @bg;
+    margin-left: 6px;
+}
+
+#workspaces button {
+    color: @light-purple;
+    margin-left: 6px;
+}
+
+#workspaces button.empty{
+    color: @grey;
+    margin-left: 6px;
+}
+
+#workspaces button.active {
+    background-color: @light-aqua;
+    color: @bg;
+}
+
+.modules-left {
+    margin-left: 12px;    
+}
+
+.modules-right {
+    margin-right: 12px;    
+}
+
+#battery,
+#network,
+#pulseaudio,
+#backlight,
+#custom-arch,
+#custom-pacman,
+#custom-wallpaper,
+#window{
+    color: @light-blue;
+    background-color: @bg;
+    margin: 0 6px 0 6px;
+    padding: 0 15px 0 15px; /* top, right, bottom, left */
+}
+
+#clock {
+    color: @light-green;
+    background-color: @bg;
+    margin: 0 6px 0 0;
+    padding: 0 15px 0 15px;
+}
+
+#network {
+    color: @light-purple;
+}
+
+#pulseaudio {
+    color: @light-yellow;
+}
+
+#backlight {
+    color: @light-orange;
+}
+
+#window{
+    color: @light-orange;
+}
+#custom-arch {
+    color: @pink;
+}
+#custom-pacman{
+    color: @light-green;
+}
