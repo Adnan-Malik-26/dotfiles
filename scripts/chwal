@@ -1,9 +1,0 @@
-RANDOM_FILE=$(find "/home/adnanmalik/walls/gruvbox-walls/" -type f | shuf -n 1)
-
-swww img --transition-type wipe "$RANDOM_FILE"
-
-FILENAME=$(basename "$RANDOM_FILE")
-echo "$FILENAME"
-
-notify-send "Random File Selected" "$FILENAME"
-

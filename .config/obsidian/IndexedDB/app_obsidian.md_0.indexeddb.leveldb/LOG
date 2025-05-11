@@ -1,6 +1,0 @@
-2025/01/28-17:06:16.422 1c7d5 Reusing MANIFEST /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
-2025/01/28-17:06:16.422 1c7d5 Recovering log #50
-2025/01/28-17:06:16.438 1c7d5 Reusing old log /home/adnanmalik/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/000050.log 
-2025/01/28-17:13:03.531 1c7d6 Level-0 table #55: started
-2025/01/28-17:13:04.304 1c7d6 Level-0 table #55: 1209301 bytes OK
-2025/01/28-17:13:04.343 1c7d6 Delete type=0 #50
