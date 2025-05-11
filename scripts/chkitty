@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Path to your wallpaper
+WALLPAPER="$1"
+
+if [[ -z "$WALLPAPER" ]]; then
+    echo "Usage: $0 /path/to/image.jpg"
+    exit 1
+fi
+
+# Generate Pywal theme
+wal -i "$WALLPAPER"
+
+# Update Kitty colors
+kitty @ set-colors --all ~/.cache/wal/colors-kitty.conf

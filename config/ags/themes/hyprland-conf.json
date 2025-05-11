@@ -1,0 +1,112 @@
+{
+  "bar.customModules.updates.pollingInterval": 1440000,
+  "theme.font.name": "Cantarell",
+  "theme.font.size": "0.8rem",
+  "tear": true,
+  "menus.transition": "crossfade",
+  "theme.bar.floating": true,
+  "theme.bar.buttons.enableBorders": false,
+  "notifications.position": "top right",
+  "theme.osd.enable": true,
+  "menus.clock.time.hideSeconds": true,
+  "menus.clock.weather.key": "645c7b33b7fe48e4bd0121401242510",
+  "menus.dashboard.powermenu.avatar.image": "/home/bobbeh/Pictures/gumball.jpeg",
+  "theme.bar.menus.menu.dashboard.profile.radius": "8em",
+  "theme.bar.buttons.modules.ram.enableBorder": false,
+  "wallpaper.enable": false,
+  "wallpaper.pywal": true,
+  "theme.matugen": false,
+  "wallpaper.image": "/home/bobbeh/Downloads/background-1920x1080.png",
+  "theme.matugen_settings.mode": "dark",
+  "theme.matugen_settings.scheme_type": "rainbow",
+  "theme.matugen_settings.variation": "monochrome_2",
+  "theme.bar.transparent": true,
+  "theme.bar.opacity": 100,
+  "theme.osd.opacity": 100,
+  "scalingPriority": "hyprland",
+  "menus.dashboard.stats.enable_gpu": true,
+  "menus.dashboard.shortcuts.left.shortcut1.command": "firefox",
+  "menus.dashboard.shortcuts.left.shortcut2.command": "spotify",
+  "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Firefox",
+  "menus.dashboard.shortcuts.left.shortcut1.icon": "󰈹",
+  "menus.dashboard.directories.enabled": false,
+  "menus.dashboard.controls.enabled": true,
+  "theme.bar.buttons.dashboard.enableBorder": true,
+  "bar.bluetooth.label": false,
+  "bar.network.label": false,
+  "bar.battery.hideLabelWhenFull": true,
+  "theme.bar.buttons.media.enableBorder": true,
+  "bar.notifications.show_total": true,
+  "theme.bar.menus.menu.media.card.tint": 90,
+  "menus.clock.weather.location": "85308",
+  "notifications.cache_actions": false,
+  "theme.osd.location": "top",
+  "theme.osd.orientation": "horizontal",
+  "theme.bar.menus.monochrome": false,
+  "theme.bar.menus.menu.bluetooth.scaling": 100,
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "dashboard",
+        "workspaces"
+      ],
+      "middle": [
+        "windowtitle"
+      ],
+      "right": [
+        "media",
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "clock"
+      ]
+    },
+    "1": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "clock",
+        "notifications"
+      ]
+    },
+    "2": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "clock",
+        "notifications"
+      ]
+    }
+  },
+  "menus.clock.time.military": false,
+  "theme.bar.border_radius": "0.8em",
+  "theme.bar.buttons.workspaces.enableBorder": false,
+  "bar.workspaces.show_icons": true,
+  "bar.workspaces.show_numbered": false,
+  "bar.workspaces.hideUnoccupied": true,
+  "bar.workspaces.ignored": "",
+  "bar.clock.format": "%b %d  %I:%M %p",
+  "bar.clock.showIcon": false,
+  "theme.bar.buttons.clock.spacing": "0em",
+  "bar.media.truncation": true,
+  "bar.media.show_artist": false,
+  "bar.media.show_active_only": true,
+  "theme.bar.menus.opacity": 100,
+  "theme.bar.buttons.monochrome": false,
+  "menus.transitionTime": 300
+}

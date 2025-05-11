@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Find a random wallpaper file
+RANDOM_FILE=$(find "/home/adnanmalik/walls/gruvbox-walls/" -type f | shuf -n 1)
+
+# Set the wallpaper with swww (or another wallpaper setter)
+swww img --transition-type wipe "$RANDOM_FILE"
+
+# Get the filename of the random wallpaper
+FILENAME=$(basename "$RANDOM_FILE")
+echo "$FILENAME"
+
+# Send a notification with the file name
+notify-send "Random File Selected" "$FILENAME"
+
+# Update Pywal color scheme
+wal -i "$RANDOM_FILE"
+
+# Apply the Pywal theme to Kitty
+kitty @ set-colors --all ~/.cache/wal/colors-kitty.conf
+
+# Extract colors from Pywal's colors.json file
+BACKGROUND=$(jq -r '.background' ~/.cache/wal/colors.json)
+FOREGROUND=$(jq -r '.foreground' ~/.cache/wal/colors.json)
+COLOR1=$(jq -r '.color1' ~/.cache/wal/colors.json)
+COLOR2=$(jq -r '.color2' ~/.cache/wal/colors.json)
+COLOR3=$(jq -r '.color3' ~/.cache/wal/colors.json)
+COLOR4=$(jq -r '.color4' ~/.cache/wal/colors.json)
+COLOR5=$(jq -r '.color5' ~/.cache/wal/colors.json)
+COLOR6=$(jq -r '.color6' ~/.cache/wal/colors.json)
+COLOR7=$(jq -r '.color7' ~/.cache/wal/colors.json)
+COLOR8=$(jq -r '.color8' ~/.cache/wal/colors.json)
+
+# Update Hyprland config with Pywal colors
+CONFIG_FILE="$HOME/.config/hypr/hyprland.conf"
+
+# Set background and foreground color (use colors.json values)
+sed -i "s/^background = .*/background = $BACKGROUND/" "$CONFIG_FILE"
+sed -i "s/^foreground = .*/foreground = $FOREGROUND/" "$CONFIG_FILE"
+
+# Set color scheme for window borders (if desired)
+sed -i "s/^border_color = .*/border_color = $COLOR1/" "$CONFIG_FILE"
+sed -i "s/^inactive_border_color = .*/inactive_border_color = $COLOR2/" "$CONFIG_FILE"
+
+# Apply the changes in Hyprland
+hyprctl reload
+
+echo "Hyprland color scheme updated with Pywal colors."
+

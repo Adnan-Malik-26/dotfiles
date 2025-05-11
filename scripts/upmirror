@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Backup the current mirrorlist before making any changes
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+
+# Use reflector to get the top 10 mirrors in India and update mirrorlist
+sudo reflector --country 'India' --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+
+# Update the system
+sudo pacman -Syyu
+
+echo "Mirrorlist updated and system is up to date."

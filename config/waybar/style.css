@@ -1,0 +1,11 @@
+* {
+  all: unset;
+  font-family: "Noto Sans Mono", "DejaVu Sans Mono", monospace;
+  font-size: 14px;
+  color: white;
+  background-color: #2e3440;
+}
+
+#clock {
+  padding: 0 10px;
+}
