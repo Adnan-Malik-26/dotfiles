@@ -1,6 +1,5 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
-fastfetch
 # confirmations, etc.) must go above this block; everything else may go below.
 #if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -31,7 +30,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-
+zinit load atuinsh/atuin
 # Add in snippets
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
@@ -80,11 +79,14 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias vim='nvim'
 alias c='clear'
 alias 'celar'='clear'
+alias 'uptime'='uptime -p'
 
 # CD aliases
 alias '..'='cd ..'
 alias '...'='cd ../..'
 alias '....'='cd ../../..'
+
+alias 'mdkir'='mkdir'
 #Git
 alias add='git add .'
 alias branch='git branch'
@@ -104,6 +106,7 @@ alias 'y'='yazi'
 
 #Quitting Terminal
 alias ':q'="exit"
+alias ';q'="exit"
 alias ':qw'='exit'
 alias ':wq'='exit'
 
@@ -117,15 +120,6 @@ alias df='duf'
 alias 'cat'='bat'
 alias 'ping'='gping -c blue'
 
-#Opening Configs
-alias 'i3c'='nvim ~/.config/i3/config '
-alias 'plc'='nvim ~/.config/polybar/config.ini'
-alias 'nfc'='nvim ~/.config/neofetch/config.conf'
-alias 'alc'='nvim ~/.config/alacritty/alacritty.yml'
-alias 'ts'='tmux source ~/.config/tmux/tmux.conf'
-alias 'tmc'='nvim ~/.config/tmux/tmux.conf'
-
-
 #List Aliases
 alias 'ls'='eza --icons --group-directories-first'
 alias 'la'='eza -a --icons --group-directories-first'
@@ -137,7 +131,7 @@ alias df='df -h'
 alias free='free -m'
 
 #zshrc
-alias 's'='source ~/.zshrc'
+alias 'sss'='source ~/.zshrc'
 alias 'b'='nvim ~/.zshrc'
 
 #Adding Verbose
@@ -168,6 +162,11 @@ alias 'rnn'='reboot'
 
 #C++ Alias
 alias 'ccc'='c++'
+
+#Hardhat alias
+alias 'hh'='npx hardhat'
+alias 'hc'='npx hardhat compile'
+alias 'hx'='npx hardhat compile'
 
 # Shell integrations
 eval "$(fzf --zsh)"
@@ -228,6 +227,24 @@ ex() {
 export PATH=$PATH:/home/adnanmalik/.spicetify
 
 
-. "$HOME/.atuin/bin/env"
-
 eval "$(atuin init zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Loads nvm bash_completion
+
+
+fastfetch
+ls
+
+# pnpm
+export PNPM_HOME="/home/adnanmalik/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+#
+
+export FONTCONFIG_FILE=$HOME/.config/fontconfig/fonts.conf
+export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
