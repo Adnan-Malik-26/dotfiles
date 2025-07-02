@@ -136,7 +136,7 @@ alias 'b'='nvim ~/.zshrc'
 
 #Adding Verbose
 alias 'cp'='cp -v'
-alias 'rm'='rm -v'
+alias 'rm'='trash-put'
 alias 'mv'='mv -v'
 alias 'cl'='clear'
 alias 'rls'='clear&&ls'
@@ -189,7 +189,6 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.config/emacs/bin
 export MANPAGER='nvim +Man!'
 
-export BAT_THEME='Catppuccin Frappe'
 
 eval $(thefuck --alias)
 eval $(thefuck --alias fk)
@@ -244,7 +243,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-#
-
+export TMUX="$TMUX"
+alias 'tmux'='tmux -u'
 export FONTCONFIG_FILE=$HOME/.config/fontconfig/fonts.conf
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
