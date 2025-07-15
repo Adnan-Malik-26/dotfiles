@@ -153,7 +153,6 @@ alias 'giveip'="ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'"
 
 #Update and Upgrade aliases
 alias 'up'='yay'
-alias 'ff'='fastfetch'
 
 # Shutdown and Reboot
 alias 'ssn'='shutdown now'
@@ -188,7 +187,7 @@ export PATH=$PATH:$HOMEclones/swww/target
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.config/emacs/bin
 export MANPAGER='nvim +Man!'
-
+export PATH="$HOME/clones/swww/target/release:$PATH"
 
 eval $(thefuck --alias)
 eval $(thefuck --alias fk)
@@ -232,9 +231,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Loads nvm bash_completion
 
-
-fastfetch
-ls
 
 # pnpm
 export PNPM_HOME="/home/adnanmalik/.local/share/pnpm"

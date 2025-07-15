@@ -1,48 +1,35 @@
 #!/bin/bash
 
-# Find a random wallpaper file
-RANDOM_FILE=$(find "/home/adnanmalik/walls/gruvbox-walls/" -type f | shuf -n 1)
+# Path to your swww binary
+swww_target="$HOME/clones/swww/target/release/swww"
 
-# Set the wallpaper with swww (or another wallpaper setter)
-swww img --transition-type wipe "$RANDOM_FILE"
+# Find a random wallpaper
+RANDOM_FILE=$(find "/home/adnanmalik/walls/catppuccin-walls/" -type f | shuf -n 1)
 
-# Get the filename of the random wallpaper
+# Set the wallpaper using swww
+"$swww_target" img --transition-type wipe "$RANDOM_FILE"
+
+# Get the filename and send notification
 FILENAME=$(basename "$RANDOM_FILE")
+notify-send "Random File Selected" "$FILENAME"
 echo "$FILENAME"
 
-# Send a notification with the file name
-notify-send "Random File Selected" "$FILENAME"
-
-# Update Pywal color scheme
+# Generate Pywal colors
 wal -i "$RANDOM_FILE"
 
-# Apply the Pywal theme to Kitty
-kitty @ set-colors --all ~/.cache/wal/colors-kitty.conf
+# Load generated Pywal colors
+source "$HOME/.cache/wal/colors.sh"
 
-# Extract colors from Pywal's colors.json file
-BACKGROUND=$(jq -r '.background' ~/.cache/wal/colors.json)
-FOREGROUND=$(jq -r '.foreground' ~/.cache/wal/colors.json)
-COLOR1=$(jq -r '.color1' ~/.cache/wal/colors.json)
-COLOR2=$(jq -r '.color2' ~/.cache/wal/colors.json)
-COLOR3=$(jq -r '.color3' ~/.cache/wal/colors.json)
-COLOR4=$(jq -r '.color4' ~/.cache/wal/colors.json)
-COLOR5=$(jq -r '.color5' ~/.cache/wal/colors.json)
-COLOR6=$(jq -r '.color6' ~/.cache/wal/colors.json)
-COLOR7=$(jq -r '.color7' ~/.cache/wal/colors.json)
-COLOR8=$(jq -r '.color8' ~/.cache/wal/colors.json)
-
-# Update Hyprland config with Pywal colors
+# Update Hyprland config with colors
 CONFIG_FILE="$HOME/.config/hypr/hyprland.conf"
 
-# Set background and foreground color (use colors.json values)
-sed -i "s/^background = .*/background = $BACKGROUND/" "$CONFIG_FILE"
-sed -i "s/^foreground = .*/foreground = $FOREGROUND/" "$CONFIG_FILE"
+# Ensure variables are not empty before replacing
+[ -n "$background" ] && sed -i "s/^background = .*/background = $background/" "$CONFIG_FILE"
+[ -n "$foreground" ] && sed -i "s/^foreground = .*/foreground = $foreground/" "$CONFIG_FILE"
+[ -n "$color1" ] && sed -i "s/^border_color = .*/border_color = $color1/" "$CONFIG_FILE"
+[ -n "$color2" ] && sed -i "s/^inactive_border_color = .*/inactive_border_color = $color2/" "$CONFIG_FILE"
 
-# Set color scheme for window borders (if desired)
-sed -i "s/^border_color = .*/border_color = $COLOR1/" "$CONFIG_FILE"
-sed -i "s/^inactive_border_color = .*/inactive_border_color = $COLOR2/" "$CONFIG_FILE"
-
-# Apply the changes in Hyprland
+# Apply changes in Hyprland
 hyprctl reload
 
 echo "Hyprland color scheme updated with Pywal colors."

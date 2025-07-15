@@ -1,0 +1,12 @@
+#!/bin/bash
+WAL_COLORS="$HOME/.cache/wal/colors.json"
+CONFIG="$HOME/.config/ghostty/config"
+
+if [ -f "$WAL_COLORS" ]; then
+  jq -r '.colors | to_entries[] | "\(.key)=\(.value)"' "$WAL_COLORS" > /tmp/wal_ghostty.toml
+
+  {
+    echo "[colors]"
+    jq -r '.colors | to_entries[] | .key + " = \"" + .value + "\"" ' "$WAL_COLORS"
+  } > "$CONFIG"
+fi

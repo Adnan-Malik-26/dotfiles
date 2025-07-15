@@ -14,5 +14,5 @@ mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
 cursor-style = block
 
-font-size = 16
-font-family = CaskaydiaCove Nerd Font
+font-size = 18
+font-family = CaskaydiaCove Nerd Font Mono
