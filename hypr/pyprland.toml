@@ -1,0 +1,99 @@
+[pyprland]
+hyprland_version = "0.50.0"
+plugins = ["scratchpads"]
+
+[scratchpads.pomo]
+command = "kitty --class pomo pomo"
+class = "pomo"
+size = "40% 40%"
+margin = 65
+animation = "fromTop"
+unfocus = "hide"
+lazy = true
+max_size = "1920px 100%"
+
+[scratchpads.bluetuith]
+animation = "fromTop"
+command = "kitty --class dropterm bluetuith"
+class = "dropterm"
+size = "50% 25%"
+max_size = "1920px 100%"
+margin = 65
+lazy = true
+
+[scratchpads.yazi]
+animation = "fromTop"
+command = "kitty --class yazi yazi"
+class = "yazi"
+size = "50% 70%"
+max_size = "1920px 100%"
+margin = 50
+lazy = true
+
+[scratchpads.spotify]
+animation = "fromRight"
+command = "spotify"
+class = "Spotify"
+size = "45% 90%"
+max_size = "1920px 100%"
+margin = 50
+position = "55% 5%"
+lazy = true
+
+[scratchpads.gh-contrib]
+animation = "fromTop"
+command = 'qutebrowser --target window "https://www.gitch.art/api/og/Adnan-Malik-26?color=a55eea"'
+class = "org.qutebrowser.qutebrowser"
+size = "60% 20%"
+max_size = "1920px 100%"
+margin = 65
+lazy = true
+
+[scratchpads.kairu]
+animation = "fromTop"
+command = "chromium --app=https://kairu.app/focus"
+class = "Chromium"
+size = "60% 80%"
+max_size = "1920px 100%"
+margin = 50
+position = "20% 10%"
+lazy = true
+
+[scratchpads.htop]
+animation = "fromTop"
+command = "kitty --class htop htop"
+class = "htop"
+size = "50% 50%"
+max_size = "1920px 100%"
+margin = 50
+lazy = true
+
+
+[scratchpads.nmon]
+animation = "fromTop"
+command = "kitty --class nmon nmon"
+class = "nmon"
+size = "50% 50%"
+max_size = "1920px 100%"
+margin = 50
+lazy = true
+
+[scratchpads.ncdu]
+animation = "fromTop"
+command = "kitty --class ncdu ncdu"
+class = "ncdu"
+size = "50% 50%"
+max_size = "1920px 100%"
+margin = 50
+lazy = true
+
+[scratchpads.nvim]
+animation = "fromTop"
+command = "kitty --class nvim nvim"
+class = "nvim"
+size = "50% 50%"
+max_size = "1920px 100%"
+margin = 50
+lazy = true
+
+

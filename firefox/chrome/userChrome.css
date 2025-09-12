@@ -1,0 +1,51 @@
+/*///////////////////////////////////////////////////////////////////////////////////////\
+
+┏┓┏┓  ┳┳┓ ┏┳┓┳┳┳┓┏┓
+┣ ┣   ┃┃┃  ┃ ┃┃┃┃┣┫
+┻ ┻   ┗┛┗┛ ┻ ┻┛ ┗┛┗
+                   
+FF Ultima:         https://github.com/soulhotel/FF-ULTIMA
+Wiki:              https://github.com/soulhotel/FF-ULTIMA/wiki
+Latest Version:    https://github.com/soulhotel/FF-ULTIMA/releases/latest                 
+License:           https://github.com/soulhotel/FF-ULTIMA/blob/main/LICENSE MPL 2.0
+
+\////////////////////////////////////////////////////////////////////////////////////////*/
+
+@import url(theme/ffu-global-positioning.css);
+@import url(theme/ffu-internal-appearance.css);
+@import url(theme/ffu-private-browsing.css);
+
+@import url(theme/color-schemes/apply-cs.css); /*color schemes*/
+
+@import url(theme/settings-context-menus.css);
+@import url(theme/settings-extensions-panel.css);
+
+@import url(theme/settings-urlbar.css);
+@import url(theme/settings-navbar.css);
+@import url(theme/settings-navbar-windowcontrols.css);
+@import url(theme/settings-icons.css);
+
+@import url(theme/settings-sidebar-sidebery.css);
+
+@import url(theme/settings-TABS.css);
+
+@import url(theme/ffu-special-configs.css);
+
+
+  /* from panelUI-share.css 1190 */
+/*
+.subview-subheader, panelview .toolbarbutton-1, .subviewbutton, .widget-overflow-list .toolbarbutton-1 {
+  appearance: none;
+  margin: var(--arrowpanel-menuitem-margin);
+  min-height: 24px;
+  padding: var(--arrowpanel-menuitem-padding);
+  border-radius: var(--arrowpanel-menuitem-border-radius);
+  background-color: transparent;
+  flex-shrink: 0;
+}*/
+
+@media -moz-pref("ultima.spacing.compact.menus") {
+    .subview-subheader, panelview .toolbarbutton-1, .subviewbutton, .widget-overflow-list .toolbarbutton-1 {
+        --arrowpanel-menuitem-padding: 4px 8px;
+    }
+}
