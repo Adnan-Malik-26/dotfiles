@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Kill existing waybar
+pkill waybar
+
+# Give it a moment to exit
+sleep 0.5
+
+# Restart waybar in background
+waybar &
+

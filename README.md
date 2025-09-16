@@ -10,3 +10,6 @@ cd dotfiles
 
 # Usage
 The installation script installs all the files and sets up symlinks for all your config directories inside of `$HOME/.config`
+
+# Roadmap
+- [ ] Installation Script
