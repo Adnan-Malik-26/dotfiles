@@ -97,3 +97,11 @@ margin = 50
 lazy = true
 
 
+[scratchpads.proton]
+animation = "fromRight"
+command = "protonvpn-app"
+class = "protonvpn-app"
+size = "100% 25%"
+max_size = "1920px 100%"
+margin = 50
+lazy = true

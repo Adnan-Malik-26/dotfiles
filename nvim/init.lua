@@ -3,116 +3,48 @@
 -- ============================================================================
 
 local vim = vim
+local api = vim.api
 local map = vim.keymap.set
-local o = vim.opt
-local mapopts = { noremap = true, silent = true }
+local opt = vim.opt
+
+-- Backward compatibility shim for plugins still using vim.tbl_islist
+if vim.tbl_islist then
+	vim.tbl_islist = vim.islist
+end
 -- ============================================================================
 -- Core Settings
 -- ============================================================================
 
--- Editor behavior
-o.expandtab = true -- Use spaces instead of tabs
-o.tabstop = 2 -- Tab width
-o.shiftwidth = 2 -- Indentation width
-o.smartindent = true -- Smart auto-indenting
-o.smarttab = true -- Smart auto-indenting
-o.wrap = false -- Don't wrap lines
-
-o.swapfile = false -- Disable swap files
-o.undofile = true -- Enable persistent undo
-o.splitright = true -- Vertical Split on right
-o.scrolloff = 4
-
--- UI appearance
-o.number = true -- Show line numbers
-o.relativenumber = true -- Show relative line numbers
-o.signcolumn = "yes" -- Always show sign column
-o.cursorcolumn = false -- Don't highlight cursor column
-o.cmdheight = 0 -- Hide command line (shows in popup)
-o.winborder = "rounded" -- Rounded window borders
-
--- Search and interaction
-o.ignorecase = true -- Case insensitive search
-o.incsearch = true -- Incremental search
-o.mousemoveevent = true -- Enable mouse move events
-
--- Performance
-o.updatetime = 200
-o.timeoutlen = 400
-
--- ============================================================================
--- Key Mappings
--- ============================================================================
-
--- Set leader key
+-- Set leader key first
 vim.g.mapleader = " "
 
--- Increment and Decrement
-map("n", "+", "<C-a>", { desc = "Increment Number under Cursor" }, mapopts)
-map("n", "-", "<C-x>", { desc = "Decrement Number under Cursor" }, mapopts)
+-- Editor behavior
+opt.expandtab = true -- Use spaces instead of tabs
+opt.tabstop = 2 -- Tab width
+opt.shiftwidth = 2 -- Indentation width
+opt.smartindent = true -- Smart auto-indenting
+opt.smarttab = true -- Smart auto-indenting
+opt.wrap = false -- Don't wrap lines
+opt.swapfile = false -- Disable swap files
+opt.undofile = true -- Enable persistent undo
+opt.splitright = true -- Vertical split on right
+opt.scrolloff = 10 -- Keep 4 lines above/below cursor
 
--- Select Everything
-map("n", "<C-a>", "gg<S-v>G", { desc = "Select all" }, mapopts)
+-- UI appearance
+opt.number = true -- Show line numbers
+opt.relativenumber = true -- Show relative line numbers
+opt.signcolumn = "yes" -- Always show sign column
+opt.cursorcolumn = false -- Don't highlight cursor column
+opt.winborder = "rounded" -- Rounded window borders
 
--- Highlight
-map("n", "<leader>nh", ":nohlsearch<CR>", { desc = "Clear search highlight" }, mapopts)
-map("n", "<ESC>", ":nohlsearch<CR>", { desc = "Clear search highlight" }, mapopts)
+-- Search and interaction
+opt.ignorecase = true -- Case insensitive search
+opt.incsearch = true -- Incremental search
+opt.mousemoveevent = true -- Enable mouse move events
 
--- File operations
-map("n", "<leader>o", ":update<CR> :source<CR>", { desc = "Write and source config" }, mapopts)
-
--- Moving Lines
-map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" }, mapopts)
-map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" }, mapopts)
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move block down" }, mapopts)
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move block up" }, mapopts)
-
--- Keep selection after indenting
-map("v", "<", "<gv", { desc = "Indent left and keep selection" }, mapopts)
-map("v", ">", ">gv", { desc = "Indent right and keep selection" }, mapopts)
-
--- System clipboard operations
-map({ "n", "v", "x" }, "<leader>y", '"+y<CR>', { desc = "Copy to system clipboard" }, mapopts)
-map({ "n", "v", "x" }, "<leader>d", '"+d<CR>', { desc = "Delete and copy to system clipboard" }, mapopts)
-map({ "n", "v", "x" }, "<leader>p", '"+p<CR>', { desc = "Paste from system clipboard" }, mapopts)
-
--- Navigation shortcuts
-map("n", "#", "$", { noremap = true, silent = true, desc = "Go to end of line" }, mapopts)
-map("n", ";", ":", { noremap = true, desc = "Enter command mode" }, mapopts)
-map("v", ";", ":", { noremap = true, desc = "Enter command mode" }, mapopts)
-
--- File explorer
-map("n", "<leader>e", function()
-	require("oil").toggle_float()
-end, { desc = "Open Oil File Explorer" }, mapopts)
-
--- LSP formatting
-map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format with LSP" }, mapopts)
-
--- Tmux navigation
-map("n", "<C-h>", ":TmuxNavigateLeft<CR>", { desc = "Go to left window" }, mapopts)
-map("n", "<C-j>", ":TmuxNavigateDown<CR>", { desc = "Go to down window" }, mapopts)
-map("n", "<C-k>", ":TmuxNavigateUp<CR>", { desc = "Go to up window" }, mapopts)
-map("n", "<C-l>", ":TmuxNavigateRight<CR>", { desc = "Go to right window" }, mapopts)
-
--- Buffer
-map("n", "<Tab>", "<CMD>bNext<CR>", { desc = "Go to next buffer" }, mapopts)
-map("n", "<S-Tab>", "<CMD>bprevious<CR>", { desc = "Go to previous buffer" }, mapopts)
-map("n", "<leader>q", "<CMD>bdelete!<CR>", { desc = "Delete current buffer" }, mapopts)
-map("n", "<leader>bo", ":%bd|e#|bd#<CR>", { desc = "Close other buffers" }, mapopts)
-map("n", "<leader><leader>", "<C-^>", { desc = "Switch to last buffer" }, mapopts)
-
--- Tab
-map("n", "te", "<CMD>tabnew<CR>", { desc = "Open a new tab" }, mapopts)
-map("n", "tn", "<CMD>tabnext<CR>", { desc = "Next Tab" }, mapopts)
-
--- Terminal
-map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" }, mapopts)
-map("n", "<leader>t", "<CMD>FloatTermToggle<CR>", { desc = "Open Floating Terminal" }, mapopts)
-
--- Splitting Windows
-map("n", "<leader>sh", "<CMD>split<CR> <CMD>Oil<CR>", { desc = "Split Buffer Horizontally" }, mapopts)
-map("n", "<leader>sv", "<CMD>vsplit<CR> <CMD>Oil<CR>", { desc = "Split Buffer Vertically" }, mapopts)
+-- Performance
+opt.updatetime = 500
+opt.timeoutlen = 400
 
 -- ============================================================================
 -- Plugin Management
@@ -122,11 +54,14 @@ vim.pack.add({
 	-- Theme and UI
 	{ src = "https://github.com/catppuccin/nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
-	{ src = "https://github.com/RRethy/base16-nvim" },
-	{ src = "https://github.com/linux-cultist/venv-selector.nvim" },
+	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
+	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+	{ src = "https://github.com/folke/noice.nvim" },
+	{ src = "https://github.com/folke/nui.nvim" },
+	{ src = "https://github.com/rcarriga/nvim-notify" },
 
 	-- File management
-	{ src = "https://github.com/stevearc/Oil.nvim" },
+	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 
@@ -139,31 +74,105 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/folke/lazydev.nvim" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/Saghen/blink.cmp" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
-	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
+	{ src = "https://github.com/hrsh7th/nvim-cmp" },
+	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
+	{ src = "https://github.com/hrsh7th/cmp-buffer" },
+	{ src = "https://github.com/hrsh7th/cmp-path" },
+	{ src = "https://github.com/hrsh7th/cmp-cmdline" },
+	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
+	{ src = "https://github.com/onsails/lspkind.nvim" },
+	{ src = "https://github.com/ray-x/lsp_signature.nvim" },
 
 	-- Syntax and parsing
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim" },
+	{ src = "https://github.com/mfussenegger/nvim-lint" },
 
 	-- Navigation and workflow
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
-	{ src = "https://github.com/folke/todo-comments.nvim" },
 	{ src = "https://github.com/mrjones2014/smart-splits.nvim" },
 
 	-- Specialized functionality
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 	{ src = "https://github.com/derektata/lorem.nvim" },
 	{ src = "https://github.com/3rd/image.nvim" },
-	{ src = "https://github.com/3rd/diagram.nvim" },
-	{ src = "https://github.com/jedrzejboczar/possession.nvim" },
+	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 })
+
+-- ============================================================================
+-- Key Mappings
+-- ============================================================================
+
+local keymap_opts = { noremap = true, silent = true }
+
+-- Utility functions for keymaps
+local function desc(description)
+	return vim.tbl_extend("force", keymap_opts, { desc = description })
+end
+
+-- Basic editor commands
+map("n", "+", "<C-a>", desc("Increment number"))
+map("n", "-", "<C-x>", desc("Decrement number"))
+map("n", "<C-a>", "gg<S-v>G", desc("Select all"))
+map("n", "#", "$", desc("Go to end of line"))
+map("n", ";", ":", { noremap = true, desc = "Enter command mode" })
+map("v", ";", ":", { noremap = true, desc = "Enter command mode" })
+
+-- Search and highlighting
+map("n", "<ESC>", ":nohlsearch<CR>", desc("Clear search highlight"))
+
+-- File operations
+map("n", "<leader>o", ":update<CR> :source<CR>", desc("Write and source config"))
+
+-- Moving lines
+map("n", "<A-j>", ":m .+1<CR>==", desc("Move line down"))
+map("n", "<A-k>", ":m .-2<CR>==", desc("Move line up"))
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", desc("Move block down"))
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", desc("Move block up"))
+
+-- Indentation
+map("v", "<", "<gv", desc("Indent left and keep selection"))
+map("v", ">", ">gv", desc("Indent right and keep selection"))
+
+-- System clipboard operations
+map({ "n", "v", "x" }, "<leader>y", '"+y<CR>', desc("Copy to system clipboard"))
+map({ "n", "v", "x" }, "<leader>d", '"+d<CR>', desc("Delete and copy to system clipboard"))
+map({ "n", "v", "x" }, "<leader>p", '"+p<CR>', desc("Paste from system clipboard"))
+
+-- File explorer
+map("n", "<leader>e", function()
+	require("oil").toggle_float()
+end, desc("Open Oil file explorer"))
+
+-- Tmux navigation
+map("n", "<C-h>", ":TmuxNavigateLeft<CR>", desc("Go to left window"))
+map("n", "<C-j>", ":TmuxNavigateDown<CR>", desc("Go to down window"))
+map("n", "<C-k>", ":TmuxNavigateUp<CR>", desc("Go to up window"))
+map("n", "<C-l>", ":TmuxNavigateRight<CR>", desc("Go to right window"))
+
+-- Buffer management
+map("n", "<Tab>", "<CMD>bNext<CR>", desc("Go to next buffer"))
+map("n", "<S-Tab>", "<CMD>bprevious<CR>", desc("Go to previous buffer"))
+map("n", "<leader>q", "<CMD>bdelete!<CR>", desc("Delete current buffer"))
+map("n", "<leader>bo", ":%bd|e#|bd#<CR>", desc("Close other buffers"))
+map("n", "<leader><leader>", "<C-^>", desc("Switch to last buffer"))
+
+-- Terminal
+map("t", "<Esc>", [[<C-\><C-n>]], desc("Exit terminal mode"))
+map("n", "<leader>t", "<CMD>FloatTermToggle<CR>", desc("Open floating terminal"))
+
+-- Window splitting
+map("n", "<leader>sh", "<CMD>split<CR> <CMD>Oil<CR>", desc("Split horizontally"))
+map("n", "<leader>sv", "<CMD>vsplit<CR> <CMD>Oil<CR>", desc("Split vertically"))
 
 -- ============================================================================
 -- LSP Configuration
 -- ============================================================================
 
+-- Enable LSP servers
 vim.lsp.enable({
 	"lua_ls", -- Lua
 	"ts_ls", -- TypeScript/JavaScript
@@ -178,157 +187,151 @@ vim.lsp.enable({
 	"tinymist", -- Typst
 })
 
+-- Language server specific configurations
+vim.lsp.config["ts_ls"] = {
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	root_dir = function()
+		return vim.loop.cwd()
+	end,
+}
+
+vim.lsp.config["solidity"] = {
+	cmd = { "solidity-language-server", "--stdio" },
+	filetypes = { "solidity" },
+	root_dir = vim.fs.root(0, { "hardhat.config.js", "truffle-config.js", ".git" }),
+}
+
 -- ============================================================================
--- Plugin Setup and Configuration
+-- Plugin Configurations
 -- ============================================================================
-require("books").setup({
-	-- Keybindings
-	keymap_add = "<leader>ba", -- Add bookmark
-	keymap_list = "<leader>bl", -- Show all bookmarks
-	keymap_project = "<leader>bp", -- Show project bookmarks
-	keymap_session = "<leader>bs", -- Show session bookmarks
-	keymap_global = "<leader>bg", -- Show global bookmarks
-	keymap_delete = "<leader>bd", -- Delete bookmark at cursor
 
-	-- Organization
-	project_based = true, -- Enable project grouping
-	session_based = true, -- Enable session grouping
-	auto_save = true, -- Auto-save on changes
-	auto_cleanup = true, -- Remove invalid bookmarks
+require("noice").setup()
+-- LSP Signature
+require("lsp_signature").setup({
+	bind = true,
+	handler_opts = { border = "rounded" },
+	transparent_background = true,
+})
 
-	-- Display
-	show_line_numbers = true, -- Show [line] in display
-	show_relative_paths = true, -- Show relative paths
-	max_description_length = 50, -- Truncate long descriptions
+-- Highlight colors
+require("nvim-highlight-colors").setup({})
 
-	-- Categories
-	default_categories = {
-		"TODO",
-		"FIXME",
-		"NOTE",
-		"IMPORTANT",
-		"REFERENCE",
+-- Completion setup
+local cmp = require("cmp")
+local lspkind = require("lspkind")
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
 	},
-
-	-- Preview
-	preview = {
-		enabled = true,
-		context_lines = 5, -- Lines before/after bookmark
-		syntax_highlight = true,
+	mapping = cmp.mapping.preset.insert({
+		["<C-b>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif require("luasnip").expand_or_jumpable() then
+				require("luasnip").expand_or_jump()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif require("luasnip").jumpable(-1) then
+				require("luasnip").jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+	}, {
+		{ name = "buffer" },
+		{ name = "path" },
+	}),
+	formatting = {
+		format = function(entry, vim_item)
+			vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
+			vim_item.menu = ({
+				nvim_lsp = "[LSP]",
+				luasnip = "[Snip]",
+				buffer = "[Buf]",
+				path = "[Path]",
+			})[entry.source.name]
+			return vim_item
+		end,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
 })
 
-require("urlplus").setup({
-	keymap = "<leader>u", -- Open telescope with URLs
-	keymap_copy = "<leader>uc", -- Copy all URLs
-	keymap_open = "<leader>uo", -- Open all URLs in browser
-
-	show_preview = true, -- Show context preview
-	sort_by = "line", -- "line", "url", "type"
-
-	-- URL type icons
-	icons = {
-		https = "🔒",
-		http = "🌐",
-		ftp = "📁",
-		git = "🔗",
-		www = "🌍",
-	},
-
-	ignore_patterns = {
-		"127%.0%.0%.1",
-		"localhost",
-		"%d+%.%d+%.%d+",
-	},
+-- LuaSnip setup
+local ls = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_lua").lazy_load({
+	paths = vim.fn.stdpath("config") .. "/snippets",
 })
+-- LuaSnip keymaps
+map("i", "<C-K>", function()
+	ls.expand()
+end, { silent = true })
+map({ "i", "s" }, "<C-L>", function()
+	ls.jump(1)
+end, { silent = true })
+map({ "i", "s" }, "<C-J>", function()
+	ls.jump(-1)
+end, { silent = true })
+map({ "i", "s" }, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, { silent = true })
 
-require("refiles").setup({
-	max_recent_files = 100,
-	keymap = "<leader>r", -- Smart recent files
-	keymap_project = "<leader>rp", -- Project files only
-	-- keymap_global = "<leader>rg", -- All files
-	project_based = true, -- Enable project filtering
-	show_modified_indicator = true, -- Show ● for modified buffers
-	show_git_status = true, -- Show git status
-	auto_cleanup = true, -- Remove deleted files
-	ignore_patterns = { -- Files to ignore
-		"%.git/",
-		"node_modules/",
-		"%.pyc$",
-		"/tmp/",
-	},
-	file_icons = { -- Customize icons
-		lua = "🌙",
-		py = "🐍",
-		js = "📜",
-	},
-})
-
-require("yankhist").setup({
-	max_history = 50,
-	keymap = "<leader>c",
-	ignore_empty = true,
-	ignore_single_char = true,
-})
-
--- Venv Selector setup
-require("venv-selector").setup({
-	ft = "python", -- optional, load only for Python files
-	keys = {
-		{ ",v", "<cmd>VenvSelect<cr>" }, -- open picker with ,v
-	},
-	options = {
-		-- optional global options
-		enable_default_searches = true,
-		notify_user_on_venv_activation = true,
-		picker = "auto", -- telescope / fzf-lua / native
-	},
-	search = {
-		-- Example: find venvs under ~/Code
-		my_venvs = {
-			command = "fd python$ ~/Code --full-path -a -L",
-		},
-	},
-})
--- Core functionality
 require("image").setup()
-require("possession").setup({})
-require("telescope").load_extension("possession")
-require("edline").setup()
-require("floatterm").setup({
-	width = 0.9, -- 90% screen width
-	height = 0.7, -- 70% screen height
-	sidebar_width = 0.25, -- 25% of window width
-	border = "double", -- different border style
+require("lualine").setup({
+	options = {
+		icons_enabled = true,
+		component_separators = { left = "|", right = "|" },
+		section_separators = { left = "", right = "" },
+		theme = "catppuccin",
+	},
+	sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "branch" },
+		lualine_c = { "filename" },
+		lualine_x = { "filetype" },
+		lualine_y = { "diff" },
+		lualine_z = {},
+	},
 })
-
+require("floatterm").setup({
+	width = 0.9,
+	height = 0.7,
+	sidebar_width = 0.25,
+	border = "double",
+})
 require("mason").setup()
-
--- Text generation
 require("lorem").opts({
 	sentence_length = "mixed",
 	comma_chance = 0.3,
 	max_commas = 2,
 	debounce_ms = 200,
 })
-
--- Telescope (fuzzy finder) keymaps
-local builtin = require("telescope.builtin")
-map("n", "<leader>f", builtin.find_files, { desc = "Find files" })
-map("n", "<leader>bf", builtin.buffers, { desc = "Find buffers" })
-map("n", "<leader>rg", builtin.live_grep, { desc = "Live grep" })
-map("n", "<leader>h", builtin.help_tags, { desc = "Help tags" })
-map("n", "<leader>th", builtin.colorscheme, { desc = "Choose colorscheme" })
-map("n", "<leader>bb", builtin.builtin, { desc = "Telescope builtins" })
-map("n", "<leader>ss", "<CMD>Telescope possession list<CR>", { desc = "Show Sessions" })
-map("n", "<leader>v", "<cmd>VenvSelect<CR>", { desc = "Select Python venv" })
-
--- Development tools
-require("lazydev").setup()
+-- File management
 require("oil").setup({
-	win_options = {
-		winblend = 20,
-	},
+	win_options = { winblend = 20 },
 })
 
 -- Editing enhancements
@@ -340,51 +343,78 @@ require("mini.comment").setup({
 	},
 })
 
--- Completion setup
-require("blink-cmp").setup({
-	completion = {
-		trigger = {
-			show_on_keyword = true,
-		},
+-- Development workflow
+require("lazydev").setup()
+require("render-markdown").setup({
+	completions = { lsp = { enabled = true } },
+	latex = { enabled = false },
+})
+require("nvim-ts-autotag").setup({
+	opts = {
+		enable_close = true,
+		enable_rename = true,
+		enable_close_on_slash = false,
 	},
-	keymap = {
-		["<Tab>"] = { "select_next", "fallback" },
-		["<S-Tab>"] = { "select_prev", "fallback" },
-		["<CR>"] = { "accept", "fallback" },
-	},
-})
-
--- Rainbow Delimiters Catppuccin
-vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "#f38ba8" })
-vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = "#f9e2af" })
-vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = "#89b4fa" })
-vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { fg = "#fab387" })
-vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { fg = "#a6e3a1" })
-vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { fg = "#cba6f7" })
-vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { fg = "#94e2d5" })
-
--- ============================================================================
--- Language Server Specific Configuration
--- ============================================================================
-
--- TypeScript/JavaScript
-require("lspconfig").ts_ls.setup({
-	cmd = { "typescript-language-server", "--stdio" },
-	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-	root_dir = function()
-		return vim.loop.cwd()
-	end,
-})
-
--- Solidity
-require("lspconfig").solidity.setup({
-	cmd = { "solidity-language-server", "--stdio" },
-	filetypes = { "solidity" },
-	root_dir = require("lspconfig.util").root_pattern("hardhat.config.js", "truffle-config.js", ".git"),
 })
 
 -- ============================================================================
--- Code Formatting
+-- Telescope Configuration
+-- ============================================================================
+local builtin = require("telescope.builtin")
+map("n", "<leader>f", builtin.find_files, desc("Find files"))
+map("n", "<leader>bf", builtin.buffers, desc("Find buffers"))
+map("n", "<leader>rg", builtin.live_grep, desc("Live grep"))
+map("n", "<leader>h", builtin.help_tags, desc("Help tags"))
+map("n", "<leader>th", builtin.colorscheme, desc("Choose colorscheme"))
+map("n", "<leader>bb", builtin.builtin, desc("Telescope builtins"))
+map("n", "<leader>ss", "<CMD>Telescope possession list<CR>", desc("Show sessions"))
+
+-- ============================================================================
+-- Smart Splits Configuration
+-- ============================================================================
+local smart_splits = require("smart-splits")
+
+-- Resizing splits
+map("n", "<C-A-h>", smart_splits.resize_left, desc("Resize left"))
+map("n", "<C-A-j>", smart_splits.resize_down, desc("Resize down"))
+map("n", "<C-A-k>", smart_splits.resize_up, desc("Resize up"))
+map("n", "<C-A-l>", smart_splits.resize_right, desc("Resize right"))
+
+-- Moving between splits
+map("n", "<C-h>", smart_splits.move_cursor_left, desc("Move to left split"))
+map("n", "<C-j>", smart_splits.move_cursor_down, desc("Move to down split"))
+map("n", "<C-k>", smart_splits.move_cursor_up, desc("Move to up split"))
+map("n", "<C-l>", smart_splits.move_cursor_right, desc("Move to right split"))
+map("n", "<C-\\>", smart_splits.move_cursor_previous, desc("Move to previous split"))
+
+-- Swapping buffers between windows
+map("n", "<leader><leader>h", smart_splits.swap_buf_left, desc("Swap buffer left"))
+map("n", "<leader><leader>j", smart_splits.swap_buf_down, desc("Swap buffer down"))
+map("n", "<leader><leader>k", smart_splits.swap_buf_up, desc("Swap buffer up"))
+map("n", "<leader><leader>l", smart_splits.swap_buf_right, desc("Swap buffer right"))
+
+-- ============================================================================
+-- Linting Configuration
+-- ============================================================================
+
+local lint = require("lint")
+lint.linters_by_ft = {
+	javascript = { "eslint_d" },
+	javascriptreact = { "eslint_d" },
+	typescript = { "eslint_d" },
+	typescriptreact = { "eslint_d" },
+	python = { "ruff" },
+	markdown = { "markdownlint" },
+	cpp = { "cpplint" },
+	solidity = { "solhint" },
+	go = { "golangci-lint" },
+	css = { "stylelint" },
+	html = { "htmlhint" },
+	rust = { "clippy" },
+}
+
+-- ============================================================================
+-- Code Formatting Configuration
 -- ============================================================================
 
 require("conform").setup({
@@ -400,6 +430,12 @@ require("conform").setup({
 		sh = { "shfmt" },
 		json = { "prettierd" },
 		typst = { "typstyle" },
+		go = { "gofmt", "goimports-reviser", "golines" },
+	},
+	format_on_save = {
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 1000,
 	},
 })
 
@@ -421,7 +457,6 @@ require("nvim-treesitter.configs").setup({
 		"css",
 		-- Documentation and markup
 		"markdown",
-		"markdown_inline",
 		"latex",
 		"yaml",
 		"typst",
@@ -434,66 +469,38 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- ============================================================================
--- Specialized Plugin Configuration
--- ============================================================================
-
--- keymaps for splitting
-map("n", "<C-A-h>", require("smart-splits").resize_left)
-map("n", "<C-A-j>", require("smart-splits").resize_down)
-map("n", "<C-A-k>", require("smart-splits").resize_up)
-map("n", "<C-A-l>", require("smart-splits").resize_right)
--- moving between splits
-map("n", "<C-h>", require("smart-splits").move_cursor_left)
-map("n", "<C-j>", require("smart-splits").move_cursor_down)
-map("n", "<C-k>", require("smart-splits").move_cursor_up)
-map("n", "<C-l>", require("smart-splits").move_cursor_right)
-map("n", "<C-\\>", require("smart-splits").move_cursor_previous)
--- swapping buffers between windows
-map("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
-map("n", "<leader><leader>j", require("smart-splits").swap_buf_down)
-map("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
-map("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
-
--- Markdown rendering
-require("render-markdown").setup({
-	completions = { lsp = { enabled = true } },
-	latex = { enabled = false },
-})
-
--- Code comments highlighting
-require("todo-comments").setup()
-
--- Auto-close HTML/JSX tags
-require("nvim-ts-autotag").setup({
-	opts = {
-		enable_close = true,
-		enable_rename = true,
-		enable_close_on_slash = false,
-	},
-})
-
--- ============================================================================
 -- Theme and Visual Configuration
 -- ============================================================================
 
--- Catppuccin theme setup
+-- Catppuccin theme
 require("catppuccin").setup({
 	flavour = "mocha",
 	transparent_background = true,
-	custom_highlights = {
-		WinSeparator = { fg = "#9399b2" },
-		BlinkCmpDocBorder = { fg = "#89b4fa" },
-		BlinkCmpKind = { fg = "#89b4fa" },
-		BlinkCmpMenu = { fg = "#cdd6f4" },
-		BlinkCmpMenuBorder = { fg = "#89b4fa" },
-		BlinkCmpSignatureHelpActiveParameter = { fg = "#cba6f7" },
-		BlinkCmpSignatureHelpBorder = { fg = "#89b4fa" },
+	integrations = {
+		noice = true,
+		notify = true,
+		cmp = true,
+		treesitter = true,
+		native_lsp = { enabled = true },
 	},
-	floating_border = "on",
 })
 
--- Apply colorscheme
 vim.cmd("colorscheme catppuccin")
+
+-- Rainbow delimiters colors (Catppuccin)
+local rainbow_colors = {
+	{ "RainbowDelimiterRed", "#f38ba8" },
+	{ "RainbowDelimiterYellow", "#f9e2af" },
+	{ "RainbowDelimiterBlue", "#89b4fa" },
+	{ "RainbowDelimiterOrange", "#fab387" },
+	{ "RainbowDelimiterGreen", "#a6e3a1" },
+	{ "RainbowDelimiterViolet", "#cba6f7" },
+	{ "RainbowDelimiterCyan", "#94e2d5" },
+}
+
+for _, color in ipairs(rainbow_colors) do
+	api.nvim_set_hl(0, color[1], { fg = color[2] })
+end
 
 -- Telescope transparency
 local telescope_groups = {
@@ -508,76 +515,82 @@ local telescope_groups = {
 }
 
 for _, group in ipairs(telescope_groups) do
-	vim.api.nvim_set_hl(0, group, { bg = "none" })
+	api.nvim_set_hl(0, group, { bg = "none" })
 end
 
 -- ============================================================================
 -- Autocommands
 -- ============================================================================
 
+-- Create augroup for organization
+local augroup = api.nvim_create_augroup("UserConfig", { clear = true })
+
 -- Highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
+vim.api.nvim_set_hl(0, "YankHighlight", { bg = "#94e2d5", fg = "#000000" })
+api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight text when yanking",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	group = augroup,
 	callback = function()
-		vim.highlight.on_yank()
+		vim.highlight.on_yank({
+			higroup = "YankHighlight",
+			timeout = 100, -- ms
+		})
 	end,
 })
 
 -- Enhanced markdown support
-vim.api.nvim_create_autocmd("FileType", {
+api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
+	group = augroup,
 	callback = function()
-		local bufnr = vim.api.nvim_get_current_buf()
+		local bufnr = api.nvim_get_current_buf()
 		require("vim.treesitter").start(bufnr, "markdown")
 	end,
 })
 
--- Automatically reload a file if it's changed outside of Neovim
-vim.api.nvim_create_autocmd("FocusGained", { command = "checktime" })
+-- Automatically reload files changed outside Neovim
+api.nvim_create_autocmd("FocusGained", {
+	group = augroup,
+	command = "checktime",
+})
 
--- Remember cursor position when reopening a file
-vim.api.nvim_create_autocmd("BufReadPost", {
+-- Remember cursor position
+api.nvim_create_autocmd("BufReadPost", {
+	group = augroup,
 	callback = function()
-		local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
-		if row > 0 and row <= vim.api.nvim_buf_line_count(0) then
-			vim.api.nvim_win_set_cursor(0, { row, col })
+		local row, col = unpack(api.nvim_buf_get_mark(0, '"'))
+		if row > 0 and row <= api.nvim_buf_line_count(0) then
+			api.nvim_win_set_cursor(0, { row, col })
 		end
 	end,
 })
 
--- Auto-format on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		require("conform").format({ bufnr = args.buf })
+-- Terminal configurations
+api.nvim_create_autocmd("TermOpen", {
+	group = augroup,
+	callback = function()
+		opt.number = false
+		opt.relativenumber = false
+		vim.cmd("startinsert")
 	end,
 })
 
--- Don't show line numbers in terminal buffers
-vim.api.nvim_create_autocmd("TermOpen", {
-	command = "setlocal nonumber norelativenumber",
-})
-
--- Open `:terminal` in insert mode
-vim.api.nvim_create_autocmd("TermOpen", {
-	command = "startinsert",
-})
-
--- 'q' quits on certain files
-vim.api.nvim_create_autocmd("FileType", {
+-- Quick quit for certain file types
+api.nvim_create_autocmd("FileType", {
 	pattern = {
 		"help",
-		"qf", -- quickfix
+		"qf",
 		"lspinfo",
 		"checkhealth",
 		"fugitive",
-		"git", -- fugitive/git windows
+		"git",
 		"spectre_panel",
 		"startuptime",
 		"tsplayground",
-		"netrw", -- file explorer
+		"netrw",
+		"oil",
 	},
+	group = augroup,
 	callback = function(event)
 		vim.keymap.set("n", "q", "<cmd>close<cr>", {
 			buffer = event.buf,
@@ -586,10 +599,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Function to create a centered floating window
-local function open_centered_float(bufnr)
-	local width = math.floor(vim.o.columns * 0.6) -- 60% of screen width
-	local height = math.floor(vim.o.lines * 0.6) -- 60% of screen height
+-- Floating window utilities
+local function create_centered_float(bufnr)
+	local width = math.floor(vim.o.columns * 0.6)
+	local height = math.floor(vim.o.lines * 0.6)
 	local row = math.floor((vim.o.lines - height) / 2)
 	local col = math.floor((vim.o.columns - width) / 2)
 
@@ -603,22 +616,35 @@ local function open_centered_float(bufnr)
 		border = "rounded",
 	}
 
-	vim.api.nvim_open_win(bufnr, true, opts)
+	api.nvim_open_win(bufnr, true, opts)
 end
 
--- Autocmd for help and checkhealth
-vim.api.nvim_create_autocmd("FileType", {
+-- Float help and checkhealth windows
+api.nvim_create_autocmd("FileType", {
 	pattern = { "help", "checkhealth" },
+	group = augroup,
 	callback = function(event)
 		local bufnr = event.buf
-
-		-- Close the default split before reopening in float
 		vim.defer_fn(function()
-			if vim.api.nvim_buf_is_valid(bufnr) then
-				vim.cmd("close") -- close the default window
-				open_centered_float(bufnr)
-				vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = bufnr, silent = true })
+			if api.nvim_buf_is_valid(bufnr) then
+				vim.cmd("close")
+				create_centered_float(bufnr)
+				vim.keymap.set("n", "q", "<cmd>close<cr>", {
+					buffer = bufnr,
+					silent = true,
+				})
 			end
 		end, 10)
 	end,
 })
+
+-- Toggle image.nvim
+local images_visible = true
+vim.keymap.set("n", "<leader>i", function()
+	if images_visible then
+		require("image").clear() -- Hide images
+	else
+		vim.cmd("e %") -- Reload the current buffer
+	end
+	images_visible = not images_visible
+end, { noremap = true, silent = true })

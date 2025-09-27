@@ -1,57 +1,50 @@
-@import url("/home/adnanmalik/.config/waybar/colors.css");
-
 * {
   font-family: "JetBrainsMono Nerd Font Propo", "Caskaydia Nerd Font Mono", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 50px;
   font-weight: bold;
 }
 
 window#waybar {
   background-color: transparent;
-  color: @foreground;
 }
 
 .modules-right {
   margin-right: 12px;
 }
 
+#workspaces button {
+  background-color: transparent;
+  color: #cba6f7;
+  transition: margin 150ms ease-in-out, padding 150ms ease-in-out;
+  transition: background-color 0.3s ease, color 0.3s ease, padding 0.2s ease;
+}
+
 #workspaces {
-  background-color: @surface_container_low;
+  background-color: #11111b;
   padding: 2px 2px 2px 2px;
   border-radius: 50px;
   margin-left: 12px;
 }
 
 #workspaces button.active {
-  background-color: @primary_fixed_dim;
-  color: @on_primary_fixed;
+  background-color: #7aa2f7;
+  color: #1e1e2e;
   padding: 5px 24px;
 }
 
 #workspaces button.active:hover {
-  color: @primary_fixed_dim;
+  color: #7aa2f7;
   background: inherit;
 }
 
 #workspaces button.empty {
-  color: @outline_variant;
-}
-
-#workspaces button {
-  background-color: transparent;
-  color: @outline;
-  transition: margin 150ms ease-in-out, padding 150ms ease-in-out;
-  transition: background-color 0.3s ease, color 0.3s ease, padding 0.2s ease;
-}
-
-#workspaces button:hover {
-  background: @surface_container_high;
+  color: #3b4261;
 }
 
 #workspaces button.urgent {
-  background-color: @error;
-  color: @on_error;
+  background-color: #f7768e;
+  color: #1e1e2e;
 }
 
 #battery,
@@ -71,8 +64,8 @@ window#waybar {
 #custom-notification,
 #custom-github,
 #power-profiles-daemon {
-  color: @primary;
-  background-color: @surface_container;
+  color: #7aa2f7;
+  background-color: #11111b;
   padding: 0 15px 0 15px;
   margin: 0 0 0 12px;
 }

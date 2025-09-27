@@ -1,5 +1,5 @@
 font-family = CaskaydiaCove Nerd Font Mono
-theme=catppuccin-mocha
+theme=catppuccin-mocha.conf
 
 background-opacity = 0.8
 background-blur = true
@@ -15,4 +15,4 @@ mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
 cursor-style = block
 
-font-size = 18
+font-size = 14

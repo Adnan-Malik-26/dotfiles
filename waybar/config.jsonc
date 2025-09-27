@@ -2,7 +2,7 @@
   "layer": "top",
   "position": "top",
   "margin-top": 13,
-  "modules-left": ["clock", "custom/notification", "custom/github", "hyprland/window"],
+  "modules-left": ["clock", "custom/notification", "custom/github", "custom/media", "hyprland/window" ],
   "modules-center": ["hyprland/workspaces"],
   "modules-right": [ "custom/pacman", "pulseaudio", "battery", "network"],
   "height": 40,

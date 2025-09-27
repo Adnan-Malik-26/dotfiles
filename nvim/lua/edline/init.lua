@@ -102,7 +102,7 @@ end
 -- Get git branch and status (cached)
 local function get_git_info()
 	local current_file = vim.fn.expand("%:p")
-	local now = vim.loop.hrtime() / 1000000 -- Convert to milliseconds
+	local now = vim.uv.hrtime() / 1000000 -- Convert to milliseconds
 
 	-- Check if cache is still valid
 	if cache.git_info.file == current_file and (now - cache.git_info.last_update) < CACHE_TIMEOUT then
@@ -200,10 +200,16 @@ local function get_selection_count()
 	return ""
 end
 
--- Get current function using treesitter (cached)
+-- Get current function using treesitter (cached) - disabled in insert mode
 local function get_current_function()
+	-- Don't update function info in insert mode to reduce flicker
+	local mode = vim.fn.mode()
+	if mode == "i" or mode == "ic" then
+		return cache.current_function.data or ""
+	end
+
 	local bufnr = vim.api.nvim_get_current_buf()
-	local now = vim.loop.hrtime() / 1000000
+	local now = vim.uv.hrtime() / 1000000
 
 	-- Check cache
 	if cache.current_function.bufnr == bufnr and (now - cache.current_function.last_update) < CACHE_TIMEOUT then
@@ -270,13 +276,22 @@ local function get_modified_indicator()
 	end
 end
 
--- Get filetype with colored icon
+-- Get filetype with colored icon (cached per buffer)
+local filetype_cache = {}
 local function get_filetype()
 	local ft = vim.bo.filetype
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	if filetype_cache[bufnr] and filetype_cache[bufnr].ft == ft then
+		return filetype_cache[bufnr].result
+	end
+
 	if ft == "" then
+		filetype_cache[bufnr] = { ft = ft, result = "no ft" }
 		return "no ft"
 	end
 
+	local result = ft
 	local ok, devicons = pcall(require, "nvim-web-devicons")
 	if ok then
 		local icon = devicons.get_icon_by_filetype(ft, { default = true })
@@ -287,10 +302,12 @@ local function get_filetype()
 			local hl_group = "StatuslineIcon" .. ft:gsub("[^%w]", "")
 			-- Set the highlight with the specific color
 			vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = "NONE" })
-			return string.format("%%#%s#%s%%#StatuslineFT# %s", hl_group, icon, ft)
+			result = string.format("%%#%s#%s%%#StatuslineFT# %s", hl_group, icon, ft)
 		end
 	end
-	return ft
+
+	filetype_cache[bufnr] = { ft = ft, result = result }
+	return result
 end
 
 -- Catppuccin Mocha colors
@@ -330,8 +347,23 @@ local function mode_color()
 	return colors.inactive
 end
 
+-- Debounced statusline update
+local update_timer = nil
+local function debounced_statusline_update()
+	if update_timer then
+		update_timer:stop()
+	end
+	update_timer = vim.defer_fn(function()
+		vim.cmd("redrawstatus")
+		update_timer = nil
+	end, 50) -- 50ms debounce
+end
+
 -- Build statusline
 function M.statusline()
+	local current_mode = vim.fn.mode()
+	local is_insert = current_mode == "i" or current_mode == "ic"
+
 	local hl_mode = "%#StatuslineMode#"
 	local hl_file = "%#StatuslineFile#"
 	local hl_git = "%#StatuslineGit#"
@@ -343,6 +375,22 @@ function M.statusline()
 	-- Left side components
 	local mode = string.format("%s %s ", hl_mode, get_mode())
 	local filename = string.format("%s %s", hl_file, get_filename())
+
+	-- Simplified statusline for insert mode to reduce flicker
+	if is_insert then
+		local modified = string.format("%s%s ", hl_modified, get_modified_indicator())
+		local filetype = string.format(" %s ", get_filetype())
+
+		return table.concat({
+			mode,
+			filename,
+			"%=",
+			modified,
+			filetype,
+		})
+	end
+
+	-- Full statusline for other modes
 	local git_info = get_git_info()
 	local git = git_info ~= "" and string.format("%s%s", hl_git, git_info) or ""
 	local search = get_search_count()
@@ -381,6 +429,7 @@ end
 local function clear_cache()
 	cache.git_info = { data = "", last_update = 0, file = "" }
 	cache.current_function = { data = "", last_update = 0, bufnr = -1 }
+	filetype_cache = {}
 end
 
 -- Setup highlights
@@ -402,29 +451,44 @@ function M.setup()
 
 	vim.o.statusline = "%!v:lua.require'edline'.statusline()"
 
-	-- Reduced autocommands for better performance
+	-- Create autocommand group
+	local group = vim.api.nvim_create_augroup("EdlineStatusline", { clear = true })
+
+	-- Only update on significant events to reduce flicker
 	vim.api.nvim_create_autocmd({
 		"ModeChanged",
 		"WinEnter",
 		"BufEnter",
 		"BufWritePost", -- Update git status after save
 	}, {
-		callback = function()
+		group = group,
+		callback = function(args)
 			update_mode_hl()
 			-- Only clear cache on buffer changes
-			if vim.v.event.event == "BufEnter" then
+			if args.event == "BufEnter" then
 				clear_cache()
 			end
 		end,
 	})
 
-	-- Separate group for search updates (less frequent)
+	-- Separate autocmd for search updates (less frequent)
 	vim.api.nvim_create_autocmd({
 		"CmdlineLeave",
 		"SearchWrapped",
 	}, {
+		group = group,
+		callback = debounced_statusline_update,
+	})
+
+	-- Update function info only when leaving insert mode
+	vim.api.nvim_create_autocmd("InsertLeave", {
+		group = group,
 		callback = function()
-			vim.cmd("redrawstatus")
+			-- Clear function cache to force update
+			cache.current_function = { data = "", last_update = 0, bufnr = -1 }
+			vim.defer_fn(function()
+				vim.cmd("redrawstatus")
+			end, 100)
 		end,
 	})
 end
