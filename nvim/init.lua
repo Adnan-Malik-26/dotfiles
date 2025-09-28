@@ -94,17 +94,28 @@ vim.pack.add({
 	-- Navigation and workflow
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
 	{ src = "https://github.com/mrjones2014/smart-splits.nvim" },
+	{ src = "https://github.com/developedbyed/marko.nvim" },
 
 	-- Specialized functionality
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 	{ src = "https://github.com/derektata/lorem.nvim" },
 	{ src = "https://github.com/3rd/image.nvim" },
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
+	{ src = "https://github.com/toppair/peek.nvim" },
 })
 
 -- ============================================================================
 -- Key Mappings
 -- ============================================================================
+function DeleteWordUnderCursor()
+	local word = vim.fn.expand("<cword>")
+	if word == "" then
+		return
+	end
+	vim.cmd("normal! viwd")
+end
+
+map("n", "dw", DeleteWordUnderCursor, { noremap = true, silent = true })
 
 local keymap_opts = { noremap = true, silent = true }
 
@@ -126,7 +137,6 @@ map("n", "<ESC>", ":nohlsearch<CR>", desc("Clear search highlight"))
 
 -- File operations
 map("n", "<leader>o", ":update<CR> :source<CR>", desc("Write and source config"))
-
 -- Moving lines
 map("n", "<A-j>", ":m .+1<CR>==", desc("Move line down"))
 map("n", "<A-k>", ":m .-2<CR>==", desc("Move line up"))
@@ -191,9 +201,7 @@ vim.lsp.enable({
 vim.lsp.config["ts_ls"] = {
 	cmd = { "typescript-language-server", "--stdio" },
 	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-	root_dir = function()
-		return vim.loop.cwd()
-	end,
+	root_dir = vim.fs.root(0, { "package.json", "tsconfig.json", "jsconfig.json", ".git" }),
 }
 
 vim.lsp.config["solidity"] = {
@@ -205,7 +213,20 @@ vim.lsp.config["solidity"] = {
 -- ============================================================================
 -- Plugin Configurations
 -- ============================================================================
+-- Peek Markdown
+require("peek").setup()
+vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 
+-- Marks
+require("marko").setup({
+	width = 100,
+	height = 100,
+	border = "rounded",
+	title = " Marko ",
+})
+
+-- Noice
 require("noice").setup()
 -- LSP Signature
 require("lsp_signature").setup({
