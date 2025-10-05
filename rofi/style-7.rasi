@@ -1,13 +1,13 @@
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun";
+    modi:                       "drun,run,window,filebrowser";
     show-icons:                 true;
-    display-drun:               "drun :";
-    display-run:                "";
-    display-filebrowser:        "";
-    display-window:             "";
-	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
-	window-format:              "{w} · {c} · {t}";
+    display-drun:               "  Apps :";
+    display-run:                "  Run :";
+    display-filebrowser:        "  Files :";
+    display-window:             "  Windows :";
+    drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+    window-format:              "{w} · {c} · {t}";
 }
 
 /*****----- Global Properties -----*****/
@@ -116,7 +116,7 @@ entry {
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     1;
+    columns:                     2;
     lines:                       12;
     cycle:                       true;
     dynamic:                     true;
