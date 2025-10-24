@@ -8,33 +8,33 @@
 
 
 /* Colors */
-@define-color background 	            #11111b;
-@define-color background-alt 	        #1e1e2e;
-@define-color background-alt-darker   #181825;
-@define-color accent-one    	        #cba6f7;
-@define-color accent-two    	        #f9e2af;
-@define-color accent-three    	      #a6e3a1;
-@define-color accent-error     	      #f38ba8;
-@define-color bordercolor             #cba6f7;
-@define-color fontcolor 	            #cdd6f4;
-@define-color fontaltcolor 	          #bac2de;
+@define-color background alpha(#11111b, 0.8);
+@define-color background-alt alpha(#1e1e2e, 0.8);
+@define-color background-alt-darker #181825;
+@define-color accent-one #cba6f7;
+@define-color accent-two #f9e2af;
+@define-color accent-three #a6e3a1;
+@define-color accent-error #f38ba8;
+@define-color bordercolor #cba6f7;
+@define-color fontcolor #cdd6f4;
+@define-color fontaltcolor #bac2de;
 
 
 /* Config */
 
 * {
-    font-family: "CaskaydiaCove Nerd Font Propo";
-    font-style: italic;
+  font-family: "CaskaydiaCove Nerd Font Propo";
+  font-style: italic;
 }
 
 /* Notification */
 
 .notification {
-    background: @background;
-    color: @fontcolor;
-    border: 3px solid @bordercolor;
-    border-radius: 10px;
-    padding:10px;
+  background: @background;
+  color: @fontcolor;
+  border: 1px solid @bordercolor;
+  border-radius: 25px;
+  padding: 10px;
 }
 
 .body {
@@ -68,8 +68,8 @@
 
 .notification-default-action:hover,
 .notification-action:hover {
-    color: @accent-three;
-    background: transparent;
+  color: @accent-three;
+  background: transparent;
 }
 
 .notification.critical progress {
@@ -84,10 +84,10 @@
 /* Control Center */
 
 .control-center {
-    background-color: @background;
-    color: @fontcolor;
-    border: 3px solid @bordercolor;
-    padding: 10px;
+  background-color: @background;
+  color: @fontcolor;
+  border: 3px solid @bordercolor;
+  padding: 10px;
 }
 
 /* Notifications expanded-group */
@@ -100,7 +100,7 @@
 }
 
 .notification-group-icon {
-  color: @fontcolor;
+  color: #FFFFFF;
 }
 
 .notification-group-headers {
@@ -111,7 +111,7 @@
 .notification-group-close-all-button {
   background: @accent-two;
   color: @fontaltcolor;
-  margin: 4px; 
+  margin: 4px;
   border-radius: 6px;
   padding: 4px;
 }
@@ -120,13 +120,14 @@
 .notification-group-close-all-button:hover {
   background: @accent-error;
   color: @fontaltcolor;
-}  
+}
 
 
 /* widget title */
 .widget-title {
   color: @fontcolor;
 }
+
 .widget-title>button {
   font-size: 1rem;
   color: @fontcolor;
@@ -141,9 +142,9 @@
 
 /* widget button grid */
 button {
-    border: 0px;
-    min-width: 35px;
-    background: @background-alt;
+  border: 0px;
+  min-width: 35px;
+  background: @background-alt;
 }
 
 .widget-buttons-grid {
@@ -151,22 +152,22 @@ button {
   background: @background-alt-darker;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button {
-    color: @fontcolor;
-    margin: 8px;
-    padding: 10px;
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  color: @fontcolor;
+  margin: 8px;
+  padding: 10px;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
   background: alpha(@fontcolor, 0.55);
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
   background: @accent-three;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked label {
-    color: @fontaltcolor;
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked label {
+  color: @fontaltcolor;
 }
 
 
@@ -231,11 +232,11 @@ button {
 /* sliders in backlight and volume */
 
 trough slider {
-    background: @fontcolor;
+  background: @fontcolor;
 }
 
 trough slider:hover {
-    background: @accent-two;
+  background: @accent-two;
 }
 
 

@@ -13,6 +13,6 @@ window-colorspace = "display-p3"
 
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
-cursor-style = block
+cursor-style = bar
 
 font-size = 14

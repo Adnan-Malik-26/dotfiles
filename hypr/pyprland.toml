@@ -2,16 +2,6 @@
 hyprland_version = "0.50.0"
 plugins = ["scratchpads"]
 
-[scratchpads.pomo]
-command = "kitty --class pomo pomo"
-class = "pomo"
-size = "40% 40%"
-margin = 65
-animation = "fromTop"
-unfocus = "hide"
-lazy = true
-max_size = "1920px 100%"
-
 [scratchpads.bluetuith]
 animation = "fromTop"
 command = "kitty --class dropterm bluetuith"

@@ -1,0 +1,503 @@
+/*///////////////////////////////////////////////////////////////////////////////////////\
+
+FF Ultima:         https://github.com/soulhotel/FF-ULTIMA
+File Desc:         All Tab related settings
+
+compact tabs
+tabs below the url bar (horizontal)
+pinned tabs
+new tab button
+disable tab update dot
+disable "all tabs" button
+vertical tab action buttons
+multiline tabs
+tabs close button on icon
+tabs reversed content order
+tab/page progress bar
+disable scrollbar
+horizontal tabs take full width
+tab focus blur
+tab outline colors
+tab counter
+split view content outline
+split view seperator line
+split view focus opacity
+split view focus shrink
+split view gradient tabs background
+
+\////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* compact tabs ------------------------------------------------------------------------------------------------- */
+@media -moz-pref("ultima.spacing.compact.tabs") {
+    .tab-background {
+          margin-block: -0.4px !important;
+      }
+}
+
+/* tabs below the url bar --------------------------------------------------------------------------------------- */
+@media -moz-pref("ultima.tabs.belowURLbar") {
+    #toolbar-menubar { order: 0 !important; }
+    #navigator-toolbox #nav-bar { order: 1 !important; }
+    #TabsToolbar { order: 2 !important; }
+    #PersonalToolbar { order: 3 !important; }
+    #TabsToolbar .titlebar-buttonbox-container {display: none !important;}
+    @media not -moz-pref("ultima.disable.windowcontrols.button") {#nav-bar .titlebar-buttonbox-container {display: flex !important;}}
+}
+
+/* pinned tabs -------------------------------------------------------------------------------------------------- */
+@media -moz-pref("ultima.tabs.always.show.pinned") {
+    #pinned-tabs-container[orient="vertical"],#vertical-pinned-tabs-container {
+        height: -moz-fit-content !important;
+        min-height: -moz-fit-content !important;
+    }
+    #pinned-tabs-container[orient="horizontal"] {
+        min-width: fit-content !important;
+    }
+}
+#pinned-tabs-container[orient="vertical"],#vertical-pinned-tabs-container {
+    margin-bottom: 6px !important;
+}
+
+/* new tab button ----------------------------------------------------------------------------------------------- */
+@media -moz-pref("ultima.tabs.newtabbutton.ontop.1") {
+    #vertical-tabs-newtab-button {order: -1 !important;}
+    #tabbrowser-tabs[orient="horizontal"] > #vertical-tabs-newtab-button,
+    #tabbrowser-tabs[orient="vertical"]:not([overflow]) > #vertical-tabs-newtab-button {
+        display: flex !important;
+
+    }
+    #tabbrowser-tabs[orient="vertical"] #tabs-newtab-button {visibility: collapse !important;}
+}
+@media -moz-pref("ultima.tabs.newtabbutton.ontop.2") {
+    #pinned-tabs-container {order: -3 !important;}
+    #vertical-pinned-tabs-splitter {order: -2 !important;}
+    #vertical-tabs-newtab-button {order: -1 !important; display:flex !important;}
+    #tabbrowser-tabs[orient="vertical"] #tabs-newtab-button {visibility: collapse !important;}
+}
+
+/* disable tab update dot --------------------------------------------------------------------------------------- */
+@media -moz-pref("ultima.tabs.disable.update.dot") {
+    .tab-content[titlechanged]:not([selected]) {
+        background-image:none !important;
+    }
+}
+
+/* disable "all tabs" button ------------------------------------------------------------------------------------ */
+@media -moz-pref("ultima.disable.alltabs.button") {
+    #alltabs-button {display: none !important;}
+}
+
+/* vertical tab action buttons ---------------------------------------------------------------------------------- */
+@media -moz-pref("ultima.tabs.vertical.hide.the.bottom.buttons") {
+    .tools-and-extensions.actions-list {
+        & moz-button:not([view="viewCustomizeSidebar"]) {display:none !important;}
+    }
+    .tools-and-extensions.actions-list[orientation="horizontal"] {
+        max-width: 53px !important;
+        /*& moz-button[view="viewCustomizeSidebar"] {}*/
+    }
+}
+@media -moz-pref("ultima.tabs.vertical.hide.the.bottom.buttons.off.hover") {
+    .tools-and-extensions.actions-list[orientation="vertical"] {
+        & moz-button:not([view="viewCustomizeSidebar"]) {display:none !important;}
+    }
+}
+
+/* multiline tabs ----------------------------------------------------------------------------------------------- */
+
+@media -moz-pref("ultima.tabs.multiline.labels") {
+    #sidebar-main .tab-label {
+        white-space: wrap !important;
+        word-wrap: break-word;
+        max-height: 120px !important;
+        margin-right: 15px !important;
+    }
+    @media not -moz-pref("ultima.tabs.closetabbutton.on.icon") {
+        #sidebar-main {
+            .tab-close-button {
+                position: absolute;
+                @media not -moz-pref("ultima.tabs.reverse.content.order") {
+                    right: 18px;
+                }
+                @media -moz-pref("ultima.tabs.reverse.content.order") {
+                    left: 18px;
+                }
+            }
+        }
+    }
+}
+
+/* tabs close button on icon ------------------------------------------------------------------------------------ */
+@media -moz-pref("ultima.tabs.closetabbutton.on.icon") {
+    #tabbrowser-tabs[orient="vertical"][expanded] :not(#pinned-tabs-container) {
+        .tab-close-button {
+            order: -1 !important;
+        }
+        /* selected tab */
+        .tabbrowser-tab[selected] {
+            .tab-close-button {
+                margin-left: -3px !important;
+            }
+            .tab-icon-stack {
+                margin-left: 8px !important;
+            }
+        }
+        /* unselected tabs */
+        .tabbrowser-tab:not([selected]):hover {
+            .tab-close-button {
+                margin-inline: -3px 3px !important;
+            }
+            .tab-icon-stack {
+                display: none !important;
+            }
+        }
+    }
+    #tabbrowser-tabs[orient="horizontal"] {
+        .tab-close-button {
+            order: -1 !important;
+        }
+        /* selected tab */
+        .tabbrowser-tab[selected] {
+            .tab-icon-stack {
+                margin-left: 3px !important;
+            }
+        }
+        /* unselected tabs */
+        .tabbrowser-tab:not([selected]):not(:hover) {
+            .tab-close-button {
+                display: none !important;
+            }
+        }
+        .tabbrowser-tab:not([selected]):hover {
+            .tab-close-button {
+                margin-inline: -3px 3px !important;
+            }
+            .tab-icon-stack {
+                display: none !important;
+            }
+            .tab-close-button {
+                display: flex !important;
+            }
+        }
+    }
+}
+
+/* tabs reversed content order ---------------------------------------------------------------------------------- */
+@media -moz-pref("ultima.tabs.reverse.content.order") {
+    @media not -moz-pref("ultima.tabs.closetabbutton.on.icon") {
+        #tabbrowser-tabs[orient="vertical"] {
+            .tab-content {
+                flex-direction: row-reverse !important;
+            }
+        }
+        #tabbrowser-tabs[orient="horizontal"] {
+            .tab-content {
+                flex-direction: row-reverse !important;
+            }
+            .tab-close-button {
+                margin-right: 8px !important;
+            }/*
+            .tab-label-container {
+                margin-left: 8px !important;
+            }*/
+        }
+    }
+}
+
+/* tab/page progress bar ---------------------------------------------------------------------------------------- */
+/* immitation page loading strip - this is not a progression bar */
+@media -moz-pref("ultima.tabs.not.a.progress.bar") {
+    :root:has(.tabbrowser-tab[selected][busy]) {
+        #tabbrowser-tabbox::after {
+            width: calc(100% - 25px);
+            transition: width 0.6s linear 0.3s;
+            border: 1px solid rgba(100,100,100,0.3);
+            border-left-width:10px; /* if page loads too fast, this produces a soft dot under the statuspanel */
+        }
+    }
+    #tabbrowser-tabbox::after {
+        content:"";
+        z-index:2;
+        width: 0;
+        height:5px;
+        display:flex;
+        position:fixed;
+        bottom:5px; /* bottom positioning is "out of the way", for when a website implements there own page loading indicator and header content */
+        left:5px;
+        border: none;
+        border-radius:30px;
+        background: linear-gradient(0.25turn, var(--uc-accent-color-2), #ebf8e1, var(--uc-accent-color-2));
+        box-shadow: var(--uc-box-shadow);
+        transition: width 0.2s linear;
+    }
+    :root {
+        :has(findbar:focus-within), :has(findbar:focus), :has(findbar:focus-visible), :has(findbar:hover) {
+            #tabbrowser-tabbox::after {bottom:45px;}
+        }
+    }
+}
+
+/* disable scrollbar -------------------------------------------------------------------------------------------- */
+/* to basically hide the scrollbar within the vertical tabs container, behavior on this is iffy, so 0 opacity seemed like a viable solution for now */
+@media -moz-pref("ultima.tabs.disable.scrollbar") {
+    :root {
+      --vertical-tabs-scrollbar-color: transparent !important;
+    }
+    #vertical-tabs #tabbrowser-tabs #tabbrowser-arrowscrollbox {
+        border-bottom: 0px solid transparent !important;
+        scrollbar-width: 0 !important;
+        scrollbar-color: rgba(255, 270, 80, 0) rgba(255,225,5, 0) !important;
+    }
+}
+
+/* horizontal tabs take full width ------------------------------------------------------------------------------ */
+
+@media -moz-pref("ultima.tabs.horizontal.fullwidth") {
+    #tabbrowser-tabs[orient="horizontal"] {
+        .tabbrowser-tab[fadein]:not([style^="max-width"]) {
+            max-width: 99.3vw !important;
+        }
+    }
+}
+
+/* tab focus blur ----------------------------------------------------------------------------------------------- */
+/* focus/hover over a tab, blurs other tabs */
+
+@media -moz-pref("ultima.tabs.focus.blur") {
+    
+    #main-window:has(.tabbrowser-tab:hover) {
+        .tabbrowser-tab .tab-stack {
+            transition: opacity 0.2s ease-out !important;
+            &:not(:hover) {
+                opacity: 0.2;
+                filter: blur(1px);
+            }
+        }
+    }
+    
+}
+
+/* tab outline colors ------------------------------------------------------------------------------------------- */
+
+@media -moz-pref("user.theme.xtras.tab.outline.color","black") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: black !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","white") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: white !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","blue") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: blue !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","gold") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: gold !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","green") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: green !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","lightblue") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: lightblue !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","pink") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: pink !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","purple") {
+    #main-window[lwtheme], #main-window:not([lwtheme]) {
+        --tab-selected-outline-color: purple !important;
+    }
+}
+@media -moz-pref("user.theme.xtras.tab.outline.color","gradient") {
+    @keyframes filter{from{ filter: hue-rotate(0deg) } to { filter: hue-rotate(360deg) }}
+    .tabbrowser-tab[selected] > .tab-stack::after{
+        grid-area: 1/1;
+        content: "";
+        display: inherit;
+        border-radius:3px;
+        z-index: 0;
+        background-image: conic-gradient(
+            hsl(0 100% 70%),
+            hsl(60 100% 45%) 70deg,
+            hsl(120 100% 55%) 105deg,
+            hsl(160 100% 60%) 160deg,
+            hsl(200 100% 60%) 200deg,
+            hsl(240 100% 65%) 255deg,
+            hsl(300 100% 60%) 290deg,
+            hsl(360 100% 70%) 360deg);
+        mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB4PSIwIiB5PSIwIiByeD0iNCIgc3Ryb2tlPSJyZWQiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgdmVjdG9yLWVmZmVjdD0ibm9uLXNjYWxpbmctc3Ryb2tlIi8+DQo8L3N2Zz4");
+        background-size: cover;
+        background-position: center;
+        animation: filter steps(30) 2s infinite;
+    }
+    .tab-content {
+        z-index: 1 !important;
+    }
+    #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected]:not([pinned]) > .tab-stack::after {
+        margin: -1px 11px;
+    }
+    #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected][pinned] > .tab-stack::after {
+        margin: 0px 5px 0px 5px;
+    }
+    #main-window[sidebar-expand-on-hover=""] #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected][pinned] > .tab-stack::after {
+        margin: 0px 9px -2px 9px;
+    }
+    @media (-moz-platform: windows) {
+        #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected]:not([pinned]) > .tab-stack::after {
+            margin: -1px 9px -1px 11px;
+        }
+        #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected][pinned] > .tab-stack::after {
+            margin: 0px 5px 0px 5px;
+        }
+        #main-window[sidebar-expand-on-hover=""] #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected][pinned] > .tab-stack::after {
+            margin: 0px 9px -1px 9px;
+        }
+    }
+}
+
+/* tab counter -------------------------------------------------------------------------------------------------- */
+
+/* display the total # amount of tabs open in the current window, within the tab container */
+
+@media -moz-pref("ultima.tabs.tabCounter") {
+    /* get count */
+    #tabbrowser-tabs {
+        counter-reset: tabcount;
+        & .tabbrowser-tab {
+            counter-increment: tabcount;
+        }
+    }
+    /* VERTICAL tabs visual indicator */
+    #tabbrowser-arrowscrollbox[orient="vertical"] {
+        #tabbrowser-arrowscrollbox-periphery::after {
+            content: counter(tabcount) " Tabs Open";
+            position: absolute;
+            bottom: -22px;
+            left: 20px;
+            word-spacing: 0.2rem;
+            font-style: italic;
+            color: color-mix(in srgb, var(--toolbarbutton-icon-fill) 25%, transparent);
+        }
+    }
+    /* adjustment for collapsed tabs */
+    #sidebar-main:not([sidebar-launcher-expanded=""]) {
+        #tabbrowser-arrowscrollbox[orient="vertical"] {
+            #tabbrowser-arrowscrollbox-periphery::after {
+                bottom: -36px;
+                left: 1px;
+                text-align: center;
+            }             
+        }
+    }
+    /* adjustment for tabs overflow */
+    #tabbrowser-tabs[overflow=""] {
+        #tabbrowser-arrowscrollbox[orient="vertical"] {
+            #tabbrowser-arrowscrollbox-periphery::after {
+                position: fixed;
+                z-index: 99999999999999999;
+                bottom: 72px;
+                left: 104px;
+            }             
+        } 
+    }
+    /* HORIZONTAL tabs visual indicator */
+    #tabbrowser-arrowscrollbox[orient="horizontal"]::after {
+        content: counter(tabcount) " Tabs Open";
+         margin: 12px 18px !important;
+         color: color-mix(in srgb, var(--toolbarbutton-icon-fill) 25%, transparent);
+    }
+}
+
+/* split view modifications started 10/17/2025 via Nightly 146 */
+/* split view content outline ----------------------------------------------------------------------------------- */
+
+/* toggle the visibility of default splitview content outline */
+@media not -moz-pref("ultima.tabs.splitview.content.outline") {
+    #tabbrowser-tabpanels[splitview] {
+        & .browserStack {
+            .deck-selected > .browserContainer > & {
+                outline: none !important;
+            }
+        }
+    }
+}
+
+/* split view seperator line ------------------------------------------------------------------------------------ */
+
+/* toggle the visibility of the splitview tab seperator line */
+@media not -moz-pref("ultima.tabs.splitview.tab.seperator") {
+      #tabbrowser-tabs .tab-split-view-container {
+        tab-split-view-wrapper:not([hasactivetab]) & {
+            & .tabbrowser-tab {
+                border-block-end: 0px solid var(--uc-accent-color-2) !important;
+                &:last-child {
+                    tab-split-view-wrapper:not([hasactivetab]) & {
+                        border-inline-start: 0px solid var(--uc-accent-color-2) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* split view focus opacity ------------------------------------------------------------------------------------- */
+
+/* when using split tabs, the unfocused view becomes less opaque */
+@media -moz-pref("ultima.tabs.splitview.focus.opacity") {
+    #tabbrowser-tabpanels[splitview] {
+        & .browserStack {
+            .split-view-panel:not(.deck-selected) > .browserContainer > & {
+                filter: brightness(40%);
+                opacity:0.6;
+                transition: opacity 0.2s ease, filter 0.6s ease;
+                &:hover {
+                    filter: initial !important;
+                    opacity: 1 !important;
+                }
+            }
+        }
+    }
+}
+
+/* split view focus shrink -------------------------------------------------------------------------------------- */
+
+/* when using split tabs, the second view shrinks into a portrait size when not focused */
+@media -moz-pref("ultima.tabs.splitview.focus.shrink") {
+    .split-view-panel {
+        transition: width 0.2s linear, min-width 0.2s linear, max-width 0.2s linear !important;
+    }
+    #tabbrowser-tabpanels[splitview]:has(.split-view-panel[column="1"]:not(:hover)) {
+        & .split-view-panel[column="0"] {
+            min-width: 70% !important;
+
+        }
+        & .split-view-panel[column="1"] {
+            max-width: 30% !important;
+        }
+    }
+}
+
+/* split view gradient tabs background -------------------------------------------------------------------------- */
+
+@media -moz-pref("ultima.tabs.splitview.gradient.background") {
+    #tabbrowser-tabs {
+        .tab-split-view-container {
+            background: linear-gradient(-80deg, rgba(238,119,82,0.03), rgba(131,60,126,0.1), rgba(35,250,213,0.004)) !important;
+            background-size: 100% !important;
+            &:has(.tabbrowser-tab[selected]) {
+                background: linear-gradient(-80deg, rgba(238,119,82,0.7), rgba(131,60,126,0.7), rgba(35,250,213,0.7)) !important;
+            }
+        }
+    }
+}

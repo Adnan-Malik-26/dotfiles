@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+# Get current keyboard layout
+current_layout=$(hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap')
+
+# Toggle between layouts
+if [[ "$current_layout" == *"English (US)"* ]] || [[ "$current_layout" == *"us"* ]]; then
+    # Switch to Colemak-DH
+    hyprctl keyword input:kb_layout us
+    hyprctl keyword input:kb_variant colemak_dh
+    notify-send "Keyboard Layout" "Switched to Colemak-DH" -t 2000
+else
+    # Switch to QWERTY
+    hyprctl keyword input:kb_layout us
+    hyprctl keyword input:kb_variant ""
+    notify-send "Keyboard Layout" "Switched to QWERTY" -t 2000
+fi

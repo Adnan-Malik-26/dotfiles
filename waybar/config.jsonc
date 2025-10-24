@@ -2,11 +2,70 @@
   "layer": "top",
   "position": "top",
   "margin-top": 13,
-  "modules-left": ["clock", "custom/notification", "custom/github", "custom/media", "hyprland/window" ],
+  "modules-left": ["group/distro", "clock",  "custom/media", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": [ "custom/pacman", "pulseaudio", "battery", "network"],
+  "modules-right": [ "bluetooth", "group/pulseaudio", "battery", "network"],
   "height": 40,
 
+
+	"bluetooth": {
+		"format": "󰂯",
+		"format-disabled": "󰂲",
+		"format-off": "󰂲",
+		"format-on": "󰂰",
+		"format-connected": "󰂱",
+		"min-length": 2,
+		"max-length": 2,
+		"on-click": "pypr toggle bluetuith",
+		"on-click-right": "bluetoothctl power off && notify-send 'Bluetooth Off' -e -i 'network-bluetooth-inactive' -r 1925",
+		"tooltip-format": "Device Addr: {device_address}",
+		"tooltip-format-disabled": "Bluetooth Disabled",
+		"tooltip-format-off": "Bluetooth Off",
+		"tooltip-format-on": "Bluetooth Disconnected",
+		"tooltip-format-connected": "Device: {device_alias}",
+		"tooltip-format-enumerate-connected": "Device: {device_alias}",
+		"tooltip-format-connected-battery": "Device: {device_alias}\nBattery: {device_battery_percentage}%",
+		"tooltip-format-enumerate-connected-battery": "Device: {device_alias}\nBattery: {device_battery_percentage}%"
+	},
+	"group/pulseaudio": {
+		"orientation": "horizontal",
+		"modules": [
+			"pulseaudio#output",
+			"pulseaudio#input"
+		],
+		"drawer": {
+			"transition-left-to-right": false
+		}
+	},
+	"pulseaudio#output": {
+		"format": "{icon} {volume}%",
+		"format-muted": "{icon} {volume}%",
+		"format-icons": {
+			"default": [ "󰕿", "󰖀", "󰕾" ],
+			"default-muted": "󰝟",
+			"headphone": "󰋋",
+			"headphone-muted": "󰟎",
+			"headset": "󰋋",
+			"headset-muted": "󰋋"
+		},
+		"min-length": 7,
+		"max-length": 7,
+		"on-click": "~/.config/waybar/scripts/volume.sh output mute",
+		"on-scroll-up": "~/.config/waybar/scripts/volume.sh output raise",
+		"on-scroll-down": "~/.config/waybar/scripts/volume.sh output lower",
+		"tooltip-format": "Output Device: {desc}"
+	},
+	"pulseaudio#input": {
+		"format": "{format_source}",
+		"format-source": "󰍬 {volume}%",
+		"format-source-muted": "󰍭 {volume}%",
+		"min-length": 7,
+		"max-length": 7,
+		"on-click": "~/.config/waybar/scripts/volume.sh input mute",
+		"on-scroll-up": "~/.config/waybar/scripts/volume.sh input raise",
+		"on-scroll-down": "~/.config/waybar/scripts/volume.sh input lower",
+		"tooltip-format": "Input Device: {desc}"
+	},
 
   "custom/github": {
     "exec": "/home/adnanmalik/.local/bin/githubContributions.sh",
@@ -38,28 +97,45 @@
     "escape": true
   },
 
-  "custom/launcher": {
+	"group/distro": {
+		"orientation": "horizontal",
+		"modules": [
+			"custom/distro",
+			"custom/user"
+		],
+		"drawer": {}
+	},
+	"custom/user": {
+		"exec": "id --user --name",
+		"format": "{}",
+		"tooltip": false
+	},
+  "custom/distro": {
     "format": "",
-    "tooltip-format": "Launch your favorite apps"
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "tooltip": false
   },
 
   "custom/pacman": {
-    "format": "  {}",
-    "interval": "once",
-    "exec": "checkupdates | wc -l",
-    "on-click": "update-system",
+    "format": "{}",
+    "interval": "",
+    "exec": "$HOME/.config/waybar/scripts/system-update.sh",
+    "on-click": "ghostty -e $HOME/.config/waybar/scripts/system-update.sh start",
     "signal": 8,
-    "tooltip-format": "{} updates available"
+    "return-type": "json"
   },
 
   "custom/media": {
     "format": "{}",
     "escape": true,
     "return-type": "json",
-    "max-length": 40,
+    "max-length": 30,
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl stop",
-    "smooth-scrolling-threshold": 1, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "smooth-scrolling-threshold": 1,
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous",
     "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
@@ -78,34 +154,16 @@
     "tooltip-format": "Date: {:%Y-%m-%d}"
   },
 
-  "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-bluetooth": "󰂱 {volume}%",
-    "format-muted": "󰖁",
-    "scroll-step": 1,
-    "on-click": "pavucontrol",
-    "ignored-sinks": ["Easy Effects Sink"],
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "󰋎",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["󰖀", "󰕾"]
-    },
-    "tooltip-format": "Volume: {volume}%"
-  },
-
   "network": {
     "interface": "wlan0",
     "format": "{ifname}",
     "format-wifi": "{icon} {essid}",
     "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-    "format-disconnected": "󰤭 Disconnected",
+    "format-disconnected": "",
     "max-length": 50,
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "tooltip-format": "Connected to {essid}"
+    "tooltip-format": "Connected to {essid}",
+    "on-click": "ghostty -e $HOME/.config/waybar/scripts/network.sh"
   },
 
   "hyprland/workspaces": {
@@ -163,6 +221,7 @@
     "rewrite": {
       "Mozilla Firefox": "Firefox",
       "firefox": "Firefox",
+      "deno": "Markdown Preview",
       "(.*) Thunar": "Thunar",
       "(.*)obs(.*)": "OBS",
       "Spotify (.*)": "Spotify",
@@ -173,6 +232,7 @@
       "zen": "Zen",
       "com.mitchellh.ghostty": "Ghostty",
       "org.telegram.desktop": "Telegram",
+      "chrome-claude.ai__-Default": "Claude",
       "(.*)whatsapp(.*)": "Whatsapp"
     } 
 },
