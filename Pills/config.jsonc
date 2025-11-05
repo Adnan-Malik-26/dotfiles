@@ -4,14 +4,14 @@
   "margin-top": 13,
   "modules-left": ["group/distro", "clock",  "custom/media", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": [ "bluetooth", "group/pulseaudio", "battery", "network"],
+  "modules-right": [ "group/pulseaudio", "battery", "network"],
   "height": 40,
 
 
 	"bluetooth": {
-		"format": "󰂯",
-		"format-disabled": "󰂲",
-		"format-off": "󰂲",
+		"format": "󰂯 {status}",
+		"format-disabled": "",
+		"format-off": "",
 		"format-on": "󰂰",
 		"format-connected": "󰂱",
 		"min-length": 2,
