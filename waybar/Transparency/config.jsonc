@@ -1,0 +1,140 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "margin-top": 2,
+  "margin-left": 2,
+  "margin-right": 2,
+  "margin-bottom": 5,
+  "spacing": 8,
+  "modules-left": [
+    "custom/launcher",
+    "cpu",
+    "memory",
+    "custom/window-name",
+    "custom/pacman-update",
+    "tray"
+  ],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": [
+    "custom/music",
+    "battery",
+    "backlight",
+    // "custom/wl-gammarelay-temperature",
+    "pulseaudio",
+    "network",
+    "clock"
+  ],
+  "custom/wl-gammarelay-temperature": {
+    "format": "{} ",
+    "exec": "wl-gammarelay-rs watch {t}",
+    "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
+    "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100"
+  },
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "active-only": false,
+    "on-click": "activate",
+    "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "persistent-workspaces":{
+      "*":5
+    }
+  },
+  "tray": {
+    "icon-size": 20,
+    "spacing": 8
+  },
+
+  "clock": {
+    "interval": 1,
+    "format": "󱑅 <b>{:%I:%M:%S %p}</b>",
+    "format-alt": "󱑅 <b>{:%a.%d,%b}</b>",
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "cpu": {
+    "interval": 5,
+    "format": " {usage}%",
+    "max-length": 10,
+    "tooltip": false
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {used}GiB",
+    "format-alt": " {used:0.1f}G",
+    "max-length": 10
+  },
+  "backlight": {
+    "format": "{icon} {percent}",
+    "tooltip": false,
+    "format-icons": ["󰃚 ", "󰃛 ", "󰃜 ", "󰃝 ", "󰃞 ", "󰃟 ", "󰃠 "]
+  },
+  "network": {
+    "format-wifi": "  {essid}",
+    "on-click": "iwgtk",
+    "format-ethernet": "󰈀 wired",
+    "tooltip": false,
+    "format-disconnected": "󰖪"
+  },
+  "pulseaudio": {
+    "format": "{icon} <b>{volume}</b>",
+    "format-bluetooth": " <b>{volume}</b>",
+    "format-bluetooth-muted": " ",
+    "tooltip": false,
+    "format-muted": " ",
+    "format-icons": {
+      "default": ["󰕿 ", "󰖀 ", "󰕾 "]
+    },
+    "on-click": "pavucontrol"
+  },
+  "battery": {
+    "bat": "BAT0",
+    "interval": 30,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {icon} {capacity}%",
+    // "format-icons": [" ", " ", " ", " "],
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "max-length": 25,
+    "tooltip": false
+  },
+
+  "custom/launcher": {
+    "format": "",
+    "on-click": "$HOME/.config/rofi/launchers/type-7/launcher.sh"
+  },
+
+  "custom/window-name": {
+    "format": "<b>{}</b>",
+    "interval": 1,
+    "exec": "hyprctl activewindow | grep \"class:\" | awk '{print $2}' | sed 's/\\([[:alpha:]]\\)/\\U\\1/'"
+  },
+
+  "custom/pacman-update": {
+    "format": "󰏔  {}",
+    "interval": 3600,
+    "exec": "$HOME/.config/waybar/scripts/checkupdates | wc -l",
+    "signal": 8
+  },
+
+  "custom/music": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/caway",
+    "on-click": "playerctl play-pause"
+  }
+}

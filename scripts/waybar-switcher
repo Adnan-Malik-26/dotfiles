@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Waybar theme switcher using rofi
+WAYBAR_DIR="$HOME/.config/waybar"
+ROFI_THEME="$HOME/.config/rofi/waybar-switcher.rasi"
+CURRENT_LINK="$WAYBAR_DIR/current"
+
+# Find all theme directories (excluding 'current' symlink)
+themes=()
+for dir in "$WAYBAR_DIR"/*; do
+  if [ -d "$dir" ]; then
+    theme_name=$(basename "$dir")
+    # Skip the 'current' symlink directory
+    if [ "$theme_name" != "current" ]; then
+      themes+=("$theme_name")
+    fi
+  fi
+done
+
+# Check if any themes exist
+if [ ${#themes[@]} -eq 0 ]; then
+  notify-send "Waybar Theme Switcher" "No themes found in $WAYBAR_DIR"
+  exit 1
+fi
+
+# Create rofi menu with theme names
+selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -i -p "Select Waybar Theme" -theme "$ROFI_THEME")
+
+# Exit if no selection was made
+if [ -z "$selected" ]; then
+  exit 0
+fi
+
+# Create symlink to selected theme
+selected_path="$WAYBAR_DIR/$selected"
+ln -sfn "$selected_path" "$CURRENT_LINK"
+
+# Kill and restart waybar
+killall waybar
+waybar --config $CURRENT_LINK/config.jsonc --style $CURRENT_LINK/style.css &
+
+notify-send "Waybar Theme Switcher" "Switched to $selected"

@@ -1,0 +1,8 @@
+# Ignore - remote & release packages, workspace
+
+*.zip
+*.tar
+*.tar.gz
+*.code-workspace
+*.txt
+Version History.md

@@ -1,11 +1,15 @@
 {
   "plugins": {
     "LuaSnip": {
-      "rev": "113f831",
+      "rev": "3732756",
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
+    "bufferline.nvim": {
+      "rev": "655133c",
+      "src": "https://github.com/akinsho/bufferline.nvim"
+    },
     "checkmate.nvim": {
-      "rev": "5ffa4af",
+      "rev": "ebc9cbc",
       "src": "https://github.com/bngarren/checkmate.nvim"
     },
     "cmp-buffer": {
@@ -29,23 +33,27 @@
       "src": "https://github.com/saadparwaiz1/cmp_luasnip"
     },
     "conform.nvim": {
-      "rev": "fbcb4fa",
+      "rev": "cde4da5",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "doodle": {
-      "rev": "2f192d6",
+      "rev": "cbe8672",
       "src": "https://github.com/apdot/doodle"
     },
     "fidget.nvim": {
-      "rev": "3f54759",
+      "rev": "e32b672",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "friendly-snippets": {
       "rev": "572f566",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
+    "fyler.nvim": {
+      "rev": "cfd100d",
+      "src": "https://github.com/A7Lavinraj/fyler.nvim"
+    },
     "lazydev.nvim": {
-      "rev": "e28ce52",
+      "rev": "5231c62",
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "lorem.nvim": {
@@ -69,11 +77,11 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.comment": {
-      "rev": "c40bc46",
+      "rev": "a0c7211",
       "src": "https://github.com/nvim-mini/mini.comment"
     },
     "mini.pairs": {
-      "rev": "b9aada8",
+      "rev": "b316e68",
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "nui.nvim": {
@@ -81,11 +89,11 @@
       "src": "https://github.com/folke/nui.nvim"
     },
     "nvim": {
-      "rev": "af58927",
+      "rev": "234fc04",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-cmp": {
-      "rev": "b5311ab",
+      "rev": "106c4bc",
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-highlight-colors": {
@@ -93,11 +101,11 @@
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
     },
     "nvim-lint": {
-      "rev": "9da1fb9",
+      "rev": "8c694e1",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "ac98db2",
+      "rev": "2010fc6",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-notify": {
@@ -108,12 +116,17 @@
       "rev": "42fc28ba",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
+    "nvim-treesitter-textobjects": {
+      "rev": "2e5b873",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+      "version": "'main'"
+    },
     "nvim-ts-autotag": {
       "rev": "c4ca798",
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
     "nvim-web-devicons": {
-      "rev": "b8221e4",
+      "rev": "8dcb311",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "obsidian.nvim": {
@@ -121,7 +134,7 @@
       "src": "https://github.com/epwalsh/obsidian.nvim"
     },
     "oil.nvim": {
-      "rev": "7194872",
+      "rev": "7e1cd77",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "peek.nvim": {
@@ -132,36 +145,36 @@
       "rev": "b9fd522",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
-    "project.nvim": {
-      "rev": "8c6bad7",
-      "src": "https://github.com/ahmedkhalf/project.nvim"
-    },
     "rainbow-delimiters.nvim": {
-      "rev": "3277ad5",
+      "rev": "1812e4a",
       "src": "https://github.com/HiPhish/rainbow-delimiters.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "691651d",
+      "rev": "060c911",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
-    "sessions.nvim": {
-      "rev": "f131584",
-      "src": "https://github.com/natecraddock/sessions.nvim"
+    "snacks.nvim": {
+      "rev": "dec29f55666f8f4545835636077a86b150faf630",
+      "src": "https://github.com/folke/snacks.nvim"
     },
     "sqlite.lua": {
       "rev": "50092d6",
       "src": "https://github.com/kkharji/sqlite.lua"
+    },
+    "tabout.nvim": {
+      "rev": "9a34994",
+      "src": "https://github.com/abecodes/tabout.nvim"
     },
     "telescope-ui-select.nvim": {
       "rev": "6e51d7d",
       "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
     },
     "telescope.nvim": {
-      "rev": "b4da76b",
+      "rev": "7dbbcfd",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "typst-preview.nvim": {
-      "rev": "1603d37",
+      "rev": "64469f8",
       "src": "https://github.com/chomosuke/typst-preview.nvim"
     },
     "vim-tmux-navigator": {

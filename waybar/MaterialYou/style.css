@@ -1,0 +1,192 @@
+/* Catppuccin Mocha - Waybar Style */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "Material Design Icons", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+#workspaces,
+#window,
+#clock,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#network,
+#pulseaudio,
+#tray {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  padding: 0 16px;
+  margin: 0 4px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Material You elevation on hover */
+#workspaces:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#battery:hover,
+#network:hover,
+#pulseaudio:hover {
+  background: #313244;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 0 8px;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  color: #7f849c;
+  background: transparent;
+  border-radius: 16px;
+  margin: 4px 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#workspaces button:hover {
+  background: #45475a;
+  color: #cdd6f4;
+}
+
+#workspaces button.active {
+  background: linear-gradient(135deg, #cba6f7, #89b4fa);
+  color: #11111b;
+  box-shadow: 0 2px 6px rgba(203, 166, 247, 0.4);
+}
+
+#workspaces button.urgent {
+  background: #f38ba8;
+  color: #11111b;
+}
+
+/* Window Title */
+#window {
+  color: #b4befe;
+  font-weight: 500;
+}
+
+/* Clock - Center with emphasis */
+#clock {
+  background: linear-gradient(135deg, #cba6f7 0%, #89b4fa 100%);
+  color: #11111b;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 0 24px;
+  box-shadow: 0 3px 10px rgba(203, 166, 247, 0.3);
+}
+
+#clock:hover {
+  box-shadow: 0 4px 14px rgba(203, 166, 247, 0.5);
+}
+
+/* CPU */
+#cpu {
+  color: #89dceb;
+}
+
+#cpu.warning {
+  color: #f9e2af;
+}
+
+#cpu.critical {
+  color: #f38ba8;
+}
+
+/* Memory */
+#memory {
+  color: #a6e3a1;
+}
+
+#memory.warning {
+  color: #f9e2af;
+}
+
+#memory.critical {
+  color: #f38ba8;
+}
+
+/* Temperature */
+#temperature {
+  color: #94e2d5;
+}
+
+#temperature.critical {
+  color: #f38ba8;
+}
+
+/* Battery */
+#battery {
+  color: #a6e3a1;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #f9e2af;
+  background: linear-gradient(135deg, #1e1e2e, rgba(249, 226, 175, 0.1));
+}
+
+#battery.warning:not(.charging) {
+  color: #fab387;
+}
+
+#battery.critical:not(.charging) {
+  color: #f38ba8;
+}
+
+/* Network */
+#network {
+  color: #74c7ec;
+}
+
+#network.disconnected {
+  color: #f38ba8;
+}
+
+/* Pulseaudio */
+#pulseaudio {
+  color: #f5c2e7;
+}
+
+#pulseaudio.muted {
+  color: #7f849c;
+}
+
+/* System Tray */
+#tray {
+  padding: 0 12px;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #f38ba8;
+  border-radius: 16px;
+}
+
+/* Tooltips */
+tooltip {
+  background: #1e1e2e;
+  border: 2px solid #313244;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+tooltip label {
+  color: #cdd6f4;
+}

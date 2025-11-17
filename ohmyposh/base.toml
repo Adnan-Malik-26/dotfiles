@@ -1,6 +1,6 @@
-console_title_template = '{{ .Shell }} in {{ .Folder }}'
 version = 3
 final_space = true
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [secondary_prompt]
   template = '$> '

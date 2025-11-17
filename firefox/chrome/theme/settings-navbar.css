@@ -61,20 +61,22 @@ enable bookmark url editting (add bookmark menu)
             }
         }   
         /* exceptions for menu interactions */
-        &:has(#placesContext:hover),  &:has(#appMenu-popup[panelopen="true"]), &:has(#downloads-button-autohide-panel:hover),
-        &:has(#appMenu-notification-popup[panelopen="true"]), &:has(#unified-extensions-panel[panelopen="true"]), &:has(#widget-overflow[panelopen="true"]),
-        &:has(#unified-extensions-context-menu:hover), &:has(#notification-popup:hover), &:has(.bookmark-item[open="true"]),
-        &:has(#blockedPopupOptions:hover), &:has(#toolbar-context-menu:hover), &:has(#backForwardMenu:hover), &:has(#customizationui-widget-panel[panelopen="true"]),
-        &:has(#full-page-translations-panel[panelopen="true"]), &:has(panel[id*="_-panel"][panelopen="true"]), &:has(#editBookmarkPanel[panelopen="true"]),
-        &:has(#feature-callout[panelopen="true"])
+        &:has(#placesContext:hover),                            &:has(#appMenu-popup[panelopen="true"]),            &:has(#downloads-button-autohide-panel:hover),
+        &:has(#appMenu-notification-popup[panelopen="true"]),   &:has(#unified-extensions-panel[panelopen="true"]), &:has(#widget-overflow[panelopen="true"]),
+        &:has(#unified-extensions-context-menu:hover),          &:has(#notification-popup:hover),                   &:has(.bookmark-item[open="true"]),
+        &:has(#blockedPopupOptions:hover),                      &:has(#toolbar-context-menu:hover),                 &:has(#backForwardMenu:hover), &:has(#customizationui-widget-panel[panelopen="true"]),
+        &:has(#full-page-translations-panel[panelopen="true"]), &:has(panel[id*="_-panel"][panelopen="true"]),      &:has(#editBookmarkPanel[panelopen="true"]),
+        &:has(#feature-callout[panelopen="true"]),              &:has(#notification-popup[panelopen="true"]),       &:has(#window-modal-dialog[open])
         {
             #navigator-toolbox {top:0 !important;}
         }
-        &:has(#urlbar[focused=""][breakout-extend="true"])
-        {
-            #navigator-toolbox {top:0 !important;}
+        @media not -moz-pref("ultima.navbar.autohide.ignore.urlbar") {
+            &:has(#urlbar[focused=""][breakout-extend="true"])
+            {
+                #navigator-toolbox {top:0 !important;}
+            }
+            #urlbar[breakout-extend="true"] {top:0 !important;}
         }
-        #urlbar[breakout-extend="true"] {top:0 !important;}
     }
 }
 
@@ -115,20 +117,22 @@ enable bookmark url editting (add bookmark menu)
             }
         }   
         /* exceptions for menu interactions */
-        &:has(#placesContext:hover),  &:has(#appMenu-popup[panelopen="true"]), &:has(#downloads-button-autohide-panel:hover),
-        &:has(#appMenu-notification-popup[panelopen="true"]), &:has(#unified-extensions-panel[panelopen="true"]), &:has(#widget-overflow[panelopen="true"]),
-        &:has(#unified-extensions-context-menu:hover), &:has(#notification-popup:hover), &:has(.bookmark-item[open="true"]), &:has(#tabContextMenu:hover),
-        &:has(#blockedPopupOptions:hover), &:has(#toolbar-context-menu:hover), &:has(#backForwardMenu:hover), &:has(#customizationui-widget-panel[panelopen="true"]),
-        &:has(#full-page-translations-panel[panelopen="true"]), &:has(panel[id*="_-panel"][panelopen="true"]), &:has(#editBookmarkPanel[panelopen="true"]),
-        &:has(#feature-callout[panelopen="true"])
+        &:has(#placesContext:hover),                            &:has(#appMenu-popup[panelopen="true"]),            &:has(#downloads-button-autohide-panel:hover),
+        &:has(#appMenu-notification-popup[panelopen="true"]),   &:has(#unified-extensions-panel[panelopen="true"]), &:has(#widget-overflow[panelopen="true"]),
+        &:has(#unified-extensions-context-menu:hover),          &:has(#notification-popup:hover),                   &:has(.bookmark-item[open="true"]), &:has(#tabContextMenu:hover),
+        &:has(#blockedPopupOptions:hover),                      &:has(#toolbar-context-menu:hover),                 &:has(#backForwardMenu:hover), &:has(#customizationui-widget-panel[panelopen="true"]),
+        &:has(#full-page-translations-panel[panelopen="true"]), &:has(panel[id*="_-panel"][panelopen="true"]),      &:has(#editBookmarkPanel[panelopen="true"]),
+        &:has(#feature-callout[panelopen="true"]),              &:has(#notification-popup[panelopen="true"]),       &:has(#window-modal-dialog[open])
         {
             #navigator-toolbox {top: 14px !important;}
         }
-        &:has(#urlbar[focused=""][breakout-extend="true"])
-        {
-            #navigator-toolbox {top:0 !important;}
+        @media not -moz-pref("ultima.navbar.autohide.ignore.urlbar") {
+            &:has(#urlbar[focused=""][breakout-extend="true"])
+            {
+                #navigator-toolbox {top:0 !important;}
+            }
+            #urlbar[breakout-extend="true"] {top: 14px !important;}
         }
-        #urlbar[breakout-extend="true"] {top: 14px !important;}
     }
 }
 
@@ -413,6 +417,10 @@ enable bookmark url editting (add bookmark menu)
 @media -moz-pref("ultima.spacing.compact.menupanel") {
     .subview-subheader, panelview .toolbarbutton-1, .subviewbutton, .widget-overflow-list .toolbarbutton-1 {
         --arrowpanel-menuitem-padding: 4px 8px;
+    }
+    #tabgroup-preview-panel {
+        --panel-padding: 0 !important;
+        --menuitem-margin: 0 !important;
     }
 }
 

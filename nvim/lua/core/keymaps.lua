@@ -51,8 +51,8 @@ map("n", "<A-k>", "<C-w>k", desc("Go to up window"))
 map("n", "<A-l>", "<C-w>l", desc("Go to right window"))
 
 -- Buffer navigation
-map("n", "<Tab>", "<CMD>bNext<CR>", desc("Go to next buffer"))
-map("n", "<S-Tab>", "<CMD>bprevious<CR>", desc("Go to previous buffer"))
+map("n", "<Tab>", "<CMD>BufferLineCycleNext<CR>", desc("Go to next buffer"))
+map("n", "<S-Tab>", "<CMD>BufferLineCyclePrev<CR>", desc("Go to previous buffer"))
 map("n", "<leader>q", "<CMD>bdelete!<CR>", desc("Delete current buffer"))
 map("n", "<leader>bo", ":%bd|e#|bd#<CR>", desc("Close other buffers"))
 map("n", "<leader><leader>", "<C-^>", desc("Switch to last buffer"))
@@ -76,3 +76,31 @@ map("n", "<A-CR>", "1z=", desc("Correct Spelling under Cursor"))
 
 -- Rupees
 map("i", "<A-S-r>", "₹", desc("Enter Rupees"))
+
+-- Open Todo
+vim.keymap.set("n", "<leader>t", function()
+	local todo_path = vim.fn.expand("~/Notes/TODO.md")
+	local dir = vim.fn.fnamemodify(todo_path, ":h")
+	vim.fn.mkdir(dir, "p")
+	local width = math.floor(vim.o.columns * 0.8)
+	local height = math.floor(vim.o.lines * 0.8)
+	local col = math.floor((vim.o.columns - width) / 2)
+	local row = math.floor((vim.o.lines - height) / 2)
+	local buf = vim.api.nvim_create_buf(false, false)
+	local win = vim.api.nvim_open_win(buf, true, {
+		relative = "editor",
+		width = width,
+		height = height,
+		col = col,
+		row = row,
+		style = "minimal",
+		border = "rounded",
+	})
+
+	vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+	vim.cmd("edit " .. vim.fn.fnameescape(todo_path))
+	vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+
+	vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })
+	vim.keymap.set("n", "<Esc>", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })
+end, { desc = "Open Todo in floating window" })

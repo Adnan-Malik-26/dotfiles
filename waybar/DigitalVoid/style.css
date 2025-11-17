@@ -1,0 +1,36 @@
+* {
+  font-family: monospace;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+#workspaces button {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0 10px;
+}
+
+#workspaces button.active {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#workspaces button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0 10px;
+}

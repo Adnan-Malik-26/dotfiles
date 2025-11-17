@@ -8,17 +8,21 @@ vim.pack.add({
 	{ src = "https://github.com/folke/nui.nvim" },
 	{ src = "https://github.com/rcarriga/nvim-notify" },
 	{ src = "https://github.com/j-hui/fidget.nvim" },
+	{ src = "https://github.com/akinsho/bufferline.nvim" },
 
 	-- File management
 	{ src = "https://github.com/stevearc/oil.nvim" },
+	{ src = "https://github.com/A7Lavinraj/fyler.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/folke/snacks.nvim" },
 
 	-- Editing
 	{ src = "https://github.com/nvim-mini/mini.comment" },
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
 	{ src = "https://github.com/windwp/nvim-ts-autotag" },
+	{ src = "https://github.com/abecodes/tabout.nvim" },
 
 	-- LSP and completion
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
@@ -39,6 +43,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/mfussenegger/nvim-lint" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim" },
 
 	-- Utilities

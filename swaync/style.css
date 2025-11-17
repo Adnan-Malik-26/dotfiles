@@ -1,12 +1,3 @@
-/***
- *    ┏┓┓ ┏┏┓┓┏┳┓┏┓  ┏┓┓┏┏┓┳┓┏┓┏┓┳┓┏┓┏┓┏┳┓
- *    ┗┓┃┃┃┣┫┗┫┃┃┃ ━━┣ ┃┃┣ ┣┫┣ ┃┃┣┫┣ ┗┓ ┃ 
- *    ┗┛┗┻┛┛┗┗┛┛┗┗┛  ┗┛┗┛┗┛┛┗┻ ┗┛┛┗┗┛┗┛ ┻ 
- *                                        
- */
-
-
-
 /* Colors */
 @define-color background alpha(#11111b, 0.8);
 @define-color background-alt alpha(#1e1e2e, 0.8);
@@ -215,7 +206,8 @@ button {
 /* music player widget */
 .widget-mpris {
   background: transparent;
-  margin: 8px;
+  margin: 0;
+  padding: 0;
 }
 
 .widget-mpris button {
@@ -224,12 +216,10 @@ button {
 }
 
 .widget-mpris button:hover {
-  background-color: @accent-one;
+  background-color: transparent;
   color: @fontaltcolor;
 }
 
-
-/* sliders in backlight and volume */
 
 trough slider {
   background: @fontcolor;
@@ -242,4 +232,22 @@ trough slider:hover {
 
 trough highlight {
   background: @accent-three;
+}
+
+scrollbar,
+scrollbar slider,
+scrollbar trough {
+  background: transparent;
+  min-width: 0px;
+  min-height: 0px;
+}
+
+scrollbar {
+  scrollbar-width: none;
+}
+
+scrollbar:hover {
+  background: transparent;
+  min-width: 0px;
+  min-height: 0px;
 }

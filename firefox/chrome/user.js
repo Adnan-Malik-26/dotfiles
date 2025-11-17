@@ -64,7 +64,6 @@ user_pref("ultima.urlbar.hide.buttons.in.edge", false);
 user_pref("ultima.urlbar.hide.trackingprotection.icon", false);
 
 /* sidebar */
-user_pref("ultima.sidebar.autohide", false);
 user_pref("ultima.sidebar.seperator", false);
 user_pref("ultima.sidebar.hide.header", true);
 user_pref("ultima.sidebar.revamped.hide.when.horizontal", true);
@@ -82,17 +81,17 @@ user_pref("ultima.findbar.disable.background.image", false);
 user_pref("ultima.spacing.compact.tabs", true);
 user_pref("ultima.tabs.disable.update.dot", true);
 user_pref("ultima.tabs.belowURLbar", true);
+user_pref("ultima.tabs.hide.splitter", false);
 user_pref("ultima.tabs.not.a.progress.bar", true);
 user_pref("ultima.tabs.newtabbutton.ontop.1", false);
 user_pref("ultima.tabs.newtabbutton.ontop.2", false);
 user_pref("ultima.tabs.multiline.labels", false);
 user_pref("ultima.tabs.closetabbutton.on.icon", false);
-user_pref("ultima.tabs.always.show.pinned", true);
-user_pref("ultima.tabs.vertical.hide", false);
-user_pref("ultima.tabs.vertical.hide.in.screencorner", false);
-user_pref("ultima.tabs.vertical.hide.in.screenedge", true);
-user_pref("ultima.tabs.vertical.hide.the.bottom.buttons", false);
-user_pref("ultima.tabs.vertical.hide.the.bottom.buttons.off.hover", false);
+user_pref("ultima.tabs.pinned.always.visible", false);
+user_pref("ultima.tabs.pinned.transparent.background", false);
+user_pref("ultima.tabs.tabbar.autohide", false);
+user_pref("ultima.tabs.tabbar.disabled", false);
+user_pref("ultima.tabs.tabbar.hide.buttonstrip", false);
 user_pref("ultima.tabs.tabgroups.label.1", false);
 user_pref("ultima.tabs.tabgroups.label.2", false);
 user_pref("ultima.tabs.tabgroups.label.3", true);
@@ -101,6 +100,7 @@ user_pref("ultima.tabs.tabgroups.background.1", false);
 user_pref("ultima.tabs.tabgroups.background.2", true);
 user_pref("ultima.tabs.tabgroups.background.3", false);
 user_pref("ultima.tabs.disable.scrollbar", false);
+user_pref("ultima.tabs.horizontal.under.navbar", true);
 user_pref("ultima.tabs.horizontal.fullwidth", false);
 user_pref("ultima.tabs.focus.blur", false);
 user_pref("ultima.tabs.tabCounter", true);
@@ -108,6 +108,7 @@ user_pref("ultima.tabs.splitview.tab.seperator", false);
 user_pref("ultima.tabs.splitview.content.outline", false);
 user_pref("ultima.tabs.splitview.focus.opacity", false);
 user_pref("ultima.tabs.splitview.focus.shrink", false);
+user_pref("ultima.tabs.splitview.gradient.background", false);
 
 /* vertical tabs defaults */
 user_pref("sidebar.revamp", true);
@@ -192,6 +193,7 @@ user_pref("widget.gtk.native-context-menus", false);
 
 /* extra recommended */
 user_pref("browser.tabs.groups.enabled", true);
+user_pref("browser.tabs.splitView.enabled", true);
 user_pref("browser.tabs.hoverPreview.enabled", true);
 user_pref("browser.tabs.groups.hoverPreview.enabled", true);
 user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);

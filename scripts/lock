@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Array of sites to manage
+sites=(
+  "studio.youtube.com"
+  "www.youtube.com"
+  "www.reddit.com"
+  "www.x.com"
+  "www.linkedin.com"
+  "www.privatemail.com"
+)
+
+# Determine current state by checking if one of the sites is blocked
+current_state="out"
+if grep -q "127.0.0.1.*studio.youtube.com" /etc/hosts 2>/dev/null; then
+  current_state="in"
+fi
+
+# If argument is provided, use it; otherwise toggle
+if [ $# -eq 0 ]; then
+  # Toggle: if currently "in" (blocked), switch to "out" (unblocked)
+  if [[ "$current_state" == "in" ]]; then
+    action="out"
+  else
+    action="in"
+  fi
+else
+  action="$1"
+fi
+
+if [[ "$action" == "in" ]]; then
+  for site in "${sites[@]}"; do
+    sudo hostess add "$site" 127.0.0.1 >/dev/null 2>&1
+  done
+  notify-send "Locked In" "You are locked in" -u normal
+elif [[ "$action" == "out" ]]; then
+  for site in "${sites[@]}"; do
+    sudo hostess rm "$site" >/dev/null 2>&1
+  done
+  notify-send "Chill Mode" "You Can Chill Now" -u normal
+else
+  echo "Error: Invalid argument '$action'"
+  echo "Usage: $0 [in|out]"
+  exit 1
+fi

@@ -1,0 +1,124 @@
+// # z0mbi3 -  https://github.com/gh0stzk/dotfiles
+configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+    drun-display-format:         "{name}";
+    font:                        "JetBrainsMono NF Bold 11";
+}
+
+//----- Global Properties -----//
+* {
+    main-bg: rgba(17, 17, 27, 0.85);
+    main-fg: #cdd6f4;
+    select-bg: #cba6f7;
+    select-fg: #11111b;
+}
+
+//----- Main Window -----//
+window {
+    enabled:                     true;
+    fullscreen:                  false;
+    width:                       1200px;
+    height:                      370px;
+    transparency:                "real";
+    cursor:                      "default";
+    spacing:                     0px;
+    padding:                     0px;
+    border:                      2px;
+    border-radius:               15px;
+    border-color:                @select-bg;
+    background-color:            @main-bg;
+    location:                    center;
+    anchor:                      center;
+}
+
+//----- Main Box -----//
+mainbox {
+    enabled:                     true;
+    children:                    [ "inputbar", "listview" ];
+    background-color:            transparent;
+    spacing:                     20px;
+    padding:                     20px;
+}
+
+//----- Inputbar -----//
+inputbar {
+    enabled:                     true;
+    children:                    [ "prompt", "entry" ];
+    spacing:                     10px;
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            rgba(203, 166, 247, 0.1);
+    text-color:                  @main-fg;
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @select-bg;
+    font:                        "JetBrainsMono NF Bold 12";
+    content:                     "Search Wallpaper";
+}
+
+entry {
+    enabled:                     true;
+    placeholder:                 "Type to search...";
+    placeholder-color:           rgba(245, 224, 220, 0.5);
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    cursor:                      text;
+}
+
+//----- Listview -----//
+listview {
+    enabled:                     true;
+    columns:                     4;
+    lines:                       1;
+    spacing:                     20px;
+    padding:                     10px;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  @main-fg;
+}
+
+//----- Elements -----//
+element {
+    enabled:                     true;
+    orientation:                 vertical;
+    spacing:                     10px;
+    padding:                     15px;
+    border-radius:               12px;
+    cursor:                      pointer;
+    background-color:            rgba(245, 224, 220, 0.05);
+    text-color:                  @main-fg;
+}
+
+element selected.normal {
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
+}
+
+element-icon {
+    size:                        120px;
+    cursor:                      inherit;
+    border-radius:               8px;
+    background-color:            transparent;
+    text-color:                  inherit;
+    horizontal-align:            0.5;
+}
+
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    padding:                     10px;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}

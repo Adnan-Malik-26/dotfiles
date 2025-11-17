@@ -33,6 +33,7 @@ vim.lsp.enable({
 	"ruff",
 	"svelte",
 	"biome",
+	"qml-lsp",
 })
 
 -- LSP signature configuration

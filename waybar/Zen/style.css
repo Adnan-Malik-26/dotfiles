@@ -1,0 +1,152 @@
+* {
+  font-size: 16px;
+  font-family: "CodeNewRoman Nerd Font Propo";
+}
+
+window#waybar {
+  all: unset;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 7px;
+  margin: 10px;
+  border-radius: 10px;
+  background: rgba(30, 30, 46, 0.6);
+  /* Catppuccin Mocha base with alpha */
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+tooltip {
+  background: #1e1e2e;
+  /* Catppuccin Mocha base */
+  color: #cdd6f4;
+  /* Catppuccin Mocha text */
+}
+
+/* Hover highlights */
+#clock:hover,
+#custom-pacman:hover,
+#custom-notification:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover {
+  transition: all .3s ease;
+  color: #89b4fa;
+  /* Catppuccin Mocha blue */
+}
+
+#custom-notification,
+#clock,
+#custom-pacman {
+  padding: 0px 5px;
+  transition: all .3s ease;
+  color: #cdd6f4;
+  /* Catppuccin Mocha text */
+}
+
+#workspaces {
+  padding: 0px 5px;
+}
+
+#workspaces button {
+  all: unset;
+  padding: 0px 5px;
+  color: rgba(137, 180, 250, 0.4);
+  /* Catppuccin Mocha blue with alpha */
+  transition: all .2s ease;
+}
+
+#workspaces button:hover {
+  color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+}
+
+#workspaces button.active {
+  color: #89b4fa;
+  /* Catppuccin Mocha blue */
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+}
+
+#workspaces button.empty {
+  color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
+}
+
+#workspaces button.empty:hover {
+  color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+}
+
+#workspaces button.empty.active {
+  color: #89b4fa;
+  /* Catppuccin Mocha blue */
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+}
+
+/* Modules */
+#bluetooth,
+#network,
+#battery,
+#cpu,
+#memory,
+#temperature {
+  padding: 0px 5px;
+  transition: all .3s ease;
+  color: #cdd6f4;
+  /* Catppuccin Mocha text */
+}
+
+/* Battery states */
+#battery.charging {
+  color: #a6e3a1;
+  /* Catppuccin Mocha green */
+}
+
+#battery.warning:not(.charging) {
+  color: #f9e2af;
+  /* Catppuccin Mocha yellow */
+}
+
+#battery.critical:not(.charging) {
+  color: #f38ba8;
+  /* Catppuccin Mocha red */
+  animation: blink 0.5s linear infinite alternate;
+}
+
+/* Trays & other modules */
+#group-expand,
+#tray,
+#tray menu * {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#custom-expand {
+  padding: 0px 5px;
+  color: rgba(205, 214, 244, 0.2);
+  /* Catppuccin Mocha text with alpha */
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+}
+
+#custom-expand:hover {
+  color: rgba(255, 255, 255, .2);
+  text-shadow: 0px 0px 2px rgba(255, 255, 255, .5);
+}
+
+#custom-colorpicker {
+  padding: 0px 5px;
+}
+
+#custom-endpoint {
+  color: transparent;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
+}
+
+#tray menu separator {
+  padding: 0px 5px;
+}

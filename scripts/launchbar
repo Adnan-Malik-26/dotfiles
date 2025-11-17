@@ -7,5 +7,4 @@ pkill waybar
 sleep 0.5
 
 # Restart waybar in background
-waybar &
-
+waybar --config $HOME/.config/waybar/current/config.jsonc -s $HOME/.config/waybar/current/style.css &

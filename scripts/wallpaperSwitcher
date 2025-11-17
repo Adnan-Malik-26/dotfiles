@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Directory containing wallpapers
+WALLPAPER_DIR="$HOME/walls/mainwalls"
+
+# Rofi theme
+THEME="$HOME/.config/rofi/new-wallpaper-style.rasi"
+
+# Check if directory exists
+if [ ! -d "$WALLPAPER_DIR" ]; then
+  echo "Error: Directory $WALLPAPER_DIR does not exist"
+  exit 1
+fi
+
+# Check if theme file exists
+if [ ! -f "$THEME" ]; then
+  echo "Error: Theme file $THEME does not exist"
+  exit 1
+fi
+
+# Generate list of wallpapers with image preview format for rofi
+# Using find to get all image files
+wallpapers=$(find "$WALLPAPER_DIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.bmp" \) -printf "%f\x00icon\x1f%p\n")
+
+# Run rofi with image preview
+selected=$(echo -en "$wallpapers" | rofi -dmenu -theme "$THEME" -show-icons -i -p "Select Wallpaper" -window-title "Select Wallpaper")
+
+if [ -n "$selected" ]; then
+  selected_path="$WALLPAPER_DIR/$selected"
+  echo "Selected: $selected_path"
+  cp $selected_path ~/.local/bin/wallpaper.png
+  swww img "$selected_path" --transition-type wipe
+
+  notify-send -i "$selected_path" "$(basename $selected_path) is the wallpaper."
+fi
