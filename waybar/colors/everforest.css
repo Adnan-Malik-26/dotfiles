@@ -1,0 +1,23 @@
+/* Everforest Dark Hard */
+@define-color bgd #1E2326;
+@define-color bg #24282c;
+@define-color fg #d8dee9;
+
+@define-color black #34383c;
+@define-color red #e46c75;
+@define-color green #98c379;
+@define-color yellow #e0af68;
+@define-color blue #81a5dd;
+@define-color magenta #c6a0f6;
+@define-color cyan #6cc6c8;
+@define-color white #d8dee9;
+@define-color orange #E59875;
+
+@define-color bright_black #4c5054;
+@define-color bright_red #ed747f;
+@define-color bright_green #a6d189;
+@define-color bright_yellow #e9b97a;
+@define-color bright_blue #8db1ec;
+@define-color bright_magenta#d2acff;
+@define-color bright_cyan #79d2d4;
+@define-color bright_white #ebf1fa;

@@ -11,3 +11,6 @@ require("plugins.init")
 
 -- Load custom features
 require("features.marks")
+
+-- Load custom colors
+require("colors.colors")

@@ -1,0 +1,23 @@
+/* Void – Pure Monochrome */
+@define-color bgd #000000;
+@define-color bg #000000;
+@define-color fg #ffffff;
+
+@define-color black #000000;
+@define-color red #555555;
+@define-color green #777777;
+@define-color yellow #999999;
+@define-color blue #bbbbbb;
+@define-color magenta #dddddd;
+@define-color cyan #888888;
+@define-color white #ffffff;
+@define-color orange #444444;
+
+@define-color bright_black #222222;
+@define-color bright_red #777777;
+@define-color bright_green #999999;
+@define-color bright_yellow #bbbbbb;
+@define-color bright_blue #dddddd;
+@define-color bright_magenta#f2f2f2;
+@define-color bright_cyan #cccccc;
+@define-color bright_white #ffffff;

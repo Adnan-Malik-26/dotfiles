@@ -1,0 +1,38 @@
+@import "config"
+
+@import "./colors/color.rasi"
+
+*{
+    selected:                    #1e1e2e;
+    active:                      #cba6f7;
+    urgent:                      #f38ba8;
+}
+configuration {
+  show-icons: true;
+}
+textbox {
+  vertical-align:   0.5;
+  horizontal-align: 0.5;
+}
+listview {
+  columns:       9;
+  lines:         7;
+  cycle:         true;
+  dynamic:       true;
+  layout:        vertical;
+  flow:          horizontal;
+  reverse:       false;
+  fixed-height:  true;
+  fixed-columns: true;
+}
+element {
+  orientation: vertical;
+  background-color: @bg;
+}
+element-icon {
+  size: 64px;
+  background-color: @bg;
+}
+element-text {
+  enabled: false;
+}

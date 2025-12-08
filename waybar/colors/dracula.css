@@ -1,0 +1,23 @@
+/* Dracula */
+@define-color bgd #191a21;
+@define-color bg #282a36;
+@define-color fg #f8f8f2;
+
+@define-color black #21222c;
+@define-color red #ff5555;
+@define-color green #50fa7b;
+@define-color yellow #f1fa8c;
+@define-color blue #6272a4;
+@define-color magenta #bd93f9;
+@define-color cyan #8be9fd;
+@define-color white #f8f8f2;
+@define-color orange #F7B169;
+
+@define-color bright_black #6272a4;
+@define-color bright_red #ff6e6e;
+@define-color bright_green #69ff94;
+@define-color bright_yellow #ffffa5;
+@define-color bright_blue #d6acff;
+@define-color bright_magenta #ff92df;
+@define-color bright_cyan #a4ffff;
+@define-color bright_white #ffffff;

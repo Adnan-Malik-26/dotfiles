@@ -2,11 +2,41 @@
   "layer": "top",
   "position": "top",
   "margin-top": 13,
-  "modules-left": ["group/distro", "clock",  "custom/media", "hyprland/window"],
+  "modules-left": [ "group/distro","clock",  "custom/media", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": [ "custom/kanata","group/pulseaudio", "battery", "network"],
+  "modules-right": [ "custom/kanata", "group/pulseaudio", "battery", "network"],
   "height": 40,
 
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/privacydots": {
+      "exec": "$HOME/.local/bin/privacy_dots.sh",
+      "return-type": "json",
+      "interval": 3,
+      "format": "{text}",
+      "tooltip": true,
+      "escape": false,
+      "markup": "pango"
+  },
 
 	"bluetooth": {
 		"format": "󰂯 {status}",
@@ -50,9 +80,9 @@
 		},
 		"min-length": 7,
 		"max-length": 7,
-		"on-click": "~/.config/waybar/scripts/volume.sh output mute",
-		"on-scroll-up": "~/.config/waybar/scripts/volume.sh output raise",
-		"on-scroll-down": "~/.config/waybar/scripts/volume.sh output lower",
+		"on-click": "~/.config/waybar/Pills/scripts/volume.sh output mute",
+		"on-scroll-up": "~/.config/waybar/Pills/scripts/volume.sh output raise",
+		"on-scroll-down": "~/.config/waybar/Pills/scripts/volume.sh output lower",
 		"tooltip-format": "Output Device: {desc}"
 	},
 	"pulseaudio#input": {
@@ -61,41 +91,13 @@
 		"format-source-muted": "󰍭 {volume}%",
 		"min-length": 7,
 		"max-length": 7,
-		"on-click": "~/.config/waybar/scripts/volume.sh input mute",
-		"on-scroll-up": "~/.config/waybar/scripts/volume.sh input raise",
-		"on-scroll-down": "~/.config/waybar/scripts/volume.sh input lower",
+		"on-click": "~/.config/waybar/Pills/scripts/volume.sh input mute",
+		"on-scroll-up": "~/.config/waybar/Pills/scripts/volume.sh input raise",
+		"on-scroll-down": "~/.config/waybar/Pills/scripts/volume.sh input lower",
 		"tooltip-format": "Input Device: {desc}"
 	},
 
-  "custom/github": {
-    "exec": "/home/adnanmalik/.local/bin/githubContributions.sh",
-    "interval": 300,
-    "return-type": "json",
-    "format": "{text}", 
-    "tooltip": true,
-    "on-click": "xdg-open https://github.com/Adnan-Malik-26"
-  },
 
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  },
 
 	"group/distro": {
 		"orientation": "horizontal",
@@ -122,8 +124,8 @@
   "custom/pacman": {
     "format": "{}",
     "interval": "",
-    "exec": "$HOME/.config/waybar/scripts/system-update.sh",
-    "on-click": "ghostty -e $HOME/.config/waybar/scripts/system-update.sh start",
+    "exec": "$HOME/.config/waybar/Pills/scripts/system-update.sh",
+    "on-click": "ghostty -e $HOME/.config/waybar/Pills/scripts/system-update.sh start",
     "signal": 8,
     "return-type": "json"
   },
@@ -138,7 +140,7 @@
     "smooth-scrolling-threshold": 1,
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous",
-    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
+    "exec": "$HOME/.config/waybar/Pills/scripts/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
   },
 
   "battery": {
@@ -163,7 +165,7 @@
     "max-length": 50,
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "tooltip-format": "Connected to {essid}",
-    "on-click": "ghostty -e $HOME/.config/waybar/scripts/network.sh"
+    "on-click": "ghostty -e $HOME/.config/waybar/Pills/scripts/network.sh"
   },
 
   "hyprland/workspaces": {
@@ -182,23 +184,9 @@
       "10": "十"
     },
     "persistent-workspaces": {
-      "*": 5 // 5 workspaces by default on every monitor
+      "*": 5
     },
     "sort-by-number": true
-  },
-
-  "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon}   {percent}%",
-    "format-icons": ["󰃞", "󰃟", "󰃠"]
-  },
-
-  "custom/weather": {
-    "exec": "${HOME}/.config/waybar/scripts/get_weather.sh Bangalore+India",
-    "return-type": "json",
-    "format": "{}",
-    "tooltip": true,
-    "interval": 3600
   },
 
   "power-profiles-daemon": {
@@ -229,6 +217,7 @@
     "icon-size": 18,
     "rewrite": {
       "Mozilla Firefox": "Firefox",
+      "(.*)youtube(.*)": "Youtube Music",
       "firefox": "Firefox",
       "deno": "Markdown Preview",
       "(.*) Thunar": "Thunar",

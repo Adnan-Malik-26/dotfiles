@@ -1,0 +1,11 @@
+/* Colors */
+@define-color background alpha(#11111b, 0.8);
+@define-color background-alt alpha(#1e1e2e, 0.8);
+@define-color background-alt-darker #181825;
+@define-color accent-one #cba6f7;
+@define-color accent-two #f9e2af;
+@define-color accent-three #a6e3a1;
+@define-color accent-error #f38ba8;
+@define-color bordercolor #cba6f7;
+@define-color fontcolor #cdd6f4;
+@define-color fontaltcolor #bac2de;

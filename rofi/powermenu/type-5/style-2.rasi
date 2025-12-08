@@ -14,14 +14,11 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "JetBrains Mono Nerd Font Propo 10";
-    background:                  #11111b;
-    background-alt:              #1e1e2e;
-    foreground:                  #cdd6f4;
-    selected:                    #cba6f7;
-    active:                      #1e1e2e;
-    urgent:                      #313244;
+    font:                        "MonaspiceKr Nerd Font 10";
 }
+
+@import "../../colors/color.rasi"
+@import "/home/adnanmalik/.config/rofi/launchers/type-7/common/image.rasi"
 
 /*
 USE_BUTTONS=YES
@@ -40,9 +37,9 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               20px;
-    border-color:                @selected;
+    border-color:                @green;
     cursor:                      "default";
-    background-color:            @background;
+    background-color:            @bg;
 }
 
 /*****----- Main Box -----*****/
@@ -53,7 +50,7 @@ mainbox {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @green;
     background-color:            transparent;
     children:                    [ "inputbar", "listview", "message" ];
 }
@@ -64,7 +61,6 @@ inputbar {
     spacing:                     0px;
     padding:                     100px 80px;
     background-color:            transparent;
-    background-image:            url("~/.local/bin/wallpaper.png", width);
     children:                    [ "textbox-prompt-colon", "dummy","prompt"];
 }
 
@@ -78,15 +74,15 @@ textbox-prompt-colon {
     str:                         " System";
     padding:                     12px;
     border-radius:               100%;
-    background-color:            @urgent;
-    text-color:                  @foreground;
+    background-color:            @red;
+    text-color:                  @fg;
 }
 prompt {
     enabled:                     true;
     padding:                     12px;
     border-radius:               100%;
-    background-color:            @active;
-    text-color:                  @foreground;
+    background-color:            @green;
+    text-color:                  @bg;
 }
 
 /*****----- Listview -----*****/
@@ -113,8 +109,8 @@ element {
     enabled:                     true;
     padding:                     28px 10px;
     border-radius:               100%;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    background-color:            @bg;
+    text-color:                  @fg;
     cursor:                      pointer;
 }
 element-text {
@@ -126,8 +122,8 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            var(selected);
-    text-color:                  var(background);
+    background-color:            @green;
+    text-color:                  @bg;
 }
 
 /*****----- Message -----*****/
@@ -136,8 +132,8 @@ message {
     margin:                      0px 15px 15px 15px;
     padding:                     15px;
     border-radius:               100%;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    background-color:            @bg;
+    text-color:                  @fg;
 }
 textbox {
     background-color:            inherit;

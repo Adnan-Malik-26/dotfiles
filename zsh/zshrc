@@ -1,19 +1,6 @@
 # ============================================================================
 # ZSH Configuration
 # ============================================================================
-
-# ----------------------------------------------------------------------------
-# Instant Prompt (Powerlevel10k - currently disabled)
-# ----------------------------------------------------------------------------
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
-# ----------------------------------------------------------------------------
-# Homebrew Setup (macOS)
-# ----------------------------------------------------------------------------
-[[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # ----------------------------------------------------------------------------
 # Zinit Plugin Manager
 # ----------------------------------------------------------------------------
@@ -68,7 +55,7 @@ fpath+=~/.zfunc
 # Prompt
 # ----------------------------------------------------------------------------
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/base.toml)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/base.toml)"
 
 # ----------------------------------------------------------------------------
 # Shell Options
@@ -113,7 +100,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # ----------------------------------------------------------------------------
 # Environment Variables
 # ----------------------------------------------------------------------------
-export TERM=ghostty
+export TERM=kitty
 export EDITOR=/home/adnanmalik/.config/nvs/versions/current/bin/nvim
 export MANPAGER='nvim +Man!'
 export VENV_HOME="$HOME/.virtualenvs"

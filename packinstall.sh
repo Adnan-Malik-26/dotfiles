@@ -149,6 +149,8 @@ yay -S --needed --noconfirm \
 print_status "Installing media and graphics packages..."
 sudo pacman -S --needed --noconfirm \
   firefox \
+  thunar \
+  chromium \
   mpv \
   gimp \
   obs-studio \

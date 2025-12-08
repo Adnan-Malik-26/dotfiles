@@ -12,11 +12,6 @@ vim.lsp.config["solidity-language-server"] = {
 	root_dir = vim.fs.root(0, { "hardhat.config.js", "truffle-config.js", ".git" }) or vim.fn.getcwd(),
 }
 
-vim.lsp.config["qml-lsp"] = {
-	cmd = { "qml-lsp" },
-	filetypes = { "qml" },
-}
-
 -- Enable LSP servers
 vim.lsp.enable({
 	"lua_ls",
@@ -25,7 +20,6 @@ vim.lsp.enable({
 	"clangd",
 	"tailwindcss",
 	"gopls",
-	"rust_analyzer",
 	"html",
 	"cssls",
 	"hyprls",
@@ -33,7 +27,7 @@ vim.lsp.enable({
 	"ruff",
 	"svelte",
 	"biome",
-	"qml-lsp",
+	"qmlls",
 })
 
 -- LSP signature configuration

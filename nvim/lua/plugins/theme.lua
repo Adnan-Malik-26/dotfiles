@@ -12,8 +12,29 @@ require("catppuccin").setup({
 	},
 })
 
-vim.cmd("colorscheme catppuccin")
+require("everforest").setup({
+	background = "soft",
+	transparent_background_level = 1,
+})
 
+-- Nord Theme
+vim.g.nord_contrast = true
+vim.g.nord_disable_background = true
+
+require("dracula").setup({
+	transparent_bg = true,
+})
+
+require("gruvbox").setup({
+	transparent_mode = true,
+})
+
+require("rose-pine").setup({
+	dark_variant = "main",
+	styles = {
+		transparency = true,
+	},
+})
 -- Rainbow delimiter colors
 local rainbow_colors = {
 	{ "RainbowDelimiterRed", "#f38ba8" },

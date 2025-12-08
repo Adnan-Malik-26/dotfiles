@@ -7,12 +7,7 @@ configuration {
 }
 
 //----- Global Properties -----//
-* {
-    main-bg: rgba(17, 17, 27, 0.85);
-    main-fg: #cdd6f4;
-    select-bg: #cba6f7;
-    select-fg: #11111b;
-}
+@import "./colors/color.rasi"
 
 //----- Main Window -----//
 window {
@@ -26,8 +21,8 @@ window {
     padding:                     0px;
     border:                      2px;
     border-radius:               15px;
-    border-color:                @select-bg;
-    background-color:            @main-bg;
+    border-color:                @green;
+    background-color:            @bg;
     location:                    center;
     anchor:                      center;
 }
@@ -48,14 +43,14 @@ inputbar {
     spacing:                     10px;
     padding:                     15px;
     border-radius:               10px;
-    background-color:            rgba(203, 166, 247, 0.1);
-    text-color:                  @main-fg;
+    background-color:            @green;
+    text-color:                  @bg;
 }
 
 prompt {
     enabled:                     true;
     background-color:            transparent;
-    text-color:                  @select-bg;
+    text-color:                  @bg;
     font:                        "JetBrainsMono NF Bold 12";
     content:                     "Search Wallpaper";
 }
@@ -63,9 +58,9 @@ prompt {
 entry {
     enabled:                     true;
     placeholder:                 "Type to search...";
-    placeholder-color:           rgba(245, 224, 220, 0.5);
+    placeholder-color:           @bg;
     background-color:            transparent;
-    text-color:                  @main-fg;
+    text-color:                  @bg;
     cursor:                      text;
 }
 
@@ -85,7 +80,7 @@ listview {
     fixed-columns:               true;
     cursor:                      "default";
     background-color:            transparent;
-    text-color:                  @main-fg;
+    text-color:                  @fg;
 }
 
 //----- Elements -----//
@@ -96,13 +91,13 @@ element {
     padding:                     15px;
     border-radius:               12px;
     cursor:                      pointer;
-    background-color:            rgba(245, 224, 220, 0.05);
-    text-color:                  @main-fg;
+    background-color:            @bg;
+    text-color:                  @fg;
 }
 
 element selected.normal {
-    background-color:            @select-bg;
-    text-color:                  @select-fg;
+    background-color:            @green;
+    text-color:                  @bg;
 }
 
 element-icon {

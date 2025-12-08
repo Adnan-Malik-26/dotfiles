@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Directory to rename files in (defaults to current directory)
+DIR="${1:-.}"
+
+# Check if directory exists
+if [ ! -d "$DIR" ]; then
+    echo "Error: Directory '$DIR' does not exist"
+    exit 1
+fi
+
+# Counter for sequential numbering
+counter=1
+
+# Loop through all files (not directories) in the specified directory
+for file in "$DIR"/*; do
+    # Skip if it's not a file
+    [ ! -f "$file" ] && continue
+    
+    # Get the file extension
+    extension="${file##*.}"
+    
+    # Get the filename without path
+    basename="${file##*/}"
+    
+    # Check if file has an extension
+    if [ "$basename" = "$extension" ]; then
+        # No extension found
+        new_name=$(printf "%02d" $counter)
+    else
+        # Has extension
+        new_name=$(printf "%02d.%s" $counter "$extension")
+    fi
+    
+    # Construct full path for new filename
+    new_path="$DIR/$new_name"
+    
+    # Rename the file
+    mv "$file" "$new_path"
+    echo "Renamed: $basename -> $new_name"
+    
+    # Increment counter
+    ((counter++))
+done
+
+echo "Done! Renamed $((counter-1)) files."

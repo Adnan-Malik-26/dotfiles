@@ -47,6 +47,7 @@ window#waybar {
 #clock,
 #battery,
 #cpu,
+#custom-privacydots,
 #memory,
 #temperature,
 #network,

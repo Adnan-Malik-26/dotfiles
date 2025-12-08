@@ -1,0 +1,22 @@
+* {
+  bg: #1c1c1c;
+  fg: #e6e6e6;
+
+  black: #2a2a2a;
+  red: #d8b4b4;
+  green: #c4d6c4;
+  yellow: #ded8b8;
+  blue: #c3cadd;
+  magenta: #dac3dd;
+  cyan: #c3dedd;
+  white: #f2f2f2;
+
+  bright-black: #4a4a4a;
+  bright-red: #e8c8c8;
+  bright-green: #d8e6d8;
+  bright-yellow: #eeeac9;
+  bright-blue: #d5daf1;
+  bright-magenta: #e8d5f1;
+  bright-cyan: #d5f0f0;
+  bright-white: #ffffff;
+}

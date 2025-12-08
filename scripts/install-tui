@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [ "$#" -ne 3 ]; then
+  echo -e "\e[32mLet's create a new tui you can start with the app launcher.\n\e[0m"
+  TUI_NAME=$(gum input --prompt "Name> " --placeholder "My favorite tui")
+  COMMAND=$(gum input --prompt "Command> " --placeholder "nvim/lazygit/yazi")
+else
+  TUI_NAME="$1"
+  COMMAND="$2"
+fi
+
+if [[ -z "$TUI_NAME" || -z "$COMMAND" ]]; then
+  echo "You must set Tui Name and Command!"
+  exit 1
+fi
+
+DESKTOP_FILE="$HOME/.local/share/applications/$TUI_NAME.desktop"
+
+cat >"$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Version=1.0
+Name=$TUI_NAME
+Comment=$TUI_NAME
+Exec=ghostty -e $COMMAND
+Terminal=false
+Type=Application
+StartupNotify=true
+EOF
+
+chmod +x "$DESKTOP_FILE"
+
+if [ "$#" -ne 3 ]; then
+  echo -e "You can now find $TUI_NAME using the app launcher (SUPER + SPACE)\n"
+fi

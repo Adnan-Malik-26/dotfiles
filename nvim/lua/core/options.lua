@@ -52,8 +52,13 @@ set.ignorecase = true
 set.smartcase = true
 set.hlsearch = true
 set.incsearch = true
+set.inccommand = "split"
 
 -- Performance
 set.mousemoveevent = true
 set.updatetime = 500
 set.timeoutlen = 400
+
+-- List Chars
+set.list = true
+set.listchars = { tab = "» ", trail = "·", nbsp = "␣" }

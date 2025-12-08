@@ -11,9 +11,9 @@
 configuration {
 	modi:                       "drun,filebrowser,window";
     show-icons:                 true;
-    display-drun:               "";
+    display-drun:               " ";
     display-run:                "";
-    display-filebrowser:        "";
+    display-filebrowser:        " ";
     display-window:             "";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
@@ -21,14 +21,11 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #11111b;
-    background-alt:              #11111b;
-    foreground:                  #cdd6f4;
-    selected:                    #1e1e2e;
-    active:                      #cba6f7;
-    urgent:                      #f38ba8;
+    font:                        "MonaspiceKr Nerd Font 10";
 }
+
+@import "../../colors/color.rasi"
+@import "./common/image.rasi"
 
 /*****----- Main Window -----*****/
 window {
@@ -45,7 +42,7 @@ window {
     enabled:                     true;
     border-radius:               20px;
     cursor:                      "default";
-    background-color:            @background;
+    background-color:            @bg;
 }
 
 /*****----- Main Box -----*****/
@@ -71,8 +68,7 @@ inputbar {
     spacing:                     10px;
     padding:                     80px 60px;
     background-color:            transparent;
-    background-image:            url("~/walls/mainwalls/sakura-aura.jpg", width);
-    text-color:                  @foreground;
+    text-color:                  @fg;
     orientation:                 horizontal;
     children:                    [ "textbox-prompt-colon", "entry", "dummy", "mode-switcher" ];
 }
@@ -82,7 +78,7 @@ textbox-prompt-colon {
     str:                         "";
     padding:                     12px 15px;
     border-radius:               100%;
-    background-color:            @background-alt;
+    background-color:            @green;
     text-color:                  inherit;
 }
 entry {
@@ -91,7 +87,7 @@ entry {
     width:                       250px;
     padding:                     12px 16px;
     border-radius:               100%;
-    background-color:            @background-alt;
+    background-color:            @bg;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search";
@@ -107,19 +103,19 @@ mode-switcher{
     enabled:                     true;
     spacing:                     10px;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @fg;
 }
 button {
     width:                       45px;
     padding:                     12px;
     border-radius:               100%;
-    background-color:            @background-alt;
+    background-color:            @green;
     text-color:                  inherit;
     cursor:                      pointer;
 }
 button selected {
-    background-color:            @selected;
-    text-color:                  @foreground;
+    background-color:            @green;
+    text-color:                  @bg;
 }
 
 /*****----- Listview -----*****/
@@ -137,7 +133,7 @@ listview {
     
     spacing:                     10px;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @fg;
     cursor:                      "default";
 }
 
@@ -148,7 +144,7 @@ element {
     padding:                     4px;
     border-radius:               100%;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @fg;
     cursor:                      pointer;
 }
 element normal.normal {
@@ -156,24 +152,24 @@ element normal.normal {
     text-color:                  inherit;
 }
 element normal.urgent {
-    background-color:            @urgent;
-    text-color:                  @foreground;
+    background-color:            @red;
+    text-color:                  @fg;
 }
 element normal.active {
-    background-color:            @active;
-    text-color:                  @foreground;
+    background-color:            @blue;
+    text-color:                  @fg;
 }
 element selected.normal {
-    background-color:            @selected;
-    text-color:                  @foreground;
+    background-color:            @green;
+    text-color:                  @bg;
 }
 element selected.urgent {
-    background-color:            @urgent;
-    text-color:                  @foreground;
+    background-color:            @red;
+    text-color:                  @bg;
 }
 element selected.active {
-    background-color:            @urgent;
-    text-color:                  @foreground;
+    background-color:            @red;
+    text-color:                  @bg;
 }
 element-icon {
     background-color:            transparent;
@@ -196,14 +192,14 @@ message {
 textbox {
     padding:                     12px;
     border-radius:               100%;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    background-color:            @bg;
+    text-color:                  @fg;
     vertical-align:              0.5;
     horizontal-align:            0.0;
 }
 error-message {
     padding:                     12px;
     border-radius:               20px;
-    background-color:            @background;
-    text-color:                  @foreground;
+    background-color:            @bg;
+    text-color:                  @fg;
 }

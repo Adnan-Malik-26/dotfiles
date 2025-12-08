@@ -13,14 +13,9 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
+@import "../../colors/color.rasi"
 * {
-    font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #11092D;
-    background-alt:              #281657;
-    foreground:                  #FFFFFF;
-    selected:                    #DF5296;
-    active:                      #6E77FF;
-    urgent:                      #8E3596;
+    font:                        "MonaspiceKr Nerd Font 10";
 }
 
 /*
@@ -40,9 +35,9 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               20px;
-    border-color:                @selected;
+    border-color:                @green;
     cursor:                      "default";
-    background-color:            @background;
+    background-color:            @bg;
 }
 
 /*****----- Main Box -----*****/
@@ -69,7 +64,7 @@ inputbar {
     enabled:                     true;
     spacing:                     15px;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @fg;
     children:                    [ "dummy", "textbox-prompt-colon", "prompt", "dummy"];
 }
 
@@ -82,15 +77,15 @@ textbox-prompt-colon {
     str:                         "";
     padding:                     10px 13px;
     border-radius:               15px;
-    background-color:            @urgent;
-    text-color:                  @foreground;
+    background-color:            @red;
+    text-color:                  @fg;
 }
 prompt {
     enabled:                     true;
     padding:                     10px;
     border-radius:               15px;
-    background-color:            @active;
-    text-color:                  @background;
+    background-color:            @green;
+    text-color:                  @bg;
 }
 
 /*****----- Message -----*****/
@@ -100,9 +95,9 @@ message {
     padding:                     10px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    border-color:                @green;
+    background-color:            @bg;
+    text-color:                  @fg;
 }
 textbox {
     background-color:            inherit;
@@ -131,9 +126,9 @@ element {
     padding:                     10px;
     border:                      0px solid;
     border-radius:               15px;
-    border-color:                @selected;
+    border-color:                @green;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @fg;
     cursor:                      pointer;
 }
 element-text {
@@ -146,22 +141,22 @@ element-text {
 
 element normal.normal,
 element alternate.normal {
-    background-color:            var(background);
-    text-color:                  var(foreground);
+    background-color:            var(bg);
+    text-color:                  var(fg);
 }
 element normal.urgent,
 element alternate.urgent,
 element selected.active {
-    background-color:            var(urgent);
-    text-color:                  var(background);
+    background-color:            var(red);
+    text-color:                  var(bg);
 }
 element normal.active,
 element alternate.active,
 element selected.urgent {
-    background-color:            var(active);
-    text-color:                  var(background);
+    background-color:            var(green);
+    text-color:                  var(bg);
 }
 element selected.normal {
-    background-color:            var(selected);
-    text-color:                  var(background);
+    background-color:            var(magenta);
+    text-color:                  var(bg);
 }

@@ -1,0 +1,89 @@
+// Minimal Rofi Config for Waybar Theme Switcher
+configuration {
+    modi:                        "dmenu";
+    show-icons:                  false;
+    font:                        "JetBrainsMono NF Medium 10";
+}
+
+//----- Global Properties -----//
+@import "./colors/color.rasi"
+
+//----- Main Window -----//
+window {
+    enabled:                     true;
+    width:                       400px;
+    transparency:                "real";
+    border:                      1px;
+    border-radius:               8px;
+    border-color:                @green;
+    background-color:            @bg;
+    location:                    center;
+    anchor:                      center;
+}
+
+//----- Main Box -----//
+mainbox {
+    enabled:                     true;
+    children:                    [ "inputbar", "listview" ];
+    background-color:            transparent;
+    spacing:                     10px;
+    padding:                     15px;
+}
+
+//----- Inputbar -----//
+inputbar {
+    enabled:                     true;
+    children:                    [ "prompt", "entry" ];
+    spacing:                     8px;
+    padding:                     10px;
+    border-radius:               6px;
+    background-color:            @green;
+    text-color:                  @bg;
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @bg;
+}
+
+entry {
+    enabled:                     true;
+    placeholder:                 "Type to filter...";
+    placeholder-color:           @bg;
+    background-color:            transparent;
+    text-color:                  @bg;
+    cursor:                      text;
+}
+
+//----- Listview -----//
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    spacing:                     4px;
+    cycle:                       true;
+    scrollbar:                   false;
+    background-color:            transparent;
+}
+
+//----- Elements -----//
+element {
+    enabled:                     true;
+    padding:                     10px 12px;
+    border-radius:               4px;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @fg;
+}
+
+element selected.normal {
+    background-color:            @green;
+    text-color:                  @bg;
+}
+
+element-text {
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}

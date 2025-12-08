@@ -1,0 +1,187 @@
+#!/bin/bash
+# Configuration directories
+CONFIG_DIR="$HOME/.config"
+HYPRLAND_COLORS="$CONFIG_DIR/hypr/colors"
+ROFI_COLORS="$CONFIG_DIR/rofi/colors"
+WAYBAR_COLORS="$CONFIG_DIR/waybar/colors"
+GHOSTTY_COLORS="$CONFIG_DIR/ghostty/themes"
+KITTY_COLORS="$CONFIG_DIR/kitty/colors"
+SWAYNC_COLORS="$CONFIG_DIR/swaync/colors"
+
+# Wallpaper directories
+WALLS_DIR="$HOME/walls"
+WALLS_LINK="$WALLS_DIR/current"
+WALLPAPER_CACHE="$HOME/.local/bin/wallpaper.png"
+
+# Target symlink names
+HYPRLAND_LINK="$HYPRLAND_COLORS/colors.conf"
+ROFI_LINK="$ROFI_COLORS/color.rasi"
+WAYBAR_LINK="$WAYBAR_COLORS/colors.css"
+GHOSTTY_LINK="$GHOSTTY_COLORS/colors.conf"
+KITTY_LINK="$KITTY_COLORS/colors.conf"
+SWAYNC_LINK="$SWAYNC_COLORS/colors.css"
+
+# Available themes
+themes=(
+  "catppuccin"
+  "everforest"
+  "gruvbox"
+  "mono"
+  "nord"
+  "rosepine"
+  "void"
+  "dracula"
+)
+
+# Function to create symlink
+create_symlink() {
+  local source="$1"
+  local target="$2"
+
+  # Check if source file exists
+  if [ ! -f "$source" ]; then
+    echo "⚠️  Warning: $source does not exist, skipping..."
+    return 1
+  fi
+
+  # Remove existing symlink or file
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    rm "$target"
+  fi
+
+  # Create new symlink
+  ln -s "$source" "$target"
+  echo "✓ Linked: $target -> $source"
+  return 0
+}
+
+# Function to create directory symlink
+create_dir_symlink() {
+  local source="$1"
+  local target="$2"
+
+  # Check if source directory exists
+  if [ ! -d "$source" ]; then
+    echo "⚠️  Warning: $source directory does not exist, skipping wallpaper setup..."
+    return 1
+  fi
+
+  # Remove existing symlink or directory
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    rm -rf "$target"
+  fi
+
+  # Create new symlink
+  ln -s "$source" "$target"
+  echo "✓ Linked: $target -> $source"
+  return 0
+}
+
+# Function to set random wallpaper
+set_random_wallpaper() {
+  local theme_dir="$1"
+
+  # Check if wallpaper directory exists and has images
+  if [ ! -d "$theme_dir" ]; then
+    echo "⚠️  Warning: Wallpaper directory $theme_dir not found"
+    return 1
+  fi
+
+  # Find all image files (jpg, jpeg, png)
+  local wallpapers=($(find "$theme_dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) 2>/dev/null))
+
+  if [ ${#wallpapers[@]} -eq 0 ]; then
+    echo "⚠️  Warning: No wallpapers found in $theme_dir"
+    return 1
+  fi
+
+  # Select random wallpaper
+  local random_index=$((RANDOM % ${#wallpapers[@]}))
+  local selected_wallpaper="${wallpapers[$random_index]}"
+
+  echo "✓ Selected wallpaper: $(basename "$selected_wallpaper")"
+
+  # Ensure ~/.local/bin directory exists
+  mkdir -p "$(dirname "$WALLPAPER_CACHE")"
+
+  # Copy to cache location
+  cp "$selected_wallpaper" "$WALLPAPER_CACHE"
+  echo "✓ Cached wallpaper to: $WALLPAPER_CACHE"
+
+  # Set wallpaper using swww
+  if command -v swww &>/dev/null; then
+    swww img "$selected_wallpaper" --transition-type wipe
+    echo "✓ Wallpaper applied"
+  else
+    echo "⚠️  Warning: swww not found, wallpaper not applied"
+    return 1
+  fi
+
+  return 0
+}
+
+# Convert array to newline-separated list for rofi
+options=$(printf "%s\n" "${themes[@]}")
+
+# Show rofi menu and get selection
+selected=$(echo "$options" | rofi -dmenu -i -p "Select Theme" -theme-str 'window {width: 400px;} ' -theme ~/.config/rofi/minimal.rasi)
+
+# Exit if no selection was made
+if [ -z "$selected" ]; then
+  echo "No theme selected"
+  exit 1
+fi
+
+echo "Switching to theme: $selected"
+echo "================================"
+
+# Create symlinks for each application
+create_symlink "$HYPRLAND_COLORS/${selected}.conf" "$HYPRLAND_LINK"
+create_symlink "$ROFI_COLORS/${selected}.rasi" "$ROFI_LINK"
+create_symlink "$WAYBAR_COLORS/${selected}.css" "$WAYBAR_LINK"
+create_symlink "$GHOSTTY_COLORS/${selected}.conf" "$GHOSTTY_LINK"
+create_symlink "$KITTY_COLORS/${selected}.conf" "$KITTY_LINK"
+create_symlink "$SWAYNC_COLORS/${selected}.css" "$SWAYNC_LINK"
+
+create_symlink "$HOME/.config/rofi/launchers/type-7/common/${selected}.rasi" "$HOME/.config/rofi/launchers/type-7/common/image.rasi"
+
+# Setup wallpaper directory symlink and set random wallpaper
+echo ""
+echo "Setting up wallpapers..."
+if create_dir_symlink "$WALLS_DIR/${selected}" "$WALLS_LINK"; then
+  set_random_wallpaper "$WALLS_DIR/${selected}"
+fi
+
+echo "================================"
+echo "✓ Theme switched to: $selected"
+
+# Reload applications
+echo ""
+echo "Reloading applications..."
+
+# Reload Hyprland config
+if pgrep -x "Hyprland" >/dev/null; then
+  hyprctl reload
+  echo "✓ Hyprland reloaded"
+fi
+
+# Restart Waybar
+if pgrep -x "waybar" >/dev/null; then
+  killall waybar
+  waybar --config ~/.config/waybar/current/config.jsonc --style ~/.config/waybar/current/style.css &
+  echo "✓ Waybar restarted"
+fi
+
+if pgrep -x "kitty" >/dev/null; then
+  kill -SIGUSR1 $(pidof kitty)
+fi
+
+if pgrep -x "swaync" >/dev/null; then
+  killall swaync
+  swaync
+fi
+# Note: Rofi applies themes on next launch
+echo ""
+echo "Notes:"
+echo "  • Rofi: Theme will apply on next launch"
+echo "  • Wallpaper: Cached at $WALLPAPER_CACHE"

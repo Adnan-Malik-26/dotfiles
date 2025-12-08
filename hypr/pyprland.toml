@@ -20,10 +20,10 @@ max_size = "1920px 100%"
 margin = 50
 lazy = true
 
-[scratchpads.spotify]
+[scratchpads.ytm]
 animation = "fromRight"
-command = "spotify"
-class = "Spotify"
+command = "chromium --class=ytmusic --app='https://music.youtube.com'"
+class = "chrome-music.youtube.com__-Default"
 size = "45% 90%"
 max_size = "1920px 100%"
 margin = 50

@@ -1,6 +1,8 @@
+@import '../colors/colors.css';
+
 * {
   font-family: "Caskaydia Cove Nerd Font Propo", "Caskaydia Nerd Font Mono Propo", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   border-radius: 50px;
   font-weight: bold;
 }
@@ -15,99 +17,101 @@ window#waybar {
 
 #workspaces button {
   background-color: transparent;
-  color: #cba6f7;
+  color: @magenta;
   transition: margin 150ms ease-in-out, padding 150ms ease-in-out;
   transition: background-color 0.3s ease, color 0.3s ease, padding 0.2s ease;
 }
 
 #workspaces {
-  background-color: #11111b;
+  background-color: @bgd;
   padding: 2px 2px 2px 2px;
   border-radius: 50px;
   margin-left: 12px;
 }
 
 #workspaces button.active {
-  background-color: #7aa2f7;
-  color: #1e1e2e;
+  background-color: @magenta;
+  color: @bg;
   padding: 5px 24px;
 }
 
 #workspaces button.active:hover {
-  color: #7aa2f7;
-  background: inherit;
+  color: @blue;
+  background: @blue;
 }
 
 #workspaces button.empty {
-  color: #3b4261;
+  color: @bright_black;
 }
 
 #workspaces button.urgent {
-  background-color: #f7768e;
-  color: #1e1e2e;
+  background-color: @red;
+  color: @bg;
 }
 
 #battery,
 #pulseaudio,
 #backlight,
-#custom-pacman,
 #custom-kanata,
 #network,
 #clock,
-#custom-weather,
 #custom-media,
 #window,
-#cpu,
-#memory,
-#disk,
 #tray,
 #bluetooth,
 #custom-distro,
 #custom-notification,
+#custom-privacydots,
 #custom-github,
 #custom-user,
 #power-profiles-daemon {
-  color: #7aa2f7;
-  background-color: #11111b;
+  color: @blue;
+  background-color: @bgd;
   padding: 0 15px 0 15px;
   margin: 0 0 0 12px;
 }
 
+#custom-privacydots {
+  padding: 0 10px;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
 #battery {
-  color: #eba0ac;
+  color: @red;
 }
 
 #custom-github {
-  color: #a6e3a1;
+  color: @green;
 }
 
 #custom-kanata {
-  color: #a6e3a1;
+  color: @green;
 }
 
 #custom-media {
-  color: #8bd5ca;
+  color: @cyan;
 }
 
 #custom-pacman {
-  color: #a6e3a1;
+  color: @green;
 }
 
 #clock {
-  color: #f5a97f;
+  color: @orange;
 }
 
 #network {
-  color: #cba6f7;
+  color: @magenta;
 }
 
 #pulseaudio {
-  color: #74c7ec;
+  color: @blue;
 }
 
 #custom-launcher,
 #custom-notification {
-  color: #f38ba8;
+  color: @red;
 }
 
 #window.hidden {
@@ -124,9 +128,9 @@ window#waybar.empty #window {
 }
 
 tooltip {
-  border: 2px solid #cba6f7;
+  border: 2px solid @magenta;
   border-radius: 10px;
-  background-color: #11111b;
+  background-color: @bgd;
 }
 
 tooltip label {

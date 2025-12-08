@@ -1,19 +1,22 @@
 font-family = "Monaspace Argon NF"
 font-size = 14
 font-feature = +calt, +liga, +clig, +ss01, +ss02
-adjust-cell-height = 25%
+adjust-cell-height = 15%
 
-theme = "catppuccin-mocha.conf"
+theme = "colors.conf"
 
-background = #11111b
 background-opacity = 0.8
 background-blur = true
-background-blur-radius = 20
 
-window-decoration = true
+window-decoration = server
 window-padding-balance = true
-window-colorspace = "display-p3"
+window-padding-x = 5
+window-padding-y = 5
+window-vsync = false
+alpha-blending = native
 
 cursor-style = bar
+cursor-color = cell-foreground
+cursor-text = cell-background
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2

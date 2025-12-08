@@ -1,7 +1,16 @@
 -- Plugin Management Configuration
 vim.pack.add({
-	-- Theme and UI
+	-- Themes
 	{ src = "https://github.com/catppuccin/nvim" },
+	{ src = "https://github.com/neanias/everforest-nvim" },
+	{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
+	{ src = "https://github.com/Mofiqul/dracula.nvim" },
+	{ src = "https://github.com/shaunsingh/nord.nvim" },
+	{ src = "https://github.com/kdheepak/monochrome.nvim" },
+	{ src = "https://github.com/darkvoid-theme/darkvoid.nvim" },
+	{ src = "https://github.com/rose-pine/neovim" },
+
+	-- UI
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
@@ -12,7 +21,6 @@ vim.pack.add({
 
 	-- File management
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/A7Lavinraj/fyler.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -38,6 +46,7 @@ vim.pack.add({
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 	{ src = "https://github.com/onsails/lspkind.nvim" },
 	{ src = "https://github.com/ray-x/lsp_signature.nvim" },
+	{ src = "https://github.com/mrcjkb/rustaceanvim" },
 
 	-- Code quality
 	{ src = "https://github.com/stevearc/conform.nvim" },

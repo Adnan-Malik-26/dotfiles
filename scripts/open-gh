@@ -1,0 +1,4 @@
+#! /bin/bash
+url=$(git remote get-url origin)
+
+firefox $url || echo "No remote found"

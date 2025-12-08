@@ -74,6 +74,13 @@ map("n", "<C-A-l>", "<CMD>vertical resize -5<CR>", desc("Resize right"))
 map("n", "<C-S-s>", "<cmd>set spell<CR>", desc("Enable Spelling"))
 map("n", "<A-CR>", "1z=", desc("Correct Spelling under Cursor"))
 
+vim.keymap.set("n", "gK", function()
+	local new_config = not vim.diagnostic.config().virtual_lines
+	vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = "Toggle diagnostic virtual_lines" })
+
+vim.keymap.set("n", "gl", vim.diagnostic.open_float)
+
 -- Rupees
 map("i", "<A-S-r>", "₹", desc("Enter Rupees"))
 

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Get the current layout using hyprctl getoption
+current_layout=$(hyprctl getoption general:layout | rg str | awk -F': ' '{print $2}' | tr -d '"')
+
+# Check if the current layout is master or dwindle and toggle accordingly
+if [ "$current_layout" == "master" ]; then
+  hyprctl keyword general:layout "dwindle"
+  notify-send "Layout Changed" "Switched layout to Dwindle"
+elif [ "$current_layout" == "dwindle" ]; then
+  hyprctl keyword general:layout "master"
+  notify-send "Layout Changed" "Switched layout to Master"
+else
+  # If the layout is something else, notify the user
+  notify-send "Error" "Unexpected layout: $current_layout"
+fi

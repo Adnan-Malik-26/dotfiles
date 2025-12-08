@@ -16,9 +16,11 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "shared/colors.rasi"
-@import                          "shared/fonts.rasi"
+@import                          "../../colors/color.rasi"
 
+* {
+    font:                        "MonaspiceKr Nerd Font 10";
+}
 /*****----- Main Window -----*****/
 window {
     transparency:                "real";
@@ -34,8 +36,8 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
-    background-color:            @background;
+    border-color:                @green;
+    background-color:            @bg;
     cursor:                      "default";
 }
 
@@ -47,7 +49,7 @@ mainbox {
     padding:                     20px;
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
-    border-color:                @selected;
+    border-color:                @green;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
 }
@@ -60,9 +62,9 @@ inputbar {
     padding:                     15px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    border-color:                @green;
+    background-color:            @bg-alt;
+    text-color:                  @fg;
     children:                    [ "prompt", "entry" ];
 }
 
@@ -105,16 +107,16 @@ listview {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @green;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @fg;
     cursor:                      "default";
 }
 scrollbar {
     handle-width:                5px ;
-    handle-color:                @selected;
+    handle-color:                @green;
     border-radius:               0px;
-    background-color:            @background-alt;
+    background-color:            @bg-alt;
 }
 
 /*****----- Elements -----*****/
@@ -125,18 +127,18 @@ element {
     padding:                     5px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
+    border-color:                @green;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @fg;
     cursor:                      pointer;
 }
 element normal.normal {
-    background-color:            @background;
-    text-color:                  @foreground;
+    background-color:            @bg;
+    text-color:                  @fg;
 }
 element selected.normal {
-    background-color:            @selected;
-    text-color:                  @background;
+    background-color:            @green;
+    text-color:                  @bg;
 }
 element-icon {
     background-color:            transparent;
@@ -158,13 +160,13 @@ error-message {
     padding:                     15px;
     border:                      2px solid;
     border-radius:               12px;
-    border-color:                @selected;
-    background-color:            @background;
-    text-color:                  @foreground;
+    border-color:                @green;
+    background-color:            @bg;
+    text-color:                  @fg;
 }
 textbox {
-    background-color:            @background;
-    text-color:                  @foreground;
+    background-color:            @bg;
+    text-color:                  @fg;
     vertical-align:              0.5;
     horizontal-align:            0.0;
     highlight:                   none;

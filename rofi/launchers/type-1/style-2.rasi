@@ -20,33 +20,36 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "shared/colors.rasi"
-@import                          "shared/fonts.rasi"
+@import                          "../../colors/color.rasi"
+
+*{
+    font:                        "MonaspiceKr Nerd Font 10";
+}
 
 * {
-    border-colour:               var(selected);
-    handle-colour:               var(foreground);
-    background-colour:           var(background);
-    foreground-colour:           var(foreground);
-    alternate-background:        var(background-alt);
-    normal-background:           var(background);
-    normal-foreground:           var(foreground);
-    urgent-background:           var(urgent);
-    urgent-foreground:           var(background);
-    active-background:           var(active);
-    active-foreground:           var(background);
-    selected-normal-background:  var(selected);
-    selected-normal-foreground:  var(background);
-    selected-urgent-background:  var(active);
-    selected-urgent-foreground:  var(background);
-    selected-active-background:  var(urgent);
-    selected-active-foreground:  var(background);
-    alternate-normal-background: var(background);
-    alternate-normal-foreground: var(foreground);
-    alternate-urgent-background: var(urgent);
-    alternate-urgent-foreground: var(background);
-    alternate-active-background: var(active);
-    alternate-active-foreground: var(background);
+    border-colour:               var(green);
+    handle-colour:               var(fg);
+    background-colour:           var(bg);
+    foreground-colour:           var(fg);
+    alternate-background:        var(bg);
+    normal-background:           var(bg);
+    normal-foreground:           var(fg);
+    urgent-background:           var(red);
+    urgent-foreground:           var(bg);
+    active-background:           var(green);
+    active-foreground:           var(bg);
+    selected-normal-background:  var(green);
+    selected-normal-foreground:  var(bg);
+    selected-urgent-background:  var(magenta);
+    selected-urgent-foreground:  var(bg);
+    selected-active-background:  var(red);
+    selected-active-foreground:  var(bg);
+    alternate-normal-background: var(bg);
+    alternate-normal-foreground: var(fg);
+    alternate-urgent-background: var(red);
+    alternate-urgent-foreground: var(bg);
+    alternate-active-background: var(green);
+    alternate-active-foreground: var(bg);
 }
 
 /*****----- Main Window -----*****/

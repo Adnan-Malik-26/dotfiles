@@ -1,0 +1,23 @@
+/* Mono Pastel */
+@define-color bgd #111111;
+@define-color bg #1c1c1c;
+@define-color fg #e6e6e6;
+
+@define-color black #2a2a2a;
+@define-color red #d8b4b4;
+@define-color green #c4d6c4;
+@define-color yellow #ded8b8;
+@define-color blue #c3cadd;
+@define-color magenta #dac3dd;
+@define-color cyan #c3dedd;
+@define-color white #f2f2f2;
+@define-color orange #f7dcc6;
+
+@define-color bright_black #4a4a4a;
+@define-color bright_red #e8c8c8;
+@define-color bright_green #d8e6d8;
+@define-color bright_yellow #eeeac9;
+@define-color bright_blue #d5daf1;
+@define-color bright_magenta#e8d5f1;
+@define-color bright_cyan #d5f0f0;
+@define-color bright_white #ffffff;
