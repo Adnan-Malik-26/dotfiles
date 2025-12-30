@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Dotfiles Installation Script
-# This script copies all configuration files to their appropriate locations
+# Installs configuration files using symlinks
 
 set -e
 
@@ -10,199 +10,273 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
 NC='\033[0m' # No Color
+BOLD='\033[1m'
 
 # Get the directory where the script is located
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$HOME/.config"
+BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
 
-# Function to print colored messages
-print_info() {
-  echo -e "${BLUE}[INFO]${NC} $1"
+# Print functions
+print_header() {
+  echo -e "\n${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+  echo -e "${BOLD}${MAGENTA}  $1${NC}"
+  echo -e "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
 }
 
 print_success() {
-  echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
-
-print_warning() {
-  echo -e "${YELLOW}[WARNING]${NC} $1"
+  echo -e "${GREEN}✓${NC} $1"
 }
 
 print_error() {
-  echo -e "${RED}[ERROR]${NC} $1"
+  echo -e "${RED}✗${NC} $1"
 }
 
-# Function to backup existing config
-backup_config() {
+print_warning() {
+  echo -e "${YELLOW}⚠${NC} $1"
+}
+
+print_info() {
+  echo -e "${BLUE}ℹ${NC} $1"
+}
+
+print_step() {
+  echo -e "${BOLD}${BLUE}➜${NC} $1"
+}
+
+# Banner
+print_banner() {
+  echo -e "${CYAN}"
+  cat <<"EOF"
+    ____        __  _____ __         
+   / __ \____  / /_/ __(_) /__  _____
+  / / / / __ \/ __/ /_/ / / _ \/ ___/
+ / /_/ / /_/ / /_/ __/ / /  __(__  ) 
+/_____/\____/\__/_/ /_/_/\___/____/  
+                                      
+    Installation Script
+EOF
+  echo -e "${NC}"
+}
+
+# Create backup if file/directory exists
+backup_if_exists() {
   local target="$1"
-  if [ -e "$target" ]; then
-    local backup="${target}.backup.$(date +%Y%m%d_%H%M%S)"
-    print_warning "Backing up existing config: $target -> $backup"
-    mv "$target" "$backup"
+  if [[ -e "$target" && ! -L "$target" ]]; then
+    mkdir -p "$BACKUP_DIR"
+    print_warning "Backing up existing: $(basename "$target")"
+    mv "$target" "$BACKUP_DIR/"
+    return 0
   fi
+  return 1
 }
 
-# Function to copy directory with backup
-copy_config() {
-  local src="$1"
-  local dest="$2"
+# Create symlink
+create_symlink() {
+  local source="$1"
+  local target="$2"
 
-  if [ ! -e "$src" ]; then
-    print_warning "Source not found: $src"
-    return
+  # Remove existing symlink if it exists
+  if [[ -L "$target" ]]; then
+    rm "$target"
   fi
 
   # Create parent directory if it doesn't exist
-  mkdir -p "$(dirname "$dest")"
+  local parent_dir="$(dirname "$target")"
+  if [[ ! -d "$parent_dir" ]]; then
+    mkdir -p "$parent_dir"
+    print_info "Created directory: $parent_dir"
+  fi
 
-  # Backup if destination exists
-  backup_config "$dest"
-
-  # Copy the configuration
-  cp -r "$src" "$dest"
-  print_success "Installed: $dest"
+  # Create symlink
+  if ln -s "$source" "$target"; then
+    print_success "Linked: $(basename "$target")"
+    return 0
+  else
+    print_error "Failed to link: $(basename "$target")"
+    return 1
+  fi
 }
 
 # Main installation function
 install_dotfiles() {
-  print_info "Starting dotfiles installation..."
-  print_info "Script directory: $SCRIPT_DIR"
-  print_info "Config directory: $CONFIG_DIR"
+  print_banner
 
-  # Create .config directory if it doesn't exist
-  mkdir -p "$CONFIG_DIR"
+  print_header "Starting Dotfiles Installation"
+  print_info "Dotfiles directory: ${DOTFILES_DIR}"
+  print_info "Config directory: ${CONFIG_DIR}"
 
-  # Install configurations
-  print_info "\n=== Installing configurations ==="
-
-  # fastfetch
-  copy_config "$SCRIPT_DIR/fastfetch" "$CONFIG_DIR/fastfetch"
-
-  # ghostty
-  copy_config "$SCRIPT_DIR/ghostty" "$CONFIG_DIR/ghostty"
-
-  # hypr
-  copy_config "$SCRIPT_DIR/hypr" "$CONFIG_DIR/hypr"
-
-  # hyprlock
-  copy_config "$SCRIPT_DIR/hyprlock" "$CONFIG_DIR/hyprlock"
-
-  # kitty
-  copy_config "$SCRIPT_DIR/kitty" "$CONFIG_DIR/kitty"
-
-  # nvim
-  copy_config "$SCRIPT_DIR/nvim" "$CONFIG_DIR/nvim"
-
-  # oh-my-posh
-  copy_config "$SCRIPT_DIR/oh-my-posh" "$CONFIG_DIR/oh-my-posh"
-
-  # rofi
-  copy_config "$SCRIPT_DIR/rofi" "$CONFIG_DIR/rofi"
-
-  # scripts
-  copy_config "$SCRIPT_DIR/scripts" "$CONFIG_DIR/scripts"
-
-  # swaync
-  copy_config "$SCRIPT_DIR/swaync" "$CONFIG_DIR/swaync"
-
-  # tmux
-  copy_config "$SCRIPT_DIR/tmux" "$CONFIG_DIR/tmux"
-
-  # waybar
-  copy_config "$SCRIPT_DIR/waybar" "$CONFIG_DIR/waybar"
-
-  # zsh
-  if [ -f "$SCRIPT_DIR/zsh/zshrc" ]; then
-    backup_config "$HOME/.zshrc"
-    cp "$SCRIPT_DIR/zsh/zshrc" "$HOME/.zshrc"
-    print_success "Installed: $HOME/.zshrc"
+  # Ensure .config directory exists
+  if [[ ! -d "$CONFIG_DIR" ]]; then
+    mkdir -p "$CONFIG_DIR"
+    print_success "Created $CONFIG_DIR"
   fi
+
+  # List of directories to symlink
+  local dirs=(
+    "fastfetch"
+    "ghostty"
+    "hypr"
+    "hyprlock"
+    "kitty"
+    "nvim"
+    "oh-my-posh"
+    "rofi"
+    "scripts"
+    "swaync"
+    "tmux"
+    "waybar"
+    "zsh"
+  )
+
+  print_header "Installing Configuration Files"
+
+  local success_count=0
+  local total_count=${#dirs[@]}
+
+  for dir in "${dirs[@]}"; do
+    print_step "Processing: ${BOLD}$dir${NC}"
+
+    local source="$DOTFILES_DIR/$dir"
+    local target="$CONFIG_DIR/$dir"
+
+    if [[ ! -d "$source" ]]; then
+      print_warning "Source directory not found: $dir (skipping)"
+      continue
+    fi
+
+    # Backup existing files
+    backup_if_exists "$target"
+
+    # Create symlink
+    if create_symlink "$source" "$target"; then
+      ((success_count++))
+    fi
+
+    echo ""
+  done
+
+  print_header "Making Scripts Executable"
 
   # Make scripts executable
-  print_info "\n=== Making scripts executable ==="
-  if [ -d "$CONFIG_DIR/scripts" ]; then
-    chmod +x "$CONFIG_DIR/scripts"/*
-    print_success "Made scripts executable"
+  if [[ -d "$DOTFILES_DIR/scripts" ]]; then
+    find "$DOTFILES_DIR/scripts" -type f -exec chmod +x {} \;
+    print_success "Set execute permissions on scripts"
   fi
 
-  if [ -d "$CONFIG_DIR/rofi/launchers" ]; then
-    find "$CONFIG_DIR/rofi" -name "*.sh" -exec chmod +x {} \;
-    print_success "Made rofi scripts executable"
+  if [[ -d "$DOTFILES_DIR/rofi/launchers" ]]; then
+    find "$DOTFILES_DIR/rofi/launchers" -type f -name "*.sh" -exec chmod +x {} \;
+    find "$DOTFILES_DIR/rofi/powermenu" -type f -name "*.sh" -exec chmod +x {} \;
+    find "$DOTFILES_DIR/rofi/applets/bin" -type f -name "*.sh" -exec chmod +x {} \;
+    print_success "Set execute permissions on rofi scripts"
   fi
 
-  if [ -d "$CONFIG_DIR/waybar" ]; then
-    find "$CONFIG_DIR/waybar" -name "*.sh" -o -name "*.py" -exec chmod +x {} \;
-    print_success "Made waybar scripts executable"
+  if [[ -d "$DOTFILES_DIR/waybar" ]]; then
+    find "$DOTFILES_DIR/waybar" -type f -name "*.sh" -exec chmod +x {} \;
+    find "$DOTFILES_DIR/waybar" -type f -name "*.py" -exec chmod +x {} \;
+    print_success "Set execute permissions on waybar scripts"
   fi
 
-  if [ -d "$CONFIG_DIR/hyprlock/scripts" ]; then
-    chmod +x "$CONFIG_DIR/hyprlock/scripts"/*
-    print_success "Made hyprlock scripts executable"
+  if [[ -d "$DOTFILES_DIR/hyprlock/scripts" ]]; then
+    find "$DOTFILES_DIR/hyprlock/scripts" -type f -name "*.sh" -exec chmod +x {} \;
+    print_success "Set execute permissions on hyprlock scripts"
   fi
 
-  print_success "\n=== Installation complete! ==="
-  print_info "Your dotfiles have been installed to $CONFIG_DIR"
-  print_info "Backups of existing configs were created with .backup.TIMESTAMP extension"
-  print_warning "\nNote: You may need to:"
-  echo "  1. Restart your window manager or reboot"
-  echo "  2. Source your .zshrc: source ~/.zshrc"
-  echo "  3. Install required dependencies (fonts, packages, etc.)"
+  print_header "Installation Summary"
+
+  echo -e "${BOLD}Results:${NC}"
+  echo -e "  ${GREEN}Successfully linked:${NC} $success_count/$total_count configurations"
+
+  if [[ -d "$BACKUP_DIR" ]]; then
+    echo -e "  ${YELLOW}Backups saved to:${NC} $BACKUP_DIR"
+  else
+    echo -e "  ${GREEN}No backups needed${NC} (no existing files found)"
+  fi
+
+  print_header "Next Steps"
+
+  echo -e "${BOLD}Recommended actions:${NC}"
+  echo -e "  1. Review your configurations in ${CYAN}$CONFIG_DIR${NC}"
+  echo -e "  2. Restart your window manager or relog"
+  echo -e "  3. Check theme symlinks point to your preferred theme"
+  echo -e "  4. Run any additional setup scripts if needed"
+
+  echo -e "\n${GREEN}${BOLD}Installation complete!${NC} 🎉\n"
 }
 
-# Function to show usage
-show_usage() {
+# Uninstall function
+uninstall_dotfiles() {
+  print_banner
+  print_header "Uninstalling Dotfiles"
+
+  print_warning "This will remove all symlinked configurations!"
+  read -p "Are you sure you want to continue? (y/N) " -n 1 -r
+  echo
+
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    print_info "Uninstall cancelled"
+    exit 0
+  fi
+
+  local dirs=(
+    "fastfetch" "ghostty" "hypr" "hyprlock" "kitty"
+    "nvim" "oh-my-posh" "rofi" "scripts" "swaync"
+    "tmux" "waybar" "zsh"
+  )
+
+  for dir in "${dirs[@]}"; do
+    local target="$CONFIG_DIR/$dir"
+    if [[ -L "$target" ]]; then
+      rm "$target"
+      print_success "Removed: $dir"
+    fi
+  done
+
+  print_success "Uninstall complete!"
+}
+
+# Show help
+show_help() {
   cat <<EOF
-Usage: $0 [OPTIONS]
+Dotfiles Installation Script
+
+Usage: $0 [OPTION]
 
 Options:
-    -h, --help      Show this help message
-    -n, --dry-run   Show what would be installed without actually installing
+    install     Install dotfiles using symlinks (default)
+    uninstall   Remove all dotfile symlinks
+    help        Show this help message
 
-Description:
-    This script installs dotfiles from the current directory to ~/.config/
-    Existing configurations will be backed up automatically.
+Examples:
+    $0              # Install dotfiles
+    $0 install      # Install dotfiles
+    $0 uninstall    # Remove dotfiles
 
 EOF
 }
 
-# Parse command line arguments
-DRY_RUN=false
-while [[ $# -gt 0 ]]; do
-  case $1 in
-  -h | --help)
-    show_usage
-    exit 0
+# Main script logic
+main() {
+  case "${1:-install}" in
+  install)
+    install_dotfiles
     ;;
-  -n | --dry-run)
-    DRY_RUN=true
-    print_info "DRY RUN MODE - No changes will be made"
-    shift
+  uninstall)
+    uninstall_dotfiles
+    ;;
+  help | --help | -h)
+    show_help
     ;;
   *)
     print_error "Unknown option: $1"
-    show_usage
+    show_help
     exit 1
     ;;
   esac
-done
+}
 
-# Run installation
-if [ "$DRY_RUN" = true ]; then
-  print_warning "Dry run mode - would install the following:"
-  echo "  - fastfetch -> $CONFIG_DIR/fastfetch"
-  echo "  - ghostty -> $CONFIG_DIR/ghostty"
-  echo "  - hypr -> $CONFIG_DIR/hypr"
-  echo "  - hyprlock -> $CONFIG_DIR/hyprlock"
-  echo "  - kitty -> $CONFIG_DIR/kitty"
-  echo "  - nvim -> $CONFIG_DIR/nvim"
-  echo "  - oh-my-posh -> $CONFIG_DIR/oh-my-posh"
-  echo "  - rofi -> $CONFIG_DIR/rofi"
-  echo "  - scripts -> $CONFIG_DIR/scripts"
-  echo "  - swaync -> $CONFIG_DIR/swaync"
-  echo "  - tmux -> $CONFIG_DIR/tmux"
-  echo "  - waybar -> $CONFIG_DIR/waybar"
-  echo "  - zshrc -> $HOME/.zshrc"
-else
-  install_dotfiles
-fi
+# Run main function
+main "$@"
