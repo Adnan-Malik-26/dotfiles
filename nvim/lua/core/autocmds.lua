@@ -114,3 +114,10 @@ api.nvim_create_autocmd("FileType", {
 		end, 10)
 	end,
 })
+
+vim.api.nvim_create_user_command("RestartNvim", function()
+	vim.cmd("wall") -- save all
+	local args = vim.v.argv
+	vim.fn.jobstart(args, { detach = true })
+	vim.cmd("qa!")
+end, {})

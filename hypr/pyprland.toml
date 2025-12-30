@@ -4,8 +4,8 @@ plugins = ["scratchpads"]
 
 [scratchpads.bluetuith]
 animation = "fromTop"
-command = "kitty --class dropterm bluetuith"
-class = "dropterm"
+command = "kitty --class bluetooth bluetuith"
+class = "bluetooth"
 size = "50% 25%"
 max_size = "1920px 100%"
 margin = 65
@@ -24,6 +24,16 @@ lazy = true
 animation = "fromRight"
 command = "chromium --class=ytmusic --app='https://music.youtube.com'"
 class = "chrome-music.youtube.com__-Default"
+size = "45% 90%"
+max_size = "1920px 100%"
+margin = 50
+position = "55% 5%"
+lazy = true
+
+[scratchpads.spt]
+animation = "fromRight"
+command = "spotify"
+class = "spotify"
 size = "45% 90%"
 max_size = "1920px 100%"
 margin = 50

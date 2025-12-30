@@ -60,7 +60,7 @@ entry {
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       8;
+    lines:                       10;
     spacing:                     4px;
     cycle:                       true;
     scrollbar:                   false;

@@ -6,6 +6,7 @@ ROFI_COLORS="$CONFIG_DIR/rofi/colors"
 WAYBAR_COLORS="$CONFIG_DIR/waybar/colors"
 GHOSTTY_COLORS="$CONFIG_DIR/ghostty/themes"
 KITTY_COLORS="$CONFIG_DIR/kitty/colors"
+NVIM_COLORS="$CONFIG_DIR/nvim/lua/colors"
 SWAYNC_COLORS="$CONFIG_DIR/swaync/colors"
 
 # Wallpaper directories
@@ -19,6 +20,7 @@ ROFI_LINK="$ROFI_COLORS/color.rasi"
 WAYBAR_LINK="$WAYBAR_COLORS/colors.css"
 GHOSTTY_LINK="$GHOSTTY_COLORS/colors.conf"
 KITTY_LINK="$KITTY_COLORS/colors.conf"
+NVIM_LINK="$NVIM_COLORS/colors.lua"
 SWAYNC_LINK="$SWAYNC_COLORS/colors.css"
 
 # Available themes
@@ -31,6 +33,7 @@ themes=(
   "rosepine"
   "void"
   "dracula"
+  "synthwave"
 )
 
 # Function to create symlink
@@ -142,6 +145,7 @@ create_symlink "$WAYBAR_COLORS/${selected}.css" "$WAYBAR_LINK"
 create_symlink "$GHOSTTY_COLORS/${selected}.conf" "$GHOSTTY_LINK"
 create_symlink "$KITTY_COLORS/${selected}.conf" "$KITTY_LINK"
 create_symlink "$SWAYNC_COLORS/${selected}.css" "$SWAYNC_LINK"
+create_symlink "$NVIM_COLORS/${selected}.lua" "$NVIM_LINK"
 
 create_symlink "$HOME/.config/rofi/launchers/type-7/common/${selected}.rasi" "$HOME/.config/rofi/launchers/type-7/common/image.rasi"
 
@@ -180,6 +184,7 @@ if pgrep -x "swaync" >/dev/null; then
   killall swaync
   swaync
 fi
+
 # Note: Rofi applies themes on next launch
 echo ""
 echo "Notes:"

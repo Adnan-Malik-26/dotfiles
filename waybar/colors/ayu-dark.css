@@ -1,0 +1,23 @@
+/* Ayu Dark */
+@define-color bgd #0f1419;
+@define-color bg #151a1e;
+@define-color fg #e6e1cf;
+
+@define-color black #0f1419;
+@define-color red #f07178;
+@define-color green #b8cc52;
+@define-color yellow #ffb454;
+@define-color blue #59c2ff;
+@define-color magenta #d2a6ff;
+@define-color cyan #95e6cb;
+@define-color white #e6e1cf;
+@define-color orange #ffae57;
+
+@define-color bright_black #4d5566;
+@define-color bright_red #f07178;
+@define-color bright_green #b8cc52;
+@define-color bright_yellow #ffb454;
+@define-color bright_blue #59c2ff;
+@define-color bright_magenta #d2a6ff;
+@define-color bright_cyan #95e6cb;
+@define-color bright_white #ffffff;

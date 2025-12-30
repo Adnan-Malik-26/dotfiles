@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if pgrep -x "hyprsunset" > /dev/null; then
+    pkill hyprsunset
+    notify-send "Night Mode Off"
+else
+    hyprsunset &
+    notify-send "Night Mode On"
+fi

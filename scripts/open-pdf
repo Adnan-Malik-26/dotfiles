@@ -1,0 +1,116 @@
+#!/bin/bash
+# tmux-present.sh - Open presentations from specified directories using fzf
+# Usage: ./tmux-present.sh
+
+# Configure your presentation directories here
+DIRECTORIES=(
+  "$HOME/Documents/Books/Machine_Learning_AI/"
+  "$HOME/Documents/Books/Algorithms_DataStructures/"
+  "$HOME/Documents/Books/Personal_Development/"
+  "$HOME/Documents/Books/Programming_Languages/"
+  "$HOME/Documents/Books/Software_Engineering/"
+  "$HOME/Documents/Books/Systems_Infrastructure/"
+  "$HOME/Downloads"
+)
+
+# Check if we're in a tmux session
+if [ -z "$TMUX" ]; then
+  echo "Error: This script must be run from within a tmux session"
+  exit 1
+fi
+
+# Check for required commands
+if ! command -v fzf &>/dev/null; then
+  echo "Error: fzf is not installed"
+  echo "Install with: sudo apt install fzf  # or your package manager"
+  exit 1
+fi
+
+if ! command -v zathura &>/dev/null; then
+  echo "Warning: zathura is not installed (for PDF viewing)"
+fi
+
+if ! command -v present &>/dev/null; then
+  echo "Warning: present is not in PATH (for PPTX viewing)"
+fi
+
+# Build find command for all directories
+FIND_ARGS=()
+for dir in "${DIRECTORIES[@]}"; do
+  if [ -d "$dir" ]; then
+    FIND_ARGS+=("$dir")
+  fi
+done
+
+# If no valid directories found, exit
+if [ ${#FIND_ARGS[@]} -eq 0 ]; then
+  echo "Error: None of the specified directories exist"
+  exit 1
+fi
+
+# Create a new tmux window with fzf
+tmux new-window -n "presentations" bash -c '
+    # Find all PDF and PowerPoint files and format them
+    FILE=$(find '"${FIND_ARGS[*]}"' \
+        -type f \
+        \( -iname "*.pdf" -o -iname "*.pptx" -o -iname "*.ppt" \) \
+        2>/dev/null | \
+        awk "{
+            # Store full path
+            full=\$0
+            # Get filename and parent directory
+            n=split(\$0, parts, \"/\")
+            filename=parts[n]
+            parent=parts[n-1]
+            # Print formatted display and full path (tab-separated)
+            print parent \"/\" filename \"\t\" full
+        }" | \
+        fzf --prompt="Select presentation: " \
+            --with-nth=1 \
+            --delimiter="\t" \
+            --preview="ls -lh {2}" \
+            --preview-window=up:3:wrap \
+            --height=100% \
+            --border \
+            --header="Enter=Open | Esc=Cancel" | \
+        cut -f2)
+    
+    # Check if user selected a file
+    if [ -z "$FILE" ]; then
+        echo "No file selected"
+        sleep 1
+        exit 0
+    fi
+    
+    # Get file extension
+    EXT="${FILE##*.}"
+    EXT_LOWER=$(echo "$EXT" | tr "[:upper:]" "[:lower:]")
+    
+    # Open with appropriate viewer
+    case "$EXT_LOWER" in
+        pdf)
+            if command -v zathura &> /dev/null; then
+                echo "Opening with zathura: $FILE"
+                zathura "$FILE"
+            else
+                echo "Error: zathura not found"
+                echo "Install with: sudo apt install zathura"
+                read -p "Press Enter to continue..."
+            fi
+            ;;
+        pptx|ppt)
+            if command -v present &> /dev/null; then
+                echo "Opening with present: $FILE"
+                present "$FILE"
+            else
+                echo "Error: present not found in PATH"
+                echo "Make sure the presenter script is executable and in your PATH"
+                read -p "Press Enter to continue..."
+            fi
+            ;;
+        *)
+            echo "Unsupported file type: $EXT"
+            read -p "Press Enter to continue..."
+            ;;
+    esac
+'

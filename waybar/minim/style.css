@@ -1,0 +1,167 @@
+@import url('../colors/colors.css');
+
+* {
+  font-family: "Caskaydia Cove Nerd Font Propo", "Caskaydia Nerd Font Mono Propo", sans-serif;
+  font-size: 13px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+window#waybar {
+  background-color: transparent;
+}
+
+.modules-left {
+  margin-left: 12px;
+}
+
+.modules-right {
+  margin-right: 12px;
+}
+
+#workspaces {
+  background-color: rgba(17, 17, 29, 0.6);
+  padding: 2px;
+  border-radius: 50px;
+  /* backdrop-filter: blur(10px); */
+}
+
+#workspaces button {
+  background-color: transparent;
+  color: @magenta;
+  padding: 5px 12px;
+  transition: all 0.3s ease;
+}
+
+#workspaces button.active {
+  background-color: @magenta;
+  color: @bgd;
+  padding: 5px 16px;
+}
+
+#workspaces button:hover {
+  background-color: rgba(203, 166, 247, 0.2);
+}
+
+#workspaces button.empty {
+  color: @bright_black;
+  padding: 5px 8px;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @bgd;
+}
+
+#battery,
+#pulseaudio,
+#backlight,
+#custom-kanata,
+#network,
+#clock,
+#custom-media,
+#window,
+#tray,
+#bluetooth,
+#custom-distro,
+#custom-notification,
+#custom-privacydots,
+#custom-github,
+#custom-user,
+#power-profiles-daemon {
+  background-color: rgba(17, 17, 29, 0.6);
+  /* backdrop-filter: blur(10px); */
+  padding: 0 15px;
+  margin: 0 0 0 8px;
+}
+
+#custom-privacydots {
+  padding: 0 10px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: @yellow;
+}
+
+#battery {
+  color: @red;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#custom-github {
+  color: @green;
+}
+
+#custom-kanata {
+  color: @green;
+}
+
+#custom-media {
+  color: @cyan;
+}
+
+#custom-pacman {
+  color: @green;
+}
+
+#clock {
+  color: @orange;
+}
+
+#network {
+  color: @magenta;
+}
+
+#pulseaudio {
+  color: @blue;
+}
+
+#custom-launcher,
+#custom-notification {
+  color: @red;
+}
+
+#window {
+  color: @fg;
+  transition: all 0.3s ease;
+}
+
+#window.hidden {
+  opacity: 0;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+#tray {
+  padding: 0 12px;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+}
+
+tooltip {
+  border: 1px solid rgba(203, 166, 247, 0.3);
+  border-radius: 12px;
+  background-color: rgba(17, 17, 29, 0.9);
+  /* backdrop-filter: blur(20px); */
+}
+
+tooltip label {
+  margin: 4px 8px;
+  font-weight: normal;
+  color: @fg;
+}

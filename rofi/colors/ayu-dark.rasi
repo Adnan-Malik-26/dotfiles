@@ -1,0 +1,22 @@
+* {
+  bg: rgba(15, 20, 25, 0.85);
+  fg: #e6e1cf;
+
+  black: #0f1419;
+  red: #f07178;
+  green: #b8cc52;
+  yellow: #ffb454;
+  blue: #59c2ff;
+  magenta: #d2a6ff;
+  cyan: #95e6cb;
+  white: #e6e1cf;
+
+  bright-black: #4d5566;
+  bright-red: #f07178;
+  bright-green: #b8cc52;
+  bright-yellow: #ffb454;
+  bright-blue: #59c2ff;
+  bright-magenta: #d2a6ff;
+  bright-cyan: #95e6cb;
+  bright-white: #ffffff;
+}

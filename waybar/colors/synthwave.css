@@ -1,0 +1,24 @@
+/* SynthWave 84 */
+
+@define-color bgd #171520;
+@define-color bg #232530;
+@define-color fg #ffffff;
+
+@define-color black #1f212b;
+@define-color red #fe4450;
+@define-color green #72f1b8;
+@define-color yellow #fede5d;
+@define-color blue #03edf9;
+@define-color magenta #ff7edb;
+@define-color cyan #36f9f6;
+@define-color white #ffffff;
+@define-color orange #f97e72;
+
+@define-color bright_black #495495;
+@define-color bright_red #fa2e46;
+@define-color bright_green #09f7a0;
+@define-color bright_yellow #f3e70f;
+@define-color bright_blue #2ee2fa;
+@define-color bright_magenta #a148ab;
+@define-color bright_cyan #03edf9;
+@define-color bright_white #b6b1b1;

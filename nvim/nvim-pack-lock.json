@@ -64,6 +64,10 @@
       "rev": "16176d6aacd4673f041832fac8ae857c537666c7",
       "src": "https://github.com/A7Lavinraj/fyler.nvim"
     },
+    "github-monochrome.nvim": {
+      "rev": "d9885008f7ba2436b296a00ca9868e34c0c91dca",
+      "src": "https://github.com/idr4n/github-monochrome.nvim"
+    },
     "gruvbox.nvim": {
       "rev": "5e0a460d8e0f7f669c158dedd5f9ae2bcac31437",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
@@ -192,6 +196,10 @@
     "sqlite.lua": {
       "rev": "50092d6",
       "src": "https://github.com/kkharji/sqlite.lua"
+    },
+    "synthweave.nvim": {
+      "rev": "0520bc260674745cdd3b5465f322de5731217dc6",
+      "src": "https://github.com/samharju/synthweave.nvim"
     },
     "tabout.nvim": {
       "rev": "9a34994",

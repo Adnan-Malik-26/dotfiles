@@ -271,7 +271,7 @@ alias up='yay'
 alias u='yay -Syu --noconfirm'
 alias s='yay -Ss'
 alias i='yay -S --noconfirm'
-alias r='yay -R --noconfirm'
+alias rr='yay -R --noconfirm'
 
 # ----------------------------------------------------------------------------
 # Aliases - Development Tools
