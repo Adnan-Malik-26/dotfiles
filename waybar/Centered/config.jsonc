@@ -1,0 +1,245 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 13,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": [ "group/distro","clock",  "custom/media",   "custom/kanata", "group/pulseaudio", "battery", "network", "hyprland/window"],
+  "modules-right": [],
+  "height": 40,
+  "on-sigusr1": "hide",
+  "on-sigusr2": "show",
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/privacydots": {
+      "exec": "$HOME/.local/bin/privacy_dots.sh",
+      "return-type": "json",
+      "interval": 3,
+      "format": "{text}",
+      "tooltip": true,
+      "escape": false,
+      "markup": "pango"
+  },
+
+	"bluetooth": {
+		"format": "󰂯 {status}",
+		"format-disabled": "",
+		"format-off": "",
+		"format-on": "󰂰",
+		"format-connected": "󰂱",
+		"min-length": 2,
+		"max-length": 2,
+		"on-click": "pypr toggle bluetuith",
+		"on-click-right": "bluetoothctl power off && notify-send 'Bluetooth Off' -e -i 'network-bluetooth-inactive' -r 1925",
+		"tooltip-format": "Device Addr: {device_address}",
+		"tooltip-format-disabled": "Bluetooth Disabled",
+		"tooltip-format-off": "Bluetooth Off",
+		"tooltip-format-on": "Bluetooth Disconnected",
+		"tooltip-format-connected": "Device: {device_alias}",
+		"tooltip-format-enumerate-connected": "Device: {device_alias}",
+		"tooltip-format-connected-battery": "Device: {device_alias}\nBattery: {device_battery_percentage}%",
+		"tooltip-format-enumerate-connected-battery": "Device: {device_alias}\nBattery: {device_battery_percentage}%"
+	},
+	"group/pulseaudio": {
+		"orientation": "horizontal",
+		"modules": [
+			"pulseaudio#output",
+			"pulseaudio#input"
+		],
+		"drawer": {
+			"transition-left-to-right": false
+		}
+	},
+	"pulseaudio#output": {
+		"format": "{icon} {volume}%",
+		"format-muted": "{icon} {volume}%",
+		"format-icons": {
+			"default": [ "󰕿", "󰖀", "󰕾" ],
+			"default-muted": "󰝟",
+			"headphone": "󰋋",
+			"headphone-muted": "󰟎",
+			"headset": "󰋋",
+			"headset-muted": "󰋋"
+		},
+		"min-length": 7,
+		"max-length": 7,
+		"on-click": "~/.config/waybar/Pills/scripts/volume.sh output mute",
+		"on-scroll-up": "~/.config/waybar/Pills/scripts/volume.sh output raise",
+		"on-scroll-down": "~/.config/waybar/Pills/scripts/volume.sh output lower",
+		"tooltip-format": "Output Device: {desc}"
+	},
+	"pulseaudio#input": {
+		"format": "{format_source}",
+		"format-source": "󰍬 {volume}%",
+		"format-source-muted": "󰍭 {volume}%",
+		"min-length": 7,
+		"max-length": 7,
+		"on-click": "~/.config/waybar/Pills/scripts/volume.sh input mute",
+		"on-scroll-up": "~/.config/waybar/Pills/scripts/volume.sh input raise",
+		"on-scroll-down": "~/.config/waybar/Pills/scripts/volume.sh input lower",
+		"tooltip-format": "Input Device: {desc}"
+	},
+
+
+
+	"group/distro": {
+		"orientation": "horizontal",
+		"modules": [
+			"custom/distro",
+			"custom/user"
+		],
+		"drawer": {}
+	},
+	"custom/user": {
+		"exec": "id --user --name",
+		"format": "{}",
+		"tooltip": false
+	},
+  "custom/distro": {
+    "format": "",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "tooltip": false
+  },
+
+  "custom/pacman": {
+    "format": "{}",
+    "interval": "",
+    "exec": "$HOME/.config/waybar/Pills/scripts/system-update.sh",
+    "on-click": "ghostty -e $HOME/.config/waybar/Pills/scripts/system-update.sh start",
+    "signal": 8,
+    "return-type": "json"
+  },
+
+  "custom/media": {
+    "format": "{}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 30,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "smooth-scrolling-threshold": 1,
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "exec": "$HOME/.config/waybar/Pills/scripts/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
+  },
+
+  "battery": {
+    "format": "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "Battery is at {capacity}%" 
+  },
+
+  "clock": {
+    "format": "󰥔  {:%I:%M %p}",
+    "format-alt": "󰥔  {:%a, %d. %b  %I:%M %p}",
+    "tooltip-format": "Date: {:%Y-%m-%d}"
+  },
+
+  "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "{icon} {essid}",
+    "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+    "format-disconnected": "",
+    "max-length": 50,
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format": "Connected to {essid}",
+    "on-click": "ghostty -e $HOME/.config/waybar/Pills/scripts/network.sh"
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": { },
+    "persistent-workspaces": {
+      "*": 5
+    },
+    "sort-by-number": true
+  },
+
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power mode: {profile}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "󰠠",
+      "balanced": "󰚀",
+      "power-saver": "󰌪"
+    }
+  },
+
+  "custom/kanata": {
+    "exec": "~/.config/waybar/Pills/scripts/kanata-toggle.sh",
+    "return-type": "json",
+    "interval": 2,
+    "signal": 8,
+    "on-click": "~/.config/waybar/Pills/scripts/kanata-toggle.sh toggle",
+    "format": "{}"
+  },
+
+  "hyprland/window": {
+    "format": "{class}",
+    "separate-outputs": true,
+    "icon": false,
+    "icon-size": 18,
+    "rewrite": {
+      "Mozilla Firefox": "Firefox",
+      "(.*)youtube(.*)": "Youtube Music",
+      "firefox": "Firefox",
+      "deno": "Markdown Preview",
+      "(.*) Thunar": "Thunar",
+      "(.*)obs(.*)": "OBS",
+      "Spotify (.*)": "Spotify",
+      "discord(.*)": "Discord",
+      "Code": "VS Code",
+      "Docker Desktop": " Docker",
+      "kitty": "Kitty",
+      "zen": "Zen",
+      "com.mitchellh.ghostty": "Ghostty",
+      "org.telegram.desktop": "Telegram",
+      "chrome-claude.ai__-Default": "Claude",
+      "(.*)whatsapp(.*)": "Whatsapp"
+    } 
+},
+  
+  "cpu": {
+    "interval": 10,
+    "format": "    {}%",
+    "max-length": 10
+  },
+
+  "memory": {
+    "interval": 30,
+    "format": "    {}%",
+    "max-length": 10
+  },
+
+  "disk": {
+    "interval": 30,
+    "format": "   {percentage_used}% used on {path}",
+    "path": "/"
+  }
+}

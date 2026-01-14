@@ -1,0 +1,207 @@
+@import '../colors/colors.css';
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "SF Pro Display", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+#workspaces,
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#custom-media,
+#custom-notification,
+#custom-distro,
+#custom-user,
+#custom-pacman,
+#custom-kanata,
+#bluetooth,
+#window {
+  background: @bgd;
+  color: @fg;
+  padding: 4px 14px;
+  margin: 4px 3px;
+  border-radius: 12px;
+  border: 1px solid @bg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+/* Workspace Styles */
+#workspaces {
+  padding: 2px 6px;
+}
+
+#workspaces button {
+  color: @bright_black;
+  background: transparent;
+  border-radius: 8px;
+  padding: 4px 10px;
+  margin: 2px 3px;
+  transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+  background: @bg;
+  color: @magenta;
+}
+
+#workspaces button.active {
+  background: linear-gradient(135deg, @blue 0%, @magenta 100%);
+  color: @bg;
+  font-weight: 600;
+}
+
+#workspaces button.urgent {
+  background: @red;
+  color: @bg;
+}
+
+/* Clock */
+#clock {
+  color: @blue;
+  font-weight: 600;
+  background: @bgd;
+  border: 1px solid @black;
+}
+
+/* Battery */
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}
+
+/* Network */
+#network {
+  color: @cyan;
+}
+
+#network.disconnected {
+  color: @blue;
+}
+
+/* Audio */
+#pulseaudio {
+  color: @red;
+}
+
+#pulseaudio.output,
+#pulseaudio.input {
+  padding: 4px 12px;
+}
+
+#pulseaudio.muted {
+  color: @black;
+}
+
+/* Media Player */
+#custom-media {
+  color: @magenta;
+}
+
+#custom-media.custom-spotify {
+  color: @green;
+}
+
+/* Window Title */
+#window {
+  color: @white;
+  font-weight: 500;
+}
+
+/* Distro/User Group */
+#custom-distro {
+  color: @orange;
+  font-size: 16px;
+  padding: 4px 12px;
+}
+
+#custom-user {
+  color: @blue;
+  font-weight: 500;
+}
+
+/* Kanata Status */
+#custom-kanata {
+  color: @orange;
+}
+
+/* Bluetooth */
+#bluetooth {
+  color: @blue;
+}
+
+#bluetooth.connected {
+  color: @green;
+}
+
+#bluetooth.off {
+  color: @fg;
+}
+
+/* Notifications */
+#custom-notification {
+  color: @red;
+  padding: 4px 10px;
+}
+
+/* System Updates */
+#custom-pacman {
+  color: @yellow;
+}
+
+/* Groups */
+.modules-left,
+.modules-center,
+.modules-right {
+  margin: 0 8px;
+}
+
+/* Hover Effects */
+#workspaces button:hover,
+#clock:hover,
+#battery:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-media:hover,
+#window:hover,
+#bluetooth:hover,
+#custom-kanata:hover,
+#custom-distro:hover,
+#custom-pacman:hover {
+  background: @bg;
+  border-color: @magenta;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Tooltip */
+tooltip {
+  background: @bgd;
+  color: @fg;
+  border-radius: 10px;
+  border: 1px solid @bg;
+  padding: 8px 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+tooltip label {
+  color: @fg;
+}

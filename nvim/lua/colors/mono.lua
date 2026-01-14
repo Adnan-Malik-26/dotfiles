@@ -1,1 +1,1 @@
-vim.cmd.colorscheme("github-monochrome-dark")
+vim.cmd("colorscheme mono")
