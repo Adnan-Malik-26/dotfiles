@@ -120,6 +120,16 @@ bindsym $mod+INSERT exec hyprshot -m output -o ~/Pictures/Screenshots/
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
+# Volume
+bindsym XF86AudioMute exec $HOME/.local/bin/volume.sh --toggle
+bindsym XF86AudioRaiseVolume exec $HOME/.local/bin/volume.sh --inc
+bindsym XF86AudioLowerVolume exec $HOME/.local/bin/volume.sh --dec
+
+# Brightness
+bindsym Shift+F3 exec $HOME/.local/bin/brightness.sh --inc
+bindsym Shift+F2 exec $HOME/.local/bin/brightness.sh --dec
+
 #
 # Resizing containers:
 #
