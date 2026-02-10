@@ -175,11 +175,5 @@ assign [class="Thorium-browser"] workspace 5
 assign [app_id="obsidian"] workspace 3
 
 exec kanata -c /home/adnanmalik/.config/kanata/qwerty.kbd
-exec_always --no-startup-id swayidle -w \
-timeout 300 'swaylock -f -i $background' \
-timeout 600 'swaymsg "output * dpms off"' \
-timeout 900 'systemctl suspend' \
-resume 'swaymsg "output * dmps on"' \
-before-sleep 'swaylock -f -c 000000'
 
 include /etc/sway/config.d/*
