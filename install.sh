@@ -6,7 +6,7 @@ CONFIG_DIR="$HOME/.config"
 BACKUP_DIR="$HOME/.config/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
 CONFIGS=(
-  ghostty hypr hyprlock kitty nvim rofi swaync tmux waybar zsh oh-my-posh sway
+  ghostty hypr hyprlock kitty nvim rofi swaync tmux waybar zsh oh-my-posh sway pypr
 )
 
 # ────────────────────────────────
