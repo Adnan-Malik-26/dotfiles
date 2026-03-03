@@ -1,1 +1,1 @@
-/home/adnanmalik/.config/nvim/lua/colors/catppuccin.lua
+/home/adnanmalik/.config/nvim/lua/colors/dracula.lua
