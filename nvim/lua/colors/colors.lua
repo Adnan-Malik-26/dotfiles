@@ -1,1 +1,1 @@
-/home/adnanmalik/.config/nvim/lua/colors/dracula.lua
+/home/adnanmalik/.config/nvim/lua/colors/ayu-dark.lua

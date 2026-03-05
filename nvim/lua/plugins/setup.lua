@@ -11,6 +11,7 @@ vim.pack.add({
 	{ src = "https://github.com/rose-pine/neovim" },
 	{ src = "https://github.com/idr4n/github-monochrome.nvim" },
 	{ src = "https://github.com/samharju/synthweave.nvim" },
+	{ src = "https://github.com/Shatur/neovim-ayu" },
 
 	-- UI
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },

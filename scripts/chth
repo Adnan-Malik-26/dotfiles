@@ -25,6 +25,7 @@ SWAYNC_LINK="$SWAYNC_COLORS/colors.css"
 
 # Available themes
 themes=(
+  "ayu-dark"
   "catppuccin"
   "everforest"
   "gruvbox"
@@ -34,6 +35,19 @@ themes=(
   "void"
   "dracula"
   "synthwave"
+)
+
+declare -A OBSIDIAN_THEME_MAP=(
+  ["catppuccin"]="Catppuccin"
+  ["everforest"]="Everforest Spruce"
+  ["gruvbox"]="Material Gruvbox"
+  ["ayu-dark"]="Ayu Mirage"
+  ["dracula"]="Dracula Official"
+  ["mono"]="Amoled Serenity"
+  ["nord"]="Obsidian Nord"
+  ["rosepine"]="Rose Pine"
+  ["void"]="Minimal"
+  ["synthwave"]="Synthwave '84"
 )
 
 # Function to create symlink
@@ -135,6 +149,8 @@ if [ -z "$selected" ]; then
   exit 1
 fi
 
+OBSIDIAN_THEME="${OBSIDIAN_THEME_MAP[$selected]}"
+
 echo "Switching to theme: $selected"
 echo "================================"
 
@@ -149,7 +165,17 @@ create_symlink "$NVIM_COLORS/${selected}.lua" "$NVIM_LINK"
 
 create_symlink "$HOME/.config/rofi/launchers/type-7/common/${selected}.rasi" "$HOME/.config/rofi/launchers/type-7/common/image.rasi"
 
-# Setup wallpaper directory symlink and set random wallpaper
+# Setting colors for obsidian
+if command -v obsidian &>/dev/null; then
+  if [ -n "$OBSIDIAN_THEME" ]; then
+    obsidian theme:set name="$OBSIDIAN_THEME"
+    echo "✓ Obsidian theme set to: $OBSIDIAN_THEME"
+  else
+    echo "⚠️  No Obsidian theme mapping for $selected"
+  fi
+fi
+
+#Setup wallpaper directory symlink and set random wallpaper
 echo ""
 echo "Setting up wallpapers..."
 if create_dir_symlink "$WALLS_DIR/${selected}" "$WALLS_LINK"; then
