@@ -11,7 +11,7 @@ source $ScrDir/globalcontrol.sh
 
 # Check for updates
 get_aurhlpr
-aur=$(${aurhlpr} -Qua | wc -l)
+aur=$(${yay} -Qua | wc -l)
 ofc=$(checkupdates | wc -l)
 
 # Check for flatpak updates

@@ -16,7 +16,7 @@ window#waybar {
 
 tooltip {
   background: #EAB2C2;
-  color: @main-fg;
+  color: #1e1e2e;
   border-radius: 8px;
   border-width: 0px;
 }
@@ -232,6 +232,7 @@ tooltip {
   border-radius: 5px;
   margin-top: 7.5px;
   margin-bottom: 7.5px;
+  color: #1e1e2e;
 }
 
 #workspaces,

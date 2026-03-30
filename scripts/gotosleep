@@ -1,0 +1,7 @@
+#!/bin/bash
+
+pidof hyprlock || hyprlock &>/dev/null &
+
+sleep 2
+
+systemctl suspend
