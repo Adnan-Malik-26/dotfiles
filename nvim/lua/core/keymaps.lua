@@ -61,8 +61,8 @@ map("n", "<leader><leader>", "<C-^>", desc("Switch to last buffer"))
 map("t", "<Esc>", [[<C-\><C-n>]], desc("Exit terminal mode"))
 
 -- Window splits
-map("n", "<leader>sh", "<CMD>split<CR> <CMD>Telescope find_files<CR>", desc("Split horizontally"))
-map("n", "<leader>sv", "<CMD>vsplit<CR> <CMD>Telescope find_files<CR>", desc("Split vertically"))
+map("n", "<leader>sh", "<CMD>split<CR> <CMD>lua Snacks.Picker.filesCR>", desc("Split horizontally"))
+map("n", "<leader>sv", "<CMD>vsplit<CR> <CMD>lua Snacks.Picker.files<CR>", desc("Split vertically"))
 
 -- Window resizing
 map("n", "<C-A-h>", "<CMD>vertical resize +5<CR>", desc("Resize left"))
@@ -73,6 +73,10 @@ map("n", "<C-A-l>", "<CMD>vertical resize -5<CR>", desc("Resize right"))
 -- Spelling
 map("n", "<C-S-s>", "<cmd>set spell<CR>", desc("Enable Spelling"))
 map("n", "<A-CR>", "1z=", desc("Correct Spelling under Cursor"))
+
+vim.keymap.set("n", "<leader>rp", function()
+	vim.cmd("split | terminal python3 " .. vim.fn.expand("%"))
+end, { desc = "Run Python File" })
 
 vim.keymap.set("n", "gK", function()
 	local new_config = not vim.diagnostic.config().virtual_lines
@@ -87,26 +91,31 @@ map("i", "<A-S-r>", "₹", desc("Enter Rupees"))
 -- Open Todo
 vim.keymap.set("n", "<leader>t", function()
 	local todo_path = vim.fn.expand("~/Notes/TODO.md")
-	local dir = vim.fn.fnamemodify(todo_path, ":h")
-	vim.fn.mkdir(dir, "p")
+	vim.fn.mkdir(vim.fn.fnamemodify(todo_path, ":h"), "p")
+
 	local width = math.floor(vim.o.columns * 0.8)
 	local height = math.floor(vim.o.lines * 0.8)
-	local col = math.floor((vim.o.columns - width) / 2)
-	local row = math.floor((vim.o.lines - height) / 2)
-	local buf = vim.api.nvim_create_buf(false, false)
-	local win = vim.api.nvim_open_win(buf, true, {
+
+	local buf = vim.fn.bufadd(todo_path)
+	vim.fn.bufload(buf)
+
+	if not vim.api.nvim_buf_is_valid(buf) then
+		vim.notify("Failed to load TODO buffer", vim.log.levels.ERROR)
+		return
+	end
+
+	vim.api.nvim_open_win(buf, true, {
 		relative = "editor",
 		width = width,
 		height = height,
-		col = col,
-		row = row,
+		col = math.floor((vim.o.columns - width) / 2),
+		row = math.floor((vim.o.lines - height) / 2),
 		style = "minimal",
 		border = "rounded",
 	})
 
-	vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
-	vim.cmd("edit " .. vim.fn.fnameescape(todo_path))
-	vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+	vim.bo[buf].filetype = "markdown"
+	vim.bo[buf].bufhidden = "wipe"
 
 	vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })
 	vim.keymap.set("n", "<Esc>", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })

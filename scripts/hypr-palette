@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# -----------------------------
+# Sources
+# -----------------------------
+
+# Apps
+apps=$(compgen -c | sort -u)
+
+# Tmux sessions
+tmux_sessions=$(tmux list-sessions -F "tmux: #{session_name}" 2>/dev/null || true)
+
+# Windows
+windows=$(hyprctl clients -j | jq -r '.[] | "win: \(.class) - \(.title) (\(.address))"')
+
+# Workspaces
+workspaces=$(hyprctl workspaces -j | jq -r '.[] | "ws: \(.id) (\(.windows) windows)"')
+
+# System actions
+system=$(printf "sys: shutdown\nsys: reboot\nsys: lock\nsys: logout")
+
+# Projects (customize this)
+projects=$(fd --type d . "$HOME/Dev" --max-depth 2 2>/dev/null | sed "s|$HOME/||" | awk '{print "proj: " $0}')
+
+# Combine everything
+combined=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n" \
+  "$apps" "$tmux_sessions" "$windows" "$workspaces" "$system" "$projects")
+
+# -----------------------------
+# FZF UI
+# -----------------------------
+selected=$(echo "$combined" | fzf \
+  --prompt="⚡ " \
+  --height=70% \
+  --reverse \
+  --border \
+  --preview 'echo {}' \
+  --bind "ctrl-d:execute(tmux kill-session -t {2})")
+
+[[ -z "$selected" ]] && exit 0
+
+# -----------------------------
+# Action Handler
+# -----------------------------
+
+case "$selected" in
+
+  tmux:*)
+    session=$(echo "$selected" | cut -d ':' -f2 | xargs)
+    if [[ -n "${TMUX:-}" ]]; then
+      tmux switch-client -t "$session"
+    else
+      tmux attach -t "$session"
+    fi
+    ;;
+
+  win:*)
+    address=$(echo "$selected" | grep -oP '\(0x[0-9a-f]+\)' | tr -d '()')
+    hyprctl dispatch focuswindow address:$address
+    ;;
+
+  ws:*)
+    id=$(echo "$selected" | grep -oP 'ws: \K[0-9]+')
+    hyprctl dispatch workspace "$id"
+    ;;
+
+  sys: shutdown)
+    systemctl poweroff
+    ;;
+
+  sys: reboot)
+    systemctl reboot
+    ;;
+
+  sys: lock)
+    hyprlock
+    ;;
+
+  sys: logout)
+    hyprctl dispatch exit
+    ;;
+
+  proj:*)
+    dir=$(echo "$selected" | sed 's/^proj: //' )
+    exec "$HOME/.local/bin/sessionizer" "$HOME/$dir"
+    ;;
+
+  *)
+    # fallback → run as command
+    eval "$selected" &
+    ;;
+esac

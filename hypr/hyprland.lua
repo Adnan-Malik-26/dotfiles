@@ -1,0 +1,8 @@
+require("modules.general")
+require("modules.autostart")
+require("modules.environments")
+require("modules.looknfeel")
+require("modules.windowrules")
+require("modules.theming")
+require("modules.input")
+require("modules.binds")

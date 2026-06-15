@@ -14,9 +14,6 @@ set $background /home/adnanmalik/walls/mono/92.jpeg
 
 output * bg $background fill
 
-bindswitch lid:on exec "systemctl suspend"
-bindswitch lid:off exec "sudo systemctl restart NetworkManager"
-
 set $cl_high #ffffff
 set $cl_indi #d9d8d8
 set $cl_back #231f20

@@ -18,6 +18,45 @@
 @define-color bright_green #d8e6d8;
 @define-color bright_yellow #eeeac9;
 @define-color bright_blue #d5daf1;
-@define-color bright_magenta#e8d5f1;
+@define-color bright_magenta #e8d5f1;
 @define-color bright_cyan #d5f0f0;
 @define-color bright_white #ffffff;
+
+/*
+@define-color bgd rgb(17,17,17);
+@define-color bg rgb(28,28,28);
+@define-color fg rgb(230,230,230);
+
+@define-color black rgb(42,42,42);
+@define-color red rgb(216,180,180);
+@define-color green rgb(196,214,196);
+@define-color yellow rgb(222,216,184);
+@define-color blue rgb(195,202,221);
+@define-color magenta rgb(218,195,221);
+@define-color cyan rgb(195,222,221);
+@define-color white rgb(242,242,242);
+@define-color orange rgb(247,220,198);
+
+@define-color bright_black rgb(74,74,74);
+@define-color bright_red rgb(232,200,200);
+@define-color bright_green rgb(216,230,216);
+@define-color bright_yellow rgb(238,234,201);
+@define-color bright_blue rgb(213,218,241);
+@define-color bright_magenta rgb(232,213,241);
+@define-color bright_cyan rgb(213,240,240);
+@define-color bright_white rgb(255,255,255);
+ */
+/*
+
+rgb(216,180,180) x
+rgb(232,200,189) x
+rgb(247,220,198) x
+rgb(235,218,191)
+rgb(222,216,184)
+rgb(196,214,196)
+rgb(195,222,221)
+rgb(195,212,221)
+rgb(195,202,221)
+rgb(218,195,221)
+rgb(242,242,242)
+*/

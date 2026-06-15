@@ -39,7 +39,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       branch_icon = ''
       cache_duration = 'none'
       commit_icon = '@'
-      fetch_status = true
+      fetch_status = false
+[git_status]
+ignore_submodules = "untracked"
+
+[os]
+[os.git_status]
 
 [[blocks]]
   type = 'rprompt'

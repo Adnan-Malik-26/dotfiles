@@ -10,38 +10,43 @@
 }
 
 window#waybar {
-  background-color: #1e1e2e;
-  color: #cdd6f4;
+  background-color: @bgd;
+  color: @fg;
 }
 
 /* Workspace Buttons */
 #workspaces button {
   padding: 0 12px;
-  color: #6c7086;
+  color: @magenta;
   background-color: transparent;
   border-bottom: 2px solid transparent;
 }
 
 #workspaces button.active {
-  color: #cdd6f4;
-  border-bottom: 2px solid #89b4fa;
+  color: @blue;
+  border-bottom: 2px solid @red;
 }
 
 #workspaces button:hover {
-  color: #cdd6f4;
-  background-color: #313244;
+  color: @fg;
+  background-color: @black;
 }
+
+#workspaces button.empty {
+  color: @black;
+}
+
 
 /* Window Title */
 #window {
   padding: 0 12px;
-  color: #bac2de;
+  color: @green;
 }
 
 /* Clock */
 #clock {
   padding: 0 12px;
-  color: #cdd6f4;
+  color: @yellow;
   font-weight: 500;
 }
 
@@ -53,52 +58,52 @@ window#waybar {
 #pulseaudio {
   padding: 0 12px;
   margin: 0 2px;
-  color: #cdd6f4;
+  color: @blue;
 }
 
 /* CPU */
 #cpu {
-  color: #89dceb;
+  color: @cyan;
 }
 
 /* Memory */
 #memory {
-  color: #a6e3a1;
+  color: @green;
 }
 
 /* Battery States */
 #battery {
-  color: #f9e2af;
+  color: @yellow;
 }
 
 #battery.charging {
-  color: #a6e3a1;
+  color: @green;
 }
 
 #battery.warning:not(.charging) {
-  color: #fab387;
+  color: @orange;
 }
 
 #battery.critical:not(.charging) {
-  color: #f38ba8;
+  color: @red;
 }
 
 /* Network */
 #network {
-  color: #89b4fa;
+  color: @blue;
 }
 
 #network.disconnected {
-  color: #f38ba8;
+  color: @red;
 }
 
 /* PulseAudio */
 #pulseaudio {
-  color: #cba6f7;
+  color: @magenta;
 }
 
 #pulseaudio.muted {
-  color: #6c7086;
+  color: @blue;
 }
 
 /* System Tray */
@@ -111,5 +116,5 @@ window#waybar {
 }
 
 #tray>.needs-attention {
-  color: #f38ba8;
+  color: @red;
 }

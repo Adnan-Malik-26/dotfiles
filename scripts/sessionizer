@@ -1,0 +1,377 @@
+#!/usr/bin/env bash
+# =============================================================================
+# sessionizer — fast tmux session switcher/creator
+# Deps: tmux, fzf; optional: fd, git, tree, nerd-fonts
+# =============================================================================
+
+set -euo pipefail
+
+# ---------------------------------------------------------------------------
+# CONFIG — override via ~/.config/sessionizer/config
+# ---------------------------------------------------------------------------
+SESSIONIZER_DIRS=(
+  "$HOME/Dev"
+  "$HOME/Dev/projects"
+  "$HOME/Dev/learning"
+  "$HOME/.config"
+  "$HOME"
+)
+SESSIONIZER_MAX_DEPTH=3
+SESSIONIZER_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/sessionizer"
+SESSIONIZER_SCAN_CACHE="${SESSIONIZER_CACHE_DIR}/dirs.cache"
+SESSIONIZER_LRU_CACHE="${SESSIONIZER_CACHE_DIR}/lru"
+SESSIONIZER_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sessionizer/config"
+SESSIONIZER_PINS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sessionizer/pins"
+SESSIONIZER_CACHE_TTL=300
+
+# ---------------------------------------------------------------------------
+# LOAD USER CONFIG
+# ---------------------------------------------------------------------------
+[[ -f "$SESSIONIZER_CONFIG_FILE" ]] && source "$SESSIONIZER_CONFIG_FILE"
+
+# ---------------------------------------------------------------------------
+# COLORS — $'...' syntax ensures \033 expands correctly
+# ---------------------------------------------------------------------------
+C_RESET=$'\033[0m'
+C_DIM=$'\033[2m'
+C_BOLD=$'\033[1m'
+C_GREEN=$'\033[32m'
+C_CYAN=$'\033[36m'
+C_YELLOW=$'\033[33m'
+
+# Nerd Font icons
+_nerd_fonts_available() {
+  [[ "${NERDFONT:-}" == "1" ]] || \
+  [[ "${TERM_PROGRAM:-}" == "kitty" ]] || \
+  [[ -n "${KITTY_WINDOW_ID:-}" ]]
+}
+
+if _nerd_fonts_available; then
+  ICON_DIR=" "
+  ICON_GIT=" "
+  ICON_TMUX=" "
+  ICON_PIN=" "
+  ICON_HOME="󰋜 "
+else
+  ICON_DIR="[d] "
+  ICON_GIT="[g] "
+  ICON_TMUX="[~] "
+  ICON_PIN="[*] "
+  ICON_HOME="[H] "
+fi
+
+# ---------------------------------------------------------------------------
+# DEPENDENCY CHECK
+# ---------------------------------------------------------------------------
+_check_deps() {
+  local missing=()
+  command -v tmux &>/dev/null || missing+=("tmux")
+  command -v fzf  &>/dev/null || missing+=("fzf")
+  if [[ ${#missing[@]} -gt 0 ]]; then
+    printf "sessionizer: missing deps: %s\n" "${missing[*]}" >&2
+    exit 1
+  fi
+}
+
+# ---------------------------------------------------------------------------
+# SESSION NAME SANITIZATION
+# ---------------------------------------------------------------------------
+_sanitize_name() {
+  local name="${1##*/}"
+  name="${name//[. ]/-}"
+  name="${name//[^a-zA-Z0-9_-]/}"
+  printf "%s" "$name"
+}
+
+# ---------------------------------------------------------------------------
+# DIRECTORY SCANNER — TTL-based scan cache
+# Avoids re-running fd/find on every invocation
+# ---------------------------------------------------------------------------
+_scan_dirs() {
+  mkdir -p "$SESSIONIZER_CACHE_DIR"
+
+  if [[ -f "$SESSIONIZER_SCAN_CACHE" ]]; then
+    local now mtime
+    now=$(date +%s)
+    mtime=$(stat -c %Y "$SESSIONIZER_SCAN_CACHE" 2>/dev/null || \
+            stat -f %m "$SESSIONIZER_SCAN_CACHE" 2>/dev/null || echo 0)
+    if (( now - mtime < SESSIONIZER_CACHE_TTL )); then
+      cat "$SESSIONIZER_SCAN_CACHE"
+      return
+    fi
+  fi
+
+  local dir tmp="${SESSIONIZER_SCAN_CACHE}.tmp"
+
+  for dir in "${SESSIONIZER_DIRS[@]}"; do
+    [[ -d "$dir" ]] || continue
+
+    if command -v fd &>/dev/null; then
+      fd . "$dir" \
+        --type d \
+        --max-depth "$SESSIONIZER_MAX_DEPTH" \
+        --hidden \
+        --exclude ".git" \
+        --exclude "node_modules" \
+        --exclude "__pycache__" \
+        --exclude "target" \
+        --exclude "dist" \
+        --exclude "build" \
+        --exclude ".cache" \
+        --exclude ".venv" \
+        --exclude "venv" \
+        2>/dev/null
+    else
+      find "$dir" \
+        -maxdepth "$SESSIONIZER_MAX_DEPTH" \
+        -type d \
+        \( -name ".git" \
+          -o -name "node_modules" \
+          -o -name "__pycache__" \
+          -o -name "target" \
+          -o -name "dist" \
+          -o -name "build" \
+          -o -name ".cache" \
+          -o -name ".venv" \
+          -o -name "venv" \
+        \) -prune \
+        -o -type d -print \
+        2>/dev/null
+    fi
+  done | sort -u | tee "$tmp"
+
+  mv "$tmp" "$SESSIONIZER_SCAN_CACHE"
+}
+
+# ---------------------------------------------------------------------------
+# ACTIVE TMUX SESSIONS
+# ---------------------------------------------------------------------------
+_active_sessions() {
+  tmux list-sessions -F "#{session_name}" 2>/dev/null || true
+}
+
+# ---------------------------------------------------------------------------
+# LRU CACHE
+# ---------------------------------------------------------------------------
+_lru_read() {
+  [[ -f "$SESSIONIZER_LRU_CACHE" ]] && cat "$SESSIONIZER_LRU_CACHE" || true
+}
+
+_lru_update() {
+  local selected="$1"
+  mkdir -p "$SESSIONIZER_CACHE_DIR"
+  {
+    printf "%s\n" "$selected"
+    _lru_read
+  } | awk '!seen[$0]++' | head -50 > "${SESSIONIZER_LRU_CACHE}.tmp"
+  mv "${SESSIONIZER_LRU_CACHE}.tmp" "$SESSIONIZER_LRU_CACHE"
+}
+
+# ---------------------------------------------------------------------------
+# PINNED DIRS
+# ---------------------------------------------------------------------------
+_pinned_dirs() {
+  [[ -f "$SESSIONIZER_PINS_FILE" ]] && grep -v '^\s*#\|^\s*$' "$SESSIONIZER_PINS_FILE" || true
+}
+
+# ---------------------------------------------------------------------------
+# BUILD FZF INPUT
+# NO git calls here — moved to preview only (called once per hover, not per entry)
+# Format: RAW_PATH<TAB>DISPLAY_LINE
+# ---------------------------------------------------------------------------
+_build_list() {
+  local sessions pins lru all_dirs
+
+  sessions="$(_active_sessions)"
+  pins="$(_pinned_dirs)"
+  lru="$(_lru_read)"
+
+  all_dirs="$(
+    {
+      [[ -n "$pins" ]] && printf "%s\n" "$pins"
+      [[ -n "$lru"  ]] && printf "%s\n" "$lru"
+      _scan_dirs
+    } | awk 'NF && !seen[$0]++'
+  )"
+
+  while IFS= read -r path; do
+    [[ -d "$path" ]] || continue
+
+    local name suffix prefix icon display_path
+    name="$(_sanitize_name "$path")"
+    [[ -z "$name" ]] && continue
+
+    # Session indicator — grep against pre-fetched string (no subprocess)
+    if printf "%s\n" "$sessions" | grep -qxF "$name" 2>/dev/null; then
+      suffix="${C_GREEN}${ICON_TMUX}${C_RESET}"
+    else
+      suffix=""
+    fi
+
+    # Pin indicator
+    if [[ -n "$pins" ]] && printf "%s\n" "$pins" | grep -qxF "$path" 2>/dev/null; then
+      prefix="${C_YELLOW}${ICON_PIN}${C_RESET}"
+    else
+      prefix="  "
+    fi
+
+    # Icon
+    if [[ "$path" == "$HOME" ]]; then
+      icon="${ICON_HOME}"
+    else
+      icon="${ICON_DIR}"
+    fi
+
+    display_path="${path/#$HOME/\~}"
+
+    printf "%s\t%s%s%s%-28s %s%s%s %s\n" \
+      "$path" \
+      "$prefix" \
+      "$icon" \
+      "${C_BOLD}${C_CYAN}" \
+      "$name" \
+      "${C_DIM}" \
+      "$display_path" \
+      "${C_RESET}" \
+      "$suffix"
+
+  done <<< "$all_dirs"
+}
+
+# ---------------------------------------------------------------------------
+# PREVIEW — only git call happens here (per hover, not per list entry)
+# ---------------------------------------------------------------------------
+_preview() {
+  local path="$1"
+  [[ -d "$path" ]] || { printf "not a directory: %s\n" "$path"; return; }
+
+  if git -C "$path" rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
+    local branch
+    branch="$(git -C "$path" branch --show-current 2>/dev/null || echo "detached")"
+    printf "${C_YELLOW}${ICON_GIT}${C_RESET} branch: ${C_BOLD}%s${C_RESET}\n\n" "$branch"
+    git -C "$path" status --short 2>/dev/null | head -15
+    printf "\n"
+  fi
+
+  if command -v tree &>/dev/null; then
+    tree -L 2 -a --noreport \
+      -I ".git|node_modules|__pycache__|target|dist|build|.venv|venv" \
+      --dirsfirst "$path" 2>/dev/null | head -25
+  else
+    ls -1 --color=always "$path" 2>/dev/null | head -25
+  fi
+}
+
+# ---------------------------------------------------------------------------
+# INVALIDATE SCAN CACHE
+# ---------------------------------------------------------------------------
+_invalidate_cache() {
+  rm -f "$SESSIONIZER_SCAN_CACHE"
+  printf "sessionizer: scan cache cleared\n"
+}
+
+# ---------------------------------------------------------------------------
+# SESSION SWITCH / CREATE
+# ---------------------------------------------------------------------------
+_switch_or_create() {
+  local path="$1"
+  local session_name
+  session_name="$(_sanitize_name "$path")"
+
+  [[ -z "$session_name" ]] && {
+    printf "sessionizer: could not derive session name from: %s\n" "$path" >&2
+    exit 1
+  }
+
+  _lru_update "$path"
+
+  if ! tmux has-session -t "$session_name" 2>/dev/null; then
+    tmux new-session -ds "$session_name" -c "$path"
+  fi
+
+  if [[ -n "${TMUX:-}" ]]; then
+    tmux switch-client -t "$session_name"
+  else
+    tmux attach-session -t "$session_name"
+  fi
+}
+
+# ---------------------------------------------------------------------------
+# FZF LAUNCHER
+# ---------------------------------------------------------------------------
+_run_fzf() {
+  local input="$1"
+  local preview_cmd="${BASH_SOURCE[0]} --preview {1}"
+
+  local fzf_opts=(
+    --ansi
+    --no-sort
+    --delimiter=$'\t'
+    --with-nth=2
+    --nth=2
+    --prompt=" "
+    --pointer="❯"
+    --marker="✓"
+    --border=rounded
+    --height=50%
+    --info=inline
+    --preview="$preview_cmd"
+    --preview-window="right:40%:wrap"
+    --bind="ctrl-/:toggle-preview"
+    --bind="ctrl-d:preview-down"
+    --bind="ctrl-u:preview-up"
+    --bind="ctrl-r:reload(${BASH_SOURCE[0]} --list)"
+    --header=" CTRL-/ preview  │  CTRL-R refresh  │  ENTER attach  │  ESC cancel"
+    --color="fg:#cdd6f4,bg:-1,hl:#89b4fa"
+    --color="fg+:#cdd6f4,bg+:#313244,hl+:#89dceb"
+    --color="border:#585b70,prompt:#cba6f7,pointer:#f5e0dc"
+    --color="marker:#a6e3a1,header:#a6adc8,info:#cba6f7"
+  )
+
+  if [[ -n "${TMUX:-}" ]] && command -v fzf-tmux &>/dev/null; then
+    printf "%s" "$input" | fzf-tmux -p "65%,55%" -- "${fzf_opts[@]}"
+  else
+    printf "%s" "$input" | fzf "${fzf_opts[@]}"
+  fi
+}
+
+# ---------------------------------------------------------------------------
+# MAIN
+# ---------------------------------------------------------------------------
+main() {
+  case "${1:-}" in
+    --preview)
+      _preview "${2:-}"
+      exit 0
+      ;;
+    --list)
+      _build_list
+      exit 0
+      ;;
+    --invalidate-cache|--refresh)
+      _invalidate_cache
+      exit 0
+      ;;
+    --path)
+      _check_deps
+      _switch_or_create "${2:?sessionizer: --path requires an argument}"
+      exit 0
+      ;;
+  esac
+
+  _check_deps
+
+  local list selected path
+
+  list="$(_build_list)"
+  [[ -z "$list" ]] && { printf "sessionizer: no directories found\n" >&2; exit 1; }
+
+  selected="$(_run_fzf "$list")" || exit 0
+
+  path="${selected%%$'\t'*}"
+  [[ -z "$path" ]] && exit 0
+
+  _switch_or_create "$path"
+}
+
+main "$@"

@@ -35,7 +35,11 @@ api.nvim_create_autocmd("FocusGained", {
 api.nvim_create_autocmd("BufReadPost", {
 	group = augroup,
 	callback = function()
-		local row, col = unpack(api.nvim_buf_get_mark(0, '"'))
+		if vim.bo.filetype == "help" or vim.bo.buftype ~= "" then
+			return
+		end
+		local mark = api.nvim_buf_get_mark(0, '"')
+		local row, col = mark[1], mark[2]
 		if row > 0 and row <= api.nvim_buf_line_count(0) then
 			api.nvim_win_set_cursor(0, { row, col })
 		end
@@ -73,45 +77,6 @@ api.nvim_create_autocmd("FileType", {
 			buffer = event.buf,
 			silent = true,
 		})
-	end,
-})
-
--- Floating window utilities
-local function create_centered_float(bufnr)
-	local width = math.floor(vim.o.columns * 0.6)
-	local height = math.floor(vim.o.lines * 0.6)
-	local row = math.floor((vim.o.lines - height) / 2)
-	local col = math.floor((vim.o.columns - width) / 2)
-
-	local opts = {
-		relative = "editor",
-		width = width,
-		height = height,
-		row = row,
-		col = col,
-		style = "minimal",
-		border = "rounded",
-	}
-
-	api.nvim_open_win(bufnr, true, opts)
-end
-
--- Float help and checkhealth windows
-api.nvim_create_autocmd("FileType", {
-	pattern = { "help", "checkhealth" },
-	group = augroup,
-	callback = function(event)
-		local bufnr = event.buf
-		vim.defer_fn(function()
-			if api.nvim_buf_is_valid(bufnr) then
-				vim.cmd("close")
-				create_centered_float(bufnr)
-				vim.keymap.set("n", "q", "<cmd>close<cr>", {
-					buffer = bufnr,
-					silent = true,
-				})
-			end
-		end, 10)
 	end,
 })
 

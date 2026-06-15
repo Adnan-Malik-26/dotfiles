@@ -9,12 +9,12 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run";
+	modi:                       "drun";
     show-icons:                 false;
-    display-drun:               "";
-    display-run:                "";
-    display-filebrowser:        "";
-    display-window:             "";
+    display-drun:               "drun";
+    display-run:                "run";
+    display-filebrowser:        "files";
+    display-window:             "window";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
 }
