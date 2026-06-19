@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pidof hyprlock || hyprlock &>/dev/null &
+hyprlock &
 
 sleep 2
 

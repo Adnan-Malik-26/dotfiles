@@ -1,0 +1,69 @@
+#!/bin/bash
+
+HOTSPOT_CONNECTION="LaptopWifi"
+
+show_usage() {
+  echo "Usage: $0 [on|off]"
+  echo "  on  - Enable the hotspot"
+  echo "  off - Disable the hotspot"
+  exit 1
+}
+
+# Check if notify-send is available
+if ! command -v notify-send &>/dev/null; then
+  echo "Warning: notify-send not found. Install libnotify for notifications."
+  NOTIFY=false
+else
+  NOTIFY=true
+fi
+
+send_notification() {
+  local title="$1"
+  local message="$2"
+  local urgency="${3:-normal}"
+
+  if [ "$NOTIFY" = true ]; then
+    notify-send -u "$urgency" "$title" "$message"
+  fi
+  echo "$title: $message"
+}
+
+turn_on() {
+  # Try to activate hotspot using nmcli
+  if nmcli connection up "$HOTSPOT_CONNECTION" &>/dev/null; then
+    send_notification "Hotspot" "Hotspot enabled successfully" "normal"
+    return 0
+  else
+    send_notification "Hotspot Error" "Failed to enable hotspot" "critical"
+    return 1
+  fi
+}
+
+turn_off() {
+  # Try to deactivate hotspot using nmcli
+  if nmcli connection down "$HOTSPOT_CONNECTION" &>/dev/null; then
+    send_notification "Hotspot" "Hotspot disabled successfully" "normal"
+    return 0
+  else
+    send_notification "Hotspot Error" "Failed to disable hotspot" "critical"
+    return 1
+  fi
+}
+
+# Main script logic
+if [ $# -eq 0 ]; then
+  show_usage
+fi
+
+case "$1" in
+on)
+  turn_on
+  ;;
+off)
+  turn_off
+  ;;
+*)
+  echo "Invalid argument: $1"
+  show_usage
+  ;;
+esac

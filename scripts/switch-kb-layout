@@ -1,17 +1,74 @@
-#!/bin/zsh
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Get current keyboard layout
-current_layout=$(hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap')
+LAYOUT="us"
+VARIANT="colemak_dh"
 
-# Toggle between layouts
-if [[ "$current_layout" == *"English (US)"* ]] || [[ "$current_layout" == *"us"* ]]; then
-    # Switch to Colemak-DH
-    hyprctl keyword input:kb_layout us
-    hyprctl keyword input:kb_variant colemak_dh
-    notify-send "Keyboard Layout" "Switched to Colemak-DH" -t 2000
-else
-    # Switch to QWERTY
-    hyprctl keyword input:kb_layout us
+notify() {
+  command -v notify-send >/dev/null 2>&1 && notify-send "Keyboard Layout" "$1" -t 1500
+}
+
+# -------------------------
+# Hyprland toggle
+# -------------------------
+toggle_hyprland() {
+  if ! command -v hyprctl >/dev/null 2>&1; then
+    echo "hyprctl not found"
+    exit 1
+  fi
+
+  current=$(hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap')
+
+  # If currently US/QWERTY -> switch to Colemak-DH
+  if echo "$current" | grep -qiE "english \(us\)|us"; then
+    hyprctl keyword input:kb_layout "$LAYOUT"
+    hyprctl keyword input:kb_variant "$VARIANT"
+    notify "Switched to Colemak-DH (Hyprland)"
+  else
+    hyprctl keyword input:kb_layout "$LAYOUT"
     hyprctl keyword input:kb_variant ""
-    notify-send "Keyboard Layout" "Switched to QWERTY" -t 2000
+    notify "Switched to QWERTY (Hyprland)"
+  fi
+}
+
+# -------------------------
+# Sway toggle
+# -------------------------
+toggle_sway() {
+  if ! command -v swaymsg >/dev/null 2>&1; then
+    echo "swaymsg not found"
+    exit 1
+  fi
+
+  # apply to all keyboards
+  KBD="*"
+
+  # read active layout name from first keyboard
+  current=$(swaymsg -t get_inputs -r \
+    | jq -r '.[] | select(.type=="keyboard") | .xkb_active_layout_name' \
+    | head -n1)
+
+  # If currently "English (US)" (QWERTY) -> switch to Colemak-DH
+  if echo "$current" | grep -qi "English (US)"; then
+    swaymsg "input $KBD xkb_layout $LAYOUT"
+    swaymsg "input $KBD xkb_variant $VARIANT"
+    notify "Switched to Colemak-DH (Sway)"
+  else
+    swaymsg "input $KBD xkb_layout $LAYOUT"
+    swaymsg "input $KBD xkb_variant \"\""
+    notify "Switched to QWERTY (Sway)"
+  fi
+}
+
+# -------------------------
+# Detect compositor
+# -------------------------
+if [[ "${XDG_CURRENT_DESKTOP:-}" =~ Hyprland ]] || [[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]]; then
+  toggle_hyprland
+elif [[ -n "${SWAYSOCK:-}" ]] || [[ "${XDG_CURRENT_DESKTOP:-}" =~ sway|Sway ]]; then
+  toggle_sway
+else
+  echo "Unknown compositor (not Hyprland or Sway)."
+  echo "XDG_CURRENT_DESKTOP=${XDG_CURRENT_DESKTOP:-}"
+  exit 1
 fi

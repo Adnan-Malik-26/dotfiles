@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+LAYOUTS=(scrolling dwindle monocle)
+
+INFO=$(hyprctl activeworkspace -j)
+
+LAYOUT=$(printf '%s' "$INFO" | jq -r '.tiledLayout')
+WORKSPACE_ID=$(printf '%s' "$INFO" | jq -r '.id')
+WORKSPACE_NAME=$(printf '%s' "$INFO" | jq -r '.name')
+
+CURRENT=0
+
+for i in "${!LAYOUTS[@]}"; do
+  if [ "${LAYOUTS[i]}" = "$LAYOUT" ]; then
+    CURRENT=i
+    break
+  fi
+done
+
+if [[ "$1" == "--prev" ]]; then
+  TARGET=$(((i - 1) % ${#LAYOUTS[@]}))
+else
+  TARGET=$(((i + 1) % ${#LAYOUTS[@]}))
+fi
+
+hyprctl eval "hl.workspace_rule({ workspace = '$WORKSPACE_ID', layout = '${LAYOUTS[$TARGET]}' })" >/dev/null
+
+notify-send --icon state-information \
+  --app-name $0 \
+  -h "string:x-canonical-private-synchronous:$0" \
+  "Workspace layout was changed" "Layout for workspace $WORKSPACE_NAME: - ${LAYOUTS[$TARGET]}"

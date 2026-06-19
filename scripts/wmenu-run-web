@@ -1,0 +1,10 @@
+#!/bin/bash
+grep -h '^Name=' ~/.local/share/applications/*.desktop /usr/share/applications/*.desktop 2>/dev/null | \
+  cut -d'=' -f2 | \
+  sort -u | \
+  wmenu | \
+  xargs -I{} grep -l "^Name={}" ~/.local/share/applications/*.desktop /usr/share/applications/*.desktop | \
+  head -1 | \
+  xargs grep '^Exec=' | \
+  cut -d'=' -f2 | \
+  sh

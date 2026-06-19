@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+current=$(hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap')
+
+if [[ $current == *"us(colemak)"* ]]; then
+    hyprctl keyword input:kb_layout us
+    hyprctl keyword input:kb_variant ""
+    notify-send "🧠 Switched to US QWERTY"
+else
+    hyprctl keyword input:kb_layout us
+    hyprctl keyword input:kb_variant colemak
+    notify-send "🪶 Switched to US Colemak"
+fi
