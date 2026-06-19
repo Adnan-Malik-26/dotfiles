@@ -27,8 +27,8 @@ end
 -- ========================================
 
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty -1"))
-hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("kitty --class otter otter-launcher app"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("zen-browser"))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("/home/adnanmalik/dotfiles/rofi/launchers/type-1/launcher.sh"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("helium-browser"))
 
 -- ========================================
 -- System & Utilities

@@ -1,0 +1,36 @@
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes yes
+  concurrent-tap-hold no
+)
+
+(defsrc
+  esc q w e r t y u i o p
+  caps a s d f g h j k l ;
+  z x c v b n m , . /
+  spc
+)
+
+(defvar
+  tap-time 200
+  hold-time 250
+)
+
+(defalias
+  a (tap-hold $tap-time $hold-time a lctl)
+  spc (tap-hold $tap-time $hold-time spc (layer-while-held numbers))
+)
+
+(deflayer base
+  esc q w e r t y u i o p
+  caps @a s d f g h j k l ;
+  z x c v b n m , . /
+  @spc
+)
+
+(deflayer numbers
+  XX 1 2 3 4 5 6 7 8 9 0
+  caps a s d f g h j k l ;
+  z x c v b n m , . /
+  spc
+)

@@ -1,0 +1,84 @@
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+  danger-enable-cmd yes
+  concurrent-tap-hold yes
+)
+
+(defsrc
+  esc q w e r t y u i o p
+  caps a s d f g h j k l ;
+  z x c v b n m , . /
+  spc
+  lalt
+  left right up down
+)
+
+(defvar
+  tap-time 150
+  hold-time 180
+)
+
+;; --- Vim Navigation Aliases FIRST ---
+(defalias
+  vim-h left
+  vim-j down
+  vim-k up
+  vim-l right
+)
+
+;; --- Tap-Hold Aliases ---
+(defalias
+  a (tap-hold $tap-time $hold-time a lmet)
+  s (tap-hold $tap-time $hold-time s lctl)
+  d (tap-hold $tap-time $hold-time d lsft)
+  f (tap-hold $tap-time $hold-time f lalt)
+  j (tap-hold $tap-time $hold-time j ralt)
+  k (tap-hold $tap-time $hold-time k rsft)
+  l (tap-hold $tap-time $hold-time l rctl)
+  ; (tap-hold $tap-time $hold-time ; rmet)
+
+  spc (tap-hold $tap-time $hold-time spc (layer-while-held numbers))
+  ralt (tap-hold $tap-time $hold-time ralt (layer-toggle arrows))
+
+  caps_escape esc
+  caps_tab tab
+)
+
+;; --- Number and Shifted Number Aliases ---
+(defalias
+  n1 1 n2 2 n3 3 n4 4 n5 5 n6 6 n7 7 n8 8 n9 9 n0 0
+  s1 (multi lsft 1) s2 (multi lsft 2) s3 (multi lsft 3) s4 (multi lsft 4)
+  s5 (multi lsft 5) s6 (multi lsft 6) s7 (multi lsft 7) s8 (multi lsft 8)
+  s9 (multi lsft 9) s0 (multi lsft 0)
+)
+
+;; --- Base Layer ---
+(deflayer base
+  esc q w e r t y u i o p
+  @caps_escape @a @s @d @f g h @j @k @l @;
+  z x c v b n m , . /
+  @spc
+  @ralt
+  left right up down
+)
+
+;; --- Numbers Layer ---
+(deflayer numbers
+  XX @n1 @n2 @n3 @n4 @n5 @n6 @n7 @n8 @n9 @n0
+  @caps_tab @a @s @d @f g h @j @k @l @;
+  z x c v b n m , . /
+  @spc
+  @ralt
+  left right up down
+)
+
+;; --- Arrows Layer ---
+(deflayer arrows
+  XX q w e r t y u i o p
+  @caps_escape @a @s @d @f g @vim-h @vim-j @vim-k @vim-l @;
+  z x c v b n m , . /
+  @spc
+  @ralt
+  left right up down
+)

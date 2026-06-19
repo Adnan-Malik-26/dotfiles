@@ -37,6 +37,13 @@ hl.layer_rule({
 	animation = "slide left",
 })
 
+hl.layer_rule({
+	match = {
+		namespace = "rofi",
+	},
+	animation = "slide up 10%",
+})
+
 hl.window_rule({
 	name = "zen-pip-float",
 	float = true,
