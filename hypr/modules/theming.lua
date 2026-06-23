@@ -2,7 +2,7 @@
 hl.exec_cmd('hyprctl setcursor "Catppuccin Mocha Dark" 24')
 
 -- Environment Variables
-hl.env("GTK_THEME", "Colloid-Purple-Dark-Catppuccin")
+hl.env("GTK_THEME", "Colloid-Dark")
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XCURSOR_THEME", "capitaine-cursors")
 hl.env("XCURSOR_SIZE", "24")

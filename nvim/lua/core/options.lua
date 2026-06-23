@@ -62,3 +62,5 @@ set.timeoutlen = 400
 -- List Chars
 set.list = true
 set.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+require("vim._core.ui2").enable({})

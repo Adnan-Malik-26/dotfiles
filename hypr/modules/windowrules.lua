@@ -1,8 +1,16 @@
 hl.window_rule({
+	name = "helium-pip-float",
+	float = true,
+	match = {
+  title = "^(Picture-in-picture)",
+	},
+})
+
+hl.window_rule({
 	name = "firefox-pip-float",
 	float = true,
 	match = {
-		class = "^firefox$",
+	class = "^firefox$",
 		title = "^(Picture-in-Picture)",
 	},
 })

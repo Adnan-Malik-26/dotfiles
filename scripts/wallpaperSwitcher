@@ -29,7 +29,7 @@ if [ -n "$selected" ]; then
   selected_path="$WALLPAPER_DIR/$selected"
   echo "Selected: $selected_path"
   cp $selected_path ~/.local/bin/wallpaper.png
-  swww img "$selected_path" --transition-type wipe
+  awww img "$selected_path" --transition-type wipe
 
   notify-send -i "$selected_path" "$(basename $selected_path) is the wallpaper."
 fi

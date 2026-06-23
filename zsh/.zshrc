@@ -100,7 +100,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # ----------------------------------------------------------------------------
 # Environment Variables
 # ----------------------------------------------------------------------------
-export TERM=kitty
+# export TERM=kitty
 export EDITOR=/home/adnanmalik/.config/nvs/versions/current/bin/nvim
 export MANPAGER='nvim +Man!'
 export VENV_HOME="$HOME/.virtualenvs"
@@ -253,7 +253,6 @@ alias add='git add .'
 alias branch='git branch'
 alias clone='git clone'
 alias commit='git commit -m'
-alias fetch='git fetch'
 alias push='git push'
 alias psuh='git push'
 alias ginit='git add . && git commit -m "Initial Commit" && git push'
@@ -294,6 +293,7 @@ alias hx='npx hardhat compile'
 # ----------------------------------------------------------------------------
 alias snn='shutdown now'
 alias rnn='reboot'
+alias ssp='systemctl suspend'
 
 # ----------------------------------------------------------------------------
 # Aliases - Note Taking
@@ -421,6 +421,10 @@ rmvenv() {
   fi
   rm -rf "$VENV_HOME/$1"
 }
+
+
+# nvm node version manager
+source /usr/share/nvm/init-nvm.sh
 
 # Sesh session manager
 sesh-sessions() {

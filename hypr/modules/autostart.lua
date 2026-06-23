@@ -3,10 +3,10 @@ hl.on("hyprland.start", function()
 		"udiskie",
 		"playerctld",
 		"hypridle",
-		"systemctl --user start hyprlokitagent",
+		"systemctl --user start hyprpolkitagent",
 		"~/.local/bin/gtktheme",
 		"kdeconnectd",
-		"swww-daemon",
+		"awww-daemon",
 		"waybar --config /home/adnanmalik/.config/waybar/current/config.jsonc --style /home/adnanmalik/.config/waybar/current/style.css", -- waybar
 		"kanata -c /home/adnanmalik/.config/kanata/qwerty.kbd",
 		"brightnessctl -s -d asus::kbd_backlight",
