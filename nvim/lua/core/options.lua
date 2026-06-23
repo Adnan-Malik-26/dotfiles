@@ -53,6 +53,7 @@ set.smartcase = true
 set.hlsearch = true
 set.incsearch = true
 set.inccommand = "split"
+set.laststatus = 3
 
 -- Performance
 set.mousemoveevent = true

@@ -11,7 +11,7 @@ require("plugins.init")
 
 -- Load custom features
 require("features.marks")
--- require("features.obsidian")
+-- require("features.statusline")
 
 -- Load custom colors
 require("colors.colors")

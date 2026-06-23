@@ -57,6 +57,14 @@
       "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
+    "heirline.nvim": {
+      "rev": "fae936abb5e0345b85c3a03ecf38525b0828b992",
+      "src": "https://github.com/rebelot/heirline.nvim"
+    },
+    "kanagawa.nvim": {
+      "rev": "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
+    },
     "lorem.nvim": {
       "rev": "481abe141b123e792bd1931f2335369fbb002018",
       "src": "https://github.com/derektata/lorem.nvim"
@@ -117,9 +125,17 @@
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
     },
+    "oxocarbon.nvim": {
+      "rev": "cf49e389c22dab56224e43ae16422ddcd5b61b28",
+      "src": "https://github.com/nyoom-engineering/oxocarbon.nvim"
+    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "poimandres.nvim": {
+      "rev": "a488957d803943a4201ac3b774913fcafa9e6b3a",
+      "src": "https://github.com/olivercederborg/poimandres.nvim"
     },
     "rainbow-delimiters.nvim": {
       "rev": "a798325b7f36acc62741d1029930a7b96d4dd4bf",
@@ -130,7 +146,7 @@
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "rustaceanvim": {
-      "rev": "ab9e47018218f3e41a46c76d7790b6d161f00750",
+      "rev": "cf18d0e272536266b9897b80b28004489ec54c42",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "snacks.nvim": {
@@ -150,7 +166,7 @@
       "src": "https://github.com/abecodes/tabout.nvim"
     },
     "telescope.nvim": {
-      "rev": "9377230aa5305d9e9aca4ed8dadf1070fb4aa9fc",
+      "rev": "427b576c16792edad01a92b89721d923c19ad60f",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tree-sitter-manager.nvim": {

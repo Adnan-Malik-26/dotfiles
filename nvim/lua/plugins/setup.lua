@@ -12,11 +12,14 @@ vim.pack.add({
 	{ src = "https://github.com/idr4n/github-monochrome.nvim" },
 	{ src = "https://github.com/samharju/synthweave.nvim" },
 	{ src = "https://github.com/Shatur/neovim-ayu" },
+	{ src = "https://github.com/nyoom-engineering/oxocarbon.nvim" },
+	{ src = "https://github.com/olivercederborg/poimandres.nvim" },
 
 	-- UI
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+	-- { src = "https://github.com/rebelot/heirline.nvim" },
 	-- { src = "https://github.com/folke/nui.nvim" },
 	{ src = "https://github.com/rcarriga/nvim-notify" },
 	{ src = "https://github.com/j-hui/fidget.nvim" },
