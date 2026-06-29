@@ -17,7 +17,13 @@ local function layout_bind(bind_table)
 		local layout = workspace.tiled_layout
 
 		if bind_table[layout] then
-			hl.dispatch(bind_table[layout])
+			-- bind_table values can be a dispatcher table OR a callable function
+			local action = bind_table[layout]
+			if type(action) == "function" then
+				action()
+			else
+				hl.dispatch(action)
+			end
 		end
 	end
 end
@@ -62,6 +68,7 @@ hl.bind(
 	layout_bind({
 		scrolling = hl.dsp.layout("fit active"),
 		master = hl.dsp.window.fullscreen(),
+		dwindle = hl.dsp.window.fullscreen(),
 	})
 )
 
@@ -93,16 +100,16 @@ hl.bind(
 	mainMod .. " + H",
 	layout_bind({
 		scrolling = hl.dsp.layout("focus l"),
-		master = hl.dsp.focus({ direction = "left" }),
+		master = hl.dsp.focus({ direction = "l" }), -- FIX: "left" -> "l"
 	})
 )
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "d" })) -- FIX: "down" -> "d"
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "u" })) -- FIX: "up" -> "u"
 hl.bind(
 	mainMod .. " + L",
 	layout_bind({
 		scrolling = hl.dsp.layout("focus r"),
-		master = hl.dsp.focus({ direction = "right" }),
+		master = hl.dsp.focus({ direction = "r" }), -- FIX: "right" -> "r"
 	})
 )
 
@@ -121,16 +128,16 @@ hl.bind(
 	mainMod .. " + CTRL + H",
 	layout_bind({
 		scrolling = hl.dsp.layout("swapcol l"),
-		master = hl.dsp.window.move({ direction = "left" }),
+		master = hl.dsp.window.move({ direction = "l" }), -- FIX: "left" -> "l"
 	})
 )
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.window.move({ direction = "down" }))
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.window.move({ direction = "d" })) -- FIX: "down" -> "d"
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.window.move({ direction = "u" })) -- FIX: "up" -> "u"
 hl.bind(
 	mainMod .. " + CTRL + L",
 	layout_bind({
 		scrolling = hl.dsp.layout("swapcol r"),
-		master = hl.dsp.window.move({ direction = "right" }),
+		master = hl.dsp.window.move({ direction = "r" }), -- FIX: "right" -> "r"
 	})
 )
 

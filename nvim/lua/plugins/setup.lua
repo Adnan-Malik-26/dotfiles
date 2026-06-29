@@ -8,6 +8,7 @@ vim.pack.add({
 	{ src = "https://github.com/shaunsingh/nord.nvim" },
 	{ src = "https://github.com/kdheepak/monochrome.nvim" },
 	{ src = "https://github.com/darkvoid-theme/darkvoid.nvim" },
+	{ src = "https://github.com/oskarnurm/koda.nvim" },
 	{ src = "https://github.com/rose-pine/neovim" },
 	{ src = "https://github.com/idr4n/github-monochrome.nvim" },
 	{ src = "https://github.com/samharju/synthweave.nvim" },

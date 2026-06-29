@@ -1,9 +1,32 @@
-require("poimandres").setup({
-	bold_vert_split = false, -- use bold vertical separators
-	dim_nc_background = false, -- dim 'non-current' window backgrounds
-	disable_background = true, -- disable background
-	disable_float_background = true, -- disable background for floats
-	disable_italics = false, -- disable italics
-})
+-- require("poimandres").setup({
+-- 	bold_vert_split = false, -- use bold vertical separators
+-- 	dim_nc_background = false, -- dim 'non-current' window backgrounds
+-- 	disable_background = true, -- disable background
+-- 	disable_float_background = true, -- disable background for floats
+-- 	disable_italics = false, -- disable italics
+-- })
+--
 
-vim.cmd("colorscheme poimandres")
+vim.cmd("colorscheme koda-dark")
+
+-- Monochrome.nvim Transparent background
+-- local transparent_groups = {
+-- 	"Normal",
+-- 	"NormalNC",
+-- 	"NormalFloat",
+-- 	"FloatBorder",
+-- 	"FloatTitle",
+-- 	"SignColumn",
+-- 	"EndOfBuffer",
+-- 	"LineNr",
+-- 	"FoldColumn",
+-- 	"CursorLineNr",
+-- 	"StatusLine",
+-- 	"StatusLineNC",
+-- 	"TabLineFill",
+-- 	"WinSeparator",
+-- }
+--
+-- for _, group in ipairs(transparent_groups) do
+-- 	vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+-- end
