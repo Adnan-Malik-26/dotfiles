@@ -5,6 +5,7 @@ vim.g.mapleader = " "
 require("core.options")
 require("core.keymaps")
 require("core.autocmds")
+require("core.packadd")
 
 -- Load plugin configurations
 require("plugins.init")
@@ -14,4 +15,4 @@ require("features.marks")
 -- require("features.statusline")
 
 -- Load custom colors
-require("colors.colors")
+require("colors.colors").colorscheme()
