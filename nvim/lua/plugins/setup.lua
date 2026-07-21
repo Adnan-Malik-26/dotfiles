@@ -1,26 +1,27 @@
 -- Plugin Management Configuration
 vim.pack.add({
 	-- Themes
-	{ src = "https://github.com/catppuccin/nvim" },
-	{ src = "https://github.com/neanias/everforest-nvim" },
-	{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
-	{ src = "https://github.com/Mofiqul/dracula.nvim" },
-	{ src = "https://github.com/shaunsingh/nord.nvim" },
-	{ src = "https://github.com/kdheepak/monochrome.nvim" },
-	{ src = "https://github.com/darkvoid-theme/darkvoid.nvim" },
-	{ src = "https://github.com/oskarnurm/koda.nvim" },
-	{ src = "https://github.com/rose-pine/neovim" },
-	{ src = "https://github.com/idr4n/github-monochrome.nvim" },
-	{ src = "https://github.com/samharju/synthweave.nvim" },
-	{ src = "https://github.com/Shatur/neovim-ayu" },
-	{ src = "https://github.com/nyoom-engineering/oxocarbon.nvim" },
-	{ src = "https://github.com/olivercederborg/poimandres.nvim" },
+	{ src = "https://github.com/catppuccin/nvim" , load=false},
+	{ src = "https://github.com/neanias/everforest-nvim" , load=false},
+	{ src = "https://github.com/ellisonleao/gruvbox.nvim" , load=false},
+	{ src = "https://github.com/Mofiqul/dracula.nvim" , load=false},
+	{ src = "https://github.com/shaunsingh/nord.nvim" , load=false},
+	{ src = "https://github.com/kdheepak/monochrome.nvim" , load=false},
+	{ src = "https://github.com/darkvoid-theme/darkvoid.nvim" , load=false},
+	{ src = "https://github.com/oskarnurm/koda.nvim" , load=false},
+	{ src = "https://github.com/rose-pine/neovim" , load=false},
+	{ src = "https://github.com/idr4n/github-monochrome.nvim" , load=false},
+	{ src = "https://github.com/samharju/synthweave.nvim" , load=false},
+	{ src = "https://github.com/Shatur/neovim-ayu" , load=false},
+	{ src = "https://github.com/nyoom-engineering/oxocarbon.nvim" , load=false},
+	{ src = "https://github.com/olivercederborg/poimandres.nvim" , load=false},
+	{ src = "https://github.com/Adnan-Malik-26/monoknight.nvim" , load=false},
 
 	-- UI
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-	{ src = "https://github.com/rcarriga/nvim-notify" },
+	{ src = "https://github.com/rcarriga/nvim-notify" , load=false},
 	{ src = "https://github.com/j-hui/fidget.nvim" },
 	{ src = "https://github.com/akinsho/bufferline.nvim" },
 
@@ -28,11 +29,12 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/folke/snacks.nvim" },
+  -- { src = "https://github.com/nvim-telescope/telescope.nvim" , load=false},
+  -- { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" , load=false},
 
 	-- Editing
 	{ src = "https://github.com/nvim-mini/mini.comment" },
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
-	{ src = "https://github.com/abecodes/tabout.nvim" },
 
 	-- LSP and completion
 	{ src = "https://github.com/mason-org/mason.nvim" },
@@ -40,7 +42,7 @@ vim.pack.add({
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 	{ src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
 	{ src = "https://github.com/Saghen/blink.compat" },
-	{ src = "https://github.com/mrcjkb/rustaceanvim" },
+	{ src = "https://github.com/mrcjkb/rustaceanvim" , load=false},
 
 	-- Code quality
 	{ src = "https://github.com/stevearc/conform.nvim" },
@@ -48,17 +50,17 @@ vim.pack.add({
 	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 	{ src = "https://github.com/romus204/tree-sitter-manager.nvim" },
-	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim" },
+  -- { src = "https://github.com/HiPhish/rainbow-delimiters.nvim", load = false },
 
 	-- Utilities
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
-	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-	{ src = "https://github.com/derektata/lorem.nvim" },
-	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
-	{ src = "https://github.com/bngarren/checkmate.nvim" },
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim"},
+	-- { src = "https://github.com/derektata/lorem.nvim" },
+	-- { src = "https://github.com/chomosuke/typst-preview.nvim" , load=false},
+	-- { src = "https://github.com/bngarren/checkmate.nvim" , load=false},
 
 	-- Notes
-	-- { src = "https://github.com/epwalsh/obsidian.nvim" },
-	{ src = "https://github.com/kkharji/sqlite.lua" },
-	{ src = "https://github.com/apdot/doodle" },
+	{ src = "https://github.com/epwalsh/obsidian.nvim" },
+	{ src = "https://github.com/kkharji/sqlite.lua" , load=false},
+	{ src = "https://github.com/apdot/doodle" , load=false},
 })

@@ -1,0 +1,78 @@
+@import "../colors/colors.css";
+
+* {
+  font-family:
+    "Caskaydia Cove Nerd Font Propo", "Caskaydia Nerd Font Mono Propo",
+    sans-serif;
+  font-size: 12px;
+  border-radius: 0px;
+  font-weight: bold;
+}
+
+.modules-left {
+  background-color: @bgd;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 2px 6px;
+}
+
+window#waybar {
+  background: transparent;
+  color: @blue;
+  padding: 0px 0px;
+}
+
+#workspaces button {
+  background-color: transparent;
+  color: @magenta;
+}
+
+#workspaces {
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+#workspaces button.active {
+  background-color: @magenta;
+  color: @bgd;
+  border-radius: 5px;
+}
+
+#workspaces button.empty {
+  color: @bright_black;
+}
+
+.modules-right {
+  background-color: @bgd;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+
+#battery,
+#network,
+#pulseaudio {
+  color: @blue;
+  background-color: @bgd;
+  margin: 5px 5px;
+}
+
+#battery {
+  color: @red;
+}
+
+#pulseaudio {
+  color: @magenta;
+}
+
+.modules-center {
+  background-color: @bgd;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+
+#clock {
+  background-color: @bgd;
+  color: @green;
+}

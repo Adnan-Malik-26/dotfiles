@@ -6,9 +6,21 @@ vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 -- Server configurations
 vim.lsp.config["ts_ls"] = {
 	cmd = { "typescript-language-server", "--stdio" },
-	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-	root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+	},
+	root_markers = {
+		"package.json",
+		"tsconfig.json",
+		"jsconfig.json",
+		".git",
+	},
 }
+
+vim.lsp.config["eslint"] = {}
 
 vim.lsp.config["solidity-language-server"] = {
 	cmd = { "solidity-language-server", "--stdio" },
@@ -96,18 +108,18 @@ vim.lsp.config["svelte"] = {
 	root_markers = { "svelte.config.js", "package.json", ".git" },
 }
 
-vim.lsp.config["biome"] = {
-	cmd = { "biome", "lsp-proxy" },
-	filetypes = {
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"json",
-		"jsonc",
-	},
-	root_markers = { "biome.json", "biome.jsonc", ".git" },
-}
+-- vim.lsp.config["biome"] = {
+-- 	cmd = { "biome", "lsp-proxy" },
+-- 	filetypes = {
+-- 		"javascript",
+-- 		"javascriptreact",
+-- 		"typescript",
+-- 		"typescriptreact",
+-- 		"json",
+-- 		"jsonc",
+-- 	},
+-- 	root_markers = { "biome.json", "biome.jsonc", ".git" },
+-- }
 
 -- Enable LSP servers
 vim.lsp.enable({
@@ -123,7 +135,7 @@ vim.lsp.enable({
 	"tinymist",
 	"ruff",
 	"svelte",
-	"biome",
+	-- "biome",
 	"solidity-language-server",
 })
 
@@ -132,3 +144,14 @@ vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature hel
 
 -- Mason
 require("mason").setup()
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+		if client.name == "ts_ls" then
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+		end
+	end,
+})

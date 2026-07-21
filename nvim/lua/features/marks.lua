@@ -144,7 +144,7 @@ api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "BufReadPost" }, {
 	end,
 })
 
-api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+api.nvim_create_autocmd({ "TextChanged" }, {
 	group = marks_group,
 	callback = update_marks_virtual_text,
 })

@@ -1,5 +1,5 @@
 require("tabout").setup({
-	tabkey = "<Tab>",
+	tabkey = "<C-e>",
 	backwards_tabkey = "<S-Tab>",
 	act_as_tab = true,
 	act_as_shift_tab = false,

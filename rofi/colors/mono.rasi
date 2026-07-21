@@ -1,8 +1,8 @@
 * {
-  bg: #1c1c1c;
+  bg: #111111;
   fg: #e6e6e6;
 
-  black: #2a2a2a;
+  black: #1c1c1c;
   red: #d8b4b4;
   green: #c4d6c4;
   yellow: #ded8b8;

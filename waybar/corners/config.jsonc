@@ -1,0 +1,99 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 10,
+  "spacing": 10,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/separator",
+    "hyprland/window",
+  ],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "pulseaudio",
+    "custom/separator",
+    "network",
+    "custom/separator",
+    "battery",
+  ],
+
+  "custom/separator": {
+    "format": " | ",
+  },
+
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate",
+    "all-outputs": false,
+    "persistent-workspaces": {
+      "*": 5,
+    },
+  },
+
+  "hyprland/window": {
+    "format": "{class}",
+    "max-length": 50,
+    "separate-outputs": true,
+  },
+
+  "clock": {
+    "format": "{:%I:%M}",
+    "format-alt": "{:%A, %B %d, %Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#e7b8aa'><b>{}</b></span>",
+        "days": "<span color='#e6e6e6'>{}</span>",
+        "weeks": "<span color='#c3cedd'>W{}</span>",
+        "weekdays": "<span color='#ded8b8'><b>{}</b></span>",
+        "today": "<span color='#e8b4b4'><b><u>{}</u></b></span>",
+      },
+    },
+  },
+
+  "cpu": {
+    "format": "  {usage}%",
+    "tooltip": true,
+  },
+
+  "memory": {
+    "format": "  {}%",
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": " {capacity}%",
+    "format-charging": "   {capacity}%",
+    "format-plugged": " 󰂄 {capacity}%",
+    // "format-icons": ["󰁻", "󰁽", "󰁿", "󰂁", "󰁹"],
+  },
+
+  "network": {
+    "format-wifi": "",
+    "format-ethernet": " Connected",
+    "format-disconnected": " Disconnected",
+    "tooltip-format-wifi": "{essid} — {signalStrength}%\n{ifname}: {ipaddr}/{cidr}",
+    "on-click": "nm-connection-editor",
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "  Muted",
+    "format-icons": {
+      "default": ["", ""],
+    },
+    "on-click": "pavucontrol",
+  },
+
+  "tray": {
+    "spacing": 10,
+  },
+}

@@ -3,12 +3,13 @@ local api = vim.api
 local augroup = api.nvim_create_augroup("UserConfig", { clear = true })
 
 -- Highlight yanked text
-vim.api.nvim_set_hl(0, "YankHighlight", { bg = "#94e2d5", fg = "#000000" })
+vim.api.nvim_set_hl(0, "YankHighlight", { bg = "#fefefe", fg = "#000000" })
 api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight text when yanking",
 	group = augroup,
 	callback = function()
-		vim.highlight.on_yank({
+		vim.hl.hl_op({
+      event = vim.v.event,
 			higroup = "YankHighlight",
 			timeout = 200,
 		})
@@ -86,3 +87,63 @@ vim.api.nvim_create_user_command("RestartNvim", function()
 	vim.fn.jobstart(args, { detach = true })
 	vim.cmd("qa!")
 end, {})
+
+-- Obsidian + Telescope: only load when opening a markdown file inside your vault
+-- vim.api.nvim_create_autocmd("BufReadPre", {
+-- 	pattern = vim.fn.expand("~/Notes") .. "/*.md",
+-- 	once = true,
+-- 	callback = function()
+-- 		vim.pack.add({
+-- 			{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+-- 			{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
+-- 			{ src = "https://github.com/epwalsh/obsidian.nvim" },
+-- 		})
+-- 		require("plugins.obsidian")
+-- 	end,
+-- })
+
+-- checkmate: any markdown file, not just vault
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	once = true,
+	callback = function()
+		vim.pack.add({ { src = "https://github.com/bngarren/checkmate.nvim" } })
+		require("plugins.markdown")
+	end,
+})
+
+-- rustaceanvim: only .rs files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "rust",
+	once = true,
+	callback = function()
+		vim.pack.add({ { src = "https://github.com/mrcjkb/rustaceanvim" } })
+	end,
+})
+
+-- typst-preview: only .typ files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "typst",
+	once = true,
+	callback = function()
+		vim.pack.add({ { src = "https://github.com/chomosuke/typst-preview.nvim" } })
+	end,
+})
+
+-- rainbow-delimiters: first buffer with actual content, not startup
+vim.api.nvim_create_autocmd("BufReadPost", {
+	once = true,
+	callback = function()
+		vim.pack.add({ { src = "https://github.com/HiPhish/rainbow-delimiters.nvim" } })
+	end,
+})
+
+-- notify: defer to first notification-worthy event
+vim.api.nvim_create_autocmd("UIEnter", {
+	once = true,
+	callback = function()
+		vim.defer_fn(function()
+			vim.pack.add({ { src = "https://github.com/rcarriga/nvim-notify" } })
+		end, 100)
+	end,
+})

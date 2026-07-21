@@ -45,15 +45,13 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprpicker -a"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher"))
 
-hl.bind(
-	mainMod .. " + E",
-	hl.dsp.exec_cmd("rofi -modi emoji -show emoji -theme ~/.config/rofi/launchers/type-1/style-2.rasi")
-)
 
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("$HOME/.config/rofi/scripts/powermenu_t5"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/bin/waybar-switcher"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/switch-layout"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("$HOME/.local/bin/chth"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("$HOME/.config/rofi/powermenu/type-1/powermenu.sh"))
+hl.bind( mainMod .. " + SHIFT + B", hl.dsp.exec_cmd([[ pgrep bluetuith >/dev/null \ && pkill bluetuith \ || kitty --class bluetuith bluetuith ]]))
 
 -- ========================================
 -- Window Management

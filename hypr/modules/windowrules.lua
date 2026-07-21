@@ -16,6 +16,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	name = "kitty-bluetuith float",
+	float = true,
+	match = {
+	class = "bluetuith"
+	},
+  size = {800, 700}
+})
+
+hl.window_rule({
 	name = "otter-launcher",
 	match = {
 		class = "otter",

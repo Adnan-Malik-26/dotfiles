@@ -83,6 +83,30 @@ vim.keymap.set("n", "gK", function()
 	vim.diagnostic.config({ virtual_lines = new_config })
 end, { desc = "Toggle diagnostic virtual_lines" })
 
+-- Rename Current File
+vim.keymap.set("n", "<leader>rn", function()
+  local old = vim.api.nvim_buf_get_name(0)
+  if old == "" then
+    vim.notify("No file associated with buffer", vim.log.levels.ERROR)
+    return
+  end
+
+  local new = vim.fn.input("Rename to: ", old, "file")
+  if new == "" or new == old then
+    return
+  end
+
+  local ok, err = vim.uv.fs_rename(old, new)
+  if not ok then
+    vim.notify(err, vim.log.levels.ERROR)
+    return
+  end
+
+  vim.api.nvim_buf_set_name(0, new)
+  vim.cmd("checktime")
+  vim.notify("Renamed to " .. new)
+end, { desc = "Rename current file" })
+
 vim.keymap.set("n", "gl", vim.diagnostic.open_float)
 
 -- Rupees
@@ -90,7 +114,7 @@ map("i", "<A-S-r>", "₹", desc("Enter Rupees"))
 
 -- Open Todo
 vim.keymap.set("n", "<leader>t", function()
-	local todo_path = vim.fn.expand("~/Notes/TODO.md")
+	local todo_path = vim.fn.expand("~/Notes/Tasks.md")
 	vim.fn.mkdir(vim.fn.fnamemodify(todo_path, ":h"), "p")
 
 	local width = math.floor(vim.o.columns * 0.8)

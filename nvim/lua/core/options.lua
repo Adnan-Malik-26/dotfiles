@@ -15,7 +15,6 @@ set.writebackup = false
 set.backup = false
 set.undofile = true
 set.autoread = true
-set.cmdheight = 0
 set.iskeyword:append("-")
 set.path:append("**")
 

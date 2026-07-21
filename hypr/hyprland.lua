@@ -1,4 +1,4 @@
-require("modules.general")
+require("modules.monitors")
 require("modules.autostart")
 require("modules.environments")
 require("modules.looknfeel")

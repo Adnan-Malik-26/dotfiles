@@ -1,3 +1,4 @@
+require("blink.compat").setup({})
 -- Blink completion
 require("blink.cmp").setup({
 	fuzzy = {
@@ -17,26 +18,27 @@ require("blink.cmp").setup({
 		use_nvim_cmp_as_default = false,
 		nerd_font_variant = "mono",
 	},
-	sources = {
-		default = { "lsp", "path", "snippets", "buffer", "obsidian", "obsidian_tags", "obsidian_new" },
-		providers = {
-			obsidian = {
-				name = "obsidian",
-				module = "blink.compat.source",
-				opts = { name = "obsidian" },
-			},
-			obsidian_tags = {
-				name = "obsidian_tags",
-				module = "blink.compat.source",
-				opts = { name = "obsidian_tags" },
-			},
-			obsidian_new = {
-				name = "obsidian_new",
-				module = "blink.compat.source",
-				opts = { name = "obsidian_new" },
-			},
-		},
-	},
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer" },
+    per_filetype = {
+      markdown = { "obsidian", "obsidian_new", "obsidian_tags", "path", "buffer" },
+    },
+    providers = {
+      obsidian = {
+        name = "obsidian",
+        module = "blink.compat.source",
+      },
+      obsidian_new = {
+        name = "obsidian_new",
+        module = "blink.compat.source",
+      },
+      obsidian_tags = {
+        name = "obsidian_tags",
+        module = "blink.compat.source",
+      },
+    },
+  },
+
 	snippets = {
 		preset = "luasnip",
 	},

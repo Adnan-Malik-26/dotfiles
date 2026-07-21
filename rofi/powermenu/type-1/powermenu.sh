@@ -10,8 +10,8 @@
 ## style-1   style-2   style-3   style-4   style-5
 
 # Current Theme
-dir="$HOME/.config/rofi/powermenu/type-1"
-theme='style-4'
+dir="$HOME/.config/rofi/"
+theme='minimal'
 
 # CMDs
 uptime="$(uptime -p | sed -e 's/up //g')"
@@ -20,7 +20,6 @@ host=$(hostname)
 # Options
 shutdown=' Shutdown'
 reboot=' Reboot'
-lock=' Lock'
 suspend=' Suspend'
 logout=' Logout'
 yes=' Yes'
@@ -54,7 +53,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-  echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+  echo -e "$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Execute Command
@@ -66,8 +65,6 @@ run_cmd() {
     elif [[ $1 == '--reboot' ]]; then
       systemctl reboot
     elif [[ $1 == '--suspend' ]]; then
-      mpc -q pause
-      amixer set Master mute
       systemctl suspend
     elif [[ $1 == '--logout' ]]; then
       if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
