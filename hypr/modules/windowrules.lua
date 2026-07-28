@@ -25,6 +25,14 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	name = "nwg-displays-float",
+	float = true,
+	match = {
+	class = "nwg-displays"
+	},
+})
+
+hl.window_rule({
 	name = "otter-launcher",
 	match = {
 		class = "otter",
