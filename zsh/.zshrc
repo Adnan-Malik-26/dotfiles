@@ -75,7 +75,7 @@ fi
 # ----------------------------------------------------------------------------
 # Prompt
 # ----------------------------------------------------------------------------
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/base.toml)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/monoknight.omp.json)"
 
 # ----------------------------------------------------------------------------
 # Shell Options
