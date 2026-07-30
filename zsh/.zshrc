@@ -215,6 +215,7 @@ npx()  { _nvm_lazy_load; npx "$@"; }
 # ----------------------------------------------------------------------------
 alias c='clear'
 alias cl='clear'
+alias cll='clear && fastfetch && ls'
 alias celar='clear'
 alias tm='tmux -u'
 alias tmux='tmux new-session -A -s playground'
