@@ -1,0 +1,105 @@
+;; ============================================================
+;; Colemak-DH conversion of your QWERTY kanata config
+;; ------------------------------------------------------------
+;; Key fact: defsrc/deflayer key names are PHYSICAL scancodes.
+;; "q" in defsrc always means "the key where Q is printed on a
+;; QWERTY keyboard" - it has nothing to do with what gets typed.
+;; This config keeps your OS/driver on QWERTY and has kanata do
+;; 100% of the QWERTY -> Colemak-DH letter translation.
+;;
+;; Colemak-DH letter map (physical position -> output letter):
+;; ANSI variant (Z has no dedicated far-left key like ISO does,
+;; so X C D V shift one column left and Z takes B's old spot):
+;;   q w e r t y u i o p  ->  q w f p b j l u y ;
+;;   a s d f g h j k l ;  ->  a r s t g m n e i o
+;;   z x c v b n m , . /  ->  x c d v z k h , . /
+;; ============================================================
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+  danger-enable-cmd yes
+  concurrent-tap-hold yes
+)
+
+(defsrc
+  esc q w e r t y u i o p
+  caps a s d f g h j k l ;
+  z x c v b n m , . /
+  spc
+  lalt
+  left right up down
+)
+
+(defvar
+  tap-time 150
+  hold-time 180
+)
+
+;; --- Vim navigation, now on physical j k l ; -----------------
+;; Under Colemak-DH those physical keys type n e i o, so this is
+;; the standard "colemak homerow nav" cluster (same finger travel
+;; as h j k l was on QWERTY, just shifted one column right).
+(defalias
+  vim-left  left
+  vim-down  down
+  vim-up    up
+  vim-right right
+)
+
+;; --- Home row mods -------------------------------------------
+;; Alias names = physical key (unchanged from your original config
+;; so defsrc/deflayer wiring below doesn't need to change), but the
+;; TAP output is now the Colemak-DH letter for that physical key.
+(defalias
+  a (tap-hold $tap-time $hold-time a lmet)   ;; phys a -> a
+  s (tap-hold $tap-time $hold-time r lctl)   ;; phys s -> r
+  d (tap-hold $tap-time $hold-time s lsft)   ;; phys d -> s
+  f (tap-hold $tap-time $hold-time t lalt)   ;; phys f -> t
+  j (tap-hold $tap-time $hold-time n ralt)   ;; phys j -> n
+  k (tap-hold $tap-time $hold-time e rsft)   ;; phys k -> e
+  l (tap-hold $tap-time $hold-time i rctl)   ;; phys l -> i
+  ; (tap-hold $tap-time $hold-time o rmet)   ;; phys ; -> o
+  spc (tap-hold $tap-time $hold-time spc (layer-while-held numbers))
+  ralt (tap-hold $tap-time $hold-time ralt (layer-toggle arrows))
+  caps_escape esc
+  caps_tab tab
+)
+
+;; --- Number / shifted-number aliases (layout-agnostic) --------
+(defalias
+  n1 1 n2 2 n3 3 n4 4 n5 5 n6 6 n7 7 n8 8 n9 9 n0 0
+  s1 (multi lsft 1) s2 (multi lsft 2) s3 (multi lsft 3) s4 (multi lsft 4)
+  s5 (multi lsft 5) s6 (multi lsft 6) s7 (multi lsft 7) s8 (multi lsft 8)
+  s9 (multi lsft 9) s0 (multi lsft 0)
+)
+
+;; --- Base Layer ------------------------------------------------
+(deflayer base
+  esc  q    w    f    p    b    j    l    u    y    ;
+  @caps_escape @a @s @d @f  g    m    @j   @k   @l   @;
+  x    c    d    v    z    k    h    ,    .    /
+  @spc
+  @ralt
+  left right up down
+)
+
+;; --- Numbers Layer -----------------------------------------------
+(deflayer numbers
+  XX   @n1  @n2  @n3  @n4  @n5  @n6  @n7  @n8  @n9  @n0
+  @caps_tab @a @s @d @f    g    m    @j   @k   @l   @;
+  x    c    d    v    z    k    h    ,    .    /
+  @spc
+  @ralt
+  left right up down
+)
+
+;; --- Arrows Layer (vim nav on physical j k l ;) -------------------
+(deflayer arrows
+  XX   q    w    f    p    b    j    l    u    y    ;
+  @caps_escape @a @s @d @f  g    m    @vim-left @vim-down @vim-up @vim-right
+  x    c    d    v    z    k    h    ,    .    /
+  @spc
+  @ralt
+  left right up down
+)

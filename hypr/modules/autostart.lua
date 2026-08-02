@@ -8,7 +8,7 @@ hl.on("hyprland.start", function()
 		"kdeconnectd",
 		"awww-daemon",
 		"waybar --config /home/adnanmalik/.config/waybar/current/config.jsonc --style /home/adnanmalik/.config/waybar/current/style.css", -- waybar
-		"kanata -c /home/adnanmalik/.config/kanata/qwerty.kbd",
+		"kanata -c /home/adnanmalik/.config/kanata/colemak_dh.kbd",
 		"brightnessctl -s -d asus::kbd_backlight",
 		"wl-paste --type text --watch cliphist store",
 		"nohup /home/adnanmalik/.local/bin/battery_notify.sh",
