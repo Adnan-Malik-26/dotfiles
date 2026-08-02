@@ -222,6 +222,7 @@ alias tmux='tmux new-session -A -s playground'
 alias img='imv'
 alias impressive='impressive -t None'
 alias fman="compgen -c | fzf | xargs man"
+alias kanata="kanata -c /home/adnanmalik/dotfiles/kanata/qwerty.kbd & disown"
 
 alias :q='exit'
 alias qq='exit'
