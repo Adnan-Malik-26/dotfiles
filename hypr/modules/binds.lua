@@ -34,7 +34,7 @@ end
 
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty -1"))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("/home/adnanmalik/dotfiles/rofi/launchers/type-1/launcher.sh"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("helium-browser"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofi-books.sh"))
 
 -- ========================================
 -- System & Utilities
@@ -51,7 +51,6 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/bin/waybar-swit
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/switch-layout"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("$HOME/.local/bin/chth"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("$HOME/.config/rofi/powermenu/type-1/powermenu.sh"))
-hl.bind( mainMod .. " + SHIFT + B", hl.dsp.exec_cmd([[ pgrep bluetuith >/dev/null \ && pkill bluetuith \ || kitty --class bluetuith bluetuith ]]))
 
 -- ========================================
 -- Window Management

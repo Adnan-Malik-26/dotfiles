@@ -20,6 +20,12 @@ vim.lsp.config["ts_ls"] = {
 	},
 }
 
+vim.lsp.config["qmlls"] = {
+	cmd = { "qmlls6" },
+	filetypes = { "qml" },
+	root_markers = { ".qmlls.ini", "shell.qml", ".git" },
+}
+
 vim.lsp.config["eslint"] = {}
 
 vim.lsp.config["solidity-language-server"] = {
@@ -135,6 +141,7 @@ vim.lsp.enable({
 	"tinymist",
 	"ruff",
 	"svelte",
+  "qmlls",
 	-- "biome",
 	"solidity-language-server",
 })
