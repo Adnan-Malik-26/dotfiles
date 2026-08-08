@@ -6,17 +6,9 @@ hl.window_rule({
 	},
 })
 
-hl.window_rule({
-	name = "firefox-pip-float",
-	float = true,
-	match = {
-	class = "^firefox$",
-		title = "^(Picture-in-Picture)",
-	},
-})
 
 hl.window_rule({
-	name = "kitty-bluetuith float",
+	name = "kitty-bluetuith-float",
 	float = true,
 	match = {
 	class = "bluetuith"
@@ -121,7 +113,7 @@ hl.window_rule({
 
 hl.window_rule({
 	name = "launcher-size-center",
-	size = "800 500",
+	size = {800, 500},
 	center = true,
 	match = {
 		class = "^(launcher)$",
