@@ -5,6 +5,7 @@
 # ----------------------------------------------------------------------------
 # Zinit Plugin Manager
 # ----------------------------------------------------------------------------
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 if [[ ! -d "$ZINIT_HOME" ]]; then
@@ -66,7 +67,9 @@ fpath+=~/.zfunc
 fpath+=~/.local/share/zsh/completions
 
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+
+local zcd="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ ! -f "$zcd" || -n "$zcd"(#qN.mh+24) ]]; then
   compinit
 else
   compinit -C
@@ -75,8 +78,7 @@ fi
 # ----------------------------------------------------------------------------
 # Prompt
 # ----------------------------------------------------------------------------
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/monoknight.omp.json)"
-
+source $HOME/dotfiles/zsh/oh-my-posh.zsh
 # ----------------------------------------------------------------------------
 # Shell Options
 # ----------------------------------------------------------------------------
@@ -90,7 +92,6 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
-setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt LONG_LIST_JOBS
 setopt NO_FLOW_CONTROL
@@ -114,12 +115,11 @@ bindkey '^G' clear-screen
 HISTSIZE=5000
 HISTFILE="$XDG_DATA_HOME/zsh/history"
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 
 # ----------------------------------------------------------------------------
 # Environment Variables
 # ----------------------------------------------------------------------------
-export EDITOR=/home/adnanmalik/.config/nvs/versions/current/bin/nvim
+export EDITOR="$HOME/.local/share/bob/nvim-bin/nvim"
 export MANPAGER='nvim +Man!'
 export VENV_HOME="$HOME/.virtualenvs"
 export PNPM_HOME="$HOME/.local/share/pnpm"
@@ -183,12 +183,13 @@ export FZF_ALT_C_OPTS="
 --bind 'ctrl-/:change-preview-window(down|hidden|)'
 --header='CTRL-/: Toggle preview'
 "
-eval "$(fzf --zsh)"
+
+source $HOME/dotfiles/zsh/fzf.zsh
 
 # ----------------------------------------------------------------------------
 # Tool Integrations
 # ----------------------------------------------------------------------------
-eval "$(zoxide init --cmd z zsh)"
+source $HOME/dotfiles/zsh/zoxide.zsh
 
 [[ -f "$HOME/.deno/env" ]] && . "$HOME/.deno/env"
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
@@ -229,7 +230,7 @@ alias qq='exit'
 alias :wq='exit'
 alias :qw='exit'
 
-alias sss='source ~/.zshrc'
+alias sss='compile_zshrc && source ~/.zshrc'
 alias b='nvim ~/.zshrc'
 
 alias uptime='uptime -p'
@@ -450,7 +451,6 @@ compile_zshrc() {
     zcompile "$zshrc" 2>/dev/null || rm -f "$zwc"
   fi
 }
-compile_zshrc &!
 
 # ----------------------------------------------------------------------------
 # End of Configuration
