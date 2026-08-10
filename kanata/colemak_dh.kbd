@@ -97,7 +97,7 @@
 ;; --- Arrows Layer (vim nav on physical j k l ;) -------------------
 (deflayer arrows
   XX   q    w    f    p    b    j    l    u    y    ;
-  @caps_escape @a @s @d @f  g    m    @vim-left @vim-down @vim-up @vim-right
+  @caps_escape @a @s @d @f  g    @vim-left @vim-down @vim-up @vim-right o
   x    c    d    v    z    k    h    ,    .    /
   @spc
   @ralt
