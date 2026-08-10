@@ -1,66 +1,73 @@
 -- Plugin Management Configuration
+
+local github = function(repo, opts)
+	return vim.tbl_extend("force", {
+		src = "https://github.com/" .. repo,
+	}, opts or {})
+end
+
 vim.pack.add({
 	-- Themes
-	{ src = "https://github.com/catppuccin/nvim" , load=false},
-	{ src = "https://github.com/neanias/everforest-nvim" , load=false},
-	{ src = "https://github.com/ellisonleao/gruvbox.nvim" , load=false},
-	{ src = "https://github.com/Mofiqul/dracula.nvim" , load=false},
-	{ src = "https://github.com/shaunsingh/nord.nvim" , load=false},
-	{ src = "https://github.com/kdheepak/monochrome.nvim" , load=false},
-	{ src = "https://github.com/darkvoid-theme/darkvoid.nvim" , load=false},
-	{ src = "https://github.com/oskarnurm/koda.nvim" , load=false},
-	{ src = "https://github.com/rose-pine/neovim" , load=false},
-	{ src = "https://github.com/idr4n/github-monochrome.nvim" , load=false},
-	{ src = "https://github.com/samharju/synthweave.nvim" , load=false},
-	{ src = "https://github.com/Shatur/neovim-ayu" , load=false},
-	{ src = "https://github.com/nyoom-engineering/oxocarbon.nvim" , load=false},
-	{ src = "https://github.com/olivercederborg/poimandres.nvim" , load=false},
-	{ src = "https://github.com/Adnan-Malik-26/monoknight.nvim" , load=false},
+	github("catppuccin/nvim", { load = false }),
+	github("neanias/everforest-nvim", { load = false }),
+	github("ellisonleao/gruvbox.nvim", { load = false }),
+	github("Mofiqul/dracula.nvim", { load = false }),
+	github("shaunsingh/nord.nvim", { load = false }),
+	github("kdheepak/monochrome.nvim", { load = false }),
+	github("darkvoid-theme/darkvoid.nvim", { load = false }),
+	github("oskarnurm/koda.nvim", { load = false }),
+	github("rose-pine/neovim", { load = false }),
+	github("idr4n/github-monochrome.nvim", { load = false }),
+	github("samharju/synthweave.nvim", { load = false }),
+	github("Shatur/neovim-ayu", { load = false }),
+	github("nyoom-engineering/oxocarbon.nvim", { load = false }),
+	github("olivercederborg/poimandres.nvim", { load = false }),
+	github("Adnan-Malik-26/monoknight.nvim", { load = false }),
 
 	-- UI
-	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
-	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
-	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-	{ src = "https://github.com/rcarriga/nvim-notify" , load=false},
-	{ src = "https://github.com/j-hui/fidget.nvim" },
-	{ src = "https://github.com/akinsho/bufferline.nvim" },
+	github("nvim-tree/nvim-web-devicons"),
+	github("brenoprata10/nvim-highlight-colors"),
+	github("nvim-lualine/lualine.nvim"),
+	github("rcarriga/nvim-notify", { load = false }),
+	github("j-hui/fidget.nvim"),
+	github("akinsho/bufferline.nvim"),
 
 	-- File management
-	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-lua/plenary.nvim" },
-	{ src = "https://github.com/folke/snacks.nvim" },
-  -- { src = "https://github.com/nvim-telescope/telescope.nvim" , load=false},
-  -- { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" , load=false},
+	github("stevearc/oil.nvim"),
+	github("nvim-lua/plenary.nvim"),
+	github("folke/snacks.nvim"),
+	-- github("nvim-telescope/telescope.nvim", { load = false }),
+	-- github("nvim-telescope/telescope-fzf-native.nvim", { load = false }),
 
 	-- Editing
-	{ src = "https://github.com/nvim-mini/mini.comment" },
-	{ src = "https://github.com/nvim-mini/mini.pairs" },
+	github("nvim-mini/mini.comment"),
+	github("nvim-mini/mini.pairs"),
 
 	-- LSP and completion
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/L3MON4D3/LuaSnip" },
-	{ src = "https://github.com/rafamadriz/friendly-snippets" },
-	{ src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" },
-	{ src = "https://github.com/Saghen/blink.compat" },
-	{ src = "https://github.com/mrcjkb/rustaceanvim" , load=false},
+	github("mason-org/mason.nvim"),
+	github("L3MON4D3/LuaSnip"),
+	github("rafamadriz/friendly-snippets"),
+	github("saghen/blink.cmp", { version = "v1.10.2" }),
+	github("Saghen/blink.compat"),
+	github("mrcjkb/rustaceanvim", { load = false }),
 
 	-- Code quality
-	{ src = "https://github.com/stevearc/conform.nvim" },
-	{ src = "https://github.com/mfussenegger/nvim-lint" },
-	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
-	{ src = "https://github.com/romus204/tree-sitter-manager.nvim" },
-  -- { src = "https://github.com/HiPhish/rainbow-delimiters.nvim", load = false },
+	github("stevearc/conform.nvim"),
+	github("mfussenegger/nvim-lint"),
+	-- github("nvim-treesitter/nvim-treesitter", { version = "main" }),
+	-- github("nvim-treesitter/nvim-treesitter-textobjects", { version = "main" }),
+	github("romus204/tree-sitter-manager.nvim"),
+	-- github("HiPhish/rainbow-delimiters.nvim", { load = false }),
 
 	-- Utilities
-	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
-	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim"},
-	-- { src = "https://github.com/derektata/lorem.nvim" },
-	-- { src = "https://github.com/chomosuke/typst-preview.nvim" , load=false},
-	-- { src = "https://github.com/bngarren/checkmate.nvim" , load=false},
+	github("christoomey/vim-tmux-navigator"),
+	github("MeanderingProgrammer/render-markdown.nvim"),
+	-- github("derektata/lorem.nvim"),
+	-- github("chomosuke/typst-preview.nvim", { load = false }),
+	-- github("bngarren/checkmate.nvim", { load = false }),
 
 	-- Notes
-	{ src = "https://github.com/epwalsh/obsidian.nvim" },
-	{ src = "https://github.com/kkharji/sqlite.lua" , load=false},
-	{ src = "https://github.com/apdot/doodle" , load=false},
+	github("epwalsh/obsidian.nvim"),
+	github("kkharji/sqlite.lua", { load = false }),
+	github("apdot/doodle", { load = false }),
 })
