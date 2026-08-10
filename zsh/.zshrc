@@ -6,6 +6,7 @@
 # Zinit Plugin Manager
 # ----------------------------------------------------------------------------
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+mkdir -p "$XDG_DATA_HOME/zsh"
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 if [[ ! -d "$ZINIT_HOME" ]]; then
@@ -79,6 +80,7 @@ fi
 # Prompt
 # ----------------------------------------------------------------------------
 source $HOME/dotfiles/zsh/oh-my-posh.zsh
+
 # ----------------------------------------------------------------------------
 # Shell Options
 # ----------------------------------------------------------------------------
@@ -96,6 +98,7 @@ setopt HIST_FIND_NO_DUPS
 setopt LONG_LIST_JOBS
 setopt NO_FLOW_CONTROL
 setopt HIST_VERIFY
+setopt interactive_comments
 
 KEYTIMEOUT=1
 
@@ -223,7 +226,7 @@ alias tm='tmux -u'
 alias img='imv'
 alias impressive='impressive -t None'
 alias fman="compgen -c | fzf | xargs man"
-alias kanata="kanata -c /home/adnanmalik/dotfiles/kanata/qwerty.kbd & disown"
+# alias kanata="kanata -c /home/adnanmalik/dotfiles/kanata/qwerty.kbd & disown"
 
 alias :q='exit'
 alias qq='exit'
@@ -440,6 +443,13 @@ rmvenv() {
   fi
   rm -rf "$VENV_HOME/$1"
 }
+
+# ----------------------------------------------------------------------------
+# Creating and Gopath
+# ----------------------------------------------------------------------------
+export GOPATH="$HOME/.local/share/go"
+export GOBIN="$HOME/.local/bin"
+export PATH="$GOBIN:$PATH"
 
 # ----------------------------------------------------------------------------
 # Compile .zshrc for faster loading (background zcompile)
