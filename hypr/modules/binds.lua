@@ -214,13 +214,13 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- ============================================================
 -- Screenshots (hyprshot) — Print and Insert both bound for keyboards without Print
 -- ============================================================
-hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m window -o ~/Pictures/Screenshots/"))
-hl.bind("SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots/"))
-hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("hyprshot -m output -o ~/Pictures/Screenshots/"))
+hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m window -o $HOME/Documents/Pictures/Screenshots/"))
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region -o ~/Documents/Pictures/Screenshots/"))
+hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("hyprshot -m output -o ~/Documents/Pictures/Screenshots/"))
 
-hl.bind("Insert", hl.dsp.exec_cmd("hyprshot -m window -o ~/Pictures/Screenshots/"))
-hl.bind("SHIFT + Insert", hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots/"))
-hl.bind(mainMod .. " + Insert", hl.dsp.exec_cmd("hyprshot -m output -o ~/Pictures/Screenshots/"))
+hl.bind("Insert", hl.dsp.exec_cmd("hyprshot -m window -o ~/Documents/Pictures/Screenshots/"))
+hl.bind("SHIFT + Insert", hl.dsp.exec_cmd("hyprshot -m region -o ~/Documents/Pictures/Screenshots/"))
+hl.bind(mainMod .. " + Insert", hl.dsp.exec_cmd("hyprshot -m output -o ~/Documents/Pictures/Screenshots/"))
 
 -- ============================================================
 -- Media & Hardware Keys
