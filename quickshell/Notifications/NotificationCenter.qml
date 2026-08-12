@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Hyprland
 import "config.js" as Config
 
 PanelWindow {
@@ -12,7 +13,7 @@ PanelWindow {
     anchors { top: true; right: true }
     margins { top: Config.layout.margin; right: Config.layout.margin }
     implicitWidth: Config.layout.panelWidth
-    implicitHeight: Math.min(720, contentColumn.implicitHeight + 32)
+    implicitHeight: 600
     color: "transparent"
 
     WlrLayershell.layer: WlrLayer.Overlay
@@ -22,10 +23,16 @@ PanelWindow {
     function toggle() { visible = !visible }
     function close() { visible = false }
 
-    // Click-outside-to-close: a full-screen transparent catcher behind the
-    // panel. Omitted here since exclusive-zone-0 overlay panels don't get
-    // one automatically — wire this to your compositor's focus-follows or
-    // add a HyprlandFocusGrab if you pull in the Hyprland module.
+    // Click-outside-to-close: grabs input focus while the panel is open;
+    // any click landing outside the listed windows fires `cleared`. Hard
+    // couples this to Hyprland — if you ever go compositor-agnostic, swap
+    // this for a full-screen transparent input-catcher window instead.
+    HyprlandFocusGrab {
+        id: focusGrab
+        windows: [center]
+        active: center.visible
+        onCleared: center.close()
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -53,7 +60,7 @@ PanelWindow {
                 Button {
                     text: "Clear All"
                     flat: true
-                    visible: NotificationDaemon.history.count > 0
+                    visible: NotificationDaemon.history.length > 0
                     onClicked: NotificationDaemon.clearAll()
                 }
             }
@@ -66,7 +73,7 @@ PanelWindow {
             Rectangle { Layout.fillWidth: true; height: 1; color: Config.colors.border }
 
             Text {
-                visible: NotificationDaemon.history.count === 0
+                visible: NotificationDaemon.history.length === 0
                 text: "No notifications"
                 color: Config.colors.textMuted
                 font.family: Config.font.family
@@ -82,6 +89,7 @@ PanelWindow {
                 spacing: Config.layout.cardSpacing
                 model: NotificationDaemon.history
                 delegate: NotificationCard {
+                    required property var modelData
                     width: ListView.view.width
                     notification: modelData
                 }
