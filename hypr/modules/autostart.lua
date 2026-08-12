@@ -12,7 +12,7 @@ hl.on("hyprland.start", function()
 		"brightnessctl -s -d asus::kbd_backlight",
 		"wl-paste --type text --watch cliphist store",
 		"nohup $HOME/.local/bin/battery_notify.sh",
-		"bash -c 'sleep 2 && swaync'",
+		"qs -c Notifications",
 	}
 
 	for i = 1, #startup do

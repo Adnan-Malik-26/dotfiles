@@ -53,12 +53,12 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofi-books.sh"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("$HOME/.local/bin/night-mode"))
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprpicker -a"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher"))
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher"))
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("$HOME/.config/rofi/scripts/powermenu_t5"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/bin/waybar-switcher"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/switch-layout"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("$HOME/.local/bin/chth"))
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("$HOME/.config/rofi/powermenu/type-1/powermenu.sh"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c Notifications ipc call notifications toggle"))
 
 -- Notification center (swaync)
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("swaync-client -d"),
@@ -225,16 +225,23 @@ hl.bind(mainMod .. " + Insert", hl.dsp.exec_cmd("hyprshot -m output -o ~/Documen
 -- ============================================================
 -- Media & Hardware Keys
 -- ============================================================
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("$HOME/.local/bin/volume.sh --toggle"),
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
 	{ locked = true, repeating = true })
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("$HOME/.local/bin/volume.sh --inc"),
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),
 	{ locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("$HOME/.local/bin/volume.sh --dec"),
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
 	{ locked = true, repeating = true })
 
-hl.bind("SHIFT + F3", hl.dsp.exec_cmd("$HOME/.local/bin/brightness.sh --inc"),
+hl.bind("F6", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
 	{ locked = true, repeating = true })
-hl.bind("SHIFT + F2", hl.dsp.exec_cmd("$HOME/.local/bin/brightness.sh --dec"),
+hl.bind("F8", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),
+	{ locked = true, repeating = true })
+hl.bind("F7", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+	{ locked = true, repeating = true })
+
+hl.bind("F3", hl.dsp.exec_cmd("brightnessctl set 5%+"),
+	{ locked = true, repeating = true })
+hl.bind("F2", hl.dsp.exec_cmd("brightnessctl set 5%-"),
 	{ locked = true, repeating = true })
 
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
