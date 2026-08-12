@@ -89,12 +89,6 @@ setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_SILENT
 
-setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_SPACE
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_FIND_NO_DUPS
 setopt LONG_LIST_JOBS
 setopt NO_FLOW_CONTROL
 setopt HIST_VERIFY
@@ -115,10 +109,16 @@ bindkey '^G' clear-screen
 # ----------------------------------------------------------------------------
 # History Configuration
 # ----------------------------------------------------------------------------
-HISTSIZE=5000
+HISTSIZE=100000
 HISTFILE="$XDG_DATA_HOME/zsh/history"
 SAVEHIST=$HISTSIZE
 
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_FIND_NO_DUPS
 # ----------------------------------------------------------------------------
 # Environment Variables
 # ----------------------------------------------------------------------------
@@ -136,17 +136,9 @@ export NVM_DIR="$HOME/.nvm"
 path=(
   $HOME/.local/bin
   $HOME/.cargo/bin
-  $HOME/.spicetify
-  $HOME/go/bin
-  $HOME/scripts
   $HOME/.npm-global/bin
-  $HOME/.config/emacs/bin
-  $HOME/.pixi/bin
-  $HOME/Downloads/gitthings/swww/target/release
-  $HOME/Downloads/gitthings/eww/target/release
   $HOME/.deno/bin
   $PNPM_HOME
-  /home/linuxbrew/.linuxbrew/bin
   /usr/local/go/bin
   /usr/local/bin
   /usr/sbin
@@ -154,6 +146,7 @@ path=(
   $path
 )
 typeset -U path
+path=($^path(N-/))
 
 # ----------------------------------------------------------------------------
 # FZF Configuration
@@ -272,8 +265,6 @@ alias lsg='eza -lah --git --icons --header'
 # Aliases - Neovim
 # ----------------------------------------------------------------------------
 alias vi='nvim'
-alias v='nvim'
-alias vim='nvim'
 alias nv='nvim'
 alias nvf="nvim -c ':lua Snacks.picker.files()'"
 
@@ -465,4 +456,3 @@ compile_zshrc() {
 # ----------------------------------------------------------------------------
 # End of Configuration
 # ----------------------------------------------------------------------------
-export PATH=$PATH:/home/adnanmalik/.spicetify
