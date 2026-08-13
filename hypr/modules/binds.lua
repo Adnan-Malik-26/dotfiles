@@ -59,6 +59,9 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/bin/waybar-swit
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/switch-layout"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("$HOME/.local/bin/chth"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c Notifications ipc call notifications toggle"))
+hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("qs -c Network ipc call network toggleWifi"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("qs -c Network ipc call network toggleBluetooth"))
+
 
 -- Notification center (swaync)
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("swaync-client -d"),
