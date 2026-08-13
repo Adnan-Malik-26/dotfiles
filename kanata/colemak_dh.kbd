@@ -78,7 +78,7 @@
 (deflayer base
   esc  q    w    f    p    b    j    l    u    y    ;
   @caps_escape @a @s @d @f  g    m    @j   @k   @l   @;
-  x    c    d    v    z    k    h    ,    .    /
+  z    x    c    d    v    k    h    ,    .    /
   @spc
   @ralt
   left right up down
@@ -88,7 +88,7 @@
 (deflayer numbers
   XX   @n1  @n2  @n3  @n4  @n5  @n6  @n7  @n8  @n9  @n0
   @caps_tab @a @s @d @f    g    m    @j   @k   @l   @;
-  x    c    d    v    z    k    h    ,    .    /
+  z    x    c    d    v    k    h    ,    .    /
   @spc
   @ralt
   left right up down
@@ -98,7 +98,7 @@
 (deflayer arrows
   XX   q    w    f    p    b    j    l    u    y    ;
   @caps_escape @a @s @d @f  g    @vim-left @vim-down @vim-up @vim-right o
-  x    c    d    v    z    k    h    ,    .    /
+  z    x    c    d    v    k    h    ,    .    /
   @spc
   @ralt
   left right up down
