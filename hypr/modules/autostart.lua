@@ -13,6 +13,7 @@ hl.on("hyprland.start", function()
 		"wl-paste --type text --watch cliphist store",
 		"nohup $HOME/.local/bin/battery_notify.sh",
 		"qs -c Notifications",
+		"qs -c Network",
 	}
 
 	for i = 1, #startup do
