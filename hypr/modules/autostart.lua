@@ -11,7 +11,7 @@ hl.on("hyprland.start", function()
     "kanata -c $HOME/dotfiles/kanata/qwerty.kbd",
 		"brightnessctl -s -d asus::kbd_backlight",
 		"wl-paste --type text --watch cliphist store",
-		"nohup $HOME/.local/bin/battery_notify.sh",
+		"nohup $HOME/.local/bin/battery_notify.sh &",
 		"qs -c Notifications",
 		"qs -c Network",
 	}

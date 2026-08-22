@@ -1,5 +1,7 @@
 -- Cursor
-hl.exec_cmd('hyprctl setcursor "Vimix Cursors - White" 32')
+hl.on("hyprland.start", function()
+	hl.exec_cmd('hyprctl setcursor "Vimix Cursors - White" 32')
+end)
 
 -- Environment Variables
 hl.env("GTK_THEME", "Adwaita-AMOLED")

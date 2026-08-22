@@ -35,7 +35,7 @@ end
 -- ============================================================
 -- Clamped 1.0–3.0x zoom, stepped via repeat-hold binds below.
 local function zoom(delta)
-	local current = hl.get_config("cursor:zoom_factor")
+	local current = hl.get_config("cursor.zoom_factor")
 	local next_val = math.min(3.0, math.max(1.0, current + delta))
 	hl.config({ cursor = { zoom_factor = next_val } })
 end
@@ -50,7 +50,6 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofi-books.sh"))
 -- ============================================================
 -- Session & System Utilities
 -- ============================================================
-hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("$HOME/.local/bin/night-mode"))
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprpicker -a"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher"))
@@ -59,15 +58,10 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/bin/waybar-swit
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/switch-layout"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("$HOME/.local/bin/chth"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c Notifications ipc call notifications toggle"))
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("notify-send 'Notifications Cleared' && qs -c Notifications ipc call notifications clear"))
 hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("qs -c Network ipc call network toggleWifi"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("qs -c Network ipc call network toggleBluetooth"))
 
-
--- Notification center (swaync)
-hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("swaync-client -d"),
-	{ description = "Dismiss last notification" })
-hl.bind(mainMod .. " + SHIFT + comma", hl.dsp.exec_cmd("swaync-client -dA"),
-	{ description = "Dismiss all notifications" })
 
 -- Clipboard history (backed by `wl-paste --watch cliphist store` in autostart)
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(
@@ -99,8 +93,6 @@ hl.bind(
 	})
 )
 
--- NOTE: was previously layout_bind({ scrolling = "promote", master = "pypr toggle spt" }).
--- Overwritten with a flat pin — confirm this was intentional before it's forgotten again.
 hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 
 -- Cycle tiled <-> floating windows (jq check needed since Hyprland has no native "cycle only floating/tiled")
@@ -278,3 +270,45 @@ hl.bind(
 		scrolling = hl.dsp.layout("move +col"),
 	})
 )
+
+hl.bind("mouse:274", function()
+  local active = hl.get_active_window()
+  if active ~= nil and active.title == "Picture-in-Picture" then
+    hl.dispatch(hl.dsp.window.drag())
+  end
+end, {
+  mouse = true,
+  non_consuming = true,
+})
+
+
+
+hl.config({
+    binds = {
+        scroll_event_delay = 0,
+    }
+})
+local throttled = false
+
+local function throttled_dsp(dsp)
+    return function()
+        if throttled then return end
+        throttled = true
+        hl.dispatch(dsp)
+        hl.timer(
+            function()
+                throttled = false
+            end,
+            {
+                timeout = 200,
+                type = "oneshot",
+            }
+        )
+    end
+end
+
+local prevWs = hl.dsp.focus({ workspace = "r-1" })
+local nextWs = hl.dsp.focus({ workspace = "r+1" })
+
+hl.bind(mainMod .. " + mouse_down", throttled_dsp(prevWs))
+hl.bind(mainMod .. " + mouse_up", throttled_dsp(nextWs))
