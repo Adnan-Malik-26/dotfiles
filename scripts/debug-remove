@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+debug_packages=$(pacman -Qq | grep -- '-debug$' || true)
+
+if [[ -z "$debug_packages" ]]; then
+    echo "No -debug packages found."
+    exit 0
+fi
+
+echo "Found debug packages:"
+echo "$debug_packages"
+echo
+
+sudo pacman -Rns $debug_packages

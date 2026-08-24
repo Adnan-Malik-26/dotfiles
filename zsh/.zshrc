@@ -89,6 +89,7 @@ setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_SILENT
 
+setopt NUMERIC_GLOB_SORT  # sort file10 after file9, not after file1
 setopt LONG_LIST_JOBS
 setopt NO_FLOW_CONTROL
 setopt HIST_VERIFY
@@ -143,6 +144,7 @@ path=(
   /usr/local/bin
   /usr/sbin
   /usr/bin
+  $HOME/.local/share/bob/nvim-bin
   $path
 )
 typeset -U path
@@ -227,7 +229,7 @@ alias :wq='exit'
 alias :qw='exit'
 
 alias sss='compile_zshrc && source ~/.zshrc'
-alias b='nvim ~/.zshrc'
+alias b='nvim $HOME/dotfiles/zsh/.zshrc'
 
 alias uptime='uptime -p'
 alias btop='btop --force-utf'
