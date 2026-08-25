@@ -4,11 +4,7 @@
   "height": 10,
   "spacing": 10,
 
-  "modules-left": [
-    "hyprland/workspaces",
-    "custom/separator",
-    "hyprland/window",
-  ],
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
   "modules-right": [
     "pulseaudio",
