@@ -26,7 +26,7 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofi-books.sh"))
 -- ============================================================
 -- Session & System Utilities
 -- ============================================================
-hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock")) -- lock screen
+hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("/home/adnanmalik/.local/share/quickshell-lockscreen/lock.sh")) -- lock screen
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprpicker -a")) -- color picker, autocopy to clipboard
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher")) -- cycles wallpaper via awww
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("$HOME/.config/rofi/scripts/powermenu_t5")) -- rofi power menu
