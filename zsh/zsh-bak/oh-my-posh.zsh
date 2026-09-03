@@ -1,0 +1,1 @@
+export POSH_SESSION_ID="5ab2244e-b9a4-4c57-b045-b00cd6f3f7b6"; export POSH_CONFIG=$'/home/adnanmalik/.config/oh-my-posh/themes/arch.omp.json';source $'/home/adnanmalik/.cache/oh-my-posh/init.14715129219982951193.zsh'
