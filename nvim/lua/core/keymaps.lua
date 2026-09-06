@@ -21,6 +21,11 @@ map("n", "<C-u>", "<C-u>zz", { noremap = true, desc = "Enter command mode" })
 -- Config management
 map("n", "<leader>o", ":update<CR> :source<CR>", desc("Write and source config"))
 
+-- Enable inlay hints
+map("n", "<leader>ih", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay hints" })
+
 -- Line movement
 map("n", "<A-S-j>", ":m .+1<CR>==", desc("Move line down"))
 map("n", "<A-S-k>", ":m .-2<CR>==", desc("Move line up"))

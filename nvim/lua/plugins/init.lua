@@ -1,4 +1,5 @@
 require("plugins.setup")
+-- require("plugins.typescript")
 require("plugins.nvim-notify")
 require("plugins.theme")
 require("plugins.ui")

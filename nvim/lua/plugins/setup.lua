@@ -50,6 +50,8 @@ vim.pack.add({
 	github("saghen/blink.cmp", { version = "v1.10.2" }),
 	github("Saghen/blink.compat"),
 	github("mrcjkb/rustaceanvim", { load = false }),
+  github("pmizio/typescript-tools.nvim"),
+  github("windwp/nvim-ts-autotag"),
 
 	-- Code quality
 	github("stevearc/conform.nvim"),

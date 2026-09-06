@@ -26,7 +26,12 @@ vim.lsp.config["qmlls"] = {
 	root_markers = { ".qmlls.ini", "shell.qml", ".git" },
 }
 
-vim.lsp.config["eslint"] = {}
+vim.lsp.config["eslint"] = {
+  cmd = { "vscode-eslint-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { "eslint.config.js", ".eslintrc.js", ".eslintrc.json", "package.json", ".git" },
+  settings = { workingDirectories = { mode = "auto" } },
+}
 
 vim.lsp.config["solidity-language-server"] = {
 	cmd = { "solidity-language-server", "--stdio" },
@@ -151,6 +156,9 @@ vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature hel
 
 -- Mason
 require("mason").setup()
+
+-- LSP Settings
+vim.lsp.inlay_hint.enable(true)
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
