@@ -6,6 +6,13 @@ hl.window_rule({
 	},
 })
 
+hl.window_rule({
+  name = "balatro-fullscreen",
+  fullscreen = true,
+  match = {
+    class = "balatro.exe"
+  }
+})
 
 hl.window_rule({
 	name = "kitty-bluetuith-float",
