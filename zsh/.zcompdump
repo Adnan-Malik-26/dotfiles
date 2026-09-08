@@ -48,6 +48,7 @@ _comps=(
 'ansible-pull' '_ansible'
 'ansible-vault' '_ansible'
 'ant' '_ant'
+'antigravity-ide' '_antigravity-ide'
 'antiword' '_antiword'
 'aodh' '_openstack'
 'aoss' '_precommand'
@@ -223,6 +224,7 @@ _comps=(
 'cmp' '_cmp'
 'co' '_rcs'
 'code' '_code'
+'codium' '_codium'
 'coffee' '_coffee'
 'col' '_col'
 'column' '_column'
@@ -1540,8 +1542,6 @@ _comps=(
 'swapon' '_swapon'
 'sway' '_sway'
 'swaymsg' '_swaymsg'
-'swaync' '_swaync'
-'swaync-client' '_swaync-client'
 'swift' '_swift'
 'swiftc' '_swift'
 'sync' '_nothing'
@@ -2133,24 +2133,24 @@ autoload -Uz _ab _afew _age _archlinux-java _atach \
             _udisksctl _ufw _uuidd _uuidgen _uuidparse \
             _vipw _virtualbox _vnstat _wdctl _wemux \
             _wg-quick _xdg-mime _xsel _yamllint _yarn \
-            _zcash-cli _zinit _zramctl _awww _bat \
-            _bluetoothctl _bob _bootctl _bun _busctl \
-            _bwrap _cargo _checkupdates _coredumpctl _ctr \
-            _curl _deno _dkms _docker _dotnet \
-            _eza _fastfetch _fd _foot _footclient \
-            _gh _gum _hostnamectl _hyperfine _hyprctl \
-            _hyprpm _img2sixel _insmod _journalctl _kernel-install \
-            _keyring _kicad-cli _kitty _localectl _loginctl \
-            _lsmod _luarocks _luarocks-admin _machinectl _meson \
-            _mkinitcpio _mpv _networkctl _ninja _obsidian-cli \
-            _oomctl _p11-kit _paccache _pacdiff _paclist \
-            _paclog-pkglist _pacman _pacscripts _pacsearch _pacsort \
-            _pactree _pip _playerctl _poetry _powerprofilesctl \
-            _pulseaudio _rankmirrors _resolvectl _rg _rmmod \
-            _rmpc _run0 _sd_bus_address _sd_hosts_or_user_at_host _sd_machines \
-            _sd_outputmodes _sd_unit_files _sensors _sensors-detect _shtab \
-            _starship _storagectl _sway _swaymsg _swaync \
-            _swaync-client _systemctl _systemd _systemd-analyze _systemd-delta \
+            _zcash-cli _zinit _zramctl _antigravity-ide _awww \
+            _bat _bluetoothctl _bob _bootctl _bun \
+            _busctl _bwrap _cargo _checkupdates _codium \
+            _coredumpctl _ctr _curl _deno _dkms \
+            _docker _dotnet _eza _fastfetch _fd \
+            _foot _footclient _gh _gum _hostnamectl \
+            _hyperfine _hyprctl _hyprpm _img2sixel _insmod \
+            _journalctl _kernel-install _keyring _kicad-cli _kitty \
+            _localectl _loginctl _lsmod _luarocks _luarocks-admin \
+            _machinectl _meson _mkinitcpio _mpv _networkctl \
+            _ninja _obsidian-cli _oomctl _p11-kit _paccache \
+            _pacdiff _paclist _paclog-pkglist _pacman _pacscripts \
+            _pacsearch _pacsort _pactree _pip _playerctl \
+            _poetry _powerprofilesctl _pulseaudio _rankmirrors _resolvectl \
+            _rg _rmmod _rmpc _run0 _sd_bus_address \
+            _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files _sensors \
+            _sensors-detect _shtab _starship _storagectl _sway \
+            _swaymsg _systemctl _systemd _systemd-analyze _systemd-delta \
             _systemd-hwdb _systemd-id128 _systemd-inhibit _systemd-nspawn _systemd-path \
             _systemd-run _systemd-sysinstall _systemd-tmpfiles _tailscale _timedatectl \
             _tree-sitter _trust _typst _udevadm _udiskie \

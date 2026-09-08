@@ -79,7 +79,7 @@ alias startFabric='java -Xmx2G -jar fabric-server-mc.26.2-loader.0.19.3-launcher
 
 alias hh='npx hardhat'
 alias hc='npx hardhat compile'
-alias hx='npx hardhat compile'
+# alias hx='npx hardhat compile'
 
 # System Control
 alias snn='shutdown now'
