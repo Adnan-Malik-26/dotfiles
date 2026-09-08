@@ -149,8 +149,8 @@
 --
 -- return M
 
-require('tokyonight').setup({
+require('monoknight').setup({
   transparent = true
 })
-vim.cmd("colorscheme tokyonight-storm")
+vim.cmd("colorscheme monoknight-night")
 

@@ -86,7 +86,7 @@
       "src": "https://github.com/kdheepak/monochrome.nvim"
     },
     "monoknight.nvim": {
-      "rev": "f7588337c2a167aa253648ddca34d71300a95f13",
+      "rev": "0b9ac148214df99aed80fe46694363af123871d4",
       "src": "https://github.com/Adnan-Malik-26/monoknight.nvim"
     },
     "neovim": {
@@ -146,7 +146,7 @@
       "src": "https://github.com/olivercederborg/poimandres.nvim"
     },
     "rainbow-delimiters.nvim": {
-      "rev": "7d7645f06751501fc9a17986c934e6354a71019b",
+      "rev": "3a0fc08dd39e8bf034a4cfef3f2845bd5f565a2e",
       "src": "https://github.com/HiPhish/rainbow-delimiters.nvim"
     },
     "render-markdown.nvim": {
@@ -154,7 +154,7 @@
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "rustaceanvim": {
-      "rev": "9499318abe813fd36da9be3bca4a52765f7c24f9",
+      "rev": "facb3f26dc91e416425bf51585f3831edb833e02",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "snacks.nvim": {
@@ -182,7 +182,7 @@
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "023590c8f068788a0513a4409bf37ff7f9d1deff",
+      "rev": "1425eacb78bfee34face0fe06a8384ac3c4d9c8e",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "typescript-tools.nvim": {
