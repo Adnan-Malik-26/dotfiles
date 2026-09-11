@@ -176,6 +176,11 @@ hl.bind("F3", hl.dsp.exec_cmd("brightnessctl set 5%+"),
 hl.bind("F2", hl.dsp.exec_cmd("brightnessctl set 5%-"),
 	{ locked = true, repeating = true })
 
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"),
+	{ locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"),
+	{ locked = true, repeating = true })
+
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
