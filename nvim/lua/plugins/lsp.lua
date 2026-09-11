@@ -34,9 +34,9 @@ vim.lsp.config["eslint"] = {
 }
 
 vim.lsp.config["solidity-language-server"] = {
-	cmd = { "solidity-language-server", "--stdio" },
-	filetypes = { "solidity" },
-	root_markers = { "hardhat.config.js", "truffle-config.js", ".git" },
+  cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
+  filetypes = { "solidity" },
+  root_markers = { "hardhat.config.js", "hardhat.config.ts", ".git" },
 }
 
 vim.lsp.config["lua_ls"] = {

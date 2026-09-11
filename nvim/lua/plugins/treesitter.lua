@@ -34,6 +34,7 @@ require("tree-sitter-manager").setup({
         "vue",
         "regex",
         "latex",
+        "solidity",
         "qmljs",
     },
 
