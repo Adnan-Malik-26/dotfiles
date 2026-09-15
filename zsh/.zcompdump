@@ -1,4 +1,4 @@
-#files: 1294	version: 5.9.2
+#files: 1295	version: 5.9.2
 
 _comps=(
 '-' '_precommand'
@@ -705,7 +705,6 @@ _comps=(
 'https' '_httpie'
 'hyperfine' '_hyperfine'
 'hyprctl' '_hyprctl'
-'hyprpm' '_hyprpm'
 'ibus' '_ibus'
 'iceweasel' '_mozilla'
 'icombine' '_ispell'
@@ -783,6 +782,7 @@ _comps=(
 'keystone' '_openstack'
 'keytool' '_java'
 'kfmclient' '_kfmclient'
+'khal' '_khal'
 'kicad-cli' '_kicad-cli'
 'kill' '_kill'
 'killall' '_killall'
@@ -2140,8 +2140,8 @@ autoload -Uz _ab _afew _age _archlinux-java _atach \
             _coredumpctl _ctr _curl _deno _dkms \
             _docker _dotnet _eza _fastfetch _fd \
             _foot _footclient _gh _gum _hostnamectl \
-            _hyperfine _hyprctl _hyprpm _img2sixel _insmod \
-            _journalctl _kernel-install _keyring _kicad-cli _kitty \
+            _hyperfine _hyprctl _img2sixel _insmod _journalctl \
+            _kernel-install _keyring _khal _kicad-cli _kitty \
             _localectl _loginctl _lsmod _luarocks _luarocks-admin \
             _machinectl _meson _mkinitcpio _mpv _networkctl \
             _ninja _obsidian-cli _oomctl _p11-kit _paccache \
