@@ -64,6 +64,7 @@ vim.pack.add({
 	-- Utilities
 	github("christoomey/vim-tmux-navigator"),
 	github("MeanderingProgrammer/render-markdown.nvim"),
+  github("aurum77/live-server.nvim"),
 	-- github("derektata/lorem.nvim"),
 	-- github("chomosuke/typst-preview.nvim", { load = false }),
 	-- github("bngarren/checkmate.nvim", { load = false }),

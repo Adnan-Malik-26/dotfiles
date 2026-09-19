@@ -61,6 +61,10 @@
       "rev": "25a5c98ca2f6bb0b69f5e2654a78f0d7c7e0721d",
       "src": "https://github.com/oskarnurm/koda.nvim"
     },
+    "live-server.nvim": {
+      "rev": "f6f00a3f541251f0320910bb0d03c4ae14ee6d10",
+      "src": "https://github.com/aurum77/live-server.nvim"
+    },
     "lorem.nvim": {
       "rev": "481abe141b123e792bd1931f2335369fbb002018",
       "src": "https://github.com/derektata/lorem.nvim"

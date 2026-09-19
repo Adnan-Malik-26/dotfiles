@@ -33,6 +33,7 @@ vim.lsp.config["eslint"] = {
   settings = { workingDirectories = { mode = "auto" } },
 }
 
+
 vim.lsp.config["solidity-language-server"] = {
   cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
   filetypes = { "solidity" },
@@ -152,7 +153,7 @@ vim.lsp.enable({
 })
 
 -- Native signature help
-vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "Signature help" })
 
 -- Mason
 require("mason").setup()

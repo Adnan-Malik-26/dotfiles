@@ -13,7 +13,7 @@ alias qq='exit'
 alias :wq='exit'
 alias :qw='exit'
 
-alias sss='compile_zshrc && source ~/.zshrc'
+alias sss='compile_zshrc && source ~/dotfiles/zsh/.zshrc'
 alias b='nvim $HOME/dotfiles/zsh/.zshrc'
 
 alias uptime='uptime -p'

@@ -24,6 +24,7 @@ path=(
   /usr/local/bin
   /usr/sbin
   /usr/bin
+  $HOME/.nvm/versions/node/v26.8.2/bin/
   $HOME/.local/share/bob/nvim-bin
   $GOBIN
   $path

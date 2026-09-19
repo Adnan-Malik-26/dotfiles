@@ -171,10 +171,10 @@ hl.bind("F8", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),
 hl.bind("F7", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
 	{ locked = true, repeating = true })
 
-hl.bind("F3", hl.dsp.exec_cmd("brightnessctl set 5%+"),
-	{ locked = true, repeating = true })
-hl.bind("F2", hl.dsp.exec_cmd("brightnessctl set 5%-"),
-	{ locked = true, repeating = true })
+-- hl.bind("F3", hl.dsp.exec_cmd("brightnessctl set 5%+"),
+-- 	{ locked = true, repeating = true })
+-- hl.bind("F2", hl.dsp.exec_cmd("brightnessctl set 5%-"),
+-- 	{ locked = true, repeating = true })
 
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"),
 	{ locked = true, repeating = true })

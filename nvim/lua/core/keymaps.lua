@@ -66,7 +66,7 @@ map("n", "<leader><leader>", "<C-^>", desc("Switch to last buffer"))
 map("t", "<Esc>", [[<C-\><C-n>]], desc("Exit terminal mode"))
 
 -- Window splits
-map("n", "<leader>sh", "<CMD>split<CR> <CMD>lua Snacks.Picker.filesCR>", desc("Split horizontally"))
+map("n", "<leader>sh", "<CMD>split<CR> <CMD>lua Snacks.Picker.files<CR>", desc("Split horizontally"))
 map("n", "<leader>sv", "<CMD>vsplit<CR> <CMD>lua Snacks.Picker.files<CR>", desc("Split vertically"))
 
 -- Window resizing
