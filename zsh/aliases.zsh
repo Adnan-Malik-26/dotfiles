@@ -47,6 +47,7 @@ alias lsg='eza -lah --git --icons --header'
 alias vi='nvim'
 alias nv='nvim'
 alias nvf="nvim -c ':lua Snacks.picker.files()'"
+# alias nv2="NVIM_APPNAME=nvim-minim nvim"
 
 # Git & LazyGit
 alias add='git add .'
