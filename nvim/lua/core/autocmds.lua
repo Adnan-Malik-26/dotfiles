@@ -88,20 +88,6 @@ vim.api.nvim_create_user_command("RestartNvim", function()
 	vim.cmd("qa!")
 end, {})
 
--- Obsidian + Telescope: only load when opening a markdown file inside your vault
--- vim.api.nvim_create_autocmd("BufReadPre", {
--- 	pattern = vim.fn.expand("~/Notes") .. "/*.md",
--- 	once = true,
--- 	callback = function()
--- 		vim.pack.add({
--- 			{ src = "https://github.com/nvim-telescope/telescope.nvim" },
--- 			{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
--- 			{ src = "https://github.com/epwalsh/obsidian.nvim" },
--- 		})
--- 		require("plugins.obsidian")
--- 	end,
--- })
-
 -- checkmate: any markdown file, not just vault
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",

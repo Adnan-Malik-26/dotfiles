@@ -15,4 +15,4 @@ require("features.marks")
 -- require("features.statusline")
 
 -- Load custom colors
-require("colors.colors")
+require("colors.mono")

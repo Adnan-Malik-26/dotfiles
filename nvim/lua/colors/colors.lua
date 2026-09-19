@@ -1,1 +1,0 @@
-/home/adnanmalik/.config/nvim/lua/colors/mono.lua
