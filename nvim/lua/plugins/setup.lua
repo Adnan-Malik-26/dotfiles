@@ -30,6 +30,7 @@ vim.pack.add({
 	-- LSP and completion
 	github("mason-org/mason.nvim"),
 	github("L3MON4D3/LuaSnip"),
+  github("rafamadriz/friendly-snippets"),
 	github("saghen/blink.cmp", { version = "v1.10.2" }),
 	github("Saghen/blink.compat"),
   github("pmizio/typescript-tools.nvim"),
