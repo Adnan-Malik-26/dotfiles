@@ -126,7 +126,7 @@
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
     "nvim-web-devicons": {
-      "rev": "914decffe650296c87312c53b7933ecb86718499",
+      "rev": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "obsidian.nvim": {
@@ -186,7 +186,7 @@
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "1425eacb78bfee34face0fe06a8384ac3c4d9c8e",
+      "rev": "c59cb96f62db1c41830c2bb6c32fa72ffd701105",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "typescript-tools.nvim": {

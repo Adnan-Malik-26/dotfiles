@@ -15,7 +15,7 @@
   ],
 
   "custom/separator": {
-    "format": " | ",
+    "format": " |",
   },
 
   "hyprland/workspaces": {
