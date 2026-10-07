@@ -11,7 +11,7 @@ import "../../components"
 PanelWindow {
     id: win
 
-    property bool shown: false
+    readonly property bool shown: Panels.current === "pomodoro"
     property string view: "timer"
     readonly property var views: ["timer", "history", "stats"]
 
@@ -43,7 +43,7 @@ PanelWindow {
         // focused TextInput claim printable keys before shortcuts fire).
         Shortcut {
             sequence: "Escape"
-            onActivated: timerView.typing ? card.forceActiveFocus() : win.shown = false
+            onActivated: timerView.typing ? card.forceActiveFocus() : Panels.close("pomodoro")
         }
         Shortcut { sequence: "Space"; onActivated: Pomodoro.toggle() }
         Shortcut { sequence: "Ctrl+R"; onActivated: Pomodoro.reset() }
@@ -73,7 +73,7 @@ PanelWindow {
                     }
                 }
                 Item { Layout.fillWidth: true }
-                Chip { label: "✕"; padding: 14; onClicked: win.shown = false }
+                Chip { label: "✕"; padding: 14; onClicked: Panels.close("pomodoro") }
             }
 
             Item {

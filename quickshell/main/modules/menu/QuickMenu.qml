@@ -21,7 +21,7 @@ Scope {
 
     readonly property var modes: ["apps", "clipboard", "power"]
     readonly property var powerItems: [
-        { kind: "power", key: "lock",     title: "Lock",      sub: "qylock",             cmd: ["/home/adnanmalik/.local/share/quickshell-lockscreen/lock.sh"],                    danger: false },
+        { kind: "power", key: "lock",     title: "Lock",      sub: "hyprlock",           cmd: ["hyprlock"],                    danger: false },
         { kind: "power", key: "suspend",  title: "Suspend",   sub: "systemctl suspend",  cmd: ["systemctl", "suspend"],        danger: false },
         { kind: "power", key: "logout",   title: "Log out",   sub: "exit Hyprland",      cmd: ["hyprctl", "dispatch", "exit"], danger: true },
         { kind: "power", key: "reboot",   title: "Reboot",    sub: "systemctl reboot",   cmd: ["systemctl", "reboot"],         danger: true },
@@ -29,7 +29,7 @@ Scope {
     ]
 
     // ---------- state ----------
-    property bool shown: false
+    readonly property bool shown: Panels.current === "menu"
     property string mode: "apps"
     property string query: ""
     property int sel: 0
@@ -101,7 +101,7 @@ Scope {
         sel = 0;
         armed = "";
         if (m === "clipboard") Clipboard.refresh();
-        shown = true;
+        Panels.open("menu");
     }
 
     function setMode(m) {
@@ -117,6 +117,8 @@ Scope {
         setMode(modes[(i + dir + modes.length) % modes.length]);
     }
 
+    function close() { Panels.close("menu"); }
+
     function move(d) {
         var n = results.length;
         if (n === 0) return;
@@ -130,7 +132,7 @@ Scope {
         if (it.kind === "app") { Frecency.record(it.entry.id); it.entry.execute(); }
         else if (it.kind === "clip") Clipboard.copy(it.id);
         else Quickshell.execDetached(it.cmd);
-        shown = false;
+        close();
     }
 
     function deleteClip() {
@@ -146,9 +148,9 @@ Scope {
         target: "menu"
         function open(mode: string): void { root.openMenu(mode); }
         function toggle(mode: string): void {
-            if (root.shown && root.mode === mode) root.shown = false;
+            if (root.shown && root.mode === mode) root.close();
             else root.openMenu(mode);
         }
-        function close(): void { root.shown = false; }
+        function close(): void { root.close(); }
     }
 }

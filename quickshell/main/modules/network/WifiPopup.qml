@@ -9,7 +9,7 @@ import "../../services"
 
 PanelWindow {
     id: popup
-    visible: false   // toggle via IpcHandler in shell.qml
+    visible: Panels.current === "wifi"
 
     anchors { top: true; right: true }
     margins { top: Theme.layout.margin; right: Theme.layout.margin }
@@ -21,11 +21,9 @@ PanelWindow {
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
     exclusiveZone: 0
 
-    function toggle() {
-        visible = !visible
-        if (visible) WifiManager.refreshNetworks()
-    }
-    function close() { visible = false }
+    function toggle() { Panels.toggle("wifi") }
+    function close() { Panels.close("wifi") }
+    onVisibleChanged: if (visible) WifiManager.refreshNetworks()
 
     // Same trade-off as NotificationCenter: hard-couples click-outside-to-
     // close to Hyprland. Swap for a fullscreen transparent catcher window

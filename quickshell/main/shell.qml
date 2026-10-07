@@ -1,5 +1,6 @@
 import QtQml
 import Quickshell
+import Quickshell.Io
 import "services"
 import "modules/notifications"
 import "modules/osd"
@@ -27,6 +28,13 @@ ShellRoot {
     PomodoroPanel {}
     HoverClock {}
     QuickMenu {}
+
+    // qs -c main ipc call panels closeAll | current
+    IpcHandler {
+        target: "panels"
+        function closeAll(): void { Panels.closeAll() }
+        function current(): string { return Panels.current }
+    }
 
     // Cross-service wiring. Toasts are held back while a pomodoro runs
     // (history still records; critical notifications bypass).

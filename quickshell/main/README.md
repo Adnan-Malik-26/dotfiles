@@ -2,11 +2,13 @@
 
 ```
 shell.qml                     only ShellRoot; instantiates modules + the one service-wiring Binding
+systemd/quickshell.service    user unit (auto-restart)
+scripts/deploy.sh             commit-gated restart with automatic rollback
 theme/Theme.qml               colors / font / radii / motion (single source of truth)
 components/Chip.qml           dumb reusable UI
 services/                     state + backends, no UI
   Audio Brightness CapsLock WifiManager BluetoothManager NotificationDaemon
-  Pomodoro Clock Clipboard Frecency
+  Pomodoro Clock Clipboard Frecency Panels
 modules/
   notifications/  osd/  network/
   pomodoro/       PomodoroPanel (+ Window, Timer/History/Stats views)
@@ -17,13 +19,32 @@ Rules: modules import theme + components + services, never each other. Services
 never import modules and never each other — cross-service wiring lives in
 shell.qml only.
 
-## Install
+## Install / operate
 ```
 cp -r main ~/.config/quickshell/main
-qs -c main
+cd ~/.config/quickshell/main && git init -b main && git add -A && git commit -m "initial"
+
+mkdir -p ~/.config/systemd/user
+cp systemd/quickshell.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+scripts/deploy.sh                 # first run: starts it and tags the commit `last-good`
 ```
-Stop the old `qs -c Notifications|Network|pomodoro|hoverclock|menu` instances first.
-Running as `-c main` means every IPC call needs `-c main` (or rename the dir to `default`).
+Stop any old `qs` instances first. Replace every `exec-once = qs ...` line in
+hyprland.conf with the single line below (it imports the session environment the
+service needs, then starts it):
+```
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE && systemctl --user start quickshell.service
+```
+(With uwsm, `systemctl --user enable quickshell.service` is enough.)
+
+- Logs: `journalctl --user -u quickshell -f`
+- Edit loop: save files (hot reload) -> when happy, `git commit` -> `scripts/deploy.sh`.
+  A startup failure rolls back to `last-good` (detached HEAD, your branch untouched);
+  `git switch main`, fix, commit, deploy again. Runtime QML errors don't kill the
+  process, so deploy.sh can't catch those — watch the journal.
+- Crash recovery works because state is on disk: pomodoro resumes from active.json,
+  notification history reloads, the unit restarts after 2 s (max 5 tries / 60 s).
+- Running as `-c main` means IPC calls need `-c main` (or rename the dir to `default`).
 
 ## Hyprland
 ```
@@ -40,7 +61,7 @@ bindd = SUPER, V,         Clipboard,           exec, qs -c main ipc call menu to
 bindd = SUPER SHIFT, E,   Power menu,          exec, qs -c main ipc call menu toggle power
 bindd = SUPER SHIFT, N,   Do not disturb,      exec, qs -c main ipc call notifications toggleDnd
 ```
-`qs -c main ipc show` lists every registered target.
+`qs -c main ipc show` lists every registered target. `ipc call panels closeAll` closes whatever is open.
 
 ## Behaviour worth knowing
 - **Pomodoro survives reloads.** The running timer is saved to
@@ -51,6 +72,9 @@ bindd = SUPER SHIFT, N,   Do not disturb,      exec, qs -c main ipc call notific
   records, critical notifications bypass). Disable: `property bool dndWhileRunning: false`
   in services/Pomodoro.qml. Manual DND (`toggleDnd`) is independent.
 - **Hoverclock** shows `hh:mm · mm:ss` while a pomodoro runs; click it for the calendar.
+- **One panel at a time.** Notification center, WiFi, Bluetooth, pomodoro and the menu are
+  mutually exclusive (services/Panels). Opening one replaces the current one, so the old
+  hardcoded Bluetooth margin is gone. Toasts, OSD and the hover clock are not panels.
 - **Pomodoro window starts hidden** (it used to open at launch). Toggle with the bind.
 - Chime: ~/.local/share/quickshell/pomodoro/ding.mp3 (needs mpv or ffplay).
 - App ranking uses frecency (~/.local/share/quickshell/menu/frecency.json).
@@ -66,7 +90,7 @@ bindd = SUPER SHIFT, N,   Do not disturb,      exec, qs -c main ipc call notific
 5. Menu: apps launch, clipboard copies, power asks twice for logout/reboot/shutdown.
 
 ## Still open
-- CapsLock forks `cat` every 300 ms; Brightness forks `brightnessctl` every 2 s.
-- Toasts: one layer-shell surface each.
-- No panel manager (opening one popup doesn't close the others).
-- Frecency/clipboard/pomodoro have no decay/size limits beyond cliphist's own.
+- Toasts: one layer-shell surface each (one overlay window + ColumnLayout is the fix).
+- CapsLock still re-reads its LED file every 300 ms (in-process now, no fork) and Brightness
+  every 2 s; both could be event-driven (Hyprland bind -> IPC) at the cost of wiring.
+- Pomodoro/clipboard/frecency have no size limits beyond cliphist's own.

@@ -6,10 +6,10 @@ import Quickshell.Io
 
 // ============================================================================
 // CapsLock
-// Watches /sys/class/leds/*capslock*/brightness. Path is discovered once at
-// startup (varies by keyboard/driver), then polled at 300ms — this is a
-// single-byte sysfs read, negligible cost, and there's no portable inotify
-// hook for LED sysfs without extra native code.
+// Watches /sys/class/leds/*capslock*/brightness. The LED path is discovered
+// once at startup (it varies by keyboard/driver), then re-read every 300 ms
+// IN-PROCESS via FileView — no subprocess per tick. (Polling stays: there's no
+// portable change notification for LED sysfs files.)
 // ============================================================================
 
 Singleton {
@@ -20,6 +20,7 @@ Singleton {
 
     Component.onCompleted: findProc.running = true
 
+    // runs once
     Process {
         id: findProc
         command: ["sh", "-c", "find /sys/class/leds -iname '*capslock*' -maxdepth 1 | head -n1"]
@@ -34,18 +35,16 @@ Singleton {
         }
     }
 
+    FileView {
+        id: led
+        path: root.ledPath
+        onLoaded: root.active = text().trim() !== "0"
+    }
+
     Timer {
         id: poll
         interval: 300
         repeat: true
-        onTriggered: readProc.running = true
-    }
-
-    Process {
-        id: readProc
-        command: root.ledPath !== "" ? ["cat", root.ledPath] : ["true"]
-        stdout: SplitParser {
-            onRead: line => { root.active = line.trim() !== "0" }
-        }
+        onTriggered: led.reload()
     }
 }

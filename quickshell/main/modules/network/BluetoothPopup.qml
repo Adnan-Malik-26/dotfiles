@@ -9,10 +9,10 @@ import "../../services"
 
 PanelWindow {
     id: popup
-    visible: false   // toggle via IpcHandler in shell.qml
+    visible: Panels.current === "bluetooth"
 
     anchors { top: true; right: true }
-    margins { top: Theme.layout.margin; right: Theme.layout.margin + Theme.layout.panelWidthCompact + 16 }
+    margins { top: Theme.layout.margin; right: Theme.layout.margin }
     implicitWidth: Theme.layout.panelWidthCompact
     implicitHeight: 420
     color: "transparent"
@@ -21,14 +21,11 @@ PanelWindow {
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
     exclusiveZone: 0
 
-    function toggle() {
-        visible = !visible
+    function toggle() { Panels.toggle("bluetooth") }
+    function close() { Panels.close("bluetooth") }
+    onVisibleChanged: {
         if (visible) BluetoothManager.startDiscovery()
         else BluetoothManager.stopDiscovery()
-    }
-    function close() {
-        visible = false
-        BluetoothManager.stopDiscovery()
     }
 
     HyprlandFocusGrab {

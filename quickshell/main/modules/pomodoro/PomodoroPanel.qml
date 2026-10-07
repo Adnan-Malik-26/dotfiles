@@ -1,9 +1,10 @@
 import Quickshell
 import Quickshell.Io
+import "../../services"
 
 // ============================================================================
-// Pomodoro — module root. State lives in services/Pomodoro; this is just the
-// window and its IPC.
+// Pomodoro — module root. State lives in services/Pomodoro, open/closed state
+// in services/Panels; this is just the window and its IPC.
 //   qs -c main ipc call pomo toggle | show | hide
 // ============================================================================
 
@@ -12,8 +13,8 @@ Scope {
 
     IpcHandler {
         target: "pomo"
-        function toggle(): void { win.shown = !win.shown }
-        function show(): void { win.shown = true }
-        function hide(): void { win.shown = false }
+        function toggle(): void { Panels.toggle("pomodoro") }
+        function show(): void { Panels.open("pomodoro") }
+        function hide(): void { Panels.close("pomodoro") }
     }
 }

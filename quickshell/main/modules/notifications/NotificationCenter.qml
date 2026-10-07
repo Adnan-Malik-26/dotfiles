@@ -9,7 +9,7 @@ import "../../services"
 
 PanelWindow {
     id: center
-    visible: false   // toggle via IpcHandler in Notifications.qml, or a bar widget
+    visible: Panels.current === "notifications"   // opened via Panels (IPC in Notifications.qml)
 
     anchors { top: true; right: true }
     margins { top: Theme.layout.margin; right: Theme.layout.margin }
@@ -21,8 +21,8 @@ PanelWindow {
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
     exclusiveZone: 0
 
-    function toggle() { visible = !visible }
-    function close() { visible = false }
+    function toggle() { Panels.toggle("notifications") }
+    function close() { Panels.close("notifications") }
 
     // Click-outside-to-close: grabs input focus while the panel is open;
     // any click landing outside the listed windows fires `cleared`. Hard

@@ -1,0 +1,19 @@
+[Unit]
+Description=Quickshell (main config)
+After=graphical-session.target
+# crash-loop guard: give up after 5 failed starts in 60 s
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/qs -c main
+Restart=on-failure
+RestartSec=2
+# the session environment (WAYLAND_DISPLAY, HYPRLAND_INSTANCE_SIGNATURE, ...)
+# is imported by the exec-once line in hyprland.conf before this unit starts
+
+[Install]
+# only fires if your session starts graphical-session.target (e.g. uwsm);
+# otherwise start it from hyprland.conf as shown in README.
+WantedBy=graphical-session.target

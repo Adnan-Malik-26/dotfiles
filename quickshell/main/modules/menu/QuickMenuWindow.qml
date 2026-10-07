@@ -34,7 +34,7 @@ PanelWindow {
     // click outside the card closes
     MouseArea {
         anchors.fill: parent
-        onClicked: menu.shown = false
+        onClicked: menu.close()
     }
     Rectangle {
         id: backdrop
@@ -113,7 +113,7 @@ PanelWindow {
                     Keys.onPressed: function (e) {
                         var ctrl = e.modifiers & Qt.ControlModifier;
                         if (e.key === Qt.Key_Escape) {
-                            menu.shown = false; e.accepted = true;
+                            menu.close(); e.accepted = true;
                         } else if (e.key === Qt.Key_Down || (ctrl && (e.key === Qt.Key_N || e.key === Qt.Key_J))) {
                             menu.move(1); e.accepted = true;
                         } else if (e.key === Qt.Key_Up || (ctrl && (e.key === Qt.Key_P || e.key === Qt.Key_K))) {

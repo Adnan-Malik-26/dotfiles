@@ -6,5 +6,6 @@ singleton Clipboard 1.0 Clipboard.qml
 singleton Clock 1.0 Clock.qml
 singleton Frecency 1.0 Frecency.qml
 singleton NotificationDaemon 1.0 NotificationDaemon.qml
+singleton Panels 1.0 Panels.qml
 singleton Pomodoro 1.0 Pomodoro.qml
 singleton WifiManager 1.0 WifiManager.qml
