@@ -30,12 +30,9 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("/home/adnanmalik/.local/share/
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprpicker -a")) -- color picker, autocopy to clipboard
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher")) -- cycles wallpaper via awww
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("qs -c main ipc call menu toggle power")) -- rofi power menu
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/bin/waybar-switcher")) -- swaps waybar config/style
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/switch-layout")) -- keyboard layout switcher
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("$HOME/.local/bin/chth")) -- custom script (chth)
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c main ipc call notifications toggle")) -- toggle notification panel
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("notify-send 'Notifications Cleared' && qs -c main ipc call notifications clear")) -- clear all notifications
-hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("qs -c main ipc call network toggleWifi")) -- toggle wifi
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("qs -c main ipc call network toggleWifi")) -- toggle wifi
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("qs -c main ipc call network toggleBluetooth")) -- toggle bluetooth
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs -c main ipc call pomo toggle "))
 

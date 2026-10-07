@@ -10,12 +10,10 @@ hl.on("hyprland.start", function()
 		"waybar --config $HOME/.config/waybar/current/config.jsonc --style /home/adnanmalik/.config/waybar/current/style.css", -- waybar
     -- "kanata -c $HOME/dotfiles/kanata/colemak_dh.kbd",
 		"brightnessctl -s -d asus::kbd_backlight",
-		"wl-paste --type text --watch cliphist store",
 		"nohup $HOME/.local/bin/battery_notify.sh &",
-		"qs -c Notifications",
-		"qs -c Network",
-		"qs -c pomodoro",
-    "qs -c hoverclock"
+    "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE && systemctl --user start quickshell.service",
+    "wl-paste --type text  --watch cliphist store",
+    "wl-paste --type image --watch cliphist store",
 	}
 
 	for i = 1, #startup do
