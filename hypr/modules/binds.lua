@@ -28,7 +28,7 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofi-books.sh"))
 -- ============================================================
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("/home/adnanmalik/.local/share/quickshell-lockscreen/lock.sh")) -- lock screen
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprpicker -a")) -- color picker, autocopy to clipboard
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher")) -- cycles wallpaper via awww
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("qs -c main ipc call wallpaper toggle")) -- cycles wallpaper via awww
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("qs -c main ipc call menu toggle power")) -- rofi power menu
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c main ipc call notifications toggle")) -- toggle notification panel
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("notify-send 'Notifications Cleared' && qs -c main ipc call notifications clear")) -- clear all notifications

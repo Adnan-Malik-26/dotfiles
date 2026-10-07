@@ -80,7 +80,10 @@ bindd = SUPER SHIFT, N,   Do not disturb,      exec, qs -c main ipc call notific
   mutually exclusive (services/Panels). Opening one replaces the current one, so the old
   hardcoded Bluetooth margin is gone. Toasts, OSD and the hover clock are not panels.
 - **Wallpapers.** Images (png jpg jpeg webp gif bmp svg) in ~/walls/current (a symlink is fine).
-  Picker keys: arrows/hjkl move, Enter or click sets it and closes, R random (stays open), Esc closes.
+  Horizontal carousel with a search box (all words must appear in the file name). Keys: ←/→/↑/↓ or
+  Ctrl+N / Ctrl+P (Ctrl+J / Ctrl+K) move (wraps), Enter or clicking the centered one sets it and
+  closes, clicking a side one centers it, Ctrl+R random (within the search results), Ctrl+W deletes a
+  word, Esc closes. Mouse wheel / touchpad swipe steps through. Needs Qt 6.5+ (rounded thumbnails).
   IPC: `wallpaper toggle | random | next | prev`. The in-use wallpaper has a dot badge.
   awww forgets its image when the daemon restarts, so the last choice is saved to
   ~/.local/state/quickshell/wallpaper and re-applied once at startup — but only if the

@@ -72,11 +72,14 @@ Singleton {
         stateFile_.setText(path)
     }
 
-    function random() {
-        if (files.length === 0) return ""
-        let pool = files.filter(f => !isCurrent(f.path))
-        if (pool.length === 0) pool = files
-        const f = pool[Math.floor(Math.random() * pool.length)]
+    // random wallpaper (never the current one if there's a choice); `pool` optionally
+    // restricts the choice, e.g. to the picker's search results
+    function random(pool) {
+        const src = pool && pool.length > 0 ? pool : files
+        if (src.length === 0) return ""
+        let candidates = src.filter(f => !isCurrent(f.path))
+        if (candidates.length === 0) candidates = src
+        const f = candidates[Math.floor(Math.random() * candidates.length)]
         apply(f.path)
         return f.path
     }
