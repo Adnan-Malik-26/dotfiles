@@ -6,7 +6,7 @@ import Quickshell
 // ============================================================================
 // Panels
 // Which interactive overlay is open: "" or one of
-//   notifications | wifi | bluetooth | pomodoro | menu
+//   notifications | wifi | bluetooth | pomodoro | menu | wallpaper
 // Exactly one at a time — opening a panel replaces the current one, so panels
 // never stack and nothing needs hardcoded offsets to avoid overlapping.
 // Windows bind `visible` to `Panels.current === "<name>"` and react to

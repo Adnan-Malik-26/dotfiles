@@ -8,4 +8,5 @@ singleton Frecency 1.0 Frecency.qml
 singleton NotificationDaemon 1.0 NotificationDaemon.qml
 singleton Panels 1.0 Panels.qml
 singleton Pomodoro 1.0 Pomodoro.qml
+singleton Wallpapers 1.0 Wallpapers.qml
 singleton WifiManager 1.0 WifiManager.qml

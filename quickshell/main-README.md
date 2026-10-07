@@ -8,12 +8,13 @@ theme/Theme.qml               colors / font / radii / motion (single source of t
 components/Chip.qml           dumb reusable UI
 services/                     state + backends, no UI
   Audio Brightness CapsLock WifiManager BluetoothManager NotificationDaemon
-  Pomodoro Clock Clipboard Frecency Panels
+  Pomodoro Clock Clipboard Frecency Panels Wallpapers
 modules/
   notifications/  osd/  network/
   pomodoro/       PomodoroPanel (+ Window, Timer/History/Stats views)
   hoverclock/     HoverClock (clock + calendar, shows pomodoro countdown)
   menu/           QuickMenu (+ Window): apps / clipboard / power
+  wallpaper/      WallpaperPicker (+ Window): thumbnail grid for ~/walls/current, set via awww
 ```
 Rules: modules import theme + components + services, never each other. Services
 never import modules and never each other — cross-service wiring lives in
@@ -49,6 +50,7 @@ exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CUR
 ## Hyprland
 ```
 exec-once = qs -c main
+exec-once = awww-daemon
 exec-once = wl-paste --type text  --watch cliphist store
 exec-once = wl-paste --type image --watch cliphist store
 
@@ -59,6 +61,8 @@ bindd = SUPER, P,         Pomodoro,            exec, qs -c main ipc call pomo to
 bindd = SUPER, SPACE,     App launcher,        exec, qs -c main ipc call menu toggle apps
 bindd = SUPER, V,         Clipboard,           exec, qs -c main ipc call menu toggle clipboard
 bindd = SUPER SHIFT, E,   Power menu,          exec, qs -c main ipc call menu toggle power
+bindd = SUPER SHIFT, W,   Wallpaper picker,    exec, qs -c main ipc call wallpaper toggle
+bindd = SUPER CTRL, W,    Random wallpaper,    exec, qs -c main ipc call wallpaper random
 bindd = SUPER SHIFT, N,   Do not disturb,      exec, qs -c main ipc call notifications toggleDnd
 ```
 `qs -c main ipc show` lists every registered target. `ipc call panels closeAll` closes whatever is open.
@@ -75,6 +79,15 @@ bindd = SUPER SHIFT, N,   Do not disturb,      exec, qs -c main ipc call notific
 - **One panel at a time.** Notification center, WiFi, Bluetooth, pomodoro and the menu are
   mutually exclusive (services/Panels). Opening one replaces the current one, so the old
   hardcoded Bluetooth margin is gone. Toasts, OSD and the hover clock are not panels.
+- **Wallpapers.** Images (png jpg jpeg webp gif bmp svg) in ~/walls/current (a symlink is fine).
+  Picker keys: arrows/hjkl move, Enter or click sets it and closes, R random (stays open), Esc closes.
+  IPC: `wallpaper toggle | random | next | prev`. The in-use wallpaper has a dot badge.
+  awww forgets its image when the daemon restarts, so the last choice is saved to
+  ~/.local/state/quickshell/wallpaper and re-applied once at startup — but only if the
+  daemon isn't already showing an image (set `restoreOnStart: false` in services/Wallpapers.qml
+  if you restore it some other way). Failures raise a critical notification.
+  Thumbnails are decoded by Qt at ~2x display size on demand (no cache on disk).
+  Transition/fps: `transition` and `transitionFps` in services/Wallpapers.qml.
 - **Pomodoro window starts hidden** (it used to open at launch). Toggle with the bind.
 - Chime: ~/.local/share/quickshell/pomodoro/ding.mp3 (needs mpv or ffplay).
 - App ranking uses frecency (~/.local/share/quickshell/menu/frecency.json).
@@ -90,6 +103,7 @@ bindd = SUPER SHIFT, N,   Do not disturb,      exec, qs -c main ipc call notific
 5. Menu: apps launch, clipboard copies, power asks twice for logout/reboot/shutdown.
 
 ## Still open
+- Wallpapers: awww loses the image when a monitor is re-plugged; hook Hyprland's monitoradded event to re-apply.
 - Toasts: one layer-shell surface each (one overlay window + ColumnLayout is the fix).
 - CapsLock still re-reads its LED file every 300 ms (in-process now, no fork) and Brightness
   every 2 s; both could be event-driven (Hyprland bind -> IPC) at the cost of wiring.

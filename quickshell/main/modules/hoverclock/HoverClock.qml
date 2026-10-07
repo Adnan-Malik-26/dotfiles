@@ -88,7 +88,7 @@ Scope {
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: win.revealed ? (win.barHeight - implicitHeight) / 2 : -implicitHeight
                         opacity: win.revealed ? 1 : 0
-                        text: Qt.formatDateTime(Clock.date, "hh:mm AP")
+                        text: Qt.formatDateTime(Clock.date, "hh:mm")
                             + (Pomodoro.running ? "  ·  " + Pomodoro.fmtClock(Pomodoro.remaining) : "")
                         color: Theme.colors.text
                         font.family: Theme.font.family

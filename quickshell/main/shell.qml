@@ -8,6 +8,7 @@ import "modules/network"
 import "modules/pomodoro"
 import "modules/hoverclock"
 import "modules/menu"
+import "modules/wallpaper"
 
 // ============================================================================
 // Root. The only ShellRoot in the config — it instantiates modules and holds
@@ -28,6 +29,7 @@ ShellRoot {
     PomodoroPanel {}
     HoverClock {}
     QuickMenu {}
+    WallpaperPicker {}
 
     // qs -c main ipc call panels closeAll | current
     IpcHandler {
