@@ -40,6 +40,7 @@ vim.pack.add({
 	github("stevearc/conform.nvim"),
 	github("mfussenegger/nvim-lint"),
 	github("romus204/tree-sitter-manager.nvim"),
+  github("kdheepak/monochrome.nvim"),
 
 	-- Utilities
 	github("christoomey/vim-tmux-navigator"),

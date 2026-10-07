@@ -1,0 +1,7 @@
+BrightnessSlider 1.0 BrightnessSlider.qml
+MediaControls 1.0 MediaControls.qml
+NotificationCard 1.0 NotificationCard.qml
+NotificationCenter 1.0 NotificationCenter.qml
+NotificationPopup 1.0 NotificationPopup.qml
+Notifications 1.0 Notifications.qml
+VolumeSlider 1.0 VolumeSlider.qml

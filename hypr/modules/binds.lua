@@ -20,7 +20,7 @@ end
 -- App Launchers
 -- ============================================================
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty -1"))
-hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("/home/adnanmalik/dotfiles/rofi/launchers/type-1/launcher.sh"))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("qs -c main ipc call menu toggle apps"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofi-books.sh"))
 
 -- ============================================================
@@ -29,19 +29,18 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofi-books.sh"))
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("/home/adnanmalik/.local/share/quickshell-lockscreen/lock.sh")) -- lock screen
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("hyprpicker -a")) -- color picker, autocopy to clipboard
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/bin/wallpaperSwitcher")) -- cycles wallpaper via awww
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("$HOME/.config/rofi/scripts/powermenu_t5")) -- rofi power menu
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("qs -c main ipc call menu toggle power")) -- rofi power menu
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/bin/waybar-switcher")) -- swaps waybar config/style
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/switch-layout")) -- keyboard layout switcher
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("$HOME/.local/bin/chth")) -- custom script (chth)
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c Notifications ipc call notifications toggle")) -- toggle notification panel
-hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("notify-send 'Notifications Cleared' && qs -c Notifications ipc call notifications clear")) -- clear all notifications
-hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("qs -c Network ipc call network toggleWifi")) -- toggle wifi
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("qs -c Network ipc call network toggleBluetooth")) -- toggle bluetooth
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c main ipc call notifications toggle")) -- toggle notification panel
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("notify-send 'Notifications Cleared' && qs -c main ipc call notifications clear")) -- clear all notifications
+hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("qs -c main ipc call network toggleWifi")) -- toggle wifi
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("qs -c main ipc call network toggleBluetooth")) -- toggle bluetooth
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs -c main ipc call pomo toggle "))
 
 -- Clipboard history (backed by `wl-paste --watch cliphist store` in autostart)
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(
-	"cliphist list | rofi -dmenu -p 'clipboard' -theme $HOME/dotfiles/rofi/minimal.rasi | cliphist decode | wl-copy"
-), { description = "Clipboard history" })
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd( "qs -c menu ipc call menu toggle clipboard"))
 
 -- Screen OCR: region-capture as raw PNG bytes over stdin -> tesseract -> clipboard
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(
@@ -64,7 +63,7 @@ hl.bind(mainMod .. " + F", hl.dsp.layout("fit active"))
 
 -- Flat pin, not layout-aware (intentional — see conversation history if
 -- you're wondering why this isn't a scratchpad/promote toggle).
-hl.bind(mainMod .. " + P", hl.dsp.window.pin())
+-- hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 
 -- Cycle tiled <-> floating windows (jq check needed since Hyprland has no native "cycle only floating/tiled")
 hl.bind("ALT + Space", hl.dsp.exec_cmd(

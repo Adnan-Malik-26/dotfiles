@@ -5,13 +5,13 @@
   "console_title_template": "{{ .Shell }} • {{ .Folder }}",
   "secondary_prompt": {
     "template": "› ",
-    "foreground": "#d8b5c8",
+    "foreground": "#f6f6f6",
     "background": "transparent"
   },
   "transient_prompt": {
     "template": "{{ if gt .Code 0 }}❯ {{ else }}❯ {{ end }}",
     "foreground_templates": [
-      "{{ if gt .Code 0 }}#e8b4b4{{ else }}#d8b5c8{{ end }}"
+      "{{ if gt .Code 0 }}#a8a8a8{{ else }}#c0c0c0{{ end }}"
     ],
     "background": "transparent"
   },
@@ -24,14 +24,14 @@
         {
           "type": "session",
           "style": "plain",
-          "foreground": "#c3dedd",
+          "foreground": "#a2a2a2",
           "background": "transparent",
           "template": "{{ if or .SSHSession .Root }}{{ .UserName }} {{ end }}"
         },
         {
           "type": "path",
           "style": "plain",
-          "foreground": "#c3cadd",
+          "foreground": "#b5b5b5",
           "background": "transparent",
           "template": "{{ .Path }}",
           "properties": {
@@ -46,7 +46,7 @@
         {
           "type": "git",
           "style": "plain",
-          "foreground": "#ddd0ea",
+          "foreground": "#b0b0b0",
           "background": "transparent",
           "template": " {{ .HEAD }}",
           "properties": {
@@ -61,7 +61,7 @@
           "style": "plain",
           "background": "transparent",
           "foreground_templates": [
-            "{{ if .Working.Changed }}#f7dcc6{{ else }}#c4d6c4{{ end }}"
+            "{{ if .Working.Changed }}#adadad{{ else }}#bdbdbd{{ end }}"
           ],
           "template": " {{ if .Working.Changed }}●{{ else }}✓{{ end }}",
           "properties": {
@@ -74,7 +74,7 @@
         {
           "type": "git",
           "style": "plain",
-          "foreground": "#ded8b8",
+          "foreground": "#ababab",
           "background": "transparent",
           "template": "{{ if gt .Ahead 0 }} ⇡{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ⇣{{ .Behind }}{{ end }}",
           "properties": {
@@ -94,7 +94,7 @@
         {
           "type": "executiontime",
           "style": "plain",
-          "foreground": "#ded8b8",
+          "foreground": "#b8b8b8",
           "background": "transparent",
           "template": "{{ .FormattedMs }}",
           "properties": {
@@ -105,7 +105,7 @@
         {
           "type": "status",
           "style": "plain",
-          "foreground": "#e8b4b4",
+          "foreground": "#a8a8a8",
           "background": "transparent",
           "template": "{{ if gt .Code 0 }}  ✕ {{ .Code }}{{ end }}",
           "properties": {
@@ -124,7 +124,7 @@
           "style": "plain",
           "background": "transparent",
           "foreground_templates": [
-            "{{ if gt .Code 0 }}#e8b4b4{{ else }}#d8b5c8{{ end }}"
+            "{{ if gt .Code 0 }}#a8a8a8{{ else }}#b8b8b8{{ end }}"
           ],
           "template": "❯"
         }

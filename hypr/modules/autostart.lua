@@ -14,6 +14,8 @@ hl.on("hyprland.start", function()
 		"nohup $HOME/.local/bin/battery_notify.sh &",
 		"qs -c Notifications",
 		"qs -c Network",
+		"qs -c pomodoro",
+    "qs -c hoverclock"
 	}
 
 	for i = 1, #startup do

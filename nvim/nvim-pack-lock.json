@@ -4,6 +4,10 @@
       "rev": "0abc8f390b278c3b4aabc4c004ac8a088b65cf24",
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
+    "PureMono": {
+      "rev": "aaf29b168741523e7b1a53d9139a0dd624189fb8",
+      "src": "https://github.com/Adnan-Malik-26/PureMono"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",

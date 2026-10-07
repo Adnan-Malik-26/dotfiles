@@ -1,0 +1,5 @@
+BluetoothPopup 1.0 BluetoothPopup.qml
+DeviceItem 1.0 DeviceItem.qml
+Network 1.0 Network.qml
+NetworkItem 1.0 NetworkItem.qml
+WifiPopup 1.0 WifiPopup.qml
