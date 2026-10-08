@@ -86,6 +86,7 @@ alias hc='npx hardhat compile'
 alias snn='shutdown now'
 alias rnn='reboot'
 alias ssp='systemctl suspend'
+alias getbat='cat /sys/class/power_supply/BAT1/capacity'
 
 # Note Taking
 alias 'oo'="cd ~/Notes/ && nvim -c ':Telescope find_files'"
