@@ -1,2 +1,25 @@
 -- Laptop Monitor Config
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1})
+hl.monitor({ output = "eDP-1", mode = "1920x1080@60.02", position = "0x0", scale = 1, vrr=2})
+-- hl.monitor({ output = "HDMI-1", mode = "2560x1440p@144hz", position="2560x0",scale= 1})
+
+-- Laptop (left), external (right). Y offset 360 aligns bottom edges (1440-1080).
+-- Use 180 to center vertically instead.
+-- hl.monitor({ output = "eDP-1", mode = "1920x1080@60.02", position = "0x360", scale = 1, vrr = 2 })
+--
+-- -- Prefer desc: (from `hyprctl monitors all`) over port names. Ports can renumber.
+-- hl.monitor({ output = "HDMI-A-1", mode = "2560x1440@144", position = "1920x0", scale = 1, vrr = 0 })
+--
+-- -- Fallback for unknown displays (projectors, TVs) so they get sane defaults
+-- hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+--
+-- -- Pin workspaces: 1-5 external (primary), 6-10 laptop
+-- for i = 1, 5 do
+--   hl.workspace_rule({ workspace = tostring(i), monitor = "HDMI-A-1", default = (i == 1), persistent = true })
+-- end
+-- for i = 6, 10 do
+--   hl.workspace_rule({ workspace = tostring(i), monitor = "eDP-1", default = (i == 6), persistent = true })
+-- end
+--
+-- -- Move the focused workspace between monitors (shape confirmed from a live 0.56 config)
+-- hl.bind(mainMod .. " + U", hl.dsp.workspace.move({ monitor = "l" }))
+-- hl.bind(mainMod .. " + I", hl.dsp.workspace.move({ monitor = "r" }))

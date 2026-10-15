@@ -32,12 +32,10 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("qs -c main ipc call wallpaper toggle
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("qs -c main ipc call menu toggle power")) -- rofi power menu
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs -c main ipc call notifications toggle")) -- toggle notification panel
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("notify-send 'Notifications Cleared' && qs -c main ipc call notifications clear")) -- clear all notifications
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("qs -c main ipc call menu toggle clipboard"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("qs -c main ipc call network toggleWifi")) -- toggle wifi
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("qs -c main ipc call network toggleBluetooth")) -- toggle bluetooth
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs -c main ipc call pomo toggle "))
-
--- Clipboard history (backed by `wl-paste --watch cliphist store` in autostart)
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd( "qs -c menu ipc call menu toggle clipboard"))
 
 -- Screen OCR: region-capture as raw PNG bytes over stdin -> tesseract -> clipboard
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(

@@ -15,3 +15,4 @@ source "$HOME/dotfiles/zsh/functions.zsh"
 if [[ -f "$HOME/dotfiles/zsh/local.zsh" ]]; then
   source "$HOME/dotfiles/zsh/local.zsh"
 fi
+

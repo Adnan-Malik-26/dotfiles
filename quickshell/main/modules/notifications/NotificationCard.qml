@@ -27,6 +27,9 @@ Rectangle {
 
     Behavior on color { ColorAnimation { duration: Theme.animation } }
 
+    // Drop <img> tags: they'd make Text fetch (possibly remote) images on its own.
+    function cleanBody(b) { return (b || "").replace(/<img[^>]*>/gi, "") }
+
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.NoButton
@@ -99,8 +102,14 @@ Rectangle {
 
             Text {
                 visible: card.notification.body !== ""
-                text: card.notification.body
-                textFormat: card.notification.bodyMarkup ? Text.RichText : Text.PlainText
+                text: card.cleanBody(card.notification.body)
+                // Senders (Chrome/WhatsApp Web, Discord, ...) put spec markup in the body:
+                // <b> <i> <u> <a href> and &amp; entities. StyledText renders exactly that
+                // subset; links open in the default browser.
+                textFormat: Text.StyledText
+                linkColor: Theme.colors.accent
+                onLinkActivated: link => Qt.openUrlExternally(link)
+                HoverHandler { cursorShape: parent.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor }
                 color: Theme.colors.textMuted
                 font.family: Theme.font.family
                 font.pixelSize: Theme.font.sizeSmall

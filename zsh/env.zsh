@@ -27,6 +27,7 @@ path=(
   $HOME/.nvm/versions/node/v26.8.2/bin/
   $HOME/.local/share/bob/nvim-bin
   $GOBIN
+  $HOME/.spicetify
   $path
 )
 typeset -U path
